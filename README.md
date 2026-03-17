@@ -12,3 +12,8 @@ and thats how this small proyect was born.
 
 this is my first proyect of all time, so dont expect more from me
 (im newbye in this world of coding)
+
+REMEMBER!
+
+This project is still UNFINISHED!
+so there will be stuff mising...
