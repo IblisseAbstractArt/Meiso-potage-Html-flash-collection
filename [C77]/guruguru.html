@@ -2,9 +2,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=shift_jis" />
 <title>Marisa's Spinning Magic Cannon Formation</title>
-<script language="JavaScript" type="text/javascript">
-<script src="https://js.ruffle.rs/ruffle.js"></script>
-	<!--
+<!--
 //v1.7
 // Flash Player Version Detection
 // Detect Client Browser type
@@ -163,26 +161,7 @@ function AC_Generateobj(objAttrs, params, embedAttrs)
       str += i + '="' + objAttrs[i] + '" ';
     }
     str += '>';
-    for (var i in params)
-    {
-      str += '<param name="' + i + '" value="' + params[i] + '" /> ';
-    }
-    str += '</object>';
-  }
-  else
-  {
-    str += '<embed ';
-    for (var i in embedAttrs)
-    {
-      str += i + '="' + embedAttrs[i] + '" ';
-    }
-    str += '> </embed>';
-  }
-  document.write(str);
-}
-function AC_FL_RunContent(){
-  var ret = 
-    AC_GetArgs
+
     (  arguments, ".swf", "movie", "clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
      , "application/x-shockwave-flash"
     );
@@ -290,37 +269,36 @@ function AC_GetArgs(args, ext, srcParamName, classid, mimeType){
 <!-- saved from url=(0013)about:internet -->
 <center>
 <h3>魔理沙のぐるぐる魔砲陣</h3>
-<script language="JavaScript" type="text/javascript">
-	AC_FL_RunContent(
-		'codebase', 'http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=10,0,0,0',
-		'width', '800',
-		'height', '600',
-		'src', 'guruguru',
-		'quality', 'high',
-		'pluginspage', 'http://www.adobe.com/go/getflashplayer_jp',
-		'align', 'middle',
-		'play', 'true',
-		'loop', 'true',
-		'scale', 'showall',
-		'wmode', 'window',
-		'devicefont', 'false',
-		'id', 'guruguru',
-		'bgcolor', '#ffffff',
-		'name', 'guruguru',
-		'menu', 'true',
-		'allowFullScreen', 'false',
-		'allowScriptAccess','sameDomain',
-		'movie', 'guruguru',
-		'salign', ''
-		); //end AC code
-</script>
-<noscript>
-	<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=10,0,0,0" width="800" height="600" id="guruguru" align="middle">
-	<param name="allowScriptAccess" value="sameDomain" />
-	<param name="allowFullScreen" value="false" />
-	<param name="movie" value="guruguru.swf" /><param name="quality" value="high" /><param name="bgcolor" value="#ffffff" />	<embed src="guruguru.swf" quality="high" bgcolor="#ffffff" width="800" height="600" name="guruguru" align="middle" allowScriptAccess="sameDomain" allowFullScreen="false" type="application/x-shockwave-flash" pluginspage="http://www.adobe.com/go/getflashplayer_jp" />
-	</object>
-</noscript>
+	A<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=shift_jis" />
+<title>魔理沙のぐるぐる魔砲陣</title>
+</head>
+<body bgcolor="#000000">
+
+<center>
+    <h3><font color="#ffffff">GuruGuru [Ruffle fix]</font></h3>
+    
+    <div id="ruffle-player"></div>
+    <script src="https://js.ruffle.rs/ruffle.js"></script>
+    <script>
+        window.RufflePlayer = window.RufflePlayer || {};
+        window.addEventListener("load", (event) => {
+            const ruffle = window.RufflePlayer.newest();
+            const player = ruffle.createPlayer();
+            const container = document.getElementById("ruffle-player");
+            container.appendChild(player);
+            
+            player.load("guruguru.swf"); 
+            
+            player.style.width = "800px";
+            player.style.height = "600px";
+        });
+    </script>
+</center>
+
+</body>
+	</html>
 </center>
 </body>
 </html>
