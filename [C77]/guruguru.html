@@ -278,7 +278,13 @@ function AC_GetArgs(args, ext, srcParamName, classid, mimeType){
 
 <center>
     <h3><font color="#ffffff">GuruGuru [Ruffle fix]</font></h3>
-    
+
+	<div id="flash-container">
+        <object width="800" height="800">
+            <param name="game" value="swf/guruguru.swf">
+            <embed src="swf/guruguru.swf" width="800" height="800"></embed>
+        </object>
+	</div>
     <div id="ruffle-player"></div>
     <script src="https://js.ruffle.rs/ruffle.js"></script>
     <script>
@@ -293,7 +299,6 @@ function AC_GetArgs(args, ext, srcParamName, classid, mimeType){
             
             player.style.width = "800px";
             player.style.height = "600px";
-        });
     </script>
 </center>
 
