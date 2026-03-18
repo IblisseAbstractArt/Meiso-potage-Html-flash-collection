@@ -1,33 +1,40 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=shift_jis" />
-<title>のりしろ</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=shift-jis">
+    <title> overlap</title>
+    <script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
+    <style>
+        /* Esto evita que el flash empuje el resto del contenido */
+        #flash-container {
+            width: 512px;
+            height: 384px;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+    </style>
 </head>
-<body bgcolor="#000000">
-<font color="ffffff">
+
+<body bgcolor="#000000" text="#ffffff">
 <center>
-<h3>のりしろ</h3>
-<!--ムービーで使用されている URL-->
-<!--ムービーで使用されているテキスト-->
-<!-- saved from url=(0013)about:internet -->
-<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" 
-codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=8,0,0,0" 
-width="640" height="384" id="../swf/toho01_06_morii.swf" align="middle">
-<param name="allowScriptAccess" value="sameDomain" />
-<param name="movie" value="../swf/toho01_06_morii.swf" />
-<param name="quality" value="high" />
-<param name="bgcolor" value="#ffffff" />
-<embed src="../swf/toho01_06_morii.swf" quality="high" bgcolor="#ffffff" 
-width="640" height="384" name="../swf/toho01_06_morii.swf" 
-align="middle" allowScriptAccess="sameDomain" type="application/x-shockwave-flash" 
-pluginspage="http://www.macromedia.com/go/getflashplayer" />
-</object>
-<br><br><font size="2">
-ジャンル：ミュージッククリップ<br>
-作者：森井ケンシロウ<br>
-音楽：森井ケンシロウ 「のりしろ」<br><br></font>
-<a href="../mesopota01.html">戻る</a><br><br>
-<font size="2">(c) 2008 迷走ポタージュ, All rights reserved.</font>
-</center></font>
+    <h3>overlap [Ruffle fix]</h3>
+
+    <div id="flash-container">
+        <object width="512" height="384">
+            <param name="movie" value="swf/toho01_06_morii.swf">
+            <embed src="swf/toho01_06_morii.swf" width="512" height="384"></embed>
+        </object>
+    </div>
+
+    <br>
+    <font size="2">
+        Type = Flash Animation<br>
+        Modded = Average Rumia<br>
+        Hosted = Github Server [fixed using ruffle] <br><br>
+        <a href="../mesopota01.html" style="color: #5555ff;">XXXX[STRING_MESOPOTA_REDIRECT_BUTTON]XXXX</a>
+        <br><br>
+        (c) 2026 Meiso Potage / Average Rumia, No rights reserved.
+    </font>
+</center>
 </body>
 </html>
+<br></font>
