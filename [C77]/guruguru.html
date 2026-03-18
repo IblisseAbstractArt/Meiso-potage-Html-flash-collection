@@ -1,35 +1,43 @@
-<!DOCTYPE html>
-<html lang="ja">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja">
 <head>
-    <meta charset="utf-8" />
-    <title>GuruGuru [Ruffle fix]</title>
-    <link rel="icon" type="image/png" href="../icon64.png">
+    <meta http-equiv="Content-Type" content="text/html; charset=shift_jis" />
+    <title>GuruGuru</title>
+    
+    <script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
+    
+    <style>
+        /* Adaptado para los 800x600 de GuruGuru */
+        #flash-container {
+            width: 800px;
+            height: 600px;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+    </style>
 </head>
-<body bgcolor="#000000" style="margin:0; color:white;">
 
+<body bgcolor="#000000" text="#ffffff">
 <center>
     <h3>GuruGuru [Ruffle fix]</h3>
     
-    <div id="ruffle-player"></div>
-    
-    <script src="https://js.ruffle.rs/ruffle.js"></script>
-    <script>
-        window.RufflePlayer = window.RufflePlayer || {};
-        window.addEventListener("load", (event) => {
-            const ruffle = window.RufflePlayer.newest();
-            const player = ruffle.createPlayer();
-            const container = document.getElementById("ruffle-player");
-            container.appendChild(player);
-            
-            player.load("swf/guruguru.swf"); 
-            
-            player.style.width = "800px";
-            player.style.height = "600px";
-    </script>
+    <div id="flash-container">
+        <object width="800" height="600">
+            <param name="movie" value="swf/guruguru.swf">
+            <embed src="swf/guruguru.swf" width="800" height="600"></embed>
+        </object>
+    </div>
 
     <br>
-    <a href="../index.html" style="color: #58a6ff;">[ Return to the menu ]</a>
+    
+    <font size="2">
+        Type = Flash Game<br>
+        Modded = Average Rumia<br>
+        Hosted = Github Server [I got jumpscared by JavaScript] <br><br>
+        
+        <a href="../index.html" style="color: #5555ff;">[ Return to the menu ]</a><br><br>
+        
+        (c) 2026 Meiso Potage / Average Rumia, No rights reserved.
+    </font>
 </center>
-
 </body>
 </html>
