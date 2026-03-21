@@ -3,7 +3,7 @@
 <head><link rel="icon" type="image/png" href="icon64.png">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>C78 Ramune Flavor - Average Rumia Archive</title>
+    <title>Reitaisai 5 - Average Rumia Archive</title>
     <style>
         body { background-color: #000; color: #fff; font-family: 'Courier New', Courier, monospace; text-align: center; padding: 20px; }
         h1 { color: #00ff00; border-bottom: 1px solid #333; padding-bottom: 10px; font-size: 1.2rem; }
@@ -31,6 +31,27 @@
 </head>
 <body>
    <script src="/ruffle.js"></script>
+    <div id="splash-container" style="width: 100%; max-width: 800px; margin: 0 auto 20px auto; border-bottom: 1px solid #55ff55; padding-bottom: 10px;">
+    <div id="ruffle-splash"></div>
+</div>
+
+<script>
+    window.RufflePlayer = window.RufflePlayer || {};
+    window.addEventListener("load", (event) => {
+        const ruffle = window.RufflePlayer.newest();
+        const player = ruffle.createPlayer();
+        const container = document.getElementById("ruffle-splash");
+        container.appendChild(player);
+        player.load({
+            url: "splash.swf",
+            letterbox: "on",
+            autoplay: "on",
+            unmuteOverlay: "hidden"
+        });
+        player.style.width = "100%";
+        player.style.height = "250px"; 
+    });
+</script>
     <h1>迷走ポタージュ - Reitaisai 5</h1>
     <p style="color: #888; font-size: 0.8rem;">Select a html animation or game:</p>
 
