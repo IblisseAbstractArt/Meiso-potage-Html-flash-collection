@@ -17,8 +17,3 @@ it with the world. (the website is still in development - uncompleted sections)
 
 this is my first proyect of all time, so dont expect more from me
 (im newbye in this world of coding)
-
-REMEMBER!
-
-This project is still UNFINISHED!
-so there will be stuff mising...
