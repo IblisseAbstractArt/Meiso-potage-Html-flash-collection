@@ -31,26 +31,14 @@
 </head>
 <body>
    <script src="/ruffle.js"></script>
-    <div id="splash-container" style="width: 100%; max-width: 800px; margin: 0 auto 20px auto; border-bottom: 1px solid #55ff55; padding-bottom: 10px;">
-    <div id="ruffle-splash"></div>
-</div>
-
-<script>
-    window.RufflePlayer = window.RufflePlayer || {};
-    window.addEventListener("load", (event) => {
-        const ruffle = window.RufflePlayer.newest();
-        const player = ruffle.createPlayer();
-        const container = document.getElementById("ruffle-splash");
-        container.appendChild(player);
-        player.load({
-            url: "splash.swf",
-            letterbox: "on",
-            autoplay: "on",
-            unmuteOverlay: "hidden"
-
-        player.style.width = "100%";
-        player.style.height = "250px"; 
-    });
+    <center>
+    <ruffle-player 
+        src="splash.swf" 
+        width="100%" 
+        height="180" 
+        style="max-width: 600px; display: block; margin-bottom: 20px;">
+    </ruffle-player>
+</center>
 </script>
     <h1>迷走ポタージュ - Reitaisai 5</h1>
     <p style="color: #888; font-size: 0.8rem;">Select a html animation or game:</p>
