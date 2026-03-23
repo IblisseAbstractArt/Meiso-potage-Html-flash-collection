@@ -9,7 +9,7 @@ So, I tried making a screensaver of a past work called Miracle∞Hinacle.
 Uh, I think it will probably require a decent spec to use.
 If so, then why make such a thing, right? Sorry about that.
 I actually wanted to include a clock as well, but it became super heavy and impossible.
-I wonder how people like tha make screensavers...
+I wonder how people like that make screensavers...
 
 And on top of that, this is Windows-only! Sorry to Mac users.
 It's just that I'm anti-Apple myself. Today too, I snapped my thankful iPad in half.
