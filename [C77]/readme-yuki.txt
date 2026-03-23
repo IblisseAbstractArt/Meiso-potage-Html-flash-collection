@@ -1,6 +1,4 @@
-<div class="author-comment">
-    <blockquote>
-        "Hello, this is yu-ki.
+"Hello, this is yu-ki.
 Thank you for purchasing "Meisou Potage Wine Flavor."
 
 This time, I created a game inspired by the Bentler from Seirensen.
