@@ -53,8 +53,5 @@ But I believe the extra time was worth it,
 and the game itself turned out quite fun.
 I hope you enjoy it."
    
-    </blockquote>
-    <cite>— Yu-ki (Mesopota Circle Member)</cite>
 
-<a href="index.html" class="back">[ Close this Readme ]</a>
-</div>
+— Yu-ki (Mesopota Circle Member)
