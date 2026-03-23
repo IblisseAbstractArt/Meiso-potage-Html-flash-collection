@@ -1,5 +1,5 @@
 
-"Hello, this is Mi~ya.
+Hello, this is Mi~ya.
 Nice to meet those who are new.
 Thank you as always to those who know me.
 
