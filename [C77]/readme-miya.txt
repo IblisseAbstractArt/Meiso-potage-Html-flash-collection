@@ -1,7 +1,5 @@
 
-<div class="author-comment">
-    <blockquote>
-        "Hello, this is Mi~ya.
+"Hello, this is Mi~ya.
 Nice to meet those who are new.
 Thank you as always to those who know me.
 
@@ -36,7 +34,5 @@ you might get bored soon,
 but I hope you find it fun.
 
 That’s all.
-    </blockquote>
-    <cite>— み～や (Mesopota Circle Leader)</cite>
-</div>
-<a href="./index.html" class="back">[ Close this readme ]</a>
+   
+— み～や (Mesopota Circle Leader)
