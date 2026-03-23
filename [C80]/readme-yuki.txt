@@ -4,8 +4,8 @@ Thank you for picking up Meisou Potage "Cola Flavor."
 ＜This Game＞
 
 "graveyard trippers"  
-It’s summer. Speaking of summer, cemeteries. Speaking of cemeteries, Yoshiko is cute, yes, Yoshiko is.  
-So, this is a game where Kogasa-chan runs away desperately from Houkou-chan.  
+It’s summer. Speaking of summer, cemeteries. Speaking of cemeteries, Yoshika is cute, yes, Yoshika is.  
+So, this is a game where Kogasa-chan runs away desperately from Yoshika-chan.  
 Controls are the same as usual, with the arrow keys and the Z key. Please read the manual for details.
 
 I thought Yoshiko was a classic combination, but  
