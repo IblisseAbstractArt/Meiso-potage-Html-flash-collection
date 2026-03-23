@@ -23,7 +23,7 @@ To the original creator, zun, thank you always for your wonderful works.
 I hope you continue to release wonderful Gensokyo creations even after your marriage.
 
 To Decchi-san, who answered my unreasonable requests and made music despite all the trouble I caused,
-To Uda Tetra-san, who, when I said “Tetraemon, give me some ○○ materials~,” pulled materials out of a mysterious PC,
+To Uda Tetla-san, who, when I said “Tetlaemon, give me some ○○ materials~,” pulled materials out of a mysterious PC,
 To Lucchon-san, who saved me when I said spoiled things like “I can’t draw backgrounds, so this is impossible,”
 To everyone at Meisou Potage, who warmly welcomed me back when I casually returned despite being unable to properly engage in creative activities for a while,
 And to everyone who picked up this work,
