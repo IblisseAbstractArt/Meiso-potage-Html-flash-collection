@@ -1,11 +1,24 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=shift_jis" />
-    <title>CompGacha [Ruffle fix]</title>
+    <title>Nitori and Marisa</title>
     
     <script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
     
     <style>
+        <div class="mobile-flash-container" style="
+    width: 100%; 
+    max-width: 360px; /* Tamaño perfecto para verse bien en móviles modernos */
+    aspect-ratio: 3 / 4; /* Mantiene la proporción original de DoCoMo */
+    margin: 20px auto; 
+    border: 3px solid #333; /* Simula el borde de un teléfono */
+    border-radius: 10px; /* Bordes redondeados tipo móvil antiguo */
+    background-color: #000;
+    overflow: hidden;">
+    
+    <div id="ruffle-player"></div>
+</div>
+        
         /* Adaptado para los 800x600 de GuruGuru */
         #flash-container {
             width: 240px;
