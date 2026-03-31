@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>3-me.net Archive - Touhou Project</title>
+    <script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
+    <style>
+        body { background-color: #000; margin: 0; display: flex; justify-content: center; align-items: center; height: 100vh; overflow: hidden; }
+        #ruffle-container { width: 100%; height: 100%; }
+    </style>
+</head>
+<body>
+    <div id="ruffle-container"></div>
+
+    <script>
+        window.RufflePlayer = window.RufflePlayer || {};
+        window.RufflePlayer.config = {
+            // Permite que el SWF lea las carpetas XML de rankings y assets
+            "allowScriptAccess": true,
+            "autoplay": "on",
+            "unmuteOverlay": "hidden",
+            "letterbox": "on",
+            "warnOnUnsafeContent": false,
+            // Ayuda a procesar las rutas relativas de 3-me.net
+            "polyfills": true 
+        };
+
+        const ruffle = window.RufflePlayer.newest();
+        const player = ruffle.createPlayer();
+        const container = document.getElementById("ruffle-container");
+        container.appendChild(player);
+
+        player.load({
+            // Cambia 'juego.swf' por el nombre de tu archivo (ej: jumpGallop.swf)
+            url: "swf/jumpGallop.swf", 
+            // Fuerza a Ruffle a tratar de leer archivos locales como si fuera el servidor original
+            allowRuntimeInterface: true
+        });
+    </script>
+</body>
+</html>
