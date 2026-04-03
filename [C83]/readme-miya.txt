@@ -20,7 +20,7 @@ I made a mini-game this time as well.
 
 ■ About the work
 
-This time, I borrowed a character drawn by Tetra-san to create a mini-game.
+This time, I borrowed a character drawn by Tetla-san to create a mini-game.
 Hmm... Tetla-san’s Cirno is charming and cute, isn’t she...
 
 As for the game content, it’s a pseudo first-person perspective pseudo shooting game.
