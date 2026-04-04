@@ -115,41 +115,59 @@ h2, .section-title, span[style*="color: #FFFF00"] {
     animation: palpitarGlowAmarillo 2s ease-in-out infinite;
 
     
-@keyframes barreado {
-  0% { top: -100px; }
-  100% { top: 100%; }
-
-
-body::after {
-  content: "";
-  position: fixed;
-  top: -100px;
-  left: 0;
-  width: 100%;
-  height: 100px;
-  background: linear-gradient(to bottom, 
-      rgba(0, 255, 0, 0) 0%, 
-      rgba(0, 255, 0, 0.08) 50%, 
-      rgba(0, 255, 0, 0) 100%);
-  animation: barreado 6s linear infinite; 
-  pointer-events: none;
-  z-index: 10000;
+@keyframes barreadoEfecto {
+    0% { transform: translateY(-100vh); }
+    100% { transform: translateY(100vh); }
 }
 
-@keyframes barreado {
-  0% { transform: translateY(-100vh); }
-  100% { transform: translateY(200vh); }
-}
-
-
-
+/* 2. ESTILOS GLOBALES DEL BODY */
 body {
     background-color: #000;
-    background-image: radial-gradient(#2a2a2a 20%, transparent 20%);
+    /* EL DITHERING: Ahora con color más claro para que lo veas */
+    background-image: radial-gradient(#333 20%, transparent 20%);
     background-size: 4px 4px;
     color: #0f0;
     cursor: crosshair;
-                              }
+    margin: 0;
+    padding: 0;
+    animation: flicker 0.15s infinite;
+}
+
+/* 3. CAPA DE BARRIDO (SCANLINE ANIMATION) */
+body::after {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    background: linear-gradient(to bottom, transparent, rgba(0, 255, 0, 0.15), transparent);
+    animation: barreadoEfecto 4s linear infinite;
+    pointer-events: none;
+    z-index: 10000;
+}
+
+/* 4. TEXTOS Y TÍTULOS */
+h1, .titulo-rojo {
+    color: #f00;
+    animation: palpitarGlowRojo 1.5s ease-in-out infinite;
+    font-weight: bold;
+}
+
+h2, .section-title, span[style*="color: #FFFF00"] {
+    animation: palpitarGlowAmarillo 2s ease-in-out infinite;
+}
+
+a:hover {
+    cursor: pointer;
+    color: #fff;
+    text-shadow: 0 0 12px rgba(255, 255, 255, 1);
+}
+
+/* 5. SCROLLBAR */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: #000; }
+::-webkit-scrollbar-thumb { background:
     </style>
 </head>
 <body>
