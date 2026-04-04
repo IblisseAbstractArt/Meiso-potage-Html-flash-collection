@@ -85,6 +85,37 @@ a:hover {
     background: #004400; 
     border: 1px solid #00ff00;
 }    
+
+@keyframes palpitarGlowRojo {
+    0% {
+        text-shadow: 0 0 10px rgba(255, 0, 0, 0.8);
+    }
+    50% {
+        text-shadow: 0 0 18px rgba(255, 0, 0, 1), 0 0 8px rgba(255, 0, 0, 0.6);
+    }
+    100% {
+        text-shadow: 0 0 10px rgba(255, 0, 0, 0.8); 
+    }
+}
+
+
+h1, .titulo-rojo {
+    color: #f00;
+    
+    animation: palpitarGlowRojo 1.5s ease-in-out infinite; 
+    font-weight: bold;
+}
+
+
+@keyframes palpitarGlowAmarillo {
+    0% { text-shadow: 0 0 8px rgba(255, 255, 0, 0.7); }
+    50% { text-shadow: 0 0 15px rgba(255, 255, 0, 0.9), 0 0 6px rgba(255, 255, 0, 0.5); }
+    100% { text-shadow: 0 0 8px rgba(255, 255, 0, 0.7); }
+}
+
+h2, .section-title, span[style*="color: #FFFF00"] {
+    animation: palpitarGlowAmarillo 2s ease-in-out infinite;
+}   
     </style>
 </head>
 <body>
