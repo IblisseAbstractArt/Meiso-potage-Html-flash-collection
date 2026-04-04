@@ -116,6 +116,26 @@ h1, .titulo-rojo {
 h2, .section-title, span[style*="color: #FFFF00"] {
     animation: palpitarGlowAmarillo 2s ease-in-out infinite;
 }   
+
+    
+@keyframes barreado {
+  0% { top: -100px; }
+  100% { top: 100%; }
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  top: -100px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: rgba(0, 255, 0, 0.2); 
+  box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+  animation: barreado 4s linear infinite;
+  pointer-events: none;
+  z-index: 10000;
+}
     </style>
 </head>
 <body>
