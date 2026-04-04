@@ -96,7 +96,6 @@ a:hover {
     100% {
         text-shadow: 0 0 10px rgba(255, 0, 0, 0.8); 
     }
-}
 
 
 h1, .titulo-rojo {
@@ -104,24 +103,22 @@ h1, .titulo-rojo {
     
     animation: palpitarGlowRojo 1.5s ease-in-out infinite; 
     font-weight: bold;
-}
 
 
 @keyframes palpitarGlowAmarillo {
     0% { text-shadow: 0 0 8px rgba(255, 255, 0, 0.7); }
     50% { text-shadow: 0 0 15px rgba(255, 255, 0, 0.9), 0 0 6px rgba(255, 255, 0, 0.5); }
     100% { text-shadow: 0 0 8px rgba(255, 255, 0, 0.7); }
-}
+
 
 h2, .section-title, span[style*="color: #FFFF00"] {
     animation: palpitarGlowAmarillo 2s ease-in-out infinite;
-}   
 
     
 @keyframes barreado {
   0% { top: -100px; }
   100% { top: 100%; }
-}
+
 
 body::after {
   content: "";
@@ -135,7 +132,14 @@ body::after {
   animation: barreado 4s linear infinite;
   pointer-events: none;
   z-index: 10000;
-}
+
+
+
+body {
+    background-color: #000;
+    background-image: radial-gradient(#111 10%, transparent 10%);
+    background-size: 3px 3px;
+}    
     </style>
 </head>
 <body>
