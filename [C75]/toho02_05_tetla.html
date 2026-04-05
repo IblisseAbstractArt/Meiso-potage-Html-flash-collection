@@ -17,7 +17,22 @@
             filter: url(#rgb-split); 
             will-change: filter;
         }
+        #flash-container::after {
+    content: " ";
+    display: block;
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    
+    /* La viñeta: sombra interna fuerte y suave */
+    box-shadow: inset 0 0 80px rgba(0,0,0,0.85),
+                inset 0 0 20px rgba(0,0,0,1);
+    
+    /* Crucial para que el mouse atraviese la sombra y puedas jugar */
+    pointer-events: none; 
+    z-index: 10;
+        }
 
+        
         /* 2. Capa CRT (Scanlines) - Ajustada para no tapar tanto */
         body::before {
             content: " ";
