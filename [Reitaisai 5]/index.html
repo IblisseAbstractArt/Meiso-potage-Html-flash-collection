@@ -30,18 +30,65 @@
 }
 
     <head>
-    
-        
-    @keyframes flicker {
-  0% { opacity: 0.98; }
-  5% { opacity: 0.95; }
-  10% { opacity: 0.99; }
-  100% { opacity: 1; }
-}
+    <style>
+  body {
+    margin: 0;
+    background: #000;
+    color: #00ff66;
+    font-family: monospace;
+  }
 
-body {
-    animation: flicker 0.15s infinite;
-}    
+  /* Contenedor con look CRT */
+  .crt {
+    position: relative;
+    min-height: 100vh;
+    overflow: hidden;
+    background: #050505;
+    filter: contrast(1.1) brightness(1.05) saturate(1.2);
+    text-shadow: 0 0 2px rgba(0,255,120,0.7), 0 0 8px rgba(0,255,120,0.35);
+  }
+
+  /* Scanlines fijas */
+  .crt::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: repeating-linear-gradient(
+      to bottom,
+      rgba(255,255,255,0.05) 0px,
+      rgba(255,255,255,0.05) 1px,
+      transparent 2px,
+      transparent 4px
+    );
+    mix-blend-mode: overlay;
+    opacity: 0.35;
+  }
+
+  /* Raya brillante que baja indefinidamente */
+  .crt::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 120px;
+    pointer-events: none;
+    background: linear-gradient(
+      to bottom,
+      transparent 0%,
+      rgba(255,255,255,0.05) 45%,
+      rgba(255,255,255,0.18) 50%,
+      rgba(255,255,255,0.05) 55%,
+      transparent 100%
+    );
+    animation: scanMove 4s linear infinite;
+    opacity: 0.7;
+  }
+
+  @keyframes scanMove {
+    from { top: -120px; }
+    to   { top: 100vh; }
+  }  
     </style>
 </head>
     </style>
