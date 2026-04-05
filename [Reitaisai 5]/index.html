@@ -24,9 +24,14 @@
             color: #fff; 
             font-family: 'Courier New', Courier, monospace; 
             text-align: center; 
-            margin: 8; /* Importante para que el CRT cubra todo */
-            padding: 15;
-            animation: flicker 0.15s infinite; /* El parpadeo aplicado aquí */
+            margin: 0 auto;
+            padding: 20px;
+            animation: flicker 0.15s infinite;
+            
+            /* ESTAS TRES LÍNEAS HACEN LA MAGIA: */
+            max-width: 600px;    /* Limita el ancho para que no se expanda */
+            margin-left: auto;   /* Centra la caja a la izquierda */
+            margin-right: auto;  /* Centra la caja a la derecha */
         }
 
         /* ========================== */
