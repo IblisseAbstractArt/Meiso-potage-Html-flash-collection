@@ -16,21 +16,9 @@
             100% { opacity: 1; }
         }
 
-        /* ========================== */
-        /* 2. ESTILOS GLOBALES (BODY) */
-        /* ========================== */
-        body { 
-            background-color: #000; 
-            color: #fff; 
-            font-family: 'Courier New', Courier, monospace; 
-            text-align: center; 
-            margin: 30; /* Importante para que el CRT cubra todo */
-            padding: 10;
-            animation: flicker 0.15s infinite; /* El parpadeo aplicado aquí */
-        }
 
         /* ========================== */
-        /* 3. CAPA SCANLINES (CRT)    */
+        /* 2. CAPA SCANLINES (CRT)    */
         /* ========================== */
         body::before {
             content: " ";
@@ -45,7 +33,7 @@
         }
 
         /* ========================== */
-        /* 4. ESTILOS DE LA PÁGINA    */
+        /* 3. ESTILOS DE LA PÁGINA    */
         /* ========================== */
         h1 { color: #00ff00; border-bottom: 1px solid #333; padding-bottom: 10px; font-size: 1.2rem; }
         
