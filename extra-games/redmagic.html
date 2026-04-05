@@ -10,8 +10,60 @@
             height: 600px;
             margin: 0 auto;
             overflow: hidden;
+position: relative;
+            border: 2px solid #222;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+            /* APLICAMOS EL FILTRO */
+            filter: url(#rgb-split); 
+            will-change: filter;
         }
+
+        /* 2. Capa CRT (Scanlines) - Ajustada para no tapar tanto */
+        body::before {
+            content: " ";
+            display: block;
+            position: fixed;
+            top: 0; left: 0; bottom: 0; right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%),
+                        linear-gradient(90deg, rgba(255, 0, 0, 0.02), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.02));
+            z-index: 9999;
+            pointer-events: none;
+            /* Bajé un poco el grosor de 6px a 4px para que sea menos invasivo */
+            background-size: 100% 6px, 5px 100%;
+        }
+
+        @keyframes flicker {
+            0% { opacity: 0.98; }
+            5% { opacity: 0.95; }
+            10% { opacity: 0.99; }
+            100% { opacity: 1; } /* Corregido de 5 a 1 */
+        }
+
+        body {
+            background-color: #000;
+            color: #ffffff;
+            margin: 0;
+            padding: 20px;
+            font-family: sans-serif;
+            animation: flicker 0.15s infinite;
+        
+        font[size="2"] {
+        color: #aaa;
+        line-height: 1.6;
+            {
     </style>
+
+    <svg style="display: none;">
+      <filter id="rgb-split">
+        <feOffset in="SourceGraphic" dx="3" dy="0" result="red-shift"/>
+        <feColorMatrix in="red-shift" type="matrix" values="1 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0" result="red-only"/>
+        <feColorMatrix in="SourceGraphic" type="matrix" values="0 0 0 0 0  0 1 0 0 0  0 0 0 0 0  0 0 0 1 0" result="green-only"/>
+        <feOffset in="SourceGraphic" dx="-3" dy="0" result="blue-shift"/>
+        <feColorMatrix in="blue-shift" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 1 0 0  0 0 0 1 0" result="blue-only"/>
+        <feBlend mode="screen" in="red-only" in2="green-only" result="red-green"/>
+        <feBlend mode="screen" in="red-green" in2="blue-only"/>
+      </filter>
+    </svg>
 </head>
 
 <body bgcolor="#000000" text="#ffffff">
