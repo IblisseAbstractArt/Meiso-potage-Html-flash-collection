@@ -13,8 +13,25 @@
         position: relative; /* Para que el CRT se alinee aquí si quisiéramos */
         border: 2px solid #222; /* Un borde sutil de monitor */
         box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+        filter: url(#rgb-split);
     }
+    
 
+  <svg style="display: none;">
+  <filter id="rgb-split">
+    <feOffset in="SourceGraphic" dx="3" dy="0" result="red-shift"/>
+    <feColorMatrix in="red-shift" type="matrix" values="1 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0" result="red-only"/>
+    
+    <feColorMatrix in="SourceGraphic" type="matrix" values="0 0 0 0 0  0 1 0 0 0  0 0 0 0 0  0 0 0 1 0" result="green-only"/>
+    
+    <feOffset in="SourceGraphic" dx="-3" dy="0" result="blue-shift"/>
+    <feColorMatrix in="blue-shift" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 1 0 0  0 0 0 1 0" result="blue-only"/>
+    
+    <feBlend mode="screen" in="red-only" in2="green-only" result="red-green"/>
+    <feBlend mode="screen" in="red-green" in2="blue-only"/>
+  </filter>
+</svg>
+}
     /* 2. CAPA CRT: Cubre toda la ventana sin afectar escalas */
     body::before {
         content: " ";
