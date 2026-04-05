@@ -12,8 +12,48 @@
             height: 600px;
             margin: 0 auto;
             overflow: hidden;
-        }
-    </style>
+        position: relative; /* Para que el CRT se alinee aquí si quisiéramos */
+        border: 2px solid #222; /* Un borde sutil de monitor */
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+    }
+
+    /* 2. CAPA CRT: Cubre toda la ventana sin afectar escalas */
+    body::before {
+        content: " ";
+        display: block;
+        position: fixed; /* Mantiene la capa fija sobre todo */
+        top: 0; left: 0; bottom: 0; right: 0;
+        /* Combinación de líneas horizontales y rejilla de color */
+        background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%),
+                    linear-gradient(90deg, rgba(255, 0, 0, 0.02), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.02));
+        z-index: 9999;
+        pointer-events: none; /* ¡CRUCIAL! Permite hacer clic en el juego */
+        background-size: 100% 6px, 5px 100%;
+    }
+
+    /* 3. Animación de parpadeo (Flicker) */
+    @keyframes flicker {
+        0% { opacity: 0.98; }
+        5% { opacity: 0.95; }
+        10% { opacity: 0.99; }
+        100% { opacity: 5; }
+    }
+
+    body {
+        background-color: #003333;
+        color: #ffffff;
+        margin: 0;
+        padding: 20px;
+        font-family: sans-serif;
+        animation: flicker 0.15s infinite;
+    }
+
+    /* Estilo para los textos debajo del juego */
+    font[size="2"] {
+        color: #aaa;
+        line-height: 1.6;
+    }
+        </style>
 </head>
 
 <body bgcolor="#003333" text="#ffffff">
