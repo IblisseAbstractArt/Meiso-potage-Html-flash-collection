@@ -55,7 +55,7 @@
             100% { transform: translateY(900%); }
 		}
 
-        
+    
         /* 2. Capa CRT (Scanlines) - Ajustada para no tapar tanto */
         body::before {
             content: " ";
@@ -75,22 +75,23 @@
             5% { opacity: 0.95; }
             10% { opacity: 0.99; }
             100% { opacity: 1; } /* Corregido de 5 a 1 */
-		}
+			}
 
         /* --- EFECTO DE SALTO DE CINTA (GLITCH) --- */
-@keyframes vhs-jump {
-    /* Del 0% al 94% del tiempo, el juego está quieto */
-    0%, 94%, 100% { 
-        transform: translateX(0) skewX(0deg); 
+@keyframes vhs-pro-jump {
+    0%, 93%, 98%, 100% { 
+        transform: translate(0, 0) scale(1) skewX(0deg);
+        filter: brightness(1) contrast(1);
     }
-    95% { 
-        transform: translate(5px, -2px) scale(1.01) skewX(1deg);
-        filter: brightness(1.2); /* Un destello de luz */
-	}
-    /* En el 97% pega un tirón a la izquierda */
-    97% { 
-        transform: translateX(-4px) skewX(-1deg); 
-		filter: brightness(0.9); /* Un bajón de luz */
+    /* El "tirón" hacia arriba y derecha con destello */
+    94% { 
+        transform: translate(6px, -3px) scale(1.01) skewX(1deg);
+        filter: brightness(1.3) contrast(1.1);
+    }
+    /* El rebote hacia abajo e izquierda con sombra */
+    96% { 
+        transform: translate(-4px, 3px) scale(1.01) skewX(-1deg);
+        filter: brightness(0.8) contrast(1.2);
     }
 }
 
