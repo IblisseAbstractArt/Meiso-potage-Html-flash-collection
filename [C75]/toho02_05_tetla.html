@@ -16,6 +16,7 @@
             /* APLICAMOS EL FILTRO */
             filter: url(#rgb-split); 
             will-change: filter;
+            animation: vhs-jump 8s infinite;
         }
         #flash-container::after {
     content: " ";
@@ -84,6 +85,21 @@
             100% { opacity: 1; } /* Corregido de 5 a 1 */
         }
 
+        /* --- EFECTO DE SALTO DE CINTA (GLITCH) --- */
+@keyframes vhs-jump {
+    /* Del 0% al 94% del tiempo, el juego está quieto */
+    0%, 94%, 100% { 
+        transform: translateX(0) skewX(0deg); 
+    }
+    /* En el 95% pega un tirón a la derecha y se inclina un grado */
+    95% { 
+        transform: translateX(4px) skewX(1deg); 
+    }
+    /* En el 97% pega un tirón a la izquierda */
+    97% { 
+        transform: translateX(-4px) skewX(-1deg); 
+    }
+}
         body {
             background-color: #000;
             color: #ffffff;
