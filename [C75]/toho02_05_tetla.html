@@ -16,7 +16,7 @@
             /* APLICAMOS EL FILTRO */
             filter: url(#rgb-split); 
             will-change: filter;
-            animation: vhs-pro-jump 7s infinite;
+            animation: vhs-jump 7s infinite;
 		}
          /* 1. La viñeta: sombra interna fuerte y suave */
         #flash-container::after {
@@ -64,6 +64,7 @@
                         linear-gradient(90deg, rgba(255, 0, 0, 0.02), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.02));
             z-index: 9999;
             pointer-events: none;
+            /* Bajé un poco el grosor de 6px a 4px para que sea menos invasivo */
             background-size: 100% 6px, 5px 100%;
         }
 
@@ -72,9 +73,9 @@
             5% { opacity: 0.95; }
             10% { opacity: 0.99; }
             100% { opacity: 1; } /* Corregido de 5 a 1 */
-        }
+		}
 
-		@keyframes vhs-pro-jump {
+		@keyframes vhs-jump {
     0%, 93%, 98%, 100% { 
         transform: translate(0, 0) scale(1) skewX(0deg);
         filter: brightness(1) contrast(1);
