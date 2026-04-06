@@ -16,6 +16,7 @@
             /* APLICAMOS EL FILTRO */
             filter: url(#rgb-split); 
             will-change: filter;
+		    animation: vhs-pro-jump 8s infinite;
 		}
 
 		/* 1. La viñeta: sombra interna fuerte y suave */
@@ -74,6 +75,23 @@
             10% { opacity: 0.99; }
             100% { opacity: 1; } /* Corregido de 5 a 1 */
 
+			@keyframes vhs-pro-jump {
+    0%, 93%, 98%, 100% { 
+        /* Mantenemos el filtro RGB siempre presente */
+        transform: translate(0, 0) scale(1);
+        filter: url(#rgb-split) brightness(1) contrast(1);
+    }
+    94% { 
+        /* Salto con RGB + Brillo alto */
+        transform: translate(6px, -3px) scale(1.01);
+        filter: url(#rgb-split) brightness(1.3) contrast(1.1);
+    }
+    96% { 
+        /* Salto con RGB + Brillo bajo */
+        transform: translate(-4px, 3px) scale(1.01);
+        filter: url(#rgb-split) brightness(0.8) contrast(1.2);
+    }
+		}
         body {
             background-color: #000;
             color: #ffffff;
