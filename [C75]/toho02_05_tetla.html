@@ -79,21 +79,21 @@
 
         /* --- EFECTO DE SALTO DE CINTA (GLITCH) --- */
 @keyframes vhs-jump {
+    /* Del 0% al 94% del tiempo, el juego está quieto */
     0%, 94%, 100% { 
-        transform: translate(0, 0) scale(1) skewX(0deg);
-        filter: brightness(1);
+        transform: translateX(0) skewX(0deg); 
     }
-    /* Primer micro-salto: derecha y arriba */
     95% { 
         transform: translate(5px, -2px) scale(1.01) skewX(1deg);
         filter: brightness(1.2); /* Un destello de luz */
-    }
-    /* Segundo micro-salto: izquierda y abajo */
+	}
+    /* En el 97% pega un tirón a la izquierda */
     97% { 
-        transform: translate(-5px, 2px) scale(1.01) skewX(-1deg);
-        filter: brightness(0.9); /* Un bajón de luz */
+        transform: translateX(-4px) skewX(-1deg); 
+		filter: brightness(0.9); /* Un bajón de luz */
     }
 }
+
         body {
             background-color: #000;
             color: #ffffff;
