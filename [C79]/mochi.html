@@ -20,66 +20,41 @@
             will-change: filter;
         }
 
-        /* La viñeta: sombra interna fuerte y suave */
-    box-shadow: inset 0 0 80px rgba(0,0,0,0.85),
-                inset 0 0 20px rgba(0,0,0,1);
-    
-    /* Crucial para que el mouse atraviese la sombra y puedas jugar */
-    pointer-events: none; 
-    z-index: 10;
-        }
-    /* 1. La franja blanca transparente */
-#flash-container::before {
-    content: " ";
-    display: block;
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 12%; /* El grosor de la franja (12% de la pantalla) */
-    
-    /* El degradado: invisible arriba, blanco semitransparente en medio, invisible abajo */
-    background: linear-gradient(
-        to bottom, 
-        rgba(255,255,255,0) 0%, 
-        rgba(255,255,255,0.08) 50%, 
-        rgba(255,255,255,0) 100%
-    );
-    
-    pointer-events: none; /* Vital para que no bloquee los clics en el juego */
-    z-index: 15; /* Tiene que estar por encima del juego y la viñeta */
-    
-    /* Llama a la animación de abajo. Dura 6 segundos y se repite infinito */
-    animation: crt-roll 6s linear infinite;
-}
-
-/* 2. La animación de bajada */
-@keyframes crt-roll {
-    0% { 
-        transform: translateY(-100%); /* Empieza justo por encima del techo, oculta */
-    }
-    100% { 
-        transform: translateY(900%); /* Baja hasta cruzar toda la pantalla hacia el suelo */
-    }
-}
-        /* 2. Capa CRT (Scanlines) - Ajustada para no tapar tanto */
-        body::before {
+        /* 1. La viñeta: sombra interna fuerte y suave */
+        #flash-container::after {
             content: " ";
             display: block;
-            position: fixed;
-            top: 0; left: 0; bottom: 0; right: 0;
-            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%),
-                        linear-gradient(90deg, rgba(255, 0, 0, 0.02), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.02));
-            z-index: 9999;
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            box-shadow: inset 0 0 80px rgba(0,0,0,0.85),
+                        inset 0 0 20px rgba(0,0,0,1);
             pointer-events: none;
-            /* Bajé un poco el grosor de 6px a 4px para que sea menos invasivo */
-            background-size: 100% 6px, 5px 100%;
+            z-index: 10;
         }
 
-        @keyframes flicker {
-            0% { opacity: 0.98; }
-            5% { opacity: 0.95; }
-            10% { opacity: 0.99; }
-            100% { opacity: 1; } /* Corregido de 5 a 1 */
+        /* 2. La franja blanca transparente (CRT Roll) */
+        #flash-container::before {
+            content: " ";
+            display: block;
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 12%;
+            background: linear-gradient(
+                to bottom, 
+                rgba(255,255,255,0) 0%, 
+                rgba(255,255,255,0.08) 50%, 
+                rgba(255,255,255,0) 100%
+            );
+            pointer-events: none;
+            z-index: 15;
+            animation: crt-roll 6s linear infinite;
         }
+
+        /* 3. La animación de bajada (Corregida sin el '?') */
+        @keyframes crt-roll {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(900%); }
+		}
 
         body {
             background-color: #000;
