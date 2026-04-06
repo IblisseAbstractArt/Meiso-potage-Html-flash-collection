@@ -71,6 +71,7 @@
                         linear-gradient(90deg, rgba(255, 0, 0, 0.02), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.02));
             z-index: 9999;
             pointer-events: none;
+            /* Bajé un poco el grosor de 6px a 4px para que sea menos invasivo */
             background-size: 100% 6px, 5px 100%;
         }
 
@@ -79,7 +80,7 @@
             5% { opacity: 0.95; }
             10% { opacity: 0.99; }
             100% { opacity: 1; } /* Corregido de 5 a 1 */
-        }
+		}
 
         /* --- EFECTO DE SALTO DE CINTA (GLITCH) --- */
 @keyframes vhs-jump {
