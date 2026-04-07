@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>迷走ポタージュ (Mesopota) - Archivo de Preservación</title>
+    <style>
+        /* --- ESTILOS ORIGINALES LIMPIOS --- */
+        body { background-color: #000; color: #ccc; font-family: "MS PGothic", sans-serif; margin: 0; }
+        #wrapper { width: 850px; margin: 0 auto; background: #080808; border-left: 1px solid #222; border-right: 1px solid #222; padding: 20px; box-shadow: 0 0 50px rgba(0,0,0,1); }
+        
+        /* --- TUS EFECTOS RETRO (SCANLINES) --- */
+        body::before {
+            content: " "; display: block; position: fixed; top: 0; left: 0; bottom: 0; right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%),
+                        linear-gradient(90deg, rgba(255, 0, 0, 0.02), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.02));
+            z-index: 9999; pointer-events: none; background-size: 100% 4px, 3px 100%;
+        }
+
+        h2 { border-left: 5px solid #600; padding-left: 10px; background: #1a1a1a; font-size: 1.1em; padding-top: 5px; padding-bottom: 5px; }
+        .menu-links { list-style: none; padding: 10px; display: flex; justify-content: center; gap: 20px; border-bottom: 1px dashed #333; }
+        .menu-links a { color: #888; text-decoration: none; font-weight: bold; transition: 0.3s; }
+        .menu-links a:hover { color: #fff; text-shadow: 0 0 10px #fff; }
+
+        /* Contenedor para el Flash de portada con tu filtro RGB */
+        #visual-flash { 
+            width: 780px; height: 300px; margin: 20px auto; 
+            filter: url(#rgb-split); border: 2px solid #222; position: relative;
+        }
+        
+        /* Estilo para las secciones de noticias */
+        #info dl { padding: 10px; font-size: 0.9em; }
+        #info dt { color: #666; font-weight: bold; margin-top: 10px; }
+        #info dd a { color: #aaa; text-decoration: none; }
+        #info dd a:hover { text-decoration: underline; color: #fff; }
+    </style>
+</head>
+<body>
+
+<div id="wrapper">
+    <div id="header">
+        <h1 style="text-align: center; color: #eee; letter-spacing: 5px;">迷走ポタージュ</h1>
+    </div>
+
+    <div id="nav_info">
+        <ul class="menu-links">
+            <li><a href="#info">TOP</a></li>
+            <li><a href="#product">CONTENT</a></li>
+            <li><a href="#member">MEMBER</a></li>
+            <li><a href="#about">ABOUT</a></li>
+            <li><a href="#link">LINK</a></li>
+        </ul>
+    </div>
+
+    <div id="visual-flash">
+        <div style="color: #444; text-align: center; padding-top: 130px;">[ CARGANDO SPLASH_WINE.SWF ]</div>
+    </div>
+
+    <div id="content">
+        <div id="info">
+            <h2>更新情報 <span style="font-size: 0.7em; color: #666;">Information</span></h2>
+            <dl>
+                <dt>2009/12/27</dt>
+                <dd><a href="#">Alpha-Design of Mesopota site in my style, is very uncompleted.
+                so take a look at this preview im working on</a></dd>
+                </dl>
+        </div>
+
+        <div id="product">
+            <h2>製品情報 <span style="font-size: 0.7em; color: #666;">Product</span></h2>
+            <div style="display: flex; gap: 20px; padding: 15px;">
+                <div style="border: 1px solid #333; padding: 5px; background: #111;">
+                    <img src="img/jacket_wine.jpg" alt="Jacket" width="150">
+                </div>
+                <div>
+                    <h3 style="margin:0; color: #fff;">迷走ポタージュ ワイン味</h3>
+                    <p style="font-size: 0.8em; color: #888;">C77 - 2009/12/30</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="footer" style="text-align: center; border-top: 1px solid #222; margin-top: 50px; padding: 20px; font-size: 0.7em; color: #444;">
+        Copyright &copy; 2026 迷走ポタージュ / Average Rumia. No rights reserved.
+    </div>
+</div>
+
+<svg style="display: none;">
+    <defs>
+        <filter id="rgb-split">
+            <feOffset in="SourceGraphic" dx="1.5" dy="0" result="red"/>
+            <feOffset in="SourceGraphic" dx="-1.5" dy="0" result="blue"/>
+            <feMerge>
+                <feMergeNode in="red"/><feMergeNode in="SourceGraphic"/><feMergeNode in="blue"/>
+            </feMerge>
+        </filter>
+    </defs>
+</svg>
+
+</body>
+                                                                                                        </html>
