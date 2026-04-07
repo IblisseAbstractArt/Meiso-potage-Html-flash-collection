@@ -22,30 +22,11 @@
         .menu-links a:hover { color: #fff; text-shadow: 0 0 10px #fff; }
 
         /* Contenedor para el Flash de portada con tu filtro RGB */
-        <div id="visual-flash">
-    <object type="application/x-shockwave-flash" data="main_splash.swf" width="780" height="300">
-        <param name="movie" value="main_splash.swf" />
-        <param name="wmode" value="transparent" />
-    </object>
-</div>
-        #visual-flash {
-    width: 780px;      /* Ancho original del splash de Mesopota */
-    height: 300px;     /* Altura exacta para que los personajes no se corten */
-    margin: 20px auto; /* Centrado automático */
-    background: #000;  /* Fondo negro por si el Flash tarda en cargar */
-    overflow: hidden;
-    position: relative;
-    
-    /* Tu toque maestro: Filtro RGB para el banner */
-    filter: url(#rgb-split); 
-}
-
-/* Ajuste para que el objeto Flash ocupe todo el contenedor */
-#visual-flash object, 
-#visual-flash embed {
-    width: 100%;
-    height: 100%;
-}
+        #visual-flash { 
+            width: 780px; height: 300px; margin: 20px auto; 
+            filter: url(#rgb-split); border: 2px solid #222; position: relative;
+        }
+        
         /* Estilo para las secciones de noticias */
         #info dl { padding: 10px; font-size: 0.9em; }
         #info dt { color: #666; font-weight: bold; margin-top: 10px; }
@@ -104,6 +85,21 @@
         Copyright &copy; 2026 迷走ポタージュ / Average Rumia. No rights reserved.
     </div>
 </div>
+
+<svg style="display: none;">
+    <defs>
+        <filter id="rgb-split">
+            <feOffset in="SourceGraphic" dx="1.5" dy="0" result="red"/>
+            <feOffset in="SourceGraphic" dx="-1.5" dy="0" result="blue"/>
+            <feMerge>
+                <feMergeNode in="red"/><feMergeNode in="SourceGraphic"/><feMergeNode in="blue"/>
+            </feMerge>
+        </filter>
+    </defs>
+</svg>
+
+</body>
+                                                                                                        </html>
 
 <svg style="display: none;">
     <defs>
