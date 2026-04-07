@@ -1,0 +1,144 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=shift-jis">
+    <title>Danbooru Touhou Flash Animation 2</title>
+    <script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
+    <style>
+        /* Esto evita que el flash empuje el resto del contenido */
+        #flash-container {
+            width: 800px;
+            height: 600px;
+            margin: 0 auto;
+            overflow: hidden;
+        position: relative;
+            border: 2px solid #222;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+            /* APLICAMOS EL FILTRO */
+            filter: url(#rgb-split); 
+            will-change: filter;
+        }
+
+        /* 1. La viñeta: sombra interna fuerte y suave */
+        #flash-container::after {
+            content: " ";
+            display: block;
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            box-shadow: inset 0 0 80px rgba(0,0,0,0.85),
+                        inset 0 0 20px rgba(0,0,0,1);
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        /* 2. La franja blanca transparente (CRT Roll) */
+        #flash-container::before {
+            content: " ";
+            display: block;
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 12%;
+            background: linear-gradient(
+                to bottom, 
+                rgba(255,255,255,0) 0%, 
+                rgba(255,255,255,0.08) 50%, 
+                rgba(255,255,255,0) 100%
+            );
+            pointer-events: none;
+            z-index: 15;
+            animation: crt-roll 6s linear infinite;
+        }
+
+        /* 3. La animación de bajada (Corregida sin el '?') */
+        @keyframes crt-roll {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(900%); }
+		}
+
+		/* 2. Capa CRT (Scanlines) - Ajustada para no tapar tanto */
+        body::before {
+            content: " ";
+            display: block;
+            position: fixed;
+            top: 0; left: 0; bottom: 0; right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%),
+                        linear-gradient(90deg, rgba(255, 0, 0, 0.02), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.02));
+            z-index: 9999;
+            pointer-events: none;
+            /* Bajé un poco el grosor de 6px a 4px para que sea menos invasivo */
+            background-size: 100% 6px, 5px 100%;
+        }
+
+        @keyframes flicker {
+            0% { opacity: 0.98; }
+            5% { opacity: 0.95; }
+            10% { opacity: 0.99; }
+            100% { opacity: 1; } /* Corregido de 5 a 1 */
+		}
+
+        body {
+            background-color: #000;
+            color: #ffffff;
+            margin: 0;
+            padding: 20px;
+            font-family: sans-serif;
+            animation: flicker 0.15s infinite;
+        
+        font[size="2"] {
+        color: #aaa;
+        line-height: 1.6;
+            {
+    </style>
+
+    <svg style="display: none;">
+      <filter id="rgb-split">
+        <feOffset in="SourceGraphic" dx="3" dy="0" result="red-shift"/>
+        <feColorMatrix in="red-shift" type="matrix" values="1 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0" result="red-only"/>
+        <feColorMatrix in="SourceGraphic" type="matrix" values="0 0 0 0 0  0 1 0 0 0  0 0 0 0 0  0 0 0 1 0" result="green-only"/>
+        <feOffset in="SourceGraphic" dx="-3" dy="0" result="blue-shift"/>
+        <feColorMatrix in="blue-shift" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 1 0 0  0 0 0 1 0" result="blue-only"/>
+        <feBlend mode="screen" in="red-only" in2="green-only" result="red-green"/>
+        <feBlend mode="screen" in="red-green" in2="blue-only"/>
+      </filter>
+    </svg>
+</head>
+
+<body bgcolor="#000000" text="#ffffff">
+<center>
+    <h3>Danbooru Touhou Flash Animation 2 [Ruffle fix]</h3>
+
+    <div id="flash-container">
+        <object width="800" height="600">
+            <param name="movie" value="swf/danbooru#2.swf">
+            <embed src="swf/danbooru#2.swf" width="800" height="600"></embed>
+        </object>
+    </div>
+
+    <br>
+    <font size="2">
+        Type = Flash Animation<br>
+        Modded = Average Rumia<br>
+        Hosted = Github Server<br><br>
+        <a href="./index.html" style="color: #5555ff;">[ Return to the menu ]</a><br><br>
+        </a>
+        <br><br>
+        (c) 2026 Average Rumia, No rights reserved.
+    </font>
+ <script src="https://giscus.app/client.js"
+        data-repo="IblisseAbstractArt/Meiso-potage-Html-flash-collection"
+        data-repo-id="R_kgDORp4pkQ"
+        data-category="General"
+        data-category-id="DIC_kwDORp4pkc4C5HRy"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="dark"
+        data-lang="es"
+        crossorigin="anonymous"
+        async>
+ </script>
+</center>
+</body>
+</html>
+<br></font>
