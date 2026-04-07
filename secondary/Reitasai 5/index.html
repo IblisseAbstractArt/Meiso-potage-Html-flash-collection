@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>Mesopota - Product Gallery</title>
+    <style>
+        /* BASE */
+        body { background-color: #c4c4c4; color: #333; font-family: "MS PGothic", sans-serif; margin: 0; }
+        
+        /* SCANLINES GLOBALES */
+        body::before {
+            content: " "; display: block; position: fixed; top: 0; left: 0; bottom: 0; right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.05) 50%),
+                        linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
+            z-index: 9999; pointer-events: none; background-size: 100% 3px, 3px 100%;
+        }
+
+        #wrapper { width: 850px; margin: 0 auto; background: #c4c4c4; }
+        #headernav { background-color: #cc8000; padding: 10px 0; margin-bottom: 20px; }
+        .orange-menu { list-style: none; padding: 0; margin: 0; display: flex; justify-content: center; gap: 30px; }
+        .orange-menu a { color: #fff; text-decoration: none; font-weight: bold; }
+
+        /* CONTENEDOR DE LA GALERÍA */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); /* 3 columnas de juegos */
+            gap: 20px;
+            padding: 20px;
+        }
+
+        /* "CARTUCHO" DE JUEGO */
+        .game-card {
+            background: #b0b0b0;
+            border: 2px solid #8c5300;
+            padding: 10px;
+            text-align: center;
+            transition: transform 0.2s, box-shadow 0.2s;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .game-card:hover {
+            transform: translateY(-5px);
+            background: #cc8000;
+            color: #fff;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .game-card img {
+            width: 100%;
+            height: 120px;
+            object-fit: cover;
+            border: 1px solid #333;
+            margin-bottom: 10px;
+            /* El toque maestro: las miniaturas también tienen un poco de RGB */
+            filter: contrast(1.1) brightness(0.9);
+        }
+
+        .game-title { font-weight: bold; font-size: 13px; height: 35px; overflow: hidden; }
+        .game-type { font-size: 10px; text-transform: uppercase; opacity: 0.7; }
+
+        .orange-header { background-color: #cc8000; color: #fff; padding: 8px 15px; margin: 0 20px; }
+    </style>
+</head>
+<body>
+
+<div id="wrapper">
+    <div id="header" style="padding: 15px;">
+        <h1 style="color: #8c5300; margin: 0; font-size: 1.5em;">迷走ポタージュ <span style="font-size: 0.6em;">- Archive Selection</span></h1> 
+    </div>
+
+    <div id="headernav">
+        <ul class="orange-menu">
+            <li><a href="index.html">TOP / main</a></li>
+            <li><a href="#">FLASH SELECTION</a></li>
+            <li><a href="#">ABOUT ARCHIVE</a></li>
+        </ul>
+    </div>
+
+    <h2 class="orange-header">作品リスト <span style="font-size: 0.7em;">Product List</span></h2>
+
+    <div class="gallery-grid">
+        <a href="take.html" class="Flash Animation">
+            <img src="cover/tn_take.jpg" alt="Artifical Children">
+            <div class="game-title">Artificial Children</div>
+            <div class="game-type">Animation / PV</div>
+        </a>
+
+        <a href="miya.html" class="Flash Game">
+            <img src="cover/tn_miya.jpg" alt="Spell Typing Carnival">
+            <div class="game-title">Spell Typing Carnival</div>
+            <div class="game-type">Typing Game</div>
+        </a>
+
+        <a href="kagi.html" class="Flash Animation">
+            <img src="cover/tn_kagi.jpg" alt="S Complex">
+            <div class="game-title">S Complex</div>
+            <div class="game-type">Animation / PV</div>
+        </a>
+
+        <a href="tetla.html" class="Flash Animation">
+            <img src="cover/tn_tetla.jpg" alt="Kero9 Destiny">
+            <div class="game-title">Kero9 Destiny</div>
+            <div class="game-type">Animation / PV</div>
+        </a>
+
+        <a href="kouks.html" class="Flash Animation">
+            <img src="cover/tn_kouks.jpg" alt="It doesn't stop at the affected area, it goes all the way in">
+            <div class="game-title">Overdrive (Paranoia Remix)</div>
+            <div class="game-type">Animation / PV</div>
+        </a>
+
+        <a href="morii.html" class="Flash Animation">
+            <img src="cover/tn_morii.jpg" alt="Overlap">
+            <div class="game-title">Overlap</div>
+            <div class="game-type">Animation / PV</div>
+        </a>
+      
+        </div>
+  
+    <div id="footer" style="text-align: center; padding: 30px; color: #666; font-size: 12px;">
+        <p>Select a flash animation / game to start.</p>
+        <address>Copyright &copy; 2008-2026 迷走ポタージュ / Average Rumia. Preservation Project.</address>
+    </div>
+</div>
+
+</body>
+  </html>
