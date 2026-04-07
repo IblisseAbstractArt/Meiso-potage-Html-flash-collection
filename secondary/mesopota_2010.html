@@ -67,22 +67,13 @@
         </ul>
     </div>
      
-    <div id="visual-flash">
-        <div id="visual-flash">
-    <div id="ruffle-banner"></div>
-    <script>
-        window.RufflePlayer = window.RufflePlayer || {};
-        window.addEventListener("load", (event) => {
-            const ruffle = window.RufflePlayer.newest();
-            const player = ruffle.createPlayer();
-            const container = document.getElementById("ruffle-banner");
-            container.appendChild(player);
-            player.load("main_splash.swf"); // Asegúrate que el nombre sea exacto
-            player.style.width = "780px";
-            player.style.height = "300px";
-        });
-    </script>
-        </div>
+    <body>
+   <div style="width: 100%; display: flex; justify-content: center; margin-bottom: 20px;">
+    <object width="780" height="300">
+        <param name="movie" value="main_splash.swf">
+        <embed src="main_splash.swf" width="780" height="300"></embed>
+    </object>
+   </div>
 
     <div id="content">
         <div id="info">
