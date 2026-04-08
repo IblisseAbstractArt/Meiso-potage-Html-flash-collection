@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <title>迷走ポタージュ Archive - The home of flash content</title>
-    <script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
     <style>
         /* --- ESTILOS ORIGINALES LIMPIOS --- */
         body { background-color: #000; color: #ccc; font-family: "MS PGothic", sans-serif; margin: 0; }
@@ -32,39 +31,7 @@
         #info dl { padding: 10px; font-size: 0.9em; }
         #info dt { color: #666; font-weight: bold; margin-top: 10px; }
         #info dd a { color: #aaa; text-decoration: none; }
-       #info dd a:hover { text-decoration: underline; color: #fff; }
-    
-    #visual-flash {
-    width: 780px;      /* Ancho exacto del banner de Mesopota */
-    height: 300px;     /* Alto exacto */
-    margin: 20px auto; 
-    background: #000;
-    position: relative;
-    overflow: hidden;
-    filter: url(#rgb-split); /* Tu filtro RGB aplicado aquí */
-}
-
-/* Fuerza que el contenido de la celda sea vertical */
-.item-wrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-decoration: none;
-    margin-bottom: 15px;
-}
-
-.item-wrapper img {
-    margin-bottom: 8px;
-    border: 1px solid #333;
-}
-
-.item-title {
-    font-weight: bold;
-    color: #0033cc;
-    font-size: 13px;
-    text-align: center;
-    width: 160px; /* Igual al ancho de la imagen */
-    }
+        #info dd a:hover { text-decoration: underline; color: #fff; }
     </style>
 </head>
 <body>
@@ -83,22 +50,18 @@
         </ul>
     </div>
      
-    <body>
-   <div style="width: 100%; display: flex; justify-content: center; margin-bottom: 20px;">
-    <object width="780" height="300">
-        <param name="movie" value="main_splash.swf">
-        <embed src="main_splash.swf" width="780" height="300"></embed>
-    </object>
-   </div>
+    <div id="visual-flash">
+        <div style="color: #444; text-align: center; padding-top: 130px;">[ PLACEHOLDER SPLASH_MSPT.SWF ]</div>
+    </div>
 
     <div id="content">
         <div id="info">
             <h2>更新情報 <span style="font-size: 0.7em; color: #666;">Information</span></h2>
             <dl>
-               <dt>2026/05/07</dt>
+                 <dt>2026/05/07</dt>
                 <dd>Reitaisai 5 Product section has been finished!</dd>
-       
-               <dk>
+            
+            <dl>
                 <dt>2026/05/07</dt>
                 <dd>Early future design of Mesopota site in my style, is very uncompleted.
                 so take a look at this preview im working on</dd>
@@ -110,22 +73,20 @@
             <div style="display: flex; gap: 20px; padding: 15px;">
                 <div style="border: 1px solid #333; padding: 5px; background: #111;">
                     <li><a href="Reitasai 5/index.html"><img src="covers/R5.jpg" alt="Jacket" width="150">
-                    <li><a href="Comiket 75/index.html"><img src="covers/C75.jpg" alt="Jacket" width="150">    
+                </div>
                 <div>
                     <h3 style="margin:0; color: #fff;">東方映写録</h3>
                     <p style="font-size: 0.8em; color: #888;">Reitaisai 5 - 2008/05/25</p>
                 </div>
-
-                <div>
-                    <h3 style="margin:0; color: #fff;">東方籠奴抄</h3>
-                    <p style="font-size: 0.8em; color: #888;">Comiket 75 - 2008/12/29</p>
-                </div>
-    
+            </div>
+        </div>
+    </div>
+    <a href="../index.html" style="color: #5555ff;">[ Return to old menu ]</a><br><br>
+        </a>
+        <br><br>
     <div id="footer" style="text-align: center; border-top: 1px solid #222; margin-top: 50px; padding: 20px; font-size: 0.7em; color: #444;">
         Copyright &copy; 2026 迷走ポタージュ / Average Rumia. No rights reserved.
-   </div>
-<a href="../index.html" style="color: #5555ff;">[ Return to old menu ]</a><br><br></a>
- <br><br>
+    </div>
 </div>
 
 <svg style="display: none;">
@@ -139,4 +100,5 @@
         </filter>
     </defs>
 </svg>
-
+</body>
+                                                                                                        </html>
