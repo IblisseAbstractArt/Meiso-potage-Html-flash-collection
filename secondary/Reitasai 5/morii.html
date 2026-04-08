@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>Mesopota - Flash Player</title>
+    <script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
+    <style>
+        /* --- ESTILOS DE LA PÁGINA DEL REPRODUCTOR --- */
+        body { 
+            background-color: #c4c4c4; /* Fondo gris claro clásico */
+            color: #333; 
+            font-family: "MS PGothic", sans-serif; 
+            margin: 0; 
+        }
+        #wrapper { 
+            width: 850px; 
+            margin: 0 auto; 
+            background: #c4c4c4; 
+        }
+        
+        /* El menú naranja estilo barra */
+        #headernav, #footernav {
+            background-color: #cc8000; 
+            padding: 10px 0;
+            margin-bottom: 20px;
+        }
+        .orange-menu { 
+            list-style: none; 
+            padding: 0; 
+            margin: 0; 
+            display: flex; 
+            justify-content: center; 
+            gap: 30px; 
+        }
+        .orange-menu a { 
+            color: #fff; 
+            text-decoration: none; 
+            font-weight: bold; 
+            font-size: 14px;
+        }
+        .orange-menu a:hover { text-decoration: underline; color: #ffe6b3; }
+
+        /* Contenedor del Flash */
+        #visual2 {
+            display: flex;
+            justify-content: center;
+            margin: 30px 0;
+            background: #c4c4c4; /* Color de fondo mientras carga Ruffle */
+            padding: 10px;
+        }
+
+        /* Sección de Información */
+        #content { padding: 0 20px; }
+        .orange-header { 
+            background-color: #cc8000; 
+            color: #fff; 
+            padding: 8px 15px; 
+            font-size: 1.2em; 
+            margin-bottom: 15px;
+        }
+        p { font-size: 0.9em; line-height: 1.6; }
+        
+        #footer { text-align: center; margin-top: 40px; font-size: 0.8em; color: #555; padding-bottom: 20px; }
+    </style>
+</head>
+<body>
+
+<div id="wrapper">
+    <div id="header" style="text-align: left; padding: 15px;">
+        <h1 style="color: #8c5300; margin: 0; font-size: 1.5em;">迷走ポタージュ</h1> 
+    </div>
+
+    <div id="headernav">
+        <ul class="orange-menu">
+            <li><a href="../mesopota_2010.html">TOP</a></li>
+            <li><a href="./index.html">Product</a></li>
+            <li><a href="#">Member</a></li>
+        </ul>
+    </div>
+
+    <div id="visual2">
+        <object width="800" height="450">
+            <param name="movie" value="swf/toho01_06_morii.swf">
+            <param name="wmode" value="transparent">
+            <embed src="toho01_06_morii.swf" width="800" height="450" wmode="transparent"></embed>
+        </object>
+    </div>
+
+    <div id="content">
+        <div id="info">
+            <h2 class="orange-header">Flash<span style="font-size: 0.7em; font-weight: normal; margin-left: 10px;">Animation</span></h2>
+            <p>type: Flash Animation. Modded: Average Rumia. Hosted: Github Server</p>
+            <p style="color: #666;">Fun fact: in the clock scene, it changes depending on the current time you're playing the animation</p>
+        </div>
+    </div>
+
+    <div id="footer">
+        <div id="footernav">
+            <ul class="orange-menu" style="font-size: 12px; gap: 20px;">
+            </ul>
+        </div>
+        <address style="font-style: normal; margin-top: 15px;">
+            Copyright &copy; 2026 迷走ポタージュ / Average Rumia. No rights reserved.
+        </address>
+    </div>
+</div>
+
+</body>
+</html>
