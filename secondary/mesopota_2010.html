@@ -48,18 +48,26 @@
     width: 100%;
     height: 100%;
 }
-        /* Esto obliga a que el enlace de la imagen ocupe todo el ancho 
-   y empuje el texto hacia abajo automáticamente */
-.product_list td a {
-    display: block;
-    margin-bottom: 5px;
+.product-box {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    background: #b0b0b0; /* Gris de la sección */
+    border-bottom: 1px solid #8c5300; /* Separador naranja */
+    padding: 10px;
 }
 
-.product_name {
-    display: block;
-    width: 100%;
-    font-weight: bold;
-    color: #0033cc; /* El azul de link que tienes en la captura */
+.product_list td {
+    display: flex;           /* Activa el modo horizontal */
+    align-items: center;    /* Centra el texto verticalmente respecto a la imagen */
+    text-align: left;       /* Asegura que el texto empiece a la izquierda */
+    padding: 10px;          /* Espacio interno para que no respire */
+    gap: 15px;              /* ¡PARÁMETRO CLAVE! Crea espacio entre la imagen y el texto */
+        }
+.product-info {
+    display: flex;
+    flex-direction: column; /* Para que el Título y el Tipo sí estén uno bajo el otro */
+    gap: 15px;
 }
     </style>
 </head>
