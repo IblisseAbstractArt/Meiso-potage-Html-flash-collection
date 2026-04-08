@@ -44,22 +44,43 @@
     filter: url(#rgb-split); /* Tu filtro RGB aplicado aquí */
 }
 
-#ruffle-banner {
+/* Limpieza total para la lista de productos */
+.product_table {
     width: 100%;
-    height: 100%;
-}
-/* Esto obliga a que el enlace de la imagen ocupe todo el ancho 
-   y empuje el texto hacia abajo automáticamente */
-.product_list td a {
-    display: block;
-    margin-bottom: 5px;
+    border-collapse: collapse;
+    margin-top: 20px;
 }
 
-.product_name {
+.product_cell {
+    padding: 20px 10px;
+    vertical-align: top;
+    text-align: center;
+    width: 33%; /* Esto asegura que solo quepan 3 por fila */
+}
+
+.item-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+}
+
+.item-container img {
     display: block;
-    width: 100%;
+    width: 160px;
+    height: 160px;
+    border: 1px solid #333;
+    margin-bottom: 10px;
+    background-color: #eee; /* Para ver el cuadro si la imagen falla */
+}
+
+.item-title {
+    color: #0033cc;
     font-weight: bold;
-    color: #0033cc; /* El azul de link que tienes en la captura */
+    font-size: 13px;
+    line-height: 1.3;
+    width: 160px; /* Obliga al texto a no ensancharse más que la imagen */
+    word-wrap: break-word;
 }
     </style>
 </head>
