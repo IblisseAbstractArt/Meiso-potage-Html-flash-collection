@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>迷走ポタージュ Archive - The home of flash content</title>
+    <script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
     <style>
         /* --- ESTILOS ORIGINALES LIMPIOS --- */
         body { background-color: #000; color: #ccc; font-family: "MS PGothic", sans-serif; margin: 0; }
@@ -32,7 +33,16 @@
         #info dt { color: #666; font-weight: bold; margin-top: 10px; }
         #info dd a { color: #aaa; text-decoration: none; }
         #info dd a:hover { text-decoration: underline; color: #fff; }
-    </style>
+  </style>
+<div id="visual-flash">
+    <div style="width: 100%; display: flex; justify-content: center;">
+        <object width="780" height="300">
+            <param name="movie" value="main_splash.swf">
+            <param name="wmode" value="transparent">
+            <embed src="main_splash.swf" width="780" height="300" wmode="transparent"></embed>
+        </object>
+    </div>
+</div>
 </head>
 <body>
 
