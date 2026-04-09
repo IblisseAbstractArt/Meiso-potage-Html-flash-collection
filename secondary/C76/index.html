@@ -92,7 +92,16 @@
             border: 1px solid #333;
             margin-bottom: 8px;
         }
-
+/* --- Ajuste uniforme para las imágenes del grid --- */
+/* Nota: Asegúrate de que el selector coincida con el contenedor de tus juegos */
+img.cover-image { /* O aplica esta clase directamente a tus etiquetas <img> */
+    width: 320px;       /* Ancho fijo para todas las carátulas */
+    height: 180px;      /* Alto fijo para alinear la cuadrícula */
+    object-fit: cover;  /* LLena el espacio recortando el sobrante sin deformar */
+    object-position: center; /* Centra la imagen dentro del "marco" */
+    border: 1px solid #999; /* Opcional: un borde para mantener el estilo retro */
+    display: block;     /* Evita espacios fantasmas debajo de la imagen */
+}
         .game-type { color: #666; font-size: 10px; margin-top: 4px; }
 
         #footer { text-align: center; padding: 40px 0; color: #777; font-size: 11px; }
@@ -124,55 +133,55 @@
 
     <div class="gallery-grid">
         <a href="akito.html" class="Flash Animation">
-            <img src="cover/akito.jpg" alt="Patche">
+            <img class="cover-image" src="cover/akito.jpg" alt="Patche">
             <div class="game-title">Patche's Refreshing Summer Salt</div>
             <div class="game-type">Animation</div>
         </a>
 
         <a href="haruhara.html" class="Flash Game">
-            <img src="cover/haruhara.jpg" alt="Eastern Tales">
+            <img class="cover-image" src="cover/haruhara.jpg" alt="Eastern Tales">
             <div class="game-title">Touhou Eastern Tales</div>
             <div class="game-type">Animation</div>
         </a>
 
         <a href="kagi.html" class="Flash Animation">
-            <img src="cover/kagi.jpg" alt="Blazing Hearth">
+            <img class="cover-image" src="cover/kagi.jpg" alt="Blazing Hearth">
             <div class="game-title">Blazing Hearth</div>
             <div class="game-type">Animation / PV</div>
         </a>
 
         <a href="miya.html" class="Flash Animation">
-            <img src="cover/miya.jpg" alt="true blossom">
+            <img class="cover-image" src="cover/miya.jpg" alt="true blossom">
             <div class="game-title">True Blossom</div>
             <div class="game-type">Animation / PV</div>
         </a>
 
         <a href="niji.html" class="Flash Animation">
-            <img src="cover/niji.jpg" alt="nekoromamcer">
+            <img class="cover-image" src="cover/niji.jpg" alt="nekoromamcer">
             <div class="game-title">Heartful Nekoromancer</div>
             <div class="game-type">Animation / PV</div>
         </a>
 
         <a href="take.html" class="Flash Animation">
-            <img src="cover/take.jpg" alt="Neko Miko Reimu">
+            <img class="cover-image" src="cover/take.jpg" alt="Neko Miko Reimu">
             <div class="game-title">Cat Shrine Maiden Reimu</div>
             <div class="game-type">Animation / PV</div>
         </a>
 
       <a href="tetla.html" class="Flash Animation">
-            <img src="cover/tetla.jpg" alt="gouryuden">
+            <img class="cover-image" src="cover/tetla.jpg" alt="gouryuden">
             <div class="game-title">Touhou Gouryuden Video Theater</div>
             <div class="game-type">Animation / PV</div>
       </a>
 
       <a href="yamako.html" class="Flash Animation">
-            <img src="cover/yamko.jpg" alt="Yamako">
+            <img class="cover-image" src="cover/yamko.jpg" alt="Yamako">
             <div class="game-title">Oath of Soul</div>
             <div class="game-type">Animation / PV</div>
       </a>
 
       <a href="yuki.html" class="Flash Animation">
-            <img src="cover/yuki.jpg" alt="E-mission">
+            <img class="cover-image" src="cover/yuki.jpg" alt="E-mission">
             <div class="game-title">Rezamari E-Mission</div>
             <div class="game-type">Game</div>
       </a>
