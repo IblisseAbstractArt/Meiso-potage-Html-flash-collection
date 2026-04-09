@@ -92,7 +92,16 @@
             border: 1px solid #333;
             margin-bottom: 8px;
         }
-
+/* --- Ajuste uniforme para las imágenes del grid --- */
+/* Nota: Asegúrate de que el selector coincida con el contenedor de tus juegos */
+img.cover-image { /* O aplica esta clase directamente a tus etiquetas <img> */
+    width: 320px;       /* Ancho fijo para todas las carátulas */
+    height: 180px;      /* Alto fijo para alinear la cuadrícula */
+    object-fit: cover;  /* LLena el espacio recortando el sobrante sin deformar */
+    object-position: center; /* Centra la imagen dentro del "marco" */
+    border: 1px solid #999; /* Opcional: un borde para mantener el estilo retro */
+    display: block;     /* Evita espacios fantasmas debajo de la imagen */
+}
         .game-type { color: #666; font-size: 10px; margin-top: 4px; }
 
         #footer { text-align: center; padding: 40px 0; color: #777; font-size: 11px; }
@@ -124,37 +133,37 @@
 
     <div class="gallery-grid">
         <a href="miya.html" class="Flash Animation">
-            <img src="cover/tn_miya.jpg" alt="Shutter Girl">
+            <img class="cover-image" src="cover/tn_miya.jpg" alt="Shutter Girl">
             <div class="game-title">Fastest And Best Shutter Girl</div>
             <div class="game-type">Animation / PV</div>
         </a>
 
         <a href="kagi.html" class="Flash Game">
-            <img src="cover/tn_kagi.jpg" alt="Spell Typing Carnival">
+            <img class="cover-image" src="cover/tn_kagi.jpg" alt="Spell Typing Carnival">
             <div class="game-title">Fragance of Oriental Sunflower</div>
             <div class="game-type">Animation / PV</div>
         </a>
 
         <a href="ika.html" class="Flash Animation">
-            <img src="cover/tn_ika.jpg" alt="S Complex">
+            <img class="cover-image" src="cover/tn_ika.jpg" alt="S Complex">
             <div class="game-title">Even in Death, My Feelings Remain Unfullfiled</div>
             <div class="game-type">Animation / PV</div>
         </a>
 
         <a href="fuyumogura.html" class="Flash Animation">
-            <img src="cover/tn_fuyumogura.jpg" alt="Kero9 Destiny">
+            <img class="cover-image" src="cover/tn_fuyumogura.jpg" alt="Kero9 Destiny">
             <div class="game-title">Happy Rabbit</div>
             <div class="game-type">Animation / PV</div>
         </a>
 
         <a href="opening.html" class="Flash Animation">
-            <img src="cover/tn_opening.jpg" alt="Touhou Roadshow Intro">
+            <img class="cover-image" src="cover/tn_opening.jpg" alt="Touhou Roadshow Intro">
             <div class="game-title">Touhou Taiyouka Opening Movie</div>
             <div class="game-type">Animation / PV</div>
         </a>
 
         <a href="tetla.html" class="Flash Animation">
-            <img src="cover/tn_tetla.jpg" alt="Overlap">
+            <img class="cover-image" src="cover/tn_tetla.jpg" alt="Overlap">
             <div class="game-title">Optical Cellophane</div>
             <div class="game-type">Animation / PV</div>
         </a>
