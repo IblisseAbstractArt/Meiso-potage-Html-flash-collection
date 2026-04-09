@@ -12,7 +12,7 @@
             height: 600px;
             margin: 0 auto;
             overflow: hidden;
-        position: relative;
+            position: relative;
             border: 2px solid #222;
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
             /* APLICAMOS EL FILTRO */
@@ -56,7 +56,7 @@
             100% { transform: translateY(900%); }
 		}
 
-		/* 2. Capa CRT (Scanlines) - Ajustada para no tapar tanto */
+        /* 2. Capa CRT (Scanlines) - Ajustada para no tapar tanto */
         body::before {
             content: " ";
             display: block;
@@ -75,17 +75,18 @@
             5% { opacity: 0.95; }
             10% { opacity: 0.99; }
             100% { opacity: 1; } /* Corregido de 5 a 1 */
-		}
+        }
+
         body {
             background-color: #baa591;
-            color: #0000;
+            color: #ffffff;
             margin: 0;
             padding: 20px;
             font-family: sans-serif;
             animation: flicker 0.15s infinite;
         
         font[size="2"] {
-        color: #aaa;
+        color: #000000;
         line-height: 1.6;
             {
     </style>
@@ -103,7 +104,7 @@
     </svg>
 </head>
 
-<body bgcolor="#baa591" text="#000000">
+<body bgcolor="#000000" text="#ffffff">
 <center>
     <h3>The Crow of Hell That Illuminates The Sky [Ruffle fix]</h3>
     
@@ -142,4 +143,4 @@
 </script>
 </center>
 </body>
-</html>
+	</html>
