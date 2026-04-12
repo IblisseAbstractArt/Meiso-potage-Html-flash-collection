@@ -197,24 +197,28 @@
 </div>
 
 <script>
-function togglePerformance() {
+function toggleRetro() {
     const container = document.getElementById('flash-container');
-    const btn = document.getElementById('toggle-perf');
+    const btn = document.getElementById('perf-btn');
     
-    // Si tiene el filtro pesado, pasamos al ligero
+    // Comprobamos qué filtro tiene puesto
     if (container.style.filter.includes('retro-full')) {
         container.style.filter = 'url(#retro-lite)';
-        btn.innerText = 'ACTUAL MODE: LITE';
-        btn.style.color = '#00ff00'; // Verde para indicar rendimiento
+        btn.innerText = '[ MODO: VHS LITE ]';
+        btn.style.color = '#55ff55'; // Verde para modo fluido
+        btn.style.borderColor = '#006600';
     } else {
         container.style.filter = 'url(#retro-full)';
-        btn.innerText = 'ACTUAL MODE: FULL RETRO EXPERIENCE';
-        btn.style.color = '#ff5555'; // Rojo para indicar carga pesada
+        btn.innerText = '[ MODO: VHS FULL ]';
+        btn.style.color = '#ff5555'; // Rojo para modo pesado
+        btn.style.borderColor = '#660000';
     }
 }
 
-// Inicializar con el modo pesado por defecto
-document.getElementById('flash-container').style.filter = 'url(#retro-full)';
+// Empezamos en LITE por defecto para no asustar a la CPU del usuario
+document.getElementById('flash-container').style.filter = 'url(#retro-lite)';
+document.getElementById('perf-btn').innerText = '[ MODO: VHS LITE ]';
+document.getElementById('perf-btn').style.color = '#55ff55';
 </script>
         <a href="./index.html" style="color: #5555ff;">[ Return to the menu ]</a><br><br>
         <br><br>
