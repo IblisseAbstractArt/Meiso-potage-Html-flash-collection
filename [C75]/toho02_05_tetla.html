@@ -171,7 +171,6 @@
   </filter>
 </svg>
 
-
 </head>
 
 <body bgcolor="#000000" text="#ffffff">
@@ -204,12 +203,12 @@ function toggleRetro() {
     // Comprobamos qué filtro tiene puesto
     if (container.style.filter.includes('retro-full')) {
         container.style.filter = 'url(#retro-lite)';
-        btn.innerText = '[ MODO: VHS LITE ]';
+        btn.innerText = '[ MODE: VHS LITE ]';
         btn.style.color = '#55ff55'; // Verde para modo fluido
         btn.style.borderColor = '#006600';
     } else {
         container.style.filter = 'url(#retro-full)';
-        btn.innerText = '[ MODO: VHS FULL ]';
+        btn.innerText = '[ MODE: VHS FULL ]';
         btn.style.color = '#ff5555'; // Rojo para modo pesado
         btn.style.borderColor = '#660000';
     }
@@ -217,7 +216,7 @@ function toggleRetro() {
 
 // Empezamos en LITE por defecto para no asustar a la CPU del usuario
 document.getElementById('flash-container').style.filter = 'url(#retro-lite)';
-document.getElementById('perf-btn').innerText = '[ MODO: VHS LITE ]';
+document.getElementById('perf-btn').innerText = '[ MODE: VHS LITE ]';
 document.getElementById('perf-btn').style.color = '#55ff55';
 </script>
         <a href="./index.html" style="color: #5555ff;">[ Return to the menu ]</a><br><br>
