@@ -1,10 +1,18 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=shift-jis">
-    <title>Optical Cellophane</title>
+    <title>Optical Cellophane - Optimized</title>
     <script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
     <style>
-        /* Esto evita que el flash empuje el resto del contenido */
+        body {
+            background-color: #000;
+            color: #ffffff;
+            margin: 0;
+            padding: 20px;
+            font-family: sans-serif;
+            animation: flicker 0.15s infinite;
+        }
+
         #flash-container {
             width: 512px;
             height: 384px;
@@ -13,12 +21,11 @@
             position: relative;
             border: 2px solid #222;
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
-            /* APLICAMOS EL FILTRO MAESTRO QUE CONTIENE TODO */
-            filter: url(#retro-master); 
+            /* El filtro se aplicará mediante JavaScript al cargar */
             will-change: filter;
-		}
+        }
 
-		/* 1. La viñeta: sombra interna fuerte y suave */
+        /* Viñeta */
         #flash-container::after {
             content: " ";
             display: block;
@@ -30,44 +37,7 @@
             z-index: 10;
         }
 
-        /* 2. La franja blanca transparente (CRT Roll) */
-        #flash-container::before {
-            content: " ";
-            display: block;
-            position: absolute;
-            top: 0; left: 0; right: 0;
-            height: 12%;
-            background: linear-gradient(
-                to bottom, 
-                rgba(255,255,255,0) 0%, 
-                rgba(255,255,255,0.08) 50%, 
-                rgba(255,255,255,0) 100%
-            );
-            pointer-events: none;
-            z-index: 15;
-            animation: crt-roll 6s linear infinite;
-        }
-#flash-container {
-    /* ... lo que ya tenías ... */
-    filter: url(#retro-master); 
-    animation: vhs-glitch 4s infinite; /* Añadimos este glitch sutil */
-}
-
-@keyframes vhs-glitch {
-    0% { filter: url(#retro-master) brightness(1); }
-    1% { filter: url(#retro-master) brightness(1.2) contrast(1.1); }
-    2% { filter: url(#retro-master) brightness(1); }
-    98% { filter: url(#retro-master) brightness(1); }
-    99% { filter: url(#retro-master) brightness(1.3); }
-    100% { filter: url(#retro-master) brightness(1); }
-			}
-        /* 3. La animación de bajada */
-        @keyframes crt-roll {
-            0% { transform: translateY(-100%); }
-            100% { transform: translateY(900%); }
-		}
-
-        /* Capa CRT (Scanlines) - Ajustada para no tapar tanto */
+        /* Scanlines (Efecto CRT ligero siempre activo) */
         body::before {
             content: " ";
             display: block;
@@ -77,105 +47,86 @@
                         linear-gradient(90deg, rgba(255, 0, 0, 0.02), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.02));
             z-index: 9999;
             pointer-events: none;
-            background-size: 100% 6px, 5px 100%;
+            background-size: 100% 4px, 3px 100%;
         }
 
         @keyframes flicker {
-            0% { opacity: 0.98; }
-            5% { opacity: 0.95; }
+            0% { opacity: 0.99; }
+            5% { opacity: 0.97; }
             10% { opacity: 0.99; }
             100% { opacity: 1; }
-        } /* <--- FALTABA ESTA LLAVE DE CIERRE */
-
-        body {
-            background-color: #000;
-            color: #ffffff;
-            margin: 0;
-            padding: 20px;
-            font-family: sans-serif;
-            animation: flicker 0.15s infinite;
         }
 
-		#flash-container {
-    /* ... manten tus otros estilos ... */
-    filter: url(#retro-master); 
-    animation: vhs-tracking 6s linear infinite;
-}
-
-@keyframes vhs-tracking {
-    0% { transform: translateX(0); filter: url(#retro-master) brightness(1); }
-    94% { transform: translateX(0); filter: url(#retro-master) brightness(1); }
-    95% { transform: translateX(2px); filter: url(#retro-master) brightness(1.3); }
-    96% { transform: translateX(-2px); filter: url(#retro-master) brightness(0.9); }
-    97% { transform: translateX(1px); filter: url(#retro-master) brightness(1.2); }
-    100% { transform: translateX(0); filter: url(#retro-master) brightness(1); }
-}
+        /* Estilo del Botón */
+        .retro-button {
+            background: #1a1a1a;
+            color: #55ff55;
+            border: 2px solid #333;
+            padding: 10px 20px;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 15px;
+            text-transform: uppercase;
+            transition: all 0.2s;
+        }
+        .retro-button:hover {
+            background: #333;
+            border-color: #55ff55;
+        }
     </style>
 
     <svg style="display: none;">
-  <filter id="retro-lite">
-    <filter id="rgb-split">
-        <feOffset in="SourceGraphic" dx="3" dy="0" result="red-shift"/>
-        <feColorMatrix in="red-shift" type="matrix" values="1 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0" result="red-only"/>
-        <feColorMatrix in="SourceGraphic" type="matrix" values="0 0 0 0 0  0 1 0 0 0  0 0 0 0 0  0 0 0 1 0" result="green-only"/>
-        <feOffset in="SourceGraphic" dx="-3" dy="0" result="blue-shift"/>
-        <feColorMatrix in="blue-shift" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 1 0 0  0 0 0 1 0" result="blue-only"/>
-        <feBlend mode="screen" in="red-only" in2="green-only" result="red-green"/>
-        <feBlend mode="screen" in="red-green" in2="blue-only"/>
+      <filter id="retro-lite">
+        <feOffset in="SourceGraphic" dx="2" dy="0" result="red-p"/>
+        <feColorMatrix in="red-p" type="matrix" values="1 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0" result="r"/>
+        <feColorMatrix in="SourceGraphic" type="matrix" values="0 0 0 0 0  0 1 0 0 0  0 0 0 0 0  0 0 0 1 0" result="g"/>
+        <feOffset in="SourceGraphic" dx="-2" dy="0" result="blue-p"/>
+        <feColorMatrix in="blue-p" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 1 0 0  0 0 0 1 0" result="b"/>
+        <feBlend mode="screen" in="r" in2="g" result="rg"/>
+        <feBlend mode="screen" in="rg" in2="b" result="rgb"/>
+        <feTurbulence type="fractalNoise" baseFrequency="0.01 50" numOctaves="1" result="noise">
+            <animate attributeName="seed" from="1" to="100" dur="2s" repeatCount="indefinite" />
+        </feTurbulence>
+        <feColorMatrix type="matrix" values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 10 -8" />
+        <feComposite in2="rgb" operator="over"/>
       </filter>
-	</svg>
 
-  <filter id="retro-full">
-    <svg style="display: none;">
-  <filter id="retro-master">
-    <feOffset in="SourceGraphic" dx="2" dy="0" result="red-shift"/>
-    <feColorMatrix in="red-shift" type="matrix" values="1 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0" result="red-only"/>
-    <feColorMatrix in="SourceGraphic" type="matrix" values="0 0 0 0 0  0 1 0 0 0  0 0 0 0 0  0 0 0 1 0" result="green-only"/>
-    <feOffset in="SourceGraphic" dx="-2" dy="0" result="blue-shift"/>
-    <feColorMatrix in="blue-shift" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 1 0 0  0 0 0 1 0" result="blue-only"/>
-    <feBlend mode="screen" in="red-only" in2="green-only" result="red-green"/>
-    <feBlend mode="screen" in="red-green" in2="blue-only" result="rgb-result"/>
+      <filter id="retro-full">
+        <feOffset in="SourceGraphic" dx="2" dy="0" result="red-p"/>
+        <feColorMatrix in="red-p" type="matrix" values="1 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0" result="r"/>
+        <feColorMatrix in="SourceGraphic" type="matrix" values="0 0 0 0 0  0 1 0 0 0  0 0 0 0 0  0 0 0 1 0" result="g"/>
+        <feOffset in="SourceGraphic" dx="-2" dy="0" result="blue-p"/>
+        <feColorMatrix in="blue-p" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 1 0 0  0 0 0 1 0" result="b"/>
+        <feBlend mode="screen" in="r" in2="g" result="rg"/>
+        <feBlend mode="screen" in="rg" in2="b" result="rgb"/>
+        
+        <feGaussianBlur in="rgb" stdDeviation="2" result="g-blur"/>
+        <feOffset in="g-blur" dx="3" result="g-off"/>
+        <feComponentTransfer in="g-off" result="g-fade">
+            <feFuncA type="linear" slope="0.3"/>
+        </feComponentTransfer>
+        <feBlend mode="screen" in="rgb" in2="g-fade" result="ghost"/>
 
-    <feGaussianBlur in="rgb-result" stdDeviation="2" result="ghost-blur"/>
-    <feOffset in="ghost-blur" dx="3" dy="0" result="ghost-offset"/>
-    <feComponentTransfer in="ghost-offset" result="ghost-faded">
-        <feFuncA type="linear" slope="0.3"/> </feComponentTransfer>
-    <feBlend mode="screen" in="rgb-result" in2="ghost-faded" result="ghost-result"/>
+        <feTurbulence type="fractalNoise" baseFrequency="0.001 0.15" numOctaves="1" result="t-noise">
+            <animate attributeName="seed" from="1" to="100" dur="1s" repeatCount="indefinite" />
+        </feTurbulence>
+        <feDisplacementMap in="ghost" in2="t-noise" scale="8" xChannelSelector="R" result="distort"/>
 
-    <feTurbulence type="fractalNoise" baseFrequency="0.001 0.15" numOctaves="2" result="distort-noise">
-        <animate attributeName="seed" from="1" to="1000" dur="1s" repeatCount="indefinite" />
-    </feTurbulence>
-    <feDisplacementMap in="ghost-result" in2="distort-noise" scale="8" xChannelSelector="R" yChannelSelector="G" result="distorted"/>
-
-    <feGaussianBlur in="distorted" stdDeviation="1.5" result="bloom-blur"/>
-    <feComponentTransfer in="bloom-blur" result="glow">
-        <feFuncA type="linear" slope="0.5"/>
-    </feComponentTransfer>
-    <feBlend mode="screen" in="distorted" in2="glow" result="bloom-result"/>
-
-    <feTurbulence type="fractalNoise" baseFrequency="0.01 50" numOctaves="1" result="vhs-lines">
-        <animate attributeName="seed" from="1" to="100" dur="1.5s" repeatCount="indefinite" />
-    </feTurbulence>
-    <feColorMatrix in="vhs-lines" type="matrix" values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 10 -8" result="lines-final"/>
-    <feComposite in="lines-final" in2="bloom-result" operator="over" result="with-lines"/>
-
-    <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="1" result="noise">
-        <animate attributeName="seed" from="1" to="100" dur="0.3s" repeatCount="indefinite" />
-    </feTurbulence>
-    <feComponentTransfer in="noise" result="soft-noise">
-        <feFuncA type="linear" slope="0.12"/>
-    </feComponentTransfer>
-    <feBlend mode="screen" in="with-lines" in2="soft-noise" result="final-output"/>
-  </filter>
-</svg>
-
-</svg>
-
+        <feGaussianBlur in="distort" stdDeviation="1.5" result="b-blur"/>
+        <feBlend mode="screen" in="distort" in2="b-blur" result="bloom"/>
+        <feTurbulence type="fractalNoise" baseFrequency="0.01 50" numOctaves="1" result="l-noise">
+            <animate attributeName="seed" from="1" to="100" dur="1.5s" repeatCount="indefinite" />
+        </feTurbulence>
+        <feColorMatrix type="matrix" values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 10 -8" result="lines"/>
+        <feComposite in="lines" in2="bloom" operator="over"/>
+      </filter>
+    </svg>
 </head>
 
-<body bgcolor="#000000" text="#ffffff">
+<body>
 <center>
-    <h3>Optical Cellophane [Ruffle fix]</h3>
+    <h3>Optical Cellophane [Ruffle Fix]</h3>
 
     <div id="flash-container">
         <object width="512" height="384">
@@ -184,46 +135,22 @@
         </object>
     </div>
 
+    <button id="perf-btn" class="retro-button" onclick="toggleRetro()">
+        [ MODO: VHS LITE ]
+    </button>
+    <p style="font-size: 11px; color: #666;">* Selecciona MODO FULL si tienes una CPU potente</p>
+
     <br>
-    <font size="2">
+    <div style="font-size: 12px; line-height: 1.6;">
         Type = Flash Animation<br>
         Modded = Average Rumia<br>
-        Hosted = Github Server [fixed using ruffle] <br><br>
-		<div style="margin-top: 15px;">
-    <button id="toggle-perf" onclick="togglePerformance()" style="background: #333; color: #eee; border: 1px solid #555; padding: 5px 15px; cursor: pointer; font-family: monospace;">
-        RETRO FILTER SWITCH
-    </button>
-</div>
-
-<script>
-function toggleRetro() {
-    const container = document.getElementById('flash-container');
-    const btn = document.getElementById('perf-btn');
-    
-    // Comprobamos qué filtro tiene puesto
-    if (container.style.filter.includes('retro-full')) {
-        container.style.filter = 'url(#retro-lite)';
-        btn.innerText = '[ MODE: VHS LITE ]';
-        btn.style.color = '#55ff55'; // Verde para modo fluido
-        btn.style.borderColor = '#006600';
-    } else {
-        container.style.filter = 'url(#retro-full)';
-        btn.innerText = '[ MODE: VHS FULL ]';
-        btn.style.color = '#ff5555'; // Rojo para modo pesado
-        btn.style.borderColor = '#660000';
-    }
-}
-
-// Empezamos en LITE por defecto para no asustar a la CPU del usuario
-document.getElementById('flash-container').style.filter = 'url(#retro-lite)';
-document.getElementById('perf-btn').innerText = '[ MODE: VHS LITE ]';
-document.getElementById('perf-btn').style.color = '#55ff55';
-</script>
-        <a href="./index.html" style="color: #5555ff;">[ Return to the menu ]</a><br><br>
+        Hosted = Github Server<br><br>
+        <a href="./index.html" style="color: #5555ff; text-decoration: none;">[ Return to the menu ]</a>
         <br><br>
-        (c) 2026 Meiso Potage / Average Rumia, No rights reserved.
-    </font>
- <script src="https://giscus.app/client.js"
+        (c) 2026 Meiso Potage / Average Rumia.
+    </div>
+
+    <script src="https://giscus.app/client.js"
         data-repo="IblisseAbstractArt/Meiso-potage-Html-flash-collection"
         data-repo-id="R_kgDORp4pkQ"
         data-category="General"
@@ -237,7 +164,34 @@ document.getElementById('perf-btn').style.color = '#55ff55';
         data-lang="es"
         crossorigin="anonymous"
         async>
- </script>
+    </script>
 </center>
+
+<script>
+    // Lógica del Switch corregida
+    const container = document.getElementById('flash-container');
+    const btn = document.getElementById('perf-btn');
+    let isFull = false;
+
+    function toggleRetro() {
+        isFull = !isFull;
+        if (isFull) {
+            container.style.filter = 'url(#retro-full)';
+            btn.innerText = '[ MODO: VHS FULL ]';
+            btn.style.color = '#ff5555';
+            btn.style.borderColor = '#ff5555';
+        } else {
+            container.style.filter = 'url(#retro-lite)';
+            btn.innerText = '[ MODO: VHS LITE ]';
+            btn.style.color = '#55ff55';
+            btn.style.borderColor = '#333';
+        }
+    }
+
+    // Inicialización forzada al cargar
+    window.onload = () => {
+        container.style.filter = 'url(#retro-lite)';
+    };
+</script>
 </body>
 </html>
