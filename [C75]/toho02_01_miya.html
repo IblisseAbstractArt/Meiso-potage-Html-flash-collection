@@ -4,10 +4,18 @@
     <title> Fastest and best shutter girl </title>
     <script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
     <style>
-        /* Esto evita que el flash empuje el resto del contenido */
+        body {
+            background-color: #000;
+            color: #ffffff;
+            margin: 0;
+            padding: 20px;
+            font-family: sans-serif;
+            animation: flicker 0.15s infinite;
+        }
+
         #flash-container {
-            width: 800px;
-            height: 600px;
+            width: 512px;
+            height: 384px;
             margin: 0 auto;
             overflow: hidden;
             position: relative;
@@ -98,7 +106,6 @@
             font-family: sans-serif;
             animation: flicker 0.15s infinite;
     </style>
-    </style>
 
     <svg style="display: none;">
       <filter id="retro-lite">
@@ -154,9 +161,10 @@
         </object>
     </div>
 <button id="perf-btn" class="retro-button" onclick="toggleRetro()">
-    [ MODE: VHS LITE ]
-</button>
+        [ MODE: VHS LITE ]
+    </button>
     <p style="font-size: 11px; color: #666;">* Select FULL MODE if you have a powerful CPU</p>
+
     <br>
     <font size="2">
         Type = Flash Animation<br>
