@@ -59,7 +59,7 @@ body::before {
     top: 0; 
     left: 0; 
     right: 0;
-    height: 15%; /* Grosor de la barra */
+    height: 10%; /* Grosor de la barra */
     background: linear-gradient(
         to bottom, 
         rgba(255,255,255,0) 0%, 
