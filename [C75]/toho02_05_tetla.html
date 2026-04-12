@@ -47,7 +47,20 @@
             z-index: 15;
             animation: crt-roll 6s linear infinite;
         }
+#flash-container {
+    /* ... lo que ya tenías ... */
+    filter: url(#retro-master); 
+    animation: vhs-glitch 4s infinite; /* Añadimos este glitch sutil */
+}
 
+@keyframes vhs-glitch {
+    0% { filter: url(#retro-master) brightness(1); }
+    1% { filter: url(#retro-master) brightness(1.2) contrast(1.1); }
+    2% { filter: url(#retro-master) brightness(1); }
+    98% { filter: url(#retro-master) brightness(1); }
+    99% { filter: url(#retro-master) brightness(1.3); }
+    100% { filter: url(#retro-master) brightness(1); }
+			}
         /* 3. La animación de bajada */
         @keyframes crt-roll {
             0% { transform: translateY(-100%); }
@@ -105,6 +118,39 @@
             <feFuncA type="linear" slope="0.15"/>
         </feComponentTransfer>
         <feBlend mode="screen" in="bloom-result" in2="soft-noise" result="final-output"/>
+
+		  <svg style="display: none;">
+  <filter id="retro-master">
+    <feOffset in="SourceGraphic" dx="3" dy="0" result="red-shift"/>
+    <feColorMatrix in="red-shift" type="matrix" values="1 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0" result="red-only"/>
+    <feColorMatrix in="SourceGraphic" type="matrix" values="0 0 0 0 0  0 1 0 0 0  0 0 0 0 0  0 0 0 1 0" result="green-only"/>
+    <feOffset in="SourceGraphic" dx="-3" dy="0" result="blue-shift"/>
+    <feColorMatrix in="blue-shift" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 1 0 0  0 0 0 1 0" result="blue-only"/>
+    <feBlend mode="screen" in="red-only" in2="green-only" result="red-green"/>
+    <feBlend mode="screen" in="red-green" in2="blue-only" result="rgb-result"/>
+
+    <feGaussianBlur in="rgb-result" stdDeviation="1.5" result="blur"/>
+    <feComponentTransfer in="blur" result="glow">
+        <feFuncA type="linear" slope="0.5"/>
+    </feComponentTransfer>
+    <feBlend mode="screen" in="rgb-result" in2="glow" result="bloom-result"/>
+
+    <feTurbulence type="fractalNoise" baseFrequency="0.01 50" numOctaves="1" result="vhs-lines">
+        <animate attributeName="seed" from="1" to="100" dur="1s" repeatCount="indefinite" />
+    </feTurbulence>
+    <feColorMatrix in="vhs-lines" type="matrix" values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 10 -8" result="lines-final"/>
+    <feComposite in="lines-final" in2="bloom-result" operator="over" result="with-lines"/>
+
+    <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="1" result="noise">
+        <animate attributeName="seed" from="1" to="100" dur="0.5s" repeatCount="indefinite" />
+    </feTurbulence>
+    <feComponentTransfer in="noise" result="soft-noise">
+        <feFuncA type="linear" slope="0.10"/>
+    </feComponentTransfer>
+    <feBlend mode="screen" in="with-lines" in2="soft-noise" result="final-output"/>
+  </filter>
+</svg>
+
       </filter>
     </svg>
 </head>
