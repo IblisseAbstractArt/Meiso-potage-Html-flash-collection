@@ -4,15 +4,7 @@
     <title> Touhou Spell Typing Carnival</title>
     <script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
     <style>
-        body {
-            background-color: #000;
-            color: #ffffff;
-            margin: 0;
-            padding: 20px;
-            font-family: sans-serif;
-            animation: flicker 0.15s infinite;
-        }
-
+        /* Esto evita que el flash empuje el resto del contenido */
         #flash-container {
             width: 512px;
             height: 384px;
@@ -21,7 +13,8 @@
             position: relative;
             border: 2px solid #222;
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
-            /* El filtro se aplicará mediante JavaScript al cargar */
+            /* APLICAMOS EL FILTRO */
+            filter: url(#rgb-split); 
             will-change: filter;
         }
 
@@ -53,8 +46,14 @@
             pointer-events: none;
             z-index: 15;
             animation: crt-roll 6s linear infinite;
-            }
-        /* Scanlines (Efecto CRT ligero siempre activo) */
+        }
+
+        /* 3. La animación de bajada (Corregida sin el '?') */
+        @keyframes crt-roll {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(900%); }
+        }
+        /* 2. Capa CRT (Scanlines) - Ajustada para no tapar tanto */
         body::before {
             content: " ";
             display: block;
@@ -64,39 +63,16 @@
                         linear-gradient(90deg, rgba(255, 0, 0, 0.02), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.02));
             z-index: 9999;
             pointer-events: none;
+            /* Bajé un poco el grosor de 6px a 4px para que sea menos invasivo */
             background-size: 100% 6px, 5px 100%;
         }
 
         @keyframes flicker {
-            0% { opacity: 0.99; }
-            5% { opacity: 0.97; }
+            0% { opacity: 0.98; }
+            5% { opacity: 0.95; }
             10% { opacity: 0.99; }
-            100% { opacity: 1; }
+            100% { opacity: 1; } /* Corregido de 5 a 1 */
         }
-
-        /* Estilo del Botón */
-        .retro-button {
-            background: #1a1a1a;
-            color: #55ff55;
-            border: 2px solid #333;
-            padding: 10px 20px;
-            font-family: 'Courier New', monospace;
-            font-weight: bold;
-            cursor: pointer;
-            margin-top: 15px;
-            text-transform: uppercase;
-            transition: all 0.2s;
-        }
-        .retro-button:hover {
-            background: #333;
-            border-color: #55ff55;
-        }
-        
-
-        /* 3. La animación de bajada (Corregida sin el '?') */
-        @keyframes crt-roll {
-            0% { transform: translateY(-100%); }
-            100% { transform: translateY(900%); }
 
         body {
             background-color: #000;
@@ -105,12 +81,16 @@
             padding: 20px;
             font-family: sans-serif;
             animation: flicker 0.15s infinite;
-    </style>
+        
+        font[size="2"] {
+        color: #aaa;
+        line-height: 1.6;
+            {
     </style>
 
     <svg style="display: none;">
-      <filter id="retro-lite">
-         <feOffset in="SourceGraphic" dx="3" dy="0" result="red-shift"/>
+      <filter id="rgb-split">
+        <feOffset in="SourceGraphic" dx="3" dy="0" result="red-shift"/>
         <feColorMatrix in="red-shift" type="matrix" values="1 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0" result="red-only"/>
         <feColorMatrix in="SourceGraphic" type="matrix" values="0 0 0 0 0  0 1 0 0 0  0 0 0 0 0  0 0 0 1 0" result="green-only"/>
         <feOffset in="SourceGraphic" dx="-3" dy="0" result="blue-shift"/>
@@ -118,37 +98,7 @@
         <feBlend mode="screen" in="red-only" in2="green-only" result="red-green"/>
         <feBlend mode="screen" in="red-green" in2="blue-only"/>
       </filter>
-
-      <filter id="retro-full">
-        <feOffset in="SourceGraphic" dx="2" dy="0" result="red-p"/>
-        <feColorMatrix in="red-p" type="matrix" values="1 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0" result="r"/>
-        <feColorMatrix in="SourceGraphic" type="matrix" values="0 0 0 0 0  0 1 0 0 0  0 0 0 0 0  0 0 0 1 0" result="g"/>
-        <feOffset in="SourceGraphic" dx="-2" dy="0" result="blue-p"/>
-        <feColorMatrix in="blue-p" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 1 0 0  0 0 0 1 0" result="b"/>
-        <feBlend mode="screen" in="r" in2="g" result="rg"/>
-        <feBlend mode="screen" in="rg" in2="b" result="rgb"/>
-        
-        <feGaussianBlur in="rgb" stdDeviation="2" result="g-blur"/>
-        <feOffset in="g-blur" dx="3" result="g-off"/>
-        <feComponentTransfer in="g-off" result="g-fade">
-            <feFuncA type="linear" slope="0.3"/>
-        </feComponentTransfer>
-        <feBlend mode="screen" in="rgb" in2="g-fade" result="ghost"/>
-
-        <feTurbulence type="fractalNoise" baseFrequency="0.001 0.15" numOctaves="1" result="t-noise">
-            <animate attributeName="seed" from="1" to="100" dur="1s" repeatCount="indefinite" />
-        </feTurbulence>
-        <feDisplacementMap in="ghost" in2="t-noise" scale="8" xChannelSelector="R" result="distort"/>
-
-        <feGaussianBlur in="distort" stdDeviation="1.5" result="b-blur"/>
-        <feBlend mode="screen" in="distort" in2="b-blur" result="bloom"/>
-        <feTurbulence type="fractalNoise" baseFrequency="0.01 50" numOctaves="1" result="l-noise">
-            <animate attributeName="seed" from="1" to="100" dur="1.5s" repeatCount="indefinite" />
-        </feTurbulence>
-        <feColorMatrix type="matrix" values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 10 -8" result="lines"/>
-        <feComposite in="lines" in2="bloom" operator="over"/>
-      </filter>
-            </svg>
+    </svg>
 </head>
 
 <body bgcolor="#000000" text="#ffffff">
@@ -161,10 +111,7 @@
             <embed src="swf/toho01_02_miya.swf" width="512" height="384"></embed>
         </object>
     </div>
-<button id="perf-btn" class="retro-button" onclick="toggleRetro()">
-    [ MODE: VHS LITE ]
-</button>
-    <p style="font-size: 11px; color: #666;">* Select FULL MODE if you have a powerful CPU</p>
+
     <br>
     <font size="2">
         Type = Flash Game<br>
