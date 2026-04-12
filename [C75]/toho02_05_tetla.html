@@ -81,6 +81,14 @@
             padding: 20px;
             font-family: sans-serif;
             animation: flicker 0.15s infinite;
+
+			<filter id="retro-8bit">
+    <feComponentTransfer>
+        <feFuncR type="discrete" tableValues="0 0.33 0.66 1" />
+        <feFuncG type="discrete" tableValues="0 0.33 0.66 1" />
+        <feFuncB type="discrete" tableValues="0 0.33 0.66 1" />
+    </feComponentTransfer>
+</filter>
     </style>
 
     <svg style="display: none;">
