@@ -9,15 +9,17 @@ body {
     animation: flicker 0.15s infinite;
 }
 
+/* vhs-style.css corregido */
 #flash-container {
-    width: 512px;
-    height: 384px;
+    /* Eliminamos width y height fijos */
+    display: inline-block; /* Para que se ajuste al contenido */
     margin: 0 auto;
     overflow: hidden;
     position: relative;
     border: 2px solid #222;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
     will-change: filter;
+    line-height: 0; /* Evita espacios extra debajo del flash */
 }
 
 /* 1. La viñeta: sombra interna */
