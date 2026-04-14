@@ -103,12 +103,12 @@
         </feDisplacementMap>
 
         <feOffset in="glitch-output" dx="3" dy="0" result="red-p"/>
-        <feColorMatrix in="red-p" type="matrix" values="1.2 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0" result="r"/>
+        <feColorMatrix in="red-p" type="matrix" values="1 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0" result="r"/>
         
-        <feColorMatrix in="glitch-output" type="matrix" values="0 0 0 0 0  0 1.2 0 0 0  0 0 0 0 0  0 0 0 1 0" result="g"/>
+        <feColorMatrix in="glitch-output" type="matrix" values="0 0 0 0 0  0 1 0 0 0  0 0 0 0 0  0 0 0 1 0" result="g"/>
         
         <feOffset in="glitch-output" dx="-3" dy="0" result="blue-p"/>
-        <feColorMatrix in="blue-p" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 1.2 0 0  0 0 0 1 0" result="b"/>
+        <feColorMatrix in="blue-p" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 1 0 0  0 0 0 1 0" result="b"/>
         
         <feBlend mode="screen" in="r" in2="g" result="rg"/>
         <feBlend mode="screen" in="rg" in2="b"/>
