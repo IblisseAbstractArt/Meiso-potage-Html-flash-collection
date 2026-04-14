@@ -100,14 +100,16 @@
                      dur="4s" 
                      repeatCount="indefinite" />
         </feDisplacementMap>
-        <filter id="rgb-split">
-        <feOffset in="SourceGraphic" dx="3" dy="0" result="red-shift"/>
-        <feColorMatrix in="red-shift" type="matrix" values="1 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0" result="red-only"/>
-        <feColorMatrix in="SourceGraphic" type="matrix" values="0 0 0 0 0  0 1 0 0 0  0 0 0 0 0  0 0 0 1 0" result="green-only"/>
-        <feOffset in="SourceGraphic" dx="-3" dy="0" result="blue-shift"/>
-        <feColorMatrix in="blue-shift" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 1 0 0  0 0 0 1 0" result="blue-only"/>
-        <feBlend mode="screen" in="red-only" in2="green-only" result="red-green"/>
-        <feBlend mode="screen" in="red-green" in2="blue-only"/>
+        <feOffset in="glitch-output" dx="3" dy="0" result="red-p"/>
+        <feColorMatrix in="red-p" type="matrix" values="1.2 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0" result="r"/>
+        
+        <feColorMatrix in="glitch-output" type="matrix" values="0 0 0 0 0  0 1.2 0 0 0  0 0 0 0 0  0 0 0 1 0" result="g"/>
+        
+        <feOffset in="glitch-output" dx="-3" dy="0" result="blue-p"/>
+        <feColorMatrix in="blue-p" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 1.2 0 0  0 0 0 1 0" result="b"/>
+        
+        <feBlend mode="screen" in="r" in2="g" result="rg"/>
+        <feBlend mode="screen" in="rg" in2="b"/>
       </filter>
     </svg>
 </head>
