@@ -19,7 +19,7 @@
         }
 
         /* Viñeta (CRT look) */
-         #flash-container::after {
+        #flash-container::after {
             content: " ";
             display: block;
             position: absolute;
@@ -28,7 +28,7 @@
                         inset 0 0 20px rgba(0,0,0,1);
             pointer-events: none;
             z-index: 10;
-             }
+        }
 
         /* Barra de desplazamiento blanca (CRT Roll) */
         #flash-container::before {
@@ -87,6 +87,7 @@
     </style>
 
     <svg style="display: none;">
+      <filter id="vhs-glitch-real">
         <feTurbulence type="fractalNoise" baseFrequency="0.001 0.15" numOctaves="1" result="noise">
           <animate attributeName="seed" from="1" to="100" dur="1s" repeatCount="indefinite" />
         </feTurbulence>
@@ -100,13 +101,14 @@
                      dur="4s" 
                      repeatCount="indefinite" />
         </feDisplacementMap>
-        <feOffset in="glitch-output" dx="5" dy="0" result="red-p"/>
-        <feColorMatrix in="red-p" type="matrix" values="1.5 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0" result="r"/>
+
+        <feOffset in="glitch-output" dx="3" dy="0" result="red-p"/>
+        <feColorMatrix in="red-p" type="matrix" values="1.2 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0" result="r"/>
         
         <feColorMatrix in="glitch-output" type="matrix" values="0 0 0 0 0  0 1.2 0 0 0  0 0 0 0 0  0 0 0 1 0" result="g"/>
         
-        <feOffset in="glitch-output" dx="-5" dy="0" result="blue-p"/>
-        <feColorMatrix in="blue-p" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 1.5 0 0  0 0 0 1 0" result="b"/>
+        <feOffset in="glitch-output" dx="-3" dy="0" result="blue-p"/>
+        <feColorMatrix in="blue-p" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 1.2 0 0  0 0 0 1 0" result="b"/>
         
         <feBlend mode="screen" in="r" in2="g" result="rg"/>
         <feBlend mode="screen" in="rg" in2="b"/>
@@ -152,4 +154,4 @@
     </script>
 </center>
 </body>
-            </html>
+</html>
