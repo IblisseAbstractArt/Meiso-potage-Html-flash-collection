@@ -116,23 +116,20 @@
                    dur="10s" 
                    repeatCount="indefinite" />
         </feColorMatrix>
-<feColorMatrix in="glitch-output" result="maybe-inverted" type="matrix" ... />
 
-        <feOffset in="maybe-inverted" dx="12" dy="8" result="ghost-offset" />
+<feOffset in="maybe-inverted" dx="0" dy="0" result="jittered">
+          <animate attributeName="dy" 
+                   values="0; 0; 2; 0; -1; 0; 0; 3; 0" 
+                   keyTimes="0; 0.6; 0.61; 0.62; 0.8; 0.81; 0.82; 0.83; 1" 
+                   dur="3s" repeatCount="indefinite" />
+        </feOffset>
+
+        <feTurbulence type="fractalNoise" baseFrequency="0.80" numOctaves="1" result="grain-raw" />
+        <feColorMatrix in="grain-raw" type="matrix" 
+                       values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.15 0" result="grain-mask" />
         
-        <feGaussianBlur in="ghost-offset" stdDeviation="1" result="ghost-blur" />
-        
-        <feColorMatrix in="ghost-blur" type="matrix" 
-                       values="1 0 0 0 0  
-                               0 1 0 0 0  
-                               0 0 1 0 0  
-                               0 0 0 0.5 0" result="ghost-final" />
-
-        <feBlend in="maybe-inverted" in2="ghost-final" mode="screen" result="pre-rgb" />
-
-        <feOffset in="pre-rgb" dx="3" dy="0" result="red-p"/>
-
-
+        <feBlend in="jittered" in2="grain-mask" mode="multiply" result="pre-rgb" />
+		  
 		  
         <feOffset in="pre-rgb" dx="3" dy="0" result="red-p"/>
         <feColorMatrix in="red-p" type="matrix" values="1 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0" result="r"/>
