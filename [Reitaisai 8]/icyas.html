@@ -118,15 +118,15 @@
         </feColorMatrix>
 <feColorMatrix in="glitch-output" result="maybe-inverted" type="matrix" ... />
 
-        <feOffset in="maybe-inverted" dx="8" dy="4" result="ghost-offset" />
+        <feOffset in="maybe-inverted" dx="12" dy="8" result="ghost-offset" />
         
-        <feGaussianBlur in="ghost-offset" stdDeviation="3" result="ghost-blur" />
+        <feGaussianBlur in="ghost-offset" stdDeviation="1" result="ghost-blur" />
         
         <feColorMatrix in="ghost-blur" type="matrix" 
                        values="1 0 0 0 0  
                                0 1 0 0 0  
                                0 0 1 0 0  
-                               0 0 0 0.3 0" result="ghost-final" />
+                               0 0 0 0.5 0" result="ghost-final" />
 
         <feBlend in="maybe-inverted" in2="ghost-final" mode="screen" result="pre-rgb" />
 
