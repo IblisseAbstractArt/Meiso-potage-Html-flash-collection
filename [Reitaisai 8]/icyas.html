@@ -116,13 +116,35 @@
                    dur="10s" 
                    repeatCount="indefinite" />
         </feColorMatrix>
+<feColorMatrix in="glitch-output" result="maybe-inverted" type="matrix" ... />
 
-        <feOffset in="maybe-inverted" dx="3" dy="0" result="red-p"/>
+        <feOffset in="maybe-inverted" dx="8" dy="4" result="ghost-offset" />
+        
+        <feGaussianBlur in="ghost-offset" stdDeviation="3" result="ghost-blur" />
+        
+        <feColorMatrix in="ghost-blur" type="matrix" 
+                       values="1 0 0 0 0  
+                               0 1 0 0 0  
+                               0 0 1 0 0  
+                               0 0 0 0.3 0" result="ghost-final" />
+
+        <feBlend in="maybe-inverted" in2="ghost-final" mode="screen" result="pre-rgb" />
+
+        <feOffset in="pre-rgb" dx="3" dy="0" result="red-p"/>
+
+<feOffset in="maybe-inverted" dx="5" dy="3" result="ghost-offset" />
+        <feGaussianBlur in="ghost-offset" stdDeviation="2.5" result="ghost-blur" />
+        <feColorMatrix in="ghost-blur" type="matrix" 
+                       values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 0.25 0" result="ghost-final" />
+        <feBlend in="maybe-inverted" in2="ghost-final" mode="screen" result="pre-rgb" />
+		  
+		  
+        <feOffset in="pre-rgb" dx="3" dy="0" result="red-p"/>
         <feColorMatrix in="red-p" type="matrix" values="1 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0" result="r"/>
         
-        <feColorMatrix in="maybe-inverted" type="matrix" values="0 0 0 0 0  0 1 0 0 0  0 0 0 0 0  0 0 0 1 0" result="g"/>
+        <feColorMatrix in="pre-rgb" type="matrix" values="0 0 0 0 0  0 1 0 0 0  0 0 0 0 0  0 0 0 1 0" result="g"/>
         
-        <feOffset in="maybe-inverted" dx="-3" dy="0" result="blue-p"/>
+        <feOffset in="pre-rgb" dx="-3" dy="0" result="blue-p"/>
         <feColorMatrix in="blue-p" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 1 0 0  0 0 0 1 0" result="b"/>
         
         <feBlend mode="screen" in="r" in2="g" result="rg"/>
