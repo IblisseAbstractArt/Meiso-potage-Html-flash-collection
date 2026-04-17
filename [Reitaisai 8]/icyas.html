@@ -117,25 +117,24 @@
                    repeatCount="indefinite" />
         </feColorMatrix>
 
-        <feOffset in="maybe-inverted" dx="3" dy="0" result="red-p"/>
-        <feColorMatrix in="red-p" type="matrix" values="1 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0" result="r"/>
-        
-        <feColorMatrix in="maybe-inverted" type="matrix" values="0 0 0 0 0  0 1 0 0 0  0 0 0 0 0  0 0 0 1 0" result="g"/>
-        
-        <feOffset in="maybe-inverted" dx="-3" dy="0" result="blue-p"/>
-        <feColorMatrix in="blue-p" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 1 0 0  0 0 0 1 0" result="b"/>
-
-<feFlood flood-color="black" result="black" />
-        <feGaussianBlur in="SourceAlpha" stdDeviation="40" result="blur" />
-        <feOffset dy="0" dx="0" />
+        <feFlood flood-color="black" result="black" />
+        <feGaussianBlur in="SourceAlpha" stdDeviation="40" result="sphere-blur" />
         <feComposite in2="black" operator="in" result="sphere-map" />
 
         <feDisplacementMap in="maybe-inverted" in2="sphere-map" 
-                           scale="20" 
+                           scale="25" 
                            xChannelSelector="R" 
                            yChannelSelector="G" 
                            result="pre-rgb" />
-		  
+
+        <feOffset in="pre-rgb" dx="3" dy="0" result="red-p"/>
+        <feColorMatrix in="red-p" type="matrix" values="1 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0" result="r"/>
+        
+        <feColorMatrix in="pre-rgb" type="matrix" values="0 0 0 0 0  0 1 0 0 0  0 0 0 0 0  0 0 0 1 0" result="g"/>
+        
+        <feOffset in="pre-rgb" dx="-3" dy="0" result="blue-p"/>
+        <feColorMatrix in="blue-p" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 1 0 0  0 0 0 1 0" result="b"/>
+        
         <feBlend mode="screen" in="r" in2="g" result="rg"/>
         <feBlend mode="screen" in="rg" in2="b"/>
       </filter>
