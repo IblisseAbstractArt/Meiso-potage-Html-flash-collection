@@ -124,7 +124,18 @@
         
         <feOffset in="maybe-inverted" dx="-3" dy="0" result="blue-p"/>
         <feColorMatrix in="blue-p" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 1 0 0  0 0 0 1 0" result="b"/>
-        
+
+<feFlood flood-color="black" result="black" />
+        <feGaussianBlur in="SourceAlpha" stdDeviation="40" result="blur" />
+        <feOffset dy="0" dx="0" />
+        <feComposite in2="black" operator="in" result="sphere-map" />
+
+        <feDisplacementMap in="maybe-inverted" in2="sphere-map" 
+                           scale="20" 
+                           xChannelSelector="R" 
+                           yChannelSelector="G" 
+                           result="pre-rgb" />
+		  
         <feBlend mode="screen" in="r" in2="g" result="rg"/>
         <feBlend mode="screen" in="rg" in2="b"/>
       </filter>
