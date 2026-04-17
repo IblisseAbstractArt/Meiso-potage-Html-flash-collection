@@ -117,17 +117,19 @@
                    repeatCount="indefinite" />
         </feColorMatrix>
 
-        <feGaussianBlur in="maybe-inverted" stdDeviation="2" result="blurred-light" />
+        <feOffset in="maybe-inverted" dx="3" dy="0" result="red-p"/>
+        <feColorMatrix in="red-p" type="matrix" values="1 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0" result="r"/>
         
-        <feColorMatrix in="blurred-light" type="matrix" 
-                       values="1 0 0 0 0  
-                               0 1 0 0 0  
-                               0 0 1 0 0  
-                               0 0 0 1.5 0" result="bloom-soft" />
-                               
-        <feBlend in="maybe-inverted" in2="bloom-soft" mode="screen" result="pre-rgb" />
-    </svg>
-      </head>
+        <feColorMatrix in="maybe-inverted" type="matrix" values="0 0 0 0 0  0 1 0 0 0  0 0 0 0 0  0 0 0 1 0" result="g"/>
+        
+        <feOffset in="maybe-inverted" dx="-3" dy="0" result="blue-p"/>
+        <feColorMatrix in="blue-p" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 1 0 0  0 0 0 1 0" result="b"/>
+        
+        <feBlend mode="screen" in="r" in2="g" result="rg"/>
+        <feBlend mode="screen" in="rg" in2="b"/>
+      </filter>
+	</svg>
+</head>
 
 <body bgcolor="#000000" text="#ffffff">
 <center>
