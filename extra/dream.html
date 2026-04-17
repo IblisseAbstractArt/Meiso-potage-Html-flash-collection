@@ -101,17 +101,19 @@
                    repeatCount="indefinite" />
         </feDisplacementMap>
 
-        <feComponentTransfer in="glitch-output" result="maybe-inverted">
-          <feFuncR type="table" tableValues="0 1">
-            <animate attributeName="tableValues" values="0 1; 0 1; 1 0; 0 1" keyTimes="0; 0.85; 0.87; 0.9" dur="8s" repeatCount="indefinite" />
-          </feFuncR>
-          <feFuncG type="table" tableValues="0 1">
-            <animate attributeName="tableValues" values="0 1; 0 1; 1 0; 0 1" keyTimes="0; 0.85; 0.87; 0.9" dur="8s" repeatCount="indefinite" />
-          </feFuncG>
-          <feFuncB type="table" tableValues="0 1">
-            <animate attributeName="tableValues" values="0 1; 0 1; 1 0; 0 1" keyTimes="0; 0.85; 0.87; 0.9" dur="8s" repeatCount="indefinite" />
-          </feFuncB>
-        </feComponentTransfer>
+        <feColorMatrix in="glitch-output" result="maybe-inverted" type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 1 0">
+          <animate attributeName="values" 
+                   calcMode="discrete"
+                   values="
+                     1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 1 0;
+                     -1 0 0 0 1  0 -1 0 0 1  0 0 -1 0 1  0 0 0 1 0;
+                     1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 1 0;
+                     1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 1 0
+                   " 
+                   keyTimes="0; 0.85; 0.90; 1" 
+                   dur="6s" 
+                   repeatCount="indefinite" />
+        </feColorMatrix>
 
         <feOffset in="maybe-inverted" dx="3" dy="0" result="red-p"/>
         <feColorMatrix in="red-p" type="matrix" values="1 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0" result="r"/>
