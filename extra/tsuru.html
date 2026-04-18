@@ -14,7 +14,7 @@
             border: 2px solid #222;
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
             /* APLICAMOS EL NUEVO FILTRO DE DESGARRE */
-            filter: url(#vhs-glitch-real); 
+            filter: url(#vhs-glitch-logic) url(#vhs-rgb-logic); 
             will-change: filter;
         }
 
@@ -84,45 +84,54 @@
             color: #aaa;
             line-height: 1.6;
         }
+
+		/* Estilos para el botón de control VHS */
+        .retro-button {
+            background-color: #111;
+            color: #39fdc1; /* Un verde fósforo estilo terminal */
+            border: 2px solid #39fdc1;
+            padding: 10px 20px;
+            margin-top: 15px;
+            font-family: monospace;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-transform: uppercase;
+            box-shadow: 0 0 8px rgba(57, 253, 193, 0.5);
+        }
+
+        .retro-button:hover {
+            background-color: #39fdc1;
+            color: #000;
+        }
+
+        /* Clase que usará JS para apagar el filtro SVG */
+        .glitch-disabled {
+            filter: none !important;
+		}
     </style>
 
     <svg style="display: none;">
-      <filter id="vhs-glitch-real">
+      <filter id="vhs-glitch-logic">
         <feTurbulence type="fractalNoise" baseFrequency="0.001 0.15" numOctaves="1" result="noise">
           <animate attributeName="seed" from="1" to="100" dur="1s" repeatCount="indefinite" />
         </feTurbulence>
-
         <feColorMatrix in="noise" type="matrix" values="1 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 15 -8" result="dest-map" />
         <feDisplacementMap in="SourceGraphic" in2="dest-map" scale="0" xChannelSelector="R" result="glitch-output">
-          <animate attributeName="scale" 
-                   values="0; 0; 50; 0; 0; 30; 0; 70; 0" 
-                   keyTimes="0; 0.7; 0.72; 0.75; 0.85; 0.87; 0.9; 0.92; 1" 
-                   dur="5s" 
-                   repeatCount="indefinite" />
+          <animate attributeName="scale" values="0; 0; 50; 0; 0; 30; 0; 70; 0" keyTimes="0; 0.7; 0.72; 0.75; 0.85; 0.87; 0.9; 0.92; 1" dur="5s" repeatCount="indefinite" />
         </feDisplacementMap>
-
-        <feColorMatrix in="glitch-output" result="maybe-inverted" type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 1 0">
-          <animate attributeName="values" 
-                   calcMode="discrete"
-                   values="
-                     1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 1 0;
-                     -1 0 0 0 1  0 -1 0 0 1  0 0 -1 0 1  0 0 0 1 0;
-                     1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 1 0;
-                     1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 1 0
-                   " 
-                   keyTimes="0; 0.85; 0.90; 1" 
-                   dur="10s" 
-                   repeatCount="indefinite" />
+        <feColorMatrix in="glitch-output" type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 1 0">
+          <animate attributeName="values" calcMode="discrete" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 1 0; -1 0 0 0 1  0 -1 0 0 1  0 0 -1 0 1  0 0 0 1 0; 1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 1 0; 1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 1 0" keyTimes="0; 0.85; 0.90; 1" dur="10s" repeatCount="indefinite" />
         </feColorMatrix>
+      </filter>
 
-        <feOffset in="maybe-inverted" dx="3" dy="0" result="red-p"/>
+      <filter id="vhs-rgb-logic">
+        <feOffset in="SourceGraphic" dx="3" dy="0" result="red-p"/>
         <feColorMatrix in="red-p" type="matrix" values="1 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0" result="r"/>
-        
-        <feColorMatrix in="maybe-inverted" type="matrix" values="0 0 0 0 0  0 1 0 0 0  0 0 0 0 0  0 0 0 1 0" result="g"/>
-        
-        <feOffset in="maybe-inverted" dx="-3" dy="0" result="blue-p"/>
+        <feColorMatrix in="SourceGraphic" type="matrix" values="0 0 0 0 0  0 1 0 0 0  0 0 0 0 0  0 0 0 1 0" result="g"/>
+        <feOffset in="SourceGraphic" dx="-3" dy="0" result="blue-p"/>
         <feColorMatrix in="blue-p" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 1 0 0  0 0 0 1 0" result="b"/>
-        
         <feBlend mode="screen" in="r" in2="g" result="rg"/>
         <feBlend mode="screen" in="rg" in2="b"/>
       </filter>
@@ -139,7 +148,12 @@
             <embed src="swf/Tsurupettan.swf" width="800" height="450"></embed>
         </object>
     </div>
+</object>
+    </div>
 
+    <button id="glitch-btn" class="retro-button" onclick="toggleGlitch()">
+        [ Glitch / Negative Switch ]
+	</button>
     <br>
     <font size="2">
         Type = Flash Animation<br>
@@ -165,6 +179,30 @@
         crossorigin="anonymous"
         async>
  </script>
+
+    <script>
+        function toggleGlitch() {
+            const container = document.getElementById('flash-container');
+            const button = document.getElementById('glitch-btn');
+            
+            if (container.style.filter === 'url("#vhs-rgb-logic")') {
+                container.style.filter = 'url(#vhs-glitch-logic) url(#vhs-rgb-logic)';
+                
+                button.textContent = '[ Disable Glitch / Negatives ]';
+                button.style.color = '';
+                button.style.borderColor = '';
+                button.style.boxShadow = '';
+            } else {
+            
+                container.style.filter = 'url("#vhs-rgb-logic")';
+                
+                button.textContent = '[ Enable Glitch / Negatives ]';
+                button.style.color = '#ff5555';
+                button.style.borderColor = '#ff5555';
+                button.style.boxShadow = '0 0 8px rgba(255, 85, 85, 0.5)';
+            }
+        }
+	</script>
 </center>
 </body>
 </html>
