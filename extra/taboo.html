@@ -182,45 +182,45 @@
         (c) 2026 Average Rumia, No rights reserved.
     </font>
  <script src="https://giscus.app/client.js"
-        data-repo="IblisseAbstractArt/Meiso-potage-Html-flash-collection"
-        data-repo-id="R_kgDORp4pkQ"
-        data-category="General"
-        data-category-id="DIC_kwDORp4pkc4C5HRy"
-        data-mapping="pathname"
-        data-strict="0"
-        data-reactions-enabled="1"
-        data-emit-metadata="0"
-        data-input-position="bottom"
-        data-theme="dark"
-        data-lang="es"
-        crossorigin="anonymous"
-        async>
-<script>
+            data-repo="IblisseAbstractArt/Meiso-potage-Html-flash-collection"
+            data-repo-id="R_kgDORp4pkQ"
+            data-category="General"
+            data-category-id="DIC_kwDORp4pkc4C5HRy"
+            data-mapping="pathname"
+            data-strict="0"
+            data-reactions-enabled="1"
+            data-emit-metadata="0"
+            data-input-position="bottom"
+            data-theme="dark"
+            data-lang="es"
+            crossorigin="anonymous"
+            async>
+    </script>
+
+    <script>
         function toggleGlitch() {
             const container = document.getElementById('flash-container');
             const button = document.getElementById('glitch-btn');
             
-            // Alternar la clase que apaga el filtro
-            container.classList.toggle('glitch-disabled');
-            
-            // Cambiar la apariencia del botón dependiendo del estado
-            if (container.classList.contains('glitch-disabled')) {
-                button.textContent = '[ Enabled Glitch / Negative Flashing Colors ]';
-                // Cambiamos el color a un rojo/naranja de advertencia cuando está apagado
-                button.style.color = '#ff5555';
-                button.style.borderColor = '#ff5555';
-                button.style.boxShadow = '0 0 8px rgba(255, 85, 85, 0.5)';
-            } else {
-                button.textContent = '[ Disabled Glitch / Negative Flashing Colors ]';
-                // Volvemos al verde original cuando está encendido
+            // Si el filtro está apagado (none), lo encendemos
+            if (container.style.filter === 'none') {
+                container.style.filter = ''; // Restaura el filtro SVG original
+                
+                button.textContent = '[ Disable Glitch / Negative Effects ]';
                 button.style.color = '';
                 button.style.borderColor = '';
                 button.style.boxShadow = '';
+            } else {
+                // Si está encendido, lo forzamos a apagarse
+                container.style.filter = 'none';
+                
+                button.textContent = '[ Enable Glitch / Negative Effects ]';
+                button.style.color = '#ff5555';
+                button.style.borderColor = '#ff5555';
+                button.style.boxShadow = '0 0 8px rgba(255, 85, 85, 0.5)';
             }
         }
     </script>
- 
- </script>
 </center>
 </body>
 </html>
