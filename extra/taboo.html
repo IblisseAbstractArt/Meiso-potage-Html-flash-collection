@@ -195,6 +195,31 @@
         data-lang="es"
         crossorigin="anonymous"
         async>
+<script>
+        function toggleGlitch() {
+            const container = document.getElementById('flash-container');
+            const button = document.getElementById('glitch-btn');
+            
+            // Alternar la clase que apaga el filtro
+            container.classList.toggle('glitch-disabled');
+            
+            // Cambiar la apariencia del botón dependiendo del estado
+            if (container.classList.contains('glitch-disabled')) {
+                button.textContent = '[ Enabled Glitch / Negative Flashing Colors ]';
+                // Cambiamos el color a un rojo/naranja de advertencia cuando está apagado
+                button.style.color = '#ff5555';
+                button.style.borderColor = '#ff5555';
+                button.style.boxShadow = '0 0 8px rgba(255, 85, 85, 0.5)';
+            } else {
+                button.textContent = '[ Disabled Glitch / Negative Flashing Colors ]';
+                // Volvemos al verde original cuando está encendido
+                button.style.color = '';
+                button.style.borderColor = '';
+                button.style.boxShadow = '';
+            }
+        }
+    </script>
+ 
  </script>
 </center>
 </body>
