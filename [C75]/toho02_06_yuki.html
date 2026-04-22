@@ -12,7 +12,7 @@
             height: 600px;
             margin: 0 auto;
             overflow: hidden;
-        position: relative;
+            position: relative;
             border: 2px solid #222;
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
             /* APLICAMOS EL FILTRO */
@@ -54,8 +54,10 @@
         @keyframes crt-roll {
             0% { transform: translateY(-100%); }
             100% { transform: translateY(900%); }
-        }
-        /* 2. Capa CRT (Scanlines) - Ajustada para no tapar tanto */
+		}
+
+
+		/* 2. Capa CRT (Scanlines) - Ajustada para no tapar tanto */
         body::before {
             content: " ";
             display: block;
@@ -74,8 +76,7 @@
             5% { opacity: 0.95; }
             10% { opacity: 0.99; }
             100% { opacity: 1; } /* Corregido de 5 a 1 */
-        }
-
+		}
         body {
             background-color: #000;
             color: #ffffff;
@@ -103,7 +104,7 @@
     </svg>
 </head>
 
-<body bgcolor="#0c6128" text="#ffffff">
+<body bgcolor="#000000" text="#ffffff">
 <center>
     <h3>Intercross of Ball and Bullets [Ruffle fix]</h3>
     
@@ -119,8 +120,8 @@
     <font size="2">
         Type = Flash Game<br>
         Modded = Average Rumia<br>
-        Hosted = Github Server [keyboard needed to play]<br>
-        Note: If you see a screen of Cirno mad at you, that means the game is still unplayable due to Ruffle's issues with ActionScript 3<br><br>
+        Hosted = Github Server [fixed using ruffle] <br>
+        Note: If you see a screen of cirno mad at you, that means Ruffle still doesnt support ActionScript3 yet.<br><br>
         
         <a href="./index.html" style="color: #5555ff;">[ Return to the menu ]</a><br><br>
         
