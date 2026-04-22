@@ -97,7 +97,14 @@ a:hover {
         text-shadow: 0 0 10px rgba(255, 0, 0, 0.8); 
     }
 
+.blink-text {
+    animation: simple-blink 2s step-end infinite;
+}
 
+@keyframes simple-blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+            }
 h1, .titulo-rojo {
     color: #f00;
     
