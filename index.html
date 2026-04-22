@@ -140,6 +140,23 @@ a:hover {
     color: #fff;
     text-shadow: 0 0 12px rgba(255, 255, 255, 1);
 }
+
+
+a {
+    transition: all 0.1s ease;
+}
+
+a:hover {
+    color: #ffffff; /* Cambia a blanco */
+    text-shadow: 2px 0 #ff0000, -2px 0 #00ffff; /* Aberración cromática rápida */
+    text-decoration: none;
+}
+
+/* Efecto para las miniaturas al pasar el ratón */
+img:hover {
+    filter: sepia(100%) hue-rotate(90deg) saturate(300%);
+    cursor: pointer;
+}
     </style>
 </head>
 <body>
