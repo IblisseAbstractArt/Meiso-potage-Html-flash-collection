@@ -88,21 +88,17 @@
         }
 
 		/* Estilos para el botón de control VHS */
-        .retro-button {
-            background-color: #111;
-            color: #39fdc1; /* Un verde fósforo estilo terminal */
-            border: 2px solid #39fdc1;
-            padding: 10px 20px;
-            margin-top: 15px;
-            font-family: monospace;
-            font-size: 14px;
-            font-weight: bold;
+        .glitch-btn {
+            background-color: #000 !important; /* Forzamos el fondo negro */
+            color: #39fdc1;
+            border: 1px solid #39fdc1;
+            padding: 8px 16px;
             cursor: pointer;
-            transition: all 0.2s ease;
-            text-transform: uppercase;
-            box-shadow: 0 0 8px rgba(57, 253, 193, 0.5);
-        }
-
+            font-family: monospace;
+            margin: 5px;
+            transition: 0.3s;
+            outline: none; /* Quita el borde de enfoque del navegador */
+		}
         .retro-button:hover {
             background-color: #39fdc1;
             color: #000;
@@ -230,7 +226,7 @@
             const btn = document.getElementById('style-btn');
             if (currentStyle === 'toxic') {
                 btn.textContent = '[ Style: TOXIC (Green/Purple) ]';
-                btn.style.color = '#39fdc1'; btn.style.borderColor = '#39fdc1';
+                btn.style.color = '#'; btn.style.borderColor = '#39fdc1';
             } else {
                 btn.textContent = '[ Style: CLASSIC (Red/Blue) ]';
                 btn.style.color = '#55aaff'; btn.style.borderColor = '#55aaff';
