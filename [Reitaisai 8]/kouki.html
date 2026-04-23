@@ -87,22 +87,17 @@
             line-height: 1.6;
         }
 
-		/* Estilos para el botón de control VHS */
-        .retro-button {
-            background-color: #111;
-            color: #39fdc1; /* Un verde fósforo estilo terminal */
-            border: 2px solid #39fdc1;
-            padding: 10px 20px;
-            margin-top: 15px;
-            font-family: monospace;
-            font-size: 14px;
-            font-weight: bold;
+		.glitch-btn {
+            background-color: #000 !important; /* Forzamos el fondo negro */
+            color: #39fdc1;
+            border: 1px solid #39fdc1;
+            padding: 8px 16px;
             cursor: pointer;
-            transition: all 0.2s ease;
-            text-transform: uppercase;
-            box-shadow: 0 0 8px rgba(57, 253, 193, 0.5);
-        }
-
+            font-family: monospace;
+            margin: 5px;
+            transition: 0.3s;
+            outline: none; /* Quita el borde de enfoque del navegador */
+		}
         .retro-button:hover {
             background-color: #39fdc1;
             color: #000;
@@ -114,32 +109,38 @@
 		}
     </style>
 
+    
     <svg style="display: none;">
-      <filter id="vhs-glitch-logic">
-        <feTurbulence type="fractalNoise" baseFrequency="0.001 0.15" numOctaves="1" result="noise">
-          <animate attributeName="seed" from="1" to="100" dur="1s" repeatCount="indefinite" />
-        </feTurbulence>
-        
-        <feColorMatrix in="noise" type="matrix" values="1 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 15 -8" result="dest-map" />
-        
-        <feDisplacementMap in="SourceGraphic" in2="dest-map" scale="0" xChannelSelector="R" result="glitched-raw">
-          <animate attributeName="scale" values="0; 0; 50; 0; 0; 30; 0; 70; 0" keyTimes="0; 0.7; 0.72; 0.75; 0.85; 0.87; 0.9; 0.92; 1" dur="5s" repeatCount="indefinite" />
-        </feDisplacementMap>
+        <filter id="vhs-glitch-logic">
+            <feTurbulence type="fractalNoise" baseFrequency="0.001 0.15" numOctaves="1" result="noise">
+                <animate attributeName="seed" from="1" to="100" dur="1s" repeatCount="indefinite" />
+            </feTurbulence>
+            <feColorMatrix in="noise" type="matrix" values="1 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 15 -8" result="dest-map" />
+            <feDisplacementMap in="SourceGraphic" in2="dest-map" scale="0" xChannelSelector="R" result="glitched-raw">
+                <animate attributeName="scale" values="0; 0; 50; 0; 0; 30; 0; 70; 0" keyTimes="0; 0.7; 0.72; 0.75; 0.85; 0.87; 0.9; 0.92; 1" dur="5s" repeatCount="indefinite" />
+            </feDisplacementMap>
+            <feColorMatrix in="glitched-raw" type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 1 0">
+                <animate attributeName="values" calcMode="discrete" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 1 0; -1 0 0 0 1  0 -1 0 0 1  0 0 -1 0 1  0 0 0 1 0; 1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 1 0; 1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 1 0" keyTimes="0; 0.85; 0.90; 1" dur="10s" repeatCount="indefinite" />
+            </feColorMatrix>
+        </filter>
 
-        <feColorMatrix in="glitched-raw" type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 1 0">
-          <animate attributeName="values" calcMode="discrete" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 1 0; -1 0 0 0 1  0 -1 0 0 1  0 0 -1 0 1  0 0 0 1 0; 1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 1 0; 1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 1 0" keyTimes="0; 0.85; 0.90; 1" dur="10s" repeatCount="indefinite" />
-        </feColorMatrix>
-      </filter>
+        <filter id="vhs-rgb-toxic">
+            <feOffset in="SourceGraphic" dx="3" dy="0" result="purple-p"/>
+            <feColorMatrix in="purple-p" type="matrix" values="1 0 0 0 0  0 0 0 0 0  0 0 1 0 0  0 0 0 1 0" result="chan-purple"/>
+            <feOffset in="SourceGraphic" dx="-3" dy="0" result="green-p"/>
+            <feColorMatrix in="green-p" type="matrix" values="0 0 0 0 0  0 1 0 0 0  0 0 0 0 0  0 0 0 1 0" result="chan-green"/>
+            <feBlend mode="screen" in="chan-purple" in2="chan-green"/>
+        </filter>
 
-      <filter id="vhs-rgb-logic">
-        <feOffset in="SourceGraphic" dx="3" dy="0" result="purple-p"/>
-        <feColorMatrix in="purple-p" type="matrix" values="1 0 0 0 0  0 0 0 0 0  0 0 1 0 0  0 0 0 1 0" result="chan-purple"/>
-        
-        <feOffset in="SourceGraphic" dx="-3" dy="0" result="green-p"/>
-        <feColorMatrix in="green-p" type="matrix" values="0 0 0 0 0  0 1 0 0 0  0 0 0 0 0  0 0 0 1 0" result="chan-green"/>
-        
-        <feBlend mode="screen" in="chan-purple" in2="chan-green"/>
-	  </filter>
+        <filter id="vhs-rgb-classic">
+            <feOffset in="SourceGraphic" dx="4" dy="0" result="red-p"/>
+            <feColorMatrix in="red-p" type="matrix" values="1 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0" result="r"/>
+            <feColorMatrix in="SourceGraphic" type="matrix" values="0 0 0 0 0  0 1 0 0 0  0 0 0 0 0  0 0 0 1 0" result="g"/>
+            <feOffset in="SourceGraphic" dx="-4" dy="0" result="blue-p"/>
+            <feColorMatrix in="blue-p" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 1 0 0  0 0 0 1 0" result="b"/>
+            <feBlend mode="screen" in="r" in2="g" result="rg"/>
+            <feBlend mode="screen" in="rg" in2="b"/>
+        </filter>
 	</svg>
 </head>
 
@@ -156,9 +157,10 @@
 </object>
     </div>
 
-    <button id="glitch-btn" class="retro-button" onclick="toggleGlitch()">
-        [ Glitch / Negative Switch ]
-	</button>
+    <div style="margin-top: 15px; display: flex; justify-content: center; gap: 10px;">
+        <button id="glitch-btn" class="glitch-btn" onclick="toggleGlitch()">[ Disable Glitch / Negatives ]</button>
+        <button id="style-btn" class="glitch-btn" onclick="toggleStyle()">[ Style: TOXIC (Green/Purple) ]</button>
+	</div>
     <br>
     
     <font size="2">
@@ -187,28 +189,52 @@
 </script>
 
     <script>
-        function toggleGlitch() {
+        let isGlitchActive = true; 
+        let currentStyle = 'toxic'; 
+
+        function updateFilters() {
             const container = document.getElementById('flash-container');
-            const button = document.getElementById('glitch-btn');
+            let filters = [];
+
+            if (isGlitchActive) filters.push('url(#vhs-glitch-logic)');
             
-            if (container.style.filter === 'url("#vhs-rgb-logic")') {
-                container.style.filter = 'url(#vhs-glitch-logic) url(#vhs-rgb-logic)';
-                
-                button.textContent = '[ Disable Glitch / Negatives ]';
-                button.style.color = '';
-                button.style.borderColor = '';
-                button.style.boxShadow = '';
+            if (currentStyle === 'toxic') {
+                filters.push('url(#vhs-rgb-toxic)');
             } else {
-            
-                container.style.filter = 'url("#vhs-rgb-logic")';
-                
-                button.textContent = '[ Enable Glitch / Negatives ]';
-                button.style.color = '#ff5555';
-                button.style.borderColor = '#ff5555';
-                button.style.boxShadow = '0 0 8px rgba(255, 85, 85, 0.5)';
+                filters.push('url(#vhs-rgb-classic)');
             }
+
+            container.style.filter = filters.join(' ');
         }
-	</script>
+
+        function toggleGlitch() {
+            isGlitchActive = !isGlitchActive;
+            const btn = document.getElementById('glitch-btn');
+            if (isGlitchActive) {
+                btn.textContent = '[ Disable Glitch / Negatives ]';
+                btn.style.color = ''; btn.style.borderColor = ''; btn.style.boxShadow = '';
+            } else {
+                btn.textContent = '[ Enable Glitch / Negatives ]';
+                btn.style.color = '#ff5555'; btn.style.borderColor = '#ff5555';
+            }
+            updateFilters();
+        }
+
+        function toggleStyle() {
+            currentStyle = (currentStyle === 'toxic') ? 'classic' : 'toxic';
+            const btn = document.getElementById('style-btn');
+            if (currentStyle === 'toxic') {
+                btn.textContent = '[ Style: TOXIC (Green/Purple) ]';
+                btn.style.color = '39fdc1'; btn.style.borderColor = '#39fdc1';
+            } else {
+                btn.textContent = '[ Style: CLASSIC (Red/Blue) ]';
+                btn.style.color = '#55aaff'; btn.style.borderColor = '#55aaff';
+            }
+            updateFilters();
+        }
+
+        updateFilters();
+			</script>
 </center>
 </body>
 	</html>
