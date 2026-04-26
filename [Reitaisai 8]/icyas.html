@@ -6,7 +6,8 @@
     <script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
     
     <style>
-        /* Adaptado para los 800x600 de GuruGuru */
+        body { background-color: #000; color: #ccc; font-family: monospace; }
+
         #flash-container {
             width: 800px;
             height: 600px;
@@ -15,13 +16,11 @@
             position: relative;
             border: 2px solid #222;
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
-            /* APLICAMOS EL NUEVO FILTRO DE DESGARRE */
-            filter: url(#vhs-glitch-logic) url(#vhs-rgb-logic); 
             will-change: filter;
         }
 
-        /* Viñeta (CRT look) */
-           #flash-container::after {
+        /* Viñeta CRT */
+        #flash-container::after {
             content: " ";
             display: block;
             position: absolute;
@@ -30,86 +29,56 @@
                         inset 0 0 20px rgba(0,0,0,1);
             pointer-events: none;
             z-index: 10;
-           }
+        }
 
-        /* Barra de desplazamiento blanca (CRT Roll) */
-        #flash-container::before {
-            content: " ";
-            display: block;
+        /* El visualizador de barras */
+        #audio-visualizer {
             position: absolute;
-            top: 0; left: 0; right: 0;
-            height: 12%;
-            background: linear-gradient(
-                to bottom, 
-                rgba(255,255,255,0) 0%, 
-                rgba(255,255,255,0.08) 50%, 
-                rgba(255,255,255,0) 100%
-            );
-            pointer-events: none;
-            z-index: 15;
-            animation: crt-roll 8s linear infinite;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 5;
+            pointer-events: none; /* Para que no interfiera con los clics en el juego */
+            opacity: 0.8;
+            filter: blur(1px); /* Efecto neón suave */
         }
 
-        @keyframes crt-roll {
-            0% { transform: translateY(-100%); }
-            100% { transform: translateY(900%); }
-        }
-        
-        /* Capa de Scanlines globales */
-        body::before {
-            content: " ";
-            display: block;
-            position: fixed;
-            top: 0; left: 0; bottom: 0; right: 0;
-            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%),
-                        linear-gradient(90deg, rgba(255, 0, 0, 0.02), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.02));
-            z-index: 9999;
-            pointer-events: none;
-            background-size: 100% 6px, 5px 100%;
+        /* Panel de botones centrado */
+        .controls-panel {
+            margin-top: 15px;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
         }
 
-        body {
-            background-color: #000;
-            color: #ffffff;
-            margin: 0;
-            padding: 20px;
-            font-family: sans-serif;
-            animation: flicker 0.15s infinite;
-        }
-
-        @keyframes flicker {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.98; }
-        }
-
-        font[size="2"] {
-            color: #aaa;
-            line-height: 1.6;
-        }
-
-		.glitch-btn {
-            background-color: #000 !important; /* Forzamos el fondo negro */
+        .glitch-btn {
+            background-color: #000 !important;
             color: #39fdc1;
             border: 1px solid #39fdc1;
             padding: 8px 16px;
             cursor: pointer;
             font-family: monospace;
-            margin: 5px;
             transition: 0.3s;
-            outline: none; /* Quita el borde de enfoque del navegador */
-		}
-        .retro-button:hover {
-            background-color: #39fdc1;
-            color: #000;
+            outline: none;
         }
-
-        /* Clase que usará JS para apagar el filtro SVG */
-        .glitch-disabled {
-            filter: none !important;
-		}
     </style>
+</head>
 
-    
+<body>
+<center>
+    <div id="flash-container">
+        <canvas id="audio-visualizer" width="300" height="60"></canvas>
+        
+        <object data="495go.swf" width="800" height="600"></object>
+    </div>
+
+    <div class="controls-panel">
+        <button id="glitch-btn" class="glitch-btn" onclick="toggleGlitch()">[ Disable Glitch / Negatives ]</button>
+        <button id="viz-btn" class="glitch-btn" onclick="toggleVisualizer()">[ Disable Visualizer ]</button>
+        <button id="style-btn" class="glitch-btn" onclick="toggleStyle()">[ Style: TOXIC (Green/Purple) ]</button>
+    </div>
+
     <svg style="display: none;">
         <filter id="vhs-glitch-logic">
             <feTurbulence type="fractalNoise" baseFrequency="0.001 0.15" numOctaves="1" result="noise">
@@ -123,27 +92,18 @@
                 <animate attributeName="values" calcMode="discrete" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 1 0; -1 0 0 0 1  0 -1 0 0 1  0 0 -1 0 1  0 0 0 1 0; 1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 1 0; 1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 1 0" keyTimes="0; 0.85; 0.90; 1" dur="10s" repeatCount="indefinite" />
             </feColorMatrix>
         </filter>
-
         <filter id="vhs-rgb-toxic">
-            <feOffset in="SourceGraphic" dx="3" dy="0" result="purple-p"/>
-            <feColorMatrix in="purple-p" type="matrix" values="1 0 0 0 0  0 0 0 0 0  0 0 1 0 0  0 0 0 1 0" result="chan-purple"/>
-            <feOffset in="SourceGraphic" dx="-3" dy="0" result="green-p"/>
-            <feColorMatrix in="green-p" type="matrix" values="0 0 0 0 0  0 1 0 0 0  0 0 0 0 0  0 0 0 1 0" result="chan-green"/>
-            <feBlend mode="screen" in="chan-purple" in2="chan-green"/>
+            <feOffset in="SourceGraphic" dx="4" dy="0" result="p"/><feColorMatrix in="p" type="matrix" values="1 0 0 0 0  0 0 0 0 0  0 0 1 0 0  0 0 0 1 0" result="purple"/>
+            <feOffset in="SourceGraphic" dx="-4" dy="0" result="g-p"/><feColorMatrix in="g-p" type="matrix" values="0 0 0 0 0  0 1 0 0 0  0 0 0 0 0  0 0 0 1 0" result="green"/>
+            <feBlend mode="screen" in="purple" in2="green"/>
         </filter>
-
         <filter id="vhs-rgb-classic">
-            <feOffset in="SourceGraphic" dx="4" dy="0" result="red-p"/>
-            <feColorMatrix in="red-p" type="matrix" values="1 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0" result="r"/>
+            <feOffset in="SourceGraphic" dx="2" dy="0" result="r-p"/><feColorMatrix in="r-p" type="matrix" values="1 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0" result="r"/>
             <feColorMatrix in="SourceGraphic" type="matrix" values="0 0 0 0 0  0 1 0 0 0  0 0 0 0 0  0 0 0 1 0" result="g"/>
-            <feOffset in="SourceGraphic" dx="-4" dy="0" result="blue-p"/>
-            <feColorMatrix in="blue-p" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 1 0 0  0 0 0 1 0" result="b"/>
-            <feBlend mode="screen" in="r" in2="g" result="rg"/>
-            <feBlend mode="screen" in="rg" in2="b"/>
+            <feOffset in="SourceGraphic" dx="-2" dy="0" result="b-p"/><feColorMatrix in="b-p" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 1 0 0  0 0 0 1 0" result="b"/>
+            <feBlend mode="screen" in="r" in2="g" result="rg"/><feBlend mode="screen" in="rg" in2="b"/>
         </filter>
-	</svg>
-</head>
-
+    </svg>
 <body bgcolor="#000000" text="#ffffff">
 <center>
     <h3>495Go! Little Sister's Emotion [Ruffle fix]</h3>
@@ -171,48 +131,66 @@
         <a href="./index.html" style="color: #5555ff;">[ Return to the menu ]</a><br><br>
         
         (c) 2026 Meiso Potage / Average Rumia, No rights reserved.
-    </font>
-<script src="https://giscus.app/client.js"
-        data-repo="IblisseAbstractArt/Meiso-potage-Html-flash-collection"
-        data-repo-id="R_kgDORp4pkQ"
-        data-category="General"
-        data-category-id="DIC_kwDORp4pkc4C5HRy"
-        data-mapping="pathname"
-        data-strict="0"
-        data-reactions-enabled="1"
-        data-emit-metadata="0"
-        data-input-position="bottom"
-        data-theme="dark"
-        data-lang="es"
-        crossorigin="anonymous"
-        async>
-</script>
-
+	</font>
     <script>
         let isGlitchActive = true; 
+        let isVizActive = true;
         let currentStyle = 'toxic'; 
+
+        // Lógica del Visualizador
+        const canvas = document.getElementById('audio-visualizer');
+        const ctx = canvas.getContext('2d');
+        const bars = 15;
+
+        function drawBars() {
+            if (!isVizActive) {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                return;
+            }
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // Color según el estilo activo
+            let color = (currentStyle === 'toxic') ? '#39fdc1' : '#55aaff';
+            ctx.fillStyle = color;
+
+            for (let i = 0; i < bars; i++) {
+                // Simulación de movimiento rítmico
+                let h = Math.random() * canvas.height;
+                let w = canvas.width / bars - 4;
+                ctx.fillRect(i * (w + 4), canvas.height - h, w, h);
+            }
+            setTimeout(() => requestAnimationFrame(drawBars), 80);
+        }
 
         function updateFilters() {
             const container = document.getElementById('flash-container');
             let filters = [];
-
             if (isGlitchActive) filters.push('url(#vhs-glitch-logic)');
-            
-            if (currentStyle === 'toxic') {
-                filters.push('url(#vhs-rgb-toxic)');
-            } else {
-                filters.push('url(#vhs-rgb-classic)');
-            }
-
+            filters.push(currentStyle === 'toxic' ? 'url(#vhs-rgb-toxic)' : 'url(#vhs-rgb-classic)');
             container.style.filter = filters.join(' ');
+        }
+
+        function toggleVisualizer() {
+            isVizActive = !isVizActive;
+            const btn = document.getElementById('viz-btn');
+            btn.style.backgroundColor = '#000';
+            if (isVizActive) {
+                btn.textContent = '[ Disable Visualizer ]';
+                btn.style.color = '#39fdc1'; btn.style.borderColor = '#39fdc1';
+                drawBars();
+            } else {
+                btn.textContent = '[ Enable Visualizer ]';
+                btn.style.color = '#ff5555'; btn.style.borderColor = '#ff5555';
+            }
         }
 
         function toggleGlitch() {
             isGlitchActive = !isGlitchActive;
             const btn = document.getElementById('glitch-btn');
+            btn.style.backgroundColor = '#000';
             if (isGlitchActive) {
                 btn.textContent = '[ Disable Glitch / Negatives ]';
-                btn.style.color = ''; btn.style.borderColor = ''; btn.style.boxShadow = '';
+                btn.style.color = '#39fdc1'; btn.style.borderColor = '#39fdc1';
             } else {
                 btn.textContent = '[ Enable Glitch / Negatives ]';
                 btn.style.color = '#ff5555'; btn.style.borderColor = '#ff5555';
@@ -223,18 +201,34 @@
         function toggleStyle() {
             currentStyle = (currentStyle === 'toxic') ? 'classic' : 'toxic';
             const btn = document.getElementById('style-btn');
+            btn.style.backgroundColor = '#000';
             if (currentStyle === 'toxic') {
                 btn.textContent = '[ Style: TOXIC (Green/Purple) ]';
-                btn.style.color = '39fdc1'; btn.style.borderColor = '#39fdc1';
+                btn.style.color = '#39fdc1'; btn.style.borderColor = '#39fdc1';
             } else {
                 btn.textContent = '[ Style: CLASSIC (Red/Blue) ]';
                 btn.style.color = '#55aaff'; btn.style.borderColor = '#55aaff';
             }
             updateFilters();
+            if (isVizActive) drawBars();
         }
 
+        // Inicializar
         updateFilters();
-	</script>
+        drawBars();
+    </script>
+
+    <script src="https://giscus.app/client.js"
+            data-repo="IblisseAbstractArt/Meiso-potage-Html-flash-collection"
+            data-repo-id="R_kgDORp4pkQ"
+            data-category="General"
+            data-category-id="DIC_kwDORp4pkc4C5HRy"
+            data-mapping="pathname"
+            data-theme="dark"
+            data-lang="es"
+            crossorigin="anonymous"
+            async>
+    </script>
 </center>
 </body>
 </html>
