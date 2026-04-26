@@ -70,22 +70,22 @@
     <div id="flash-container">
         <canvas id="audio-visualizer" width="300" height="60"></canvas>
         
-        <object data="495Go! Little Sister's Emotion.swf" width="800" height="600"></object>
+        <object swf="icyas.swf" width="800" height="600"></object>
     </div>
-   <font size="2">
+   
+    <div class="controls-panel">
+        <button id="glitch-btn" class="glitch-btn" onclick="toggleGlitch()">[ Disable Glitch / Negatives ]</button>
+        <button id="viz-btn" class="glitch-btn" onclick="toggleVisualizer()">[ Disable Visualizer ]</button>
+        <button id="style-btn" class="glitch-btn" onclick="toggleStyle()">[ Style: TOXIC (Green/Purple) ]</button>
+    </div>
+<font size="2">
         Type = Flash Animation<br>
         Modded = Average Rumia<br>
         Hosted = Github Server [fixed using ruffle] <br><br>
 
         <a href="./index.html" style="color: #5555ff;">[ Return to the menu ]</a><br><br>
         (c) 2026 Meiso Potage / Average Rumia, No rights reserved.
-   </font>
-    <div class="controls-panel">
-        <button id="glitch-btn" class="glitch-btn" onclick="toggleGlitch()">[ Disable Glitch / Negatives ]</button>
-        <button id="viz-btn" class="glitch-btn" onclick="toggleVisualizer()">[ Disable Visualizer ]</button>
-        <button id="style-btn" class="glitch-btn" onclick="toggleStyle()">[ Style: TOXIC (Green/Purple) ]</button>
-    </div>
-
+</font>
     <svg style="display: none;">
         <filter id="vhs-glitch-logic">
             <feTurbulence type="fractalNoise" baseFrequency="0.001 0.15" numOctaves="1" result="noise">
