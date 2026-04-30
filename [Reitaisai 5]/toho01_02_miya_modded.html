@@ -6,8 +6,8 @@
     <style>
         /* Esto evita que el flash empuje el resto del contenido */
         #flash-container {
-            width: 512px;
-            height: 348px;
+            width: 640px;
+            height: 480px;
             margin: 0 auto;
             overflow: hidden;
             position: relative;
@@ -90,10 +90,10 @@
 
     <svg style="display: none;">
       <filter id="rgb-split">
-        <feOffset in="SourceGraphic" dx="3" dy="0" result="red-shift"/>
+        <feOffset in="SourceGraphic" dx="4" dy="0" result="red-shift"/>
         <feColorMatrix in="red-shift" type="matrix" values="1 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0" result="red-only"/>
         <feColorMatrix in="SourceGraphic" type="matrix" values="0 0 0 0 0  0 1 0 0 0  0 0 0 0 0  0 0 0 1 0" result="green-only"/>
-        <feOffset in="SourceGraphic" dx="-3" dy="0" result="blue-shift"/>
+        <feOffset in="SourceGraphic" dx="-4" dy="0" result="blue-shift"/>
         <feColorMatrix in="blue-shift" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 1 0 0  0 0 0 1 0" result="blue-only"/>
         <feBlend mode="screen" in="red-only" in2="green-only" result="red-green"/>
         <feBlend mode="screen" in="red-green" in2="blue-only"/>
@@ -106,9 +106,9 @@
     <h3>Touhou Spell Typing Carnival [Ruffle fix]</h3>
 
     <div id="flash-container">
-        <object width="512" height="348">
+        <object width="640" height="480">
             <param name="movie" value="swf/toho01_02_miya.swf">
-            <embed src="swf/toho01_02_miya.swf" width="512" height="348"></embed>
+            <embed src="swf/toho01_02_miya.swf" width="640" height="480"></embed>
         </object>
     </div>
 
