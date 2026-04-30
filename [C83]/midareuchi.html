@@ -1,15 +1,15 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=shift_jis" />
-    <title>Cirno's Wild Snowball [Ruffle fix]</title>
+    <title>Cirno's Wild Snowball</title>
     
     <script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
     
     <style>
         /* Adaptado para los 800x600 de GuruGuru */
         #flash-container {
-            width: 800px;
-            height: 600px;
+            width: 864px;
+            height: 486px;
             margin: 0 auto;
             overflow: hidden;
             position: relative;
@@ -93,10 +93,10 @@
 
     <svg style="display: none;">
       <filter id="rgb-split">
-        <feOffset in="SourceGraphic" dx="3" dy="0" result="red-shift"/>
+        <feOffset in="SourceGraphic" dx="4" dy="0" result="red-shift"/>
         <feColorMatrix in="red-shift" type="matrix" values="1 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0" result="red-only"/>
         <feColorMatrix in="SourceGraphic" type="matrix" values="0 0 0 0 0  0 1 0 0 0  0 0 0 0 0  0 0 0 1 0" result="green-only"/>
-        <feOffset in="SourceGraphic" dx="-3" dy="0" result="blue-shift"/>
+        <feOffset in="SourceGraphic" dx="-4" dy="0" result="blue-shift"/>
         <feColorMatrix in="blue-shift" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 1 0 0  0 0 0 1 0" result="blue-only"/>
         <feBlend mode="screen" in="red-only" in2="green-only" result="red-green"/>
         <feBlend mode="screen" in="red-green" in2="blue-only"/>
@@ -106,12 +106,12 @@
 
 <body bgcolor="#000000" text="#ffffff">
 <center>
-    <h3>Cirno's Wild Snowball[Ruffle fix]</h3>
+    <h3>Cirno's Wild Snowball [Ruffle fix]</h3>
     
     <div id="flash-container">
-        <object width="800" height="600">
+        <object width="864" height="486">
             <param name="movie" value="swf/midareuchi.swf">
-            <embed src="swf/midareuchi.swf" width="800" height="600"></embed>
+            <embed src="swf/midareuchi.swf" width="864" height="486"></embed>
         </object>
     </div>
 
