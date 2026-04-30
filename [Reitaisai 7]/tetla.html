@@ -133,10 +133,10 @@
         </filter>
 
         <filter id="vhs-rgb-classic">
-            <feOffset in="SourceGraphic" dx="4" dy="0" result="red-p"/>
+            <feOffset in="SourceGraphic" dx="6" dy="0" result="red-p"/>
             <feColorMatrix in="red-p" type="matrix" values="1 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0" result="r"/>
             <feColorMatrix in="SourceGraphic" type="matrix" values="0 0 0 0 0  0 1 0 0 0  0 0 0 0 0  0 0 0 1 0" result="g"/>
-            <feOffset in="SourceGraphic" dx="-4" dy="0" result="blue-p"/>
+            <feOffset in="SourceGraphic" dx="-6" dy="0" result="blue-p"/>
             <feColorMatrix in="blue-p" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 1 0 0  0 0 0 1 0" result="b"/>
             <feBlend mode="screen" in="r" in2="g" result="rg"/>
             <feBlend mode="screen" in="rg" in2="b"/>
@@ -157,61 +157,6 @@
 </object>
     </div>
 
-    .glitch-btn {
-            background-color: #000 !important; /* Forzamos el fondo negro */
-            color: #39fdc1;
-            border: 1px solid #39fdc1;
-            padding: 8px 16px;
-            cursor: pointer;
-            font-family: monospace;
-            margin: 5px;
-            transition: 0.3s;
-            outline: none; /* Quita el borde de enfoque del navegador */
-		}
-        .retro-button:hover {
-            background-color: #39fdc1;
-            color: #000;
-        }
-
-        /* Clase que usará JS para apagar el filtro SVG */
-        .glitch-disabled {
-            filter: none !important;
-		}
-    </style>
-
-    
-    <svg style="display: none;">
-        <filter id="vhs-glitch-logic">
-            <feTurbulence type="fractalNoise" baseFrequency="0.001 0.15" numOctaves="1" result="noise">
-                <animate attributeName="seed" from="1" to="100" dur="1s" repeatCount="indefinite" />
-            </feTurbulence>
-            <feColorMatrix in="noise" type="matrix" values="1 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 15 -8" result="dest-map" />
-            <feDisplacementMap in="SourceGraphic" in2="dest-map" scale="0" xChannelSelector="R" result="glitched-raw">
-                <animate attributeName="scale" values="0; 0; 50; 0; 0; 30; 0; 70; 0" keyTimes="0; 0.7; 0.72; 0.75; 0.85; 0.87; 0.9; 0.92; 1" dur="5s" repeatCount="indefinite" />
-            </feDisplacementMap>
-            <feColorMatrix in="glitched-raw" type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 1 0">
-                <animate attributeName="values" calcMode="discrete" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 1 0; -1 0 0 0 1  0 -1 0 0 1  0 0 -1 0 1  0 0 0 1 0; 1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 1 0; 1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 1 0" keyTimes="0; 0.85; 0.90; 1" dur="10s" repeatCount="indefinite" />
-            </feColorMatrix>
-        </filter>
-
-        <filter id="vhs-rgb-toxic">
-            <feOffset in="SourceGraphic" dx="3" dy="0" result="purple-p"/>
-            <feColorMatrix in="purple-p" type="matrix" values="1 0 0 0 0  0 0 0 0 0  0 0 1 0 0  0 0 0 1 0" result="chan-purple"/>
-            <feOffset in="SourceGraphic" dx="-3" dy="0" result="green-p"/>
-            <feColorMatrix in="green-p" type="matrix" values="0 0 0 0 0  0 1 0 0 0  0 0 0 0 0  0 0 0 1 0" result="chan-green"/>
-            <feBlend mode="screen" in="chan-purple" in2="chan-green"/>
-        </filter>
-
-        <filter id="vhs-rgb-classic">
-            <feOffset in="SourceGraphic" dx="4" dy="0" result="red-p"/>
-            <feColorMatrix in="red-p" type="matrix" values="1 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0" result="r"/>
-            <feColorMatrix in="SourceGraphic" type="matrix" values="0 0 0 0 0  0 1 0 0 0  0 0 0 0 0  0 0 0 1 0" result="g"/>
-            <feOffset in="SourceGraphic" dx="-4" dy="0" result="blue-p"/>
-            <feColorMatrix in="blue-p" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 1 0 0  0 0 0 1 0" result="b"/>
-            <feBlend mode="screen" in="r" in2="g" result="rg"/>
-            <feBlend mode="screen" in="rg" in2="b"/>
-        </filter>
-	</svg>
     <br>
     
     <font size="2">
