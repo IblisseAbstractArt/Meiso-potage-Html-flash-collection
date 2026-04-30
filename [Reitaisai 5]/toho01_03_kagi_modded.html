@@ -6,8 +6,8 @@
     <style>
         /* Esto evita que el flash empuje el resto del contenido */
         #flash-container {
-            width: 800px;
-            height: 450px;
+            width: 512px;
+            height: 384px;
             margin: 0 auto;
             overflow: hidden;
             position: relative;
@@ -131,10 +131,10 @@
         </filter>
 
         <filter id="vhs-rgb-classic">
-            <feOffset in="SourceGraphic" dx="4" dy="0" result="red-p"/>
+            <feOffset in="SourceGraphic" dx="6" dy="0" result="red-p"/>
             <feColorMatrix in="red-p" type="matrix" values="1 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0" result="r"/>
             <feColorMatrix in="SourceGraphic" type="matrix" values="0 0 0 0 0  0 1 0 0 0  0 0 0 0 0  0 0 0 1 0" result="g"/>
-            <feOffset in="SourceGraphic" dx="-4" dy="0" result="blue-p"/>
+            <feOffset in="SourceGraphic" dx="-6" dy="0" result="blue-p"/>
             <feColorMatrix in="blue-p" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 1 0 0  0 0 0 1 0" result="b"/>
             <feBlend mode="screen" in="r" in2="g" result="rg"/>
             <feBlend mode="screen" in="rg" in2="b"/>
@@ -147,9 +147,9 @@
     <h3>s complex [Ruffle fix]</h3>
 
     <div id="flash-container">
-        <object width="800" height="450">
+        <object width="512" height="384">
             <param name="movie" value="swf/toho01_03_kagi.swf">
-            <embed src="swf/toho01_03_kagi.swf" width="800" height="450"></embed>
+            <embed src="swf/toho01_03_kagi.swf" width="512" height="384"></embed>
         </object>
     </div>
 </object>
