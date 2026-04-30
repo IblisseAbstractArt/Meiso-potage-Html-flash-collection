@@ -6,8 +6,8 @@
     <style>
         /* Esto evita que el flash empuje el resto del contenido */
         #flash-container {
-            width: 512px;
-            height: 384px;
+            width: 480px;
+            height: 360px;
             margin: 0 auto;
             overflow: hidden;
         position: relative;
@@ -131,10 +131,10 @@
         </filter>
 
         <filter id="vhs-rgb-classic">
-            <feOffset in="SourceGraphic" dx="4" dy="0" result="red-p"/>
+            <feOffset in="SourceGraphic" dx="6" dy="0" result="red-p"/>
             <feColorMatrix in="red-p" type="matrix" values="1 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0" result="r"/>
             <feColorMatrix in="SourceGraphic" type="matrix" values="0 0 0 0 0  0 1 0 0 0  0 0 0 0 0  0 0 0 1 0" result="g"/>
-            <feOffset in="SourceGraphic" dx="-4" dy="0" result="blue-p"/>
+            <feOffset in="SourceGraphic" dx="-6" dy="0" result="blue-p"/>
             <feColorMatrix in="blue-p" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 1 0 0  0 0 0 1 0" result="b"/>
             <feBlend mode="screen" in="r" in2="g" result="rg"/>
             <feBlend mode="screen" in="rg" in2="b"/>
@@ -147,9 +147,9 @@
     <h3>Kero⑨ destiny [Ruffle fix]</h3>
 
     <div id="flash-container">
-        <object width="512" height="384">
+        <object width="480" height="360">
             <param name="movie" value="swf/toho01_04_tetla.swf">
-            <embed src="swf/toho01_04_tetla.swf" width="512" height="384"></embed>
+            <embed src="swf/toho01_04_tetla.swf" width="480" height="360"></embed>
         </object>
     </div>
 </object>
