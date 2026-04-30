@@ -77,25 +77,25 @@
             100% { opacity: 1; } /* Corregido de 5 a 1 */
 		}
         body {
-            background-color: #000;
-            color: #ffffff;
+            background-color: #ccccff;
+            color: #000000;
             margin: 0;
             padding: 20px;
             font-family: sans-serif;
             animation: flicker 0.15s infinite;
         
         font[size="2"] {
-        color: #aaa;
+        color: #000000;
         line-height: 1.6;
             {
     </style>
 
     <svg style="display: none;">
       <filter id="rgb-split">
-        <feOffset in="SourceGraphic" dx="3" dy="0" result="red-shift"/>
+        <feOffset in="SourceGraphic" dx="4" dy="0" result="red-shift"/>
         <feColorMatrix in="red-shift" type="matrix" values="1 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0" result="red-only"/>
         <feColorMatrix in="SourceGraphic" type="matrix" values="0 0 0 0 0  0 1 0 0 0  0 0 0 0 0  0 0 0 1 0" result="green-only"/>
-        <feOffset in="SourceGraphic" dx="-3" dy="0" result="blue-shift"/>
+        <feOffset in="SourceGraphic" dx="-4" dy="0" result="blue-shift"/>
         <feColorMatrix in="blue-shift" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 1 0 0  0 0 0 1 0" result="blue-only"/>
         <feBlend mode="screen" in="red-only" in2="green-only" result="red-green"/>
         <feBlend mode="screen" in="red-green" in2="blue-only"/>
@@ -103,7 +103,7 @@
     </svg>
 </head>
 
-<body bgcolor="#000000" text="#ffffff">
+<body bgcolor="#ccccff" text="#000000">
 <center>
     <h3>Patchouli Knowledge and the Philosopher's Stone [Ruffle fix]</h3>
     
