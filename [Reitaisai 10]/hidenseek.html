@@ -1,15 +1,15 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=shift_jis" />
-    <title>Sunny Milk's Little Big Escape [Ruffle fix]</title>
+    <title>Sunny Milk's Little Big Escape</title>
     
     <script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
     
     <style>
         /* Adaptado para los 800x600 de GuruGuru */
         #flash-container {
-            width: 800px;
-            height: 600px;
+            width: 864px;
+            height: 684px;
             margin: 0 auto;
             overflow: hidden;
             position: relative;
@@ -78,25 +78,25 @@
         }
 
         body {
-            background-color: #000;
-            color: #ffffff;
+            background-color: #cccccc;
+            color: #000000;
             margin: 0;
             padding: 20px;
             font-family: sans-serif;
             animation: flicker 0.15s infinite;
         
         font[size="2"] {
-        color: #aaa;
+        color: #000000;
         line-height: 1.6;
             {
     </style>
 
     <svg style="display: none;">
       <filter id="rgb-split">
-        <feOffset in="SourceGraphic" dx="3" dy="0" result="red-shift"/>
+        <feOffset in="SourceGraphic" dx="4" dy="0" result="red-shift"/>
         <feColorMatrix in="red-shift" type="matrix" values="1 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0" result="red-only"/>
         <feColorMatrix in="SourceGraphic" type="matrix" values="0 0 0 0 0  0 1 0 0 0  0 0 0 0 0  0 0 0 1 0" result="green-only"/>
-        <feOffset in="SourceGraphic" dx="-3" dy="0" result="blue-shift"/>
+        <feOffset in="SourceGraphic" dx="-4" dy="0" result="blue-shift"/>
         <feColorMatrix in="blue-shift" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 1 0 0  0 0 0 1 0" result="blue-only"/>
         <feBlend mode="screen" in="red-only" in2="green-only" result="red-green"/>
         <feBlend mode="screen" in="red-green" in2="blue-only"/>
@@ -104,14 +104,14 @@
     </svg>
 </head>
 
-<body bgcolor="#000000" text="#ffffff">
+<body bgcolor="#cccccc" text="#000000">
 <center>
     <h3>Sunny Milk's Little Big Escape  [Ruffle fix]</h3>
     
     <div id="flash-container">
-        <object width="800" height="600">
+        <object width="864" height="684">
             <param name="movie" value="swf/hidenseek.swf">
-            <embed src="swf/hidenseek.swf" width="800" height="600"></embed>
+            <embed src="swf/hidenseek.swf" width="864" height="684"></embed>
         </object>
     </div>
 
@@ -121,7 +121,19 @@
         Type = Flash Game<br>
         Modded = Average Rumia<br>
         Hosted = Github Server [keyboard needed to play] <br><br>
-        
+
+		<p>&nbsp;<p>
+		
+		<b>Instructions</b>
+		<table>
+		<tr>
+		<td>Arrow keys </td><td>Move. Double press to dash.</td>
+		</tr>
+		<tr>
+		<td>SHIFT key </td><td>Hide your appearance.</td>
+		</tr>
+		</table>
+		
         <a href="./index.html" style="color: #5555ff;">[ Return to the menu ]</a><br><br>
         
         (c) 2026 Meiso Potage / Average Rumia, No rights reserved.
