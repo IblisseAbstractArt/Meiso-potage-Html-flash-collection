@@ -1,7 +1,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=shift_jis" />
-    <title>Heartful Nekoromancer [Ruffle fix]</title>
+    <title>Heartful Nekoromancer</title>
     
     <script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
     
@@ -133,10 +133,10 @@
         </filter>
 
         <filter id="vhs-rgb-classic">
-            <feOffset in="SourceGraphic" dx="4" dy="0" result="red-p"/>
+            <feOffset in="SourceGraphic" dx="6" dy="0" result="red-p"/>
             <feColorMatrix in="red-p" type="matrix" values="1 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0" result="r"/>
             <feColorMatrix in="SourceGraphic" type="matrix" values="0 0 0 0 0  0 1 0 0 0  0 0 0 0 0  0 0 0 1 0" result="g"/>
-            <feOffset in="SourceGraphic" dx="-4" dy="0" result="blue-p"/>
+            <feOffset in="SourceGraphic" dx="-6" dy="0" result="blue-p"/>
             <feColorMatrix in="blue-p" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 1 0 0  0 0 0 1 0" result="b"/>
             <feBlend mode="screen" in="r" in2="g" result="rg"/>
             <feBlend mode="screen" in="rg" in2="b"/>
