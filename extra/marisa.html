@@ -6,12 +6,14 @@
     <style>
         /* Esto evita que el flash empuje el resto del contenido */
         #flash-container {
-            width: 800px;
-            height: 340px;
-            margin: 0 auto;
-            overflow: hidden;
-        position: relative;
-            border: 2px solid #222;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    max-width: 100%;
+    margin: 0 auto;
+    overflow: hidden;
+    position: relative;
+            border: 100% solid #222;
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
             /* APLICAMOS EL NUEVO FILTRO DE DESGARRE */
             filter: url(#vhs-glitch-logic) url(#vhs-rgb-logic); 
@@ -147,9 +149,9 @@
     <h3>Marisa Stole The Precious Thing [Ruffle fix]</h3>
 
     <div id="flash-container">
-        <object width="800" height="340">
+        <object width="100%" height="auto">
             <param name="movie" value="swf/Marisa Stole the precious thing.swf">
-            <embed src="swf/Marisa Stole the precious thing.swf" width="800" height="340"></embed>
+            <embed src="swf/Marisa Stole the precious thing.swf" width="100%" height="auto"></embed>
         </object>
     </div>
 </object>
