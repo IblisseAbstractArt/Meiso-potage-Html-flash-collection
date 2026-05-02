@@ -13,13 +13,13 @@
         position: relative;
             border: 2px solid #222;
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
-            /* APLICAMOS EL FILTRO */
-            filter: url(#rgb-split); 
+            /* APLICAMOS EL NUEVO FILTRO DE DESGARRE */
+            filter: url(#vhs-glitch-logic) url(#vhs-rgb-logic); 
             will-change: filter;
         }
 
-        /* 1. La viñeta: sombra interna fuerte y suave */
-        #flash-container::after {
+        /* Viñeta (CRT look) */
+           #flash-container::after {
             content: " ";
             display: block;
             position: absolute;
@@ -28,9 +28,9 @@
                         inset 0 0 20px rgba(0,0,0,1);
             pointer-events: none;
             z-index: 10;
-        }
+           }
 
-        /* 2. La franja blanca transparente (CRT Roll) */
+        /* Barra de desplazamiento blanca (CRT Roll) */
         #flash-container::before {
             content: " ";
             display: block;
@@ -45,16 +45,15 @@
             );
             pointer-events: none;
             z-index: 15;
-            animation: crt-roll 6s linear infinite;
+            animation: crt-roll 8s linear infinite;
         }
 
-        /* 3. La animación de bajada (Corregida sin el '?') */
         @keyframes crt-roll {
             0% { transform: translateY(-100%); }
             100% { transform: translateY(900%); }
-		}
-
-		/* 2. Capa CRT (Scanlines) - Ajustada para no tapar tanto */
+        }
+        
+        /* Capa de Scanlines globales */
         body::before {
             content: " ";
             display: block;
@@ -64,16 +63,8 @@
                         linear-gradient(90deg, rgba(255, 0, 0, 0.02), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.02));
             z-index: 9999;
             pointer-events: none;
-            /* Bajé un poco el grosor de 6px a 4px para que sea menos invasivo */
             background-size: 100% 6px, 5px 100%;
         }
-
-        @keyframes flicker {
-            0% { opacity: 0.98; }
-            5% { opacity: 0.95; }
-            10% { opacity: 0.99; }
-            100% { opacity: 1; } /* Corregido de 5 a 1 */
-		}
 
         body {
             background-color: #000;
@@ -82,12 +73,19 @@
             padding: 20px;
             font-family: sans-serif;
             animation: flicker 0.15s infinite;
-        
+        }
+
+        @keyframes flicker {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.98; }
+        }
+
         font[size="2"] {
-        color: #aaa;
-        line-height: 1.6;
-            {
-    .glitch-btn {
+            color: #aaa;
+            line-height: 1.6;
+        }
+
+		.glitch-btn {
             background-color: #000 !important; /* Forzamos el fondo negro */
             color: #39fdc1;
             border: 1px solid #39fdc1;
@@ -155,8 +153,9 @@
         </object>
     </div>
 </object>
-</div>
-	<div style="margin-top: 15px; display: flex; justify-content: center; gap: 10px;">
+    </div>
+
+    <div style="margin-top: 15px; display: flex; justify-content: center; gap: 10px;">
         <button id="glitch-btn" class="glitch-btn" onclick="toggleGlitch()">[ Disable Glitch / Negatives ]</button>
         <button id="style-btn" class="glitch-btn" onclick="toggleStyle()">[ Style: TOXIC (Green/Purple) ]</button>
 	</div>
@@ -185,7 +184,8 @@
         crossorigin="anonymous"
         async>
  </script>
-<script>
+
+    <script>
         let isGlitchActive = true; 
         let currentStyle = 'toxic'; 
 
@@ -231,7 +231,7 @@
         }
 
         updateFilters();
-</script>
+	</script>
 </center>
 </body>
 </html>
