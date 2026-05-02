@@ -6,8 +6,8 @@
     <style>
         /* Esto evita que el flash empuje el resto del contenido */
         #flash-container {
-            width: 800px;
-            height: 450px;
+            width: 588px;
+            height: 266px;
             margin: 0 auto;
             overflow: hidden;
         position: relative;
@@ -84,17 +84,17 @@
             animation: flicker 0.15s infinite;
         
         font[size="2"] {
-        color: #aaa;
+        color: #ffffff;
         line-height: 1.6;
             {
     </style>
 
     <svg style="display: none;">
       <filter id="rgb-split">
-        <feOffset in="SourceGraphic" dx="3" dy="0" result="red-shift"/>
+        <feOffset in="SourceGraphic" dx="5" dy="0" result="red-shift"/>
         <feColorMatrix in="red-shift" type="matrix" values="1 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0" result="red-only"/>
         <feColorMatrix in="SourceGraphic" type="matrix" values="0 0 0 0 0  0 1 0 0 0  0 0 0 0 0  0 0 0 1 0" result="green-only"/>
-        <feOffset in="SourceGraphic" dx="-3" dy="0" result="blue-shift"/>
+        <feOffset in="SourceGraphic" dx="-5" dy="0" result="blue-shift"/>
         <feColorMatrix in="blue-shift" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 1 0 0  0 0 0 1 0" result="blue-only"/>
         <feBlend mode="screen" in="red-only" in2="green-only" result="red-green"/>
         <feBlend mode="screen" in="red-green" in2="blue-only"/>
@@ -107,9 +107,9 @@
     <h3>The Sevent Warehouse [Ruffle fix]</h3>
 
     <div id="flash-container">
-        <object width="800" height="450">
+        <object width="588" height="266">
             <param name="movie" value="swf/the seventh warehouse.swf">
-            <embed src="swf/the seventh warehouse.swf" width="800" height="450"></embed>
+            <embed src="swf/the seventh warehouse.swf" width="588" height="266"></embed>
         </object>
     </div>
 
