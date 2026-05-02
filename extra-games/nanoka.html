@@ -6,8 +6,8 @@
     <style>
         /* Esto evita que el flash empuje el resto del contenido */
         #flash-container {
-            width: 800px;
-            height: 450px;
+            width: 585px;
+            height: 303px;
             margin: 0 auto;
             overflow: hidden;
         position: relative;
@@ -91,10 +91,10 @@
 
     <svg style="display: none;">
       <filter id="rgb-split">
-        <feOffset in="SourceGraphic" dx="3" dy="0" result="red-shift"/>
+        <feOffset in="SourceGraphic" dx="5" dy="0" result="red-shift"/>
         <feColorMatrix in="red-shift" type="matrix" values="1 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0" result="red-only"/>
         <feColorMatrix in="SourceGraphic" type="matrix" values="0 0 0 0 0  0 1 0 0 0  0 0 0 0 0  0 0 0 1 0" result="green-only"/>
-        <feOffset in="SourceGraphic" dx="-3" dy="0" result="blue-shift"/>
+        <feOffset in="SourceGraphic" dx="-5" dy="0" result="blue-shift"/>
         <feColorMatrix in="blue-shift" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 1 0 0  0 0 0 1 0" result="blue-only"/>
         <feBlend mode="screen" in="red-only" in2="green-only" result="red-green"/>
         <feBlend mode="screen" in="red-green" in2="blue-only"/>
@@ -107,9 +107,9 @@
     <h3>Is That So? [Ruffle fix]</h3>
 
     <div id="flash-container">
-        <object width="800" height="450">
+        <object width="585" height="303">
             <param name="movie" value="swf/so_nano_ka.swf">
-            <embed src="swf/so_nano_ka.swf" width="800" height="450"></embed>
+            <embed src="swf/so_nano_ka.swf" width="585" height="303"></embed>
         </object>
     </div>
 
