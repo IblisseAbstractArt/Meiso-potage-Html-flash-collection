@@ -154,12 +154,12 @@ a {
 }
 
 a:hover {
-    color: #ffffff; /* Cambia a blanco */
-    text-shadow: 2px 0 #ff0000, -2px 0 #00ffff; /* Aberración cromática rápida */
+    color: #ffffff; 
+    text-shadow: 2px 0 #ff0000, -2px 0 #00ffff; 
     text-decoration: none;
 }
 
-/* Efecto para las miniaturas al pasar el ratón */
+
 img:hover {
     filter: sepia(100%) hue-rotate(90deg) saturate(300%);
     cursor: pointer;
@@ -256,6 +256,55 @@ img:hover {
          alt="Visitor Counter" 
          style="display: inline-block; image-rendering: pixelated; border: 10px solid #333; padding: 20px; width: 250px;">
     </div>
+    <style>
+    .square-particle {
+        position: fixed;
+        top: -20px;
+        background-color: rgba(0, 255, 0, 0.4); 
+        pointer-events: none; 
+        z-index: 9990; 
+    @keyframes fallAndSpin {
+        0% {
+            transform: translateY(-20px) rotate(0deg);
+            opacity: 0;
+        }
+        10% { opacity: 1; }
+        90% { opacity: 1; }
+        100% {
+            transform: translateY(105vh) rotate(720deg); 
+        }
+    }
+</style>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const particleCount = 35; 
+        
+        for (let i = 0; i < particleCount; i++) {
+            let particle = document.createElement('div');
+            particle.className = 'square-particle';
+            
+            
+            let size = Math.random() * 8 + 4; 
+            particle.style.width = size + 'px';
+            particle.style.height = size + 'px';
+            
+            
+            particle.style.left = Math.random() * 100 + 'vw';
+            
+            
+            let fallDuration = Math.random() * 8 + 4;
+            
+            
+            let delay = Math.random() * 5;
+            
+            
+            particle.style.animation = `fallAndSpin ${fallDuration}s linear ${delay}s infinite`;
+            
+            document.body.appendChild(particle);
+        }
+    });
+</script>
     </body>
     <a href="secondary/mesopota_2010.html" style="color: #5555ff;">[ Psst. Check the New Mesopota Design! ]</a><br><br>
         </a>
