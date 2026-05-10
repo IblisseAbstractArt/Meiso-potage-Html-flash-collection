@@ -74,8 +74,8 @@
             font-family: 'Courier New', Courier, monospace; 
             font-weight: bold;
             font-size: 18px;
-            color: rgba(255, 255, 255, 0.9);
-            text-shadow: 1px 1px 1px rgba(255, 0, 255, 0.5), -1px -1px 1px rgba(0, 255, 255, 0.5);
+            color: #000000
+            text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.1);
             text-transform: uppercase;
         }
         .osd-block { line-height: 1.2; }
@@ -85,11 +85,11 @@
         .bottom-left { align-self: end; text-align: left; }
         .bottom-center { align-self: end; text-align: center; }
         .bottom-right { align-self: end; text-align: right; }
-        .blink-text { animation: vhs-blink 2s step-end infinite; color: #39fdc1; }
+        .blink-text { animation: vhs-blink 2s step-end infinite; color: #000000; }
         @keyframes vhs-blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
 
         /* Estilos de botones y body (Tus originales) */
-        body { background-color: #000000; color: #fff; font-family: sans-serif; padding: 20px; text-align: center; }
+        body { background-color: #adadad; color: #000000; font-family: sans-serif; padding: 20px; text-align: center; }
         .glitch-btn {
             background-color: #000 !important;
             color: #39fdc1;
