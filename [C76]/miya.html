@@ -6,31 +6,47 @@
     <script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
     
     <style>
-        /* Adaptado para los 800x600 de GuruGuru */
+        /* EL CONTENEDOR AHORA ES UN MONITOR CRT FÍSICO */
         #flash-container {
             width: 800px;
             height: 600px;
             margin: 0 auto;
             overflow: hidden;
-        position: relative;
-            border: 2px solid #222;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
-            /* APLICAMOS EL NUEVO FILTRO DE DESGARRE */
+            position: relative;
+            
+            /* 1. La forma curva de la pantalla */
+            border-radius: 60px / 45px; 
+            
+            /* 2. El marco de plástico del televisor (más grueso abajo) */
+            border: 25px solid #050505;
+            border-bottom: 35px solid #020202;
+            
+            /* 3. El resplandor del monitor hacia la "pared" (tu fondo) */
+            box-shadow: 0 0 40px rgba(0, 255, 0, 0.15);
+            
+            /* Filtros SVG que ya tenías */
             filter: url(#vhs-glitch-logic) url(#vhs-rgb-logic); 
             will-change: filter;
         }
 
-        /* Viñeta (CRT look) */
-           #flash-container::after {
+        /* EL CRISTAL DE LA PANTALLA Y LA VIÑETA */
+        #flash-container::after {
             content: " ";
             display: block;
             position: absolute;
             top: 0; left: 0; right: 0; bottom: 0;
-            box-shadow: inset 0 0 80px rgba(0,0,0,0.85),
-                        inset 0 0 20px rgba(0,0,0,1);
+            
+            /* El brillo redondo en el centro para simular cristal abombado */
+            background: radial-gradient(circle at 50% 50%, rgba(255,255,255,0.08) 0%, rgba(0,0,0,0) 60%);
+            
+            /* Sombras internas que oscurecen los bordes (vignette) */
+            box-shadow: inset 0 0 70px rgba(0,0,0,0.9),
+                        inset 0 0 20px rgba(0,0,0,1),
+                        inset 0 0 3px rgba(255,255,255,0.2); /* Un leve reflejo en el borde interno */
+            
             pointer-events: none;
             z-index: 10;
-           }
+		}
 
         /* Barra de desplazamiento blanca (CRT Roll) */
         #flash-container::before {
