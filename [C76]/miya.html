@@ -86,13 +86,29 @@
             100% { transform: translateY(900%); }
         }
 
+            body::before {
+            content: " ";
+            display: block;
+            position: fixed;
+            top: 0; left: 0; bottom: 0; right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%),
+                        linear-gradient(90deg, rgba(255, 0, 0, 0.02), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.02));
+            z-index: 9999;
+            pointer-events: none;
+            background-size: 100% 6px, 5px 100%;
+		
         /* ESTILOS GENERALES DEL BODY */
         body { background-color: #570b78; color: #ffffff; margin: 0; padding: 20px; font-family: sans-serif; animation: flicker 0.15s infinite; overflow-x: hidden; }
         @keyframes flicker { 0%, 100% { opacity: 1; } 50% { opacity: 0.98; } }
         
         .glitch-btn { background-color: #000 !important; color: #39fdc1; border: 1px solid #39fdc1; padding: 8px 16px; cursor: pointer; font-family: monospace; margin: 5px; transition: 0.3s; }
         .glitch-btn:hover { background-color: #39fdc1 !important; color: #000 !important; }
-    </style>
+		 
+		.retro-button:hover {
+            background-color: #39fdc1;
+            color: #000;
+		  }
+	</style>
 
     <svg style="display: none;">
         <filter id="vhs-glitch-logic">
@@ -115,9 +131,9 @@
         </filter>
 
         <filter id="vhs-rgb-classic">
-            <feOffset in="SourceGraphic" dx="5" dy="0" result="r"/><feColorMatrix in="r" type="matrix" values="1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0" result="red"/>
+            <feOffset in="SourceGraphic" dx="6" dy="0" result="r"/><feColorMatrix in="r" type="matrix" values="1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0" result="red"/>
             <feColorMatrix in="SourceGraphic" type="matrix" values="0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 1 0" result="green"/>
-            <feOffset in="SourceGraphic" dx="-5" dy="0" result="b"/><feColorMatrix in="b" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 1 0" result="blue"/>
+            <feOffset in="SourceGraphic" dx="-6" dy="0" result="b"/><feColorMatrix in="b" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 1 0" result="blue"/>
             <feBlend mode="screen" in="red" in2="green" result="rg"/><feBlend mode="screen" in="rg" in2="blue"/>
         </filter>
     </svg>
