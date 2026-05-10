@@ -86,6 +86,30 @@
             100% { transform: translateY(900%); }
         }
 
+        /* Scanlines overlay */
+        #scanlines {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                0deg,
+                rgba(0, 0, 0, 0.15) 0px,
+                rgba(0, 0, 0, 0.15) 1px,
+                transparent 1px,
+                transparent 2px
+            );
+            pointer-events: none;
+            z-index: 20;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        #scanlines.active {
+            opacity: 1;
+        }
+
             body::before {
             content: " ";
             display: block;
@@ -117,7 +141,7 @@
         }
 
 		.glitch-btn {
-            background-color: #000 !important; /* Forzamos el fondo negro */
+            background-color: #000 !important;
             color: #39fdc1;
             border: 1px solid #39fdc1;
             padding: 8px 16px;
@@ -125,11 +149,12 @@
             font-family: monospace;
             margin: 5px;
             transition: 0.3s;
-            outline: none; /* Quita el borde de enfoque del navegador */
+            outline: none;
 		}
-        .retro-button:hover {
-            background-color: #39fdc1;
-            color: #000;
+
+        .glitch-btn:hover {
+            background-color: #39fdc1 !important;
+            color: #000 !important;
         }
 
         /* Clase que usará JS para apagar el filtro SVG */
@@ -196,6 +221,8 @@
             <div class="osd-block bottom-center">SOURCE</div>
             <div class="osd-block bottom-right">DECK 5</div>
         </div>
+
+        <div id="scanlines"></div>
     </div>
 
       <div style="margin-top: 15px; display: flex; justify-content: center; gap: 10px;">
@@ -236,14 +263,17 @@
 
         function updateFilters() {
             const container = document.getElementById('flash-container');
+            const scanlines = document.getElementById('scanlines');
             let filters = [];
 
             if (isGlitchActive) filters.push('url(#vhs-glitch-logic)');
             
             if (currentStyle === 'toxic') {
                 filters.push('url(#vhs-rgb-toxic)');
+                scanlines.classList.add('active');
             } else {
                 filters.push('url(#vhs-rgb-classic)');
+                scanlines.classList.remove('active');
             }
 
             container.style.filter = filters.join(' ');
@@ -254,9 +284,8 @@
             const btn = document.getElementById('glitch-btn');
             if (isGlitchActive) {
                 btn.textContent = '[ Disable Glitch / Negatives ]';
-                btn.style.color = ''; 
-                btn.style.borderColor = ''; 
-                btn.style.boxShadow = '';
+                btn.style.color = '#39fdc1'; 
+                btn.style.borderColor = '#39fdc1';
             } else {
                 btn.textContent = '[ Enable Glitch / Negatives ]';
                 btn.style.color = '#ff5555'; 
