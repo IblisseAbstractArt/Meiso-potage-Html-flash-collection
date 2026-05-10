@@ -43,12 +43,24 @@
             z-index: 15;
             animation: crt-roll 8s linear infinite;
         }
-
+		
         @keyframes crt-roll {
             0% { transform: translateY(-100%); }
             100% { transform: translateY(900%); }
         }
 
+        body::before {
+            content: " ";
+            display: block;
+            position: fixed;
+            top: 0; left: 0; bottom: 0; right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%),
+                        linear-gradient(90deg, rgba(255, 0, 0, 0.02), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.02));
+            z-index: 9999;
+            pointer-events: none;
+            background-size: 100% 6px, 5px 100%;
+		}
+		
         /* --- NUEVAS CLASES PARA EL OSD (SIN TOCAR LO ANTERIOR) --- */
         .vhs-osd-overlay {
             position: absolute;
