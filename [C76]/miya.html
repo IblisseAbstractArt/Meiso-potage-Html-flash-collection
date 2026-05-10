@@ -101,9 +101,26 @@
         body { background-color: #570b78; color: #ffffff; margin: 0; padding: 20px; font-family: sans-serif; animation: flicker 0.15s infinite; overflow-x: hidden; }
         @keyframes flicker { 0%, 100% { opacity: 1; } 50% { opacity: 0.98; } }
         
-        .glitch-btn { background-color: #000 !important; color: #39fdc1; border: 1px solid #39fdc1; padding: 8px 16px; cursor: pointer; font-family: monospace; margin: 5px; transition: 0.3s; }
-        .glitch-btn:hover { background-color: #39fdc1 !important; color: #000 !importan
-		  }
+        .glitch-btn {
+            background-color: #000 !important; /* Forzamos el fondo negro */
+            color: #39fdc1;
+            border: 1px solid #39fdc1;
+            padding: 8px 16px;
+            cursor: pointer;
+            font-family: monospace;
+            margin: 5px;
+            transition: 0.3s;
+            outline: none; /* Quita el borde de enfoque del navegador */
+		}
+        .retro-button:hover {
+            background-color: #39fdc1;
+            color: #000;
+        }
+
+        /* Clase que usará JS para apagar el filtro SVG */
+        .glitch-disabled {
+            filter: none !important;
+		}
 	</style>
 
     <svg style="display: none;">
