@@ -22,6 +22,38 @@
             /* Filtros de color y glitch, sin curvatura */
             filter: url(#vhs-glitch-logic); /* El color se aplica por JS */
             will-change: filter;
+		<div class="vhs-osd-overlay">
+    <div class="osd-block top-left">
+        DECK 5<br>
+        <span class="blink-text">PLAY</span><br>
+        <span id="vhs-timer">0:00:00</span><br>
+        SP
+    </div>
+    
+    <div class="osd-block top-center">
+        TV VIEW<br>
+        DECK 5
+    </div>
+
+    <div class="osd-block top-right">
+        DECK 5<br>
+        STOP<br>
+        0:00:00<br>
+        SP
+    </div>
+
+    <div class="osd-block bottom-left">
+        CH02
+    </div>
+
+    <div class="osd-block bottom-center">
+        SOURCE
+    </div>
+
+    <div class="osd-block bottom-right">
+        DECK 5
+    </div>
+</div>
 		}
 
         /* EL CRISTAL DE LA PANTALLA Y LA VIÑETA (ILUSIÓN 3D) */
@@ -44,6 +76,35 @@
             z-index: 10;
 		}
 
+			.vhs-osd-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 5;
+            padding: 30px 40px; /* Margen de seguridad para no tocar el marco físico */
+            box-sizing: border-box;
+            
+            /* Configuramos la rejilla de 3 columnas y 2 filas */
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            grid-template-rows: 1fr 1fr;
+            
+            /* Estilo de fuente VHS */
+            font-family: 'Courier New', Courier, monospace; 
+            font-weight: bold;
+            font-size: 18px; /* Un poco más pequeño para que quepa todo */
+            color: rgba(255, 255, 255, 0.9);
+            
+            /* Efecto de texto CRT: un poco de desenfoque y sombra de color */
+            text-shadow: 
+                1px 1px 1px rgba(255, 0, 255, 0.5), 
+                -1px -1px 1px rgba(0, 255, 255, 0.5),
+                0 0 5px rgba(255, 255, 255, 0.3);
+            text-transform: uppercase;
+		}
         /* Barra de desplazamiento blanca (CRT Roll) */
         #flash-container::before {
             content: " ";
@@ -118,6 +179,58 @@
         /* Clase que usará JS para apagar el filtro SVG */
         .glitch-disabled {
             filter: none !important;
+		}
+
+			.vhs-osd-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 5;
+            padding: 30px 40px; /* Margen de seguridad para no tocar el marco físico */
+            box-sizing: border-box;
+            
+            /* Configuramos la rejilla de 3 columnas y 2 filas */
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            grid-template-rows: 1fr 1fr;
+            
+            /* Estilo de fuente VHS */
+            font-family: 'Courier New', Courier, monospace; 
+            font-weight: bold;
+            font-size: 18px; /* Un poco más pequeño para que quepa todo */
+            color: rgba(255, 255, 255, 0.9);
+            
+            /* Efecto de texto CRT: un poco de desenfoque y sombra de color */
+            text-shadow: 
+                1px 1px 1px rgba(255, 0, 255, 0.5), 
+                -1px -1px 1px rgba(0, 255, 255, 0.5),
+                0 0 5px rgba(255, 255, 255, 0.3);
+            text-transform: uppercase;
+        }
+
+        /* Alineación de los bloques */
+        .osd-block { line-height: 1.2; }
+        
+        .top-left     { align-self: start; text-align: left; }
+        .top-center   { align-self: start; text-align: center; }
+        .top-right    { align-self: start; text-align: right; }
+        
+        .bottom-left  { align-self: end; text-align: left; }
+        .bottom-center { align-self: end; text-align: center; }
+        .bottom-right { align-self: end; text-align: right; }
+
+        /* Animación parpadeante para el "PLAY" */
+        .blink-text {
+            animation: vhs-blink 2s step-end infinite;
+            color: #39fdc1; /* Un verde cian muy de los 90 */
+        }
+
+        @keyframes vhs-blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
 		}
     </style>
 
@@ -252,7 +365,31 @@
         }
 
         updateFilters();
-				</script>
+	
+	// Lógica del contador VHS
+let totalSeconds = 0;
+const timerElement = document.getElementById('vhs-timer');
+
+function updateVHSTimer() {
+    totalSeconds++;
+    
+    // Cálculos matemáticos para el formato H:MM:SS
+    let hrs = Math.floor(totalSeconds / 3600);
+    let mins = Math.floor((totalSeconds % 3600) / 60);
+    let secs = totalSeconds % 60;
+
+    // Formateo para que siempre tengan dos dígitos (ej: 05 en vez de 5)
+    let formattedTime = 
+        hrs + ":" + 
+        mins.toString().padStart(2, '0') + ":" + 
+        secs.toString().padStart(2, '0');
+
+    timerElement.innerText = formattedTime;
+}
+
+// Inicia el contador apenas carga la página, actualizando cada 1 segundo
+setInterval(updateVHSTimer, 1000);
+	</script>
 </center>
 </body>
 </html>
