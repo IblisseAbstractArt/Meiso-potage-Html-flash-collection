@@ -124,7 +124,13 @@
             <feColorMatrix in="SourceGraphic" type="matrix" values="0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 1 0" result="green"/>
             <feOffset in="SourceGraphic" dx="-6" dy="0" result="b"/><feColorMatrix in="b" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 1 0" result="blue"/>
             <feBlend mode="screen" in="red" in2="green" result="rg"/><feBlend mode="screen" in="rg" in2="blue"/>
-        </filter>
+        
+		<filter id="vhs-wave-logic">
+            <feTurbulence type="fractalNoise" baseFrequency="0 0.05" numOctaves="1" result="warp">
+                <animate attributeName="seed" from="1" to="100" dur="5s" repeatCount="indefinite" />
+            </feTurbulence>
+            <feDisplacementMap in="SourceGraphic" in2="warp" scale="20" xChannelSelector="R" yChannelSelector="G" />
+		</filter>
     </svg>
 </head>
 
@@ -155,7 +161,8 @@
 
     <div style="margin-top: 15px; display: flex; justify-content: center; gap: 10px;">
         <button id="glitch-btn" class="glitch-btn" onclick="toggleGlitch()">[ Disable Glitch / Negatives ]</button>
-        <button id="style-btn" class="glitch-btn" onclick="toggleStyle()">[ Style: TOXIC (Green/Purple) ]</button>
+        <button id="wave-btn" class="glitch-btn" onclick="toggleWave()">[ Enable Waveform Distortion ]</button>
+		<button id="style-btn" class="glitch-btn" onclick="toggleStyle()">[ Style: TOXIC (Green/Purple) ]</button>
     </div>
 
     <br>
@@ -186,28 +193,24 @@
 
     <script>
         let isGlitchActive = true; 
-        let currentStyle = 'toxic'; 
+        let isWaveActive = false
+		let currentStyle = 'toxic'; 
 
         function updateFilters() {
             const container = document.getElementById('flash-container');
             let filters = [];
-            if (isGlitchActive) filters.push('url(#vhs-glitch-logic)');
-            filters.push(currentStyle === 'toxic' ? 'url(#vhs-rgb-toxic)' : 'url(#vhs-rgb-classic)');
-            container.style.filter = filters.join(' ');
-        }
 
-        function toggleGlitch() {
-            isGlitchActive = !isGlitchActive;
-            const btn = document.getElementById('glitch-btn');
-            if (isGlitchActive) {
-                btn.textContent = '[ Disable Glitch / Negatives ]';
-                btn.style.color = ''; btn.style.borderColor = '';
+            if (isGlitchActive) filters.push('url(#vhs-glitch-logic)');
+            if (isWaveActive) filters.push('url(#vhs-wave-logic)'); // Agregamos la ola al array de filtros
+            
+            if (currentStyle === 'toxic') {
+                filters.push('url(#vhs-rgb-toxic)');
             } else {
-                btn.textContent = '[ Enable Glitch / Negatives ]';
-                btn.style.color = '#ff5555'; btn.style.borderColor = '#ff5555';
+                filters.push('url(#vhs-rgb-classic)');
             }
-            updateFilters();
-        }
+
+            container.style.filter = filters.join(' ');
+		}
 
         function toggleStyle() {
             currentStyle = (currentStyle === 'toxic') ? 'classic' : 'toxic';
@@ -221,7 +224,19 @@
             }
             updateFilters();
         }
-
+function toggleWave() {
+            isWaveActive = !isWaveActive;
+            const btn = document.getElementById('wave-btn');
+            if (isWaveActive) {
+                btn.textContent = '[ Disable Waveform Distortion ]';
+                // Le damos un color amarillo/naranja retro cuando está encendido
+                btn.style.color = '#ffaa00'; btn.style.borderColor = '#ffaa00'; 
+            } else {
+                btn.textContent = '[ Enable Waveform Distortion ]';
+                btn.style.color = ''; btn.style.borderColor = '';
+            }
+            updateFilters();
+}
         // LÓGICA DEL CRONÓMETRO (AÑADIDA AL FINAL)
         let totalSeconds = 0;
         function updateVHSTimer() {
