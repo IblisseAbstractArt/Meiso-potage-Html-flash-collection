@@ -8,26 +8,24 @@
     <style>
         /* EL CONTENEDOR AHORA ES UN MONITOR CRT FÍSICO */
         #flash-container {
-            width: 800px;
-            height: 600px;
+            width: 864px;
+            height: 486px;
             margin: 0 auto;
             overflow: hidden;
             position: relative;
             
-            /* 1. La forma curva de la pantalla */
-            border-radius: 60px / 45px; 
+            /* Curva física del monitor */
+            border-radius: 80px / 60px; 
+            border: 28px solid #080808;
+            border-bottom-width: 40px;
             
-            /* 2. El marco de plástico del televisor (más grueso abajo) */
-            border: 25px solid #050505;
-            border-bottom: 35px solid #020202;
-            
-            /* 3. El resplandor del monitor hacia la "pared" (tu fondo) */
-            box-shadow: 0 0 40px rgba(0, 255, 0, 0.15);
-            
-            /* Filtros SVG que ya tenías */
-            filter: url(#vhs-glitch-logic) url(#vhs-rgb-logic); 
+            /* Aplicamos la curvatura aquí también */
+            filter: url(#vhs-glitch-logic) url(#vhs-rgb-logic) url(#vhs-curvature-logic); 
             will-change: filter;
-        }
+            
+            /* Empujamos la imagen un 5% hacia afuera para que rellene la curva */
+            transform: scale(1.05); 
+		}
 
         /* EL CRISTAL DE LA PANTALLA Y LA VIÑETA */
         #flash-container::after {
@@ -156,7 +154,13 @@
             <feColorMatrix in="blue-p" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 1 0 0  0 0 0 1 0" result="b"/>
             <feBlend mode="screen" in="r" in2="g" result="rg"/>
             <feBlend mode="screen" in="rg" in2="b"/>
-        </filter>
+        <filter id="vhs-curvature-logic">
+          <feDisplacementMap in="SourceGraphic" scale="25" xChannelSelector="R" yChannelSelector="G">
+            <feImage xlink:href="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1024' height='1024'%3E%3Cdefs%3E%3CradialGradient id='g'%3E%3Cstop offset='0' stop-color='%23888'/%3E%3Cstop offset='1' stop-color='%23000'/%3E%3C/radialGradient%3E%3C/defs%3E%3Crect width='1024' height='1024' fill='url(%23g)'/%3E%3C/svg%3E" result="map"/>
+          </feDisplacementMap>
+		</filter>
+		
+		</filter>
 	</svg>
 </head>
 
@@ -214,6 +218,9 @@
 
             if (isGlitchActive) filters.push('url(#vhs-glitch-logic)');
             
+            // SIEMPRE añadir la curvatura al final para que afecte a todo
+            filters.push('url(#vhs-curvature-logic)');
+
             if (currentStyle === 'toxic') {
                 filters.push('url(#vhs-rgb-toxic)');
             } else {
@@ -221,7 +228,7 @@
             }
 
             container.style.filter = filters.join(' ');
-        }
+		}
 
         function toggleGlitch() {
             isGlitchActive = !isGlitchActive;
