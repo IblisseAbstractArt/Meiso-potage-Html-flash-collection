@@ -6,7 +6,7 @@
     <script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
     
     <style>
-        /* EL CONTENEDOR AHORA ES UN MONITOR CRT FÍSICO */
+        /* EL CONTENEDOR AHORA ES UN MONITOR CRT FÍSICO (SIN BUGS) */
         #flash-container {
             width: 864px;
             height: 486px;
@@ -14,33 +14,31 @@
             overflow: hidden;
             position: relative;
             
-            /* Curva física del monitor */
-            border-radius: 80px / 60px; 
-            border: 28px solid #080808;
-            border-bottom-width: 40px;
+            /* Curva física del monitor - Ajustada para no cortar tanto la UI */
+            border-radius: 50px / 35px; 
+            border: 30px solid #080808;
+            border-bottom-width: 45px;
             
-            /* Aplicamos la curvatura aquí también */
-            filter: url(#vhs-glitch-logic) url(#vhs-rgb-logic) url(#vhs-curvature-logic); 
+            /* Filtros de color y glitch, sin curvatura */
+            filter: url(#vhs-glitch-logic); /* El color se aplica por JS */
             will-change: filter;
-            
-            /* Empujamos la imagen un 5% hacia afuera para que rellene la curva */
-            transform: scale(1.05); 
 		}
 
-        /* EL CRISTAL DE LA PANTALLA Y LA VIÑETA */
+        /* EL CRISTAL DE LA PANTALLA Y LA VIÑETA (ILUSIÓN 3D) */
         #flash-container::after {
             content: " ";
             display: block;
             position: absolute;
             top: 0; left: 0; right: 0; bottom: 0;
             
-            /* El brillo redondo en el centro para simular cristal abombado */
-            background: radial-gradient(circle at 50% 50%, rgba(255,255,255,0.08) 0%, rgba(0,0,0,0) 60%);
+            /* Este degradado es la clave: Centro iluminado, esquinas oscuras */
+            background: radial-gradient(circle at 50% 50%, 
+                rgba(255, 255, 255, 0.05) 0%, 
+                rgba(0, 0, 0, 0.2) 60%, 
+                rgba(0, 0, 0, 0.85) 100%);
             
-            /* Sombras internas que oscurecen los bordes (vignette) */
-            box-shadow: inset 0 0 70px rgba(0,0,0,0.9),
-                        inset 0 0 20px rgba(0,0,0,1),
-                        inset 0 0 3px rgba(255,255,255,0.2); /* Un leve reflejo en el borde interno */
+            /* Sombra extra en los bordes para hundir la pantalla en el marco negro */
+            box-shadow: inset 0 0 25px rgba(0,0,0,1);
             
             pointer-events: none;
             z-index: 10;
@@ -216,8 +214,7 @@
 
             if (isGlitchActive) filters.push('url(#vhs-glitch-logic)');
             
-            // SIEMPRE añadir la curvatura al final para que afecte a todo
-            filters.push('url(#vhs-curvature-logic)');
+            // BORRAMOS LA LÍNEA DE CURVATURE-LOGIC AQUÍ
 
             if (currentStyle === 'toxic') {
                 filters.push('url(#vhs-rgb-toxic)');
