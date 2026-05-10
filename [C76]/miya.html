@@ -102,11 +102,7 @@
         @keyframes flicker { 0%, 100% { opacity: 1; } 50% { opacity: 0.98; } }
         
         .glitch-btn { background-color: #000 !important; color: #39fdc1; border: 1px solid #39fdc1; padding: 8px 16px; cursor: pointer; font-family: monospace; margin: 5px; transition: 0.3s; }
-        .glitch-btn:hover { background-color: #39fdc1 !important; color: #000 !important; }
-		 
-		.retro-button:hover {
-            background-color: #39fdc1;
-            color: #000;
+        .glitch-btn:hover { background-color: #39fdc1 !important; color: #000 !importan
 		  }
 	</style>
 
@@ -211,16 +207,27 @@
 
         function toggleGlitch() {
             isGlitchActive = !isGlitchActive;
-            document.getElementById('glitch-btn').textContent = isGlitchActive ? '[ Disable Glitch / Negatives ]' : '[ Enable Glitch / Negatives ]';
+            const btn = document.getElementById('glitch-btn');
+            if (isGlitchActive) {
+                btn.textContent = '[ Disable Glitch / Negatives ]';
+                btn.style.color = ''; btn.style.borderColor = ''; btn.style.boxShadow = '';
+            } else {
+                btn.textContent = '[ Enable Glitch / Negatives ]';
+                btn.style.color = '#ff5555'; btn.style.borderColor = '#ff5555';
+            }
             updateFilters();
-        }
-
+		}
         function toggleStyle() {
             currentStyle = (currentStyle === 'toxic') ? 'classic' : 'toxic';
-            document.getElementById('style-btn').textContent = currentStyle === 'toxic' ? '[ Style: TOXIC (Green/Purple) ]' : '[ Style: CLASSIC (Red/Blue) ]';
-            updateFilters();
-        }
-
+            const btn = document.getElementById('style-btn');
+            if (currentStyle === 'toxic') {
+                btn.textContent = '[ Style: TOXIC (Green/Purple) ]';
+                btn.style.color = '39fdc1'; btn.style.borderColor = '#39fdc1';
+            } else {
+                btn.textContent = '[ Style: CLASSIC (Red/Blue) ]';
+                btn.style.color = '#55aaff'; btn.style.borderColor = '#55aaff';
+            }
+			
         function updateVHSTimer() {
             totalSeconds++;
             let hrs = Math.floor(totalSeconds / 3600);
