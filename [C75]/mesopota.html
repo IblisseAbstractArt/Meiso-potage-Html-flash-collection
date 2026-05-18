@@ -203,13 +203,15 @@
 
     <script>
         let isGlitchActive = true; 
-        let currentStyle = 'toxic'; 
+        let isWaveActive = false
+		let currentStyle = 'toxic'; 
 
         function updateFilters() {
             const container = document.getElementById('flash-container');
             let filters = [];
 
             if (isGlitchActive) filters.push('url(#vhs-glitch-logic)');
+            if (isWaveActive) filters.push('url(#vhs-wave-logic)'); // Agregamos la ola al array de filtros
             
             if (currentStyle === 'toxic') {
                 filters.push('url(#vhs-rgb-toxic)');
@@ -218,7 +220,7 @@
             }
 
             container.style.filter = filters.join(' ');
-        }
+		}
 
         function toggleGlitch() {
             isGlitchActive = !isGlitchActive;
@@ -232,7 +234,18 @@
             }
             updateFilters();
         }
-
+function toggleWave() {
+            isWaveActive = !isWaveActive;
+            const btn = document.getElementById('wave-btn');
+            if (isWaveActive) {
+                btn.textContent = '[ Disable Waveform Distortion ]';
+                btn.style.color = '#ffaa00'; btn.style.borderColor = '#ffaa00'; 
+            } else {
+                btn.textContent = '[ Enable Waveform Distortion ]';
+                btn.style.color = ''; btn.style.borderColor = '';
+            }
+            updateFilters();
+}
         function toggleStyle() {
             currentStyle = (currentStyle === 'toxic') ? 'classic' : 'toxic';
             const btn = document.getElementById('style-btn');
