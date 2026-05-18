@@ -4,23 +4,16 @@
     <title>Fragance of Oriental Sunflower</title>
     <script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
     <style>
-        /* 1. NUEVO CONTENEDOR PADRE: Aquí va el reflejo y el margen */
-        #reflection-wrapper {
-            width: 512px;
-            margin: 0 auto;
-            -webkit-box-reflect: below 5px linear-gradient(to bottom, rgba(255,255,255,0.4) 0%, transparent 60%);
-            margin-bottom: 240px; /* Mueve los botones perfectamente abajo */
-        }
-
-        /* 2. TU CONTENEDOR ORIGINAL: Mantiene el overflow oculto para las líneas CRT */
+        /* Esto evita que el flash empuje el resto del contenido */
         #flash-container {
             width: 512px;
             height: 384px;
             margin: 0 auto;
-            overflow: hidden; /* Sigue protegiendo que el CRT roll no se salga */
+            overflow: hidden;
             position: relative;
             border: 2px solid #222;
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+            -webkit-box-reflect: below 2px linear-gradient(to bottom, rgba(255,255,255,0.4) 0%, transparent 60%);
 			filter: url(#vhs-glitch-logic) url(#vhs-rgb-logic); 
             will-change: filter;
         }
@@ -67,7 +60,7 @@
             background-size: 100% 6px, 5px 100%;
 		}
 		
-        /* --- NUEVAS CLASES PARA EL OSD --- */
+        /* --- NUEVAS CLASES PARA EL OSD (SIN TOCAR LO ANTERIOR) --- */
         .vhs-osd-overlay {
             position: absolute;
             top: 0; left: 0;
@@ -96,7 +89,7 @@
         .blink-text { animation: vhs-blink 2s step-end infinite; color: #39fdc1; }
         @keyframes vhs-blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
 
-        /* Estilos de botones y body */
+        /* Estilos de botones y body (Tus originales) */
         body { background-color: #000000; color: #fff; font-family: sans-serif; padding: 20px; text-align: center; }
         .glitch-btn {
             background-color: #000 !important;
@@ -107,9 +100,10 @@
             font-family: monospace;
             margin: 5px;
             transition: 0.3s;
-		}
+				}
     </style>
 
+    
     <svg style="display: none;">
         <filter id="vhs-glitch-logic">
             <feTurbulence type="fractalNoise" baseFrequency="0.001 0.15" numOctaves="1" result="noise">
@@ -140,7 +134,6 @@
             <feColorMatrix in="blue-p" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 1 0 0  0 0 0 1 0" result="b"/>
             <feBlend mode="screen" in="r" in2="g" result="rg"/>
             <feBlend mode="screen" in="rg" in2="b"/>
-        </filter>
         
 		<filter id="vhs-wave-logic">
             <feTurbulence type="fractalNoise" baseFrequency="0 0.05" numOctaves="1" result="warp">
@@ -153,30 +146,29 @@
 
 <body bgcolor="#000000" text="#ffffff">
 <center>
-    <h3>Fragance of Oriental Sunflower [Ruffle fix]</h3>
+    <h3>Fragance of Oriental Sunflower[Ruffle fix]</h3>
 
-    <div id="reflection-wrapper">
-        <div id="flash-container">
-            <object width="512" height="384">
-                <param name="movie" value="swf/kagi.swf">
-                <embed src="swf/kagi.swf" width="512" height="384"></embed>
-            </object>
+    <div id="flash-container">
+        <object width="512" height="384">
+            <param name="movie" value="swf/kagi.swf">
+            <embed src="swf/kagi.swf" width="512" height="384"></embed>
+        </object>
+    </object>
 
-            <div class="vhs-osd-overlay">
-                <div class="osd-block top-left">
-                    DECK 2<br>
-                    <span class="blink-text">PLAY</span><br>
-                    <span id="vhs-timer">0:00:00</span><br>
-                    SP
-                </div>
-                <div class="osd-block top-center">TV VIEW<br>DECK 2</div>
-                <div class="osd-block top-right">DECK 2<br>STOP<br>0:00:00<br>SP</div>
-                <div class="osd-block bottom-left">CH02</div>
-                <div class="osd-block bottom-center">SOURCE</div>
-                <div class="osd-block bottom-right">DECK 2</div>
+        <div class="vhs-osd-overlay">
+            <div class="osd-block top-left">
+                DECK 2<br>
+                <span class="blink-text">PLAY</span><br>
+                <span id="vhs-timer">0:00:00</span><br>
+                SP
             </div>
-    	</div>
-    </div>
+            <div class="osd-block top-center">TV VIEW<br>DECK 2</div>
+            <div class="osd-block top-right">DECK 2<br>STOP<br>0:00:00<br>SP</div>
+            <div class="osd-block bottom-left">CH02</div>
+            <div class="osd-block bottom-center">SOURCE</div>
+            <div class="osd-block bottom-right">DECK 2</div>
+        </div>
+	</div>
 
     <div style="margin-top: 15px; display: flex; justify-content: center; gap: 10px;">
         <button id="glitch-btn" class="glitch-btn" onclick="toggleGlitch()">[ Disable Glitch / Negatives ]</button>
@@ -189,11 +181,11 @@
         Modded = Average Rumia<br>
         Hosted = Github Server [fixed using ruffle] <br><br>
         <a href="./index.html" style="color: #5555ff;">[ Return to the menu ]</a><br><br>
+        </a>
         <br><br>
         (c) 2026 Meiso Potage / Average Rumia, No rights reserved.
     </font>
-
-    <script src="https://giscus.app/client.js"
+ <script src="https://giscus.app/client.js"
         data-repo="IblisseAbstractArt/Meiso-potage-Html-flash-collection"
         data-repo-id="R_kgDORp4pkQ"
         data-category="General"
@@ -207,12 +199,11 @@
         data-lang="es"
         crossorigin="anonymous"
         async>
-    </script>
+ </script>
 
     <script>
-        // TUS SCRIPTS SIGUEN LEYENDO EL 'flash-container' PERFECTAMENTE
         let isGlitchActive = true; 
-        let isWaveActive = false;
+        let isWaveActive = false
 		let currentStyle = 'toxic'; 
 
         function updateFilters() {
@@ -220,7 +211,7 @@
             let filters = [];
 
             if (isGlitchActive) filters.push('url(#vhs-glitch-logic)');
-            if (isWaveActive) filters.push('url(#vhs-wave-logic)'); 
+            if (isWaveActive) filters.push('url(#vhs-wave-logic)'); // Agregamos la ola al array de filtros
             
             if (currentStyle === 'toxic') {
                 filters.push('url(#vhs-rgb-toxic)');
@@ -243,8 +234,7 @@
             }
             updateFilters();
         }
-
-        function toggleWave() {
+function toggleWave() {
             isWaveActive = !isWaveActive;
             const btn = document.getElementById('wave-btn');
             if (isWaveActive) {
@@ -255,14 +245,13 @@
                 btn.style.color = ''; btn.style.borderColor = '';
             }
             updateFilters();
-        }
-
+}
         function toggleStyle() {
             currentStyle = (currentStyle === 'toxic') ? 'classic' : 'toxic';
             const btn = document.getElementById('style-btn');
             if (currentStyle === 'toxic') {
                 btn.textContent = '[ Style: TOXIC (Green/Purple) ]';
-                btn.style.color = '#39fdc1'; btn.style.borderColor = '#39fdc1';
+                btn.style.color = '39fdc1'; btn.style.borderColor = '#39fdc1';
             } else {
                 btn.textContent = '[ Style: CLASSIC (Red/Blue) ]';
                 btn.style.color = '#55aaff'; btn.style.borderColor = '#55aaff';
@@ -275,3 +264,4 @@
 </center>
 </body>
 </html>
+<br></font>
