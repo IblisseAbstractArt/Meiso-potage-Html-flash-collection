@@ -1,7 +1,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=shift_jis" />
-    <title>Patche's Refreshing Summer Salt [Ruffle fix]</title>
+    <title>Patche's Refreshing Summer Salt</title>
     <script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
     <style>
         #flash-container {
@@ -212,7 +212,18 @@
 
             container.style.filter = filters.join(' ');
 		}
-
+function toggleGlitch() {
+            isGlitchActive = !isGlitchActive;
+            const btn = document.getElementById('glitch-btn');
+            if (isGlitchActive) {
+                btn.textContent = '[ Disable Glitch / Negatives ]';
+                btn.style.color = ''; btn.style.borderColor = '';
+            } else {
+                btn.textContent = '[ Enable Glitch / Negatives ]';
+                btn.style.color = '#ff5555'; btn.style.borderColor = '#ff5555';
+            }
+            updateFilters();
+}
         function toggleStyle() {
             currentStyle = (currentStyle === 'toxic') ? 'classic' : 'toxic';
             const btn = document.getElementById('style-btn');
@@ -238,20 +249,6 @@ function toggleWave() {
             }
             updateFilters();
 }
-        // LÓGICA DEL CRONÓMETRO (AÑADIDA AL FINAL)
-        let totalSeconds = 0;
-        function updateVHSTimer() {
-            totalSeconds++;
-            let hrs = Math.floor(totalSeconds / 3600);
-            let mins = Math.floor((totalSeconds % 3600) / 60);
-            let secs = totalSeconds % 60;
-            const timerElement = document.getElementById('vhs-timer');
-            if (timerElement) {
-                timerElement.innerText = hrs + ":" + mins.toString().padStart(2, '0') + ":" + secs.toString().padStart(2, '0');
-            }
-        }
-
-        setInterval(updateVHSTimer, 1000);
         updateFilters();
 	</script>
 </center>
