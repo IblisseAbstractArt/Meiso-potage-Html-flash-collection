@@ -295,12 +295,13 @@ function toggleWave() {
                 btn.textContent = '[ Reflection: SIMPLE (Light Reflection) ]';
                 btn.style.color = '#39fdc1'; btn.style.borderColor = '#39fdc1';
             } else {
-                // Cambia a modo Pesado/Complejo
-                currentReflection = 'complex';
+                // Disabled
+                
+                currentReflection = 'none';
                 container.classList.remove('reflection-simple');
-                container.classList.add('reflection-complex');
-                btn.textContent = '[ Reflection: COMPLEX (Real-Time Reflection) ]';
-                btn.style.color = '#d655ff'; btn.style.borderColor = '#d655ff';
+                container.classList.remove('reflection-complex');
+                btn.textContent = '[ Reflection: None (No Reflections) ]';
+                btn.style.color = '##ff0000'; btn.style.borderColor = '#ff0000';
             }
 		}
         // LÓGICA DEL CRONÓMETRO (AÑADIDA AL FINAL)
