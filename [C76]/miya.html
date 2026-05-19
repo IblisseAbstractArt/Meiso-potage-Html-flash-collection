@@ -16,9 +16,9 @@
             position: relative;
             border: 2px solid #222;
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
-            
             filter: url(#vhs-glitch-logic) url(#vhs-rgb-logic); 
-        }
+            will-change: filter;
+		}
 
         /* 2. LA LÍNEA CRT (Le quitamos el 'top: 0' fijo) */
         #flash-container::before {
