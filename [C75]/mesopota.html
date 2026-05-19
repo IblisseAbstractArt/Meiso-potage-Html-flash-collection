@@ -4,20 +4,50 @@
     <title>Fragance of Oriental Sunflower</title>
     <script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
     <style>
-        /* 1. EL CONTENEDOR LIMPIO (Con su hueco y su reflejo) */
+        /* EL CONTENEDOR BASE (Controla el espacio físico) */
         #flash-container {
             width: 512px;
             height: 384px;
             margin: 0 auto;
-            margin-bottom: 250px; /* Aquí se crea el hueco para el reflejo */
-            overflow: hidden;
+            margin-bottom: 120px; /* Espacio reservado para los reflejos */
             position: relative;
             border: 2px solid #222;
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
-            
-            /* El reflejo funciona perfecto en -negativo px */
-            -webkit-box-reflect: below -142px linear-gradient(to bottom, rgba(255,255,255,0.4) 0%, transparent 60%);
-            
+            will-change: filter;
+        }
+
+        /* [ MODO 1 ] EL REFLEJO COMPLEJO (Para teléfonos potentes) */
+        #flash-container.reflection-complex {
+            overflow: hidden; /* Corta el bug de estiramiento */
+            /* Usamos los píxeles negativos que descubriste que funcionan */
+            -webkit-box-reflect: below -100px linear-gradient(to bottom, rgba(255,255,255,0.4) 0%, transparent 60%);
+        }
+        #flash-container.reflection-complex .vhs-fake-reflection {
+            display: none; /* Escondemos el reflejo falso si el complejo está activo */
+        }
+
+        /* [ MODO 2 ] EL REFLEJO SIMPLE/LIGERO (Para ahorrar RAM) */
+        #flash-container.reflection-simple {
+            overflow: hidden; 
+            -webkit-box-reflect: none; /* Apaga por completo el devorador de RAM */
+        }
+        .vhs-fake-reflection {
+            position: absolute;
+            bottom: -105px; /* Se proyecta en el hueco negro */
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 0.25) 0%, rgba(255, 255, 255, 0) 100%);
+            filter: blur(6px);
+            pointer-events: none;
+            z-index: 20;
+            mix-blend-mode: screen;
+            animation: reflection-pulse 0.3s infinite alternate;
+        }
+
+        @keyframes reflection-pulse {
+            0% { opacity: 0.7; transform: scaleY(1); }
+            100% { opacity: 1; transform: scaleY(1.05); }
             filter: url(#vhs-glitch-logic) url(#vhs-rgb-logic); 
         }
 
@@ -157,7 +187,13 @@
         <object width="512" height="384">
             <param name="movie" value="swf/kagi.swf">
             <embed src="swf/kagi.swf" width="512" height="384"></embed>
-        </object>
+        <div class="vhs-osd-overlay">
+            </div>
+
+        <div class="vhs-fake-reflection"></div>
+	</div>
+		
+		</object>
     </object>
 
         <div class="vhs-osd-overlay">
@@ -175,10 +211,11 @@
         </div>
 	</div>
 
-    <div style="margin-top: 15px; display: flex; justify-content: center; gap: 10px;">
+    <div style="margin-top: 15px; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;">
         <button id="glitch-btn" class="glitch-btn" onclick="toggleGlitch()">[ Disable Glitch / Negatives ]</button>
         <button id="wave-btn" class="glitch-btn" onclick="toggleWave()">[ Enable Waveform Distortion ]</button>
-		<button id="style-btn" class="glitch-btn" onclick="toggleStyle()">[ Style: TOXIC (Green/Purple) ]</button>
+        <button id="style-btn" class="glitch-btn" onclick="toggleStyle()">[ Style: TOXIC (Green/Purple) ]</button>
+        <button id="reflect-btn" class="glitch-btn" onclick="toggleReflection()" style="color: #d655ff; border-color: #d655ff;">[ Reflection: COMPLEX (Real-Time Reflection) ]</button>
 	</div>
     <br>
     <font size="2">
@@ -264,6 +301,30 @@ function toggleWave() {
             }
             updateFilters();
 }
+
+		// Control del tipo de reflejo (Empieza en complejo)
+        let currentReflection = 'complex';
+
+        function toggleReflection() {
+            const container = document.getElementById('flash-container');
+            const btn = document.getElementById('reflect-btn');
+
+            if (currentReflection === 'complex') {
+                // Cambia a modo Ligero
+                currentReflection = 'simple';
+                container.classList.remove('reflection-complex');
+                container.classList.add('reflection-simple');
+                btn.textContent = '[ Reflection: SIMPLE (Light Reflection) ]';
+                btn.style.color = '#55ff55'; btn.style.borderColor = '#55ff55';
+            } else {
+                // Cambia a modo Pesado/Complejo
+                currentReflection = 'complex';
+                container.classList.remove('reflection-simple');
+                container.classList.add('reflection-complex');
+                btn.textContent = '[ Reflection: COMPLEX (Real-Time Reflection) ]';
+                btn.style.color = '#d655ff'; btn.style.borderColor = '#d655ff';
+            }
+		}
         // LÓGICA DEL CRONÓMETRO (AÑADIDA AL FINAL)
         let totalSeconds = 0;
         function updateVHSTimer() {
