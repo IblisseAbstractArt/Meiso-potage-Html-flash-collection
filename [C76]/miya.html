@@ -60,7 +60,19 @@
             pointer-events: none;
             background-size: 100% 6px, 5px 100%;
 		}
-		
+		body {
+            background-color: #000;
+            color: #ffffff;
+            margin: 0;
+            padding: 20px;
+            font-family: sans-serif;
+            animation: flicker 0.15s infinite;
+        }
+
+        @keyframes flicker {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.98; }
+		}
         /* --- NUEVAS CLASES PARA EL OSD (SIN TOCAR LO ANTERIOR) --- */
         .vhs-osd-overlay {
             position: absolute;
