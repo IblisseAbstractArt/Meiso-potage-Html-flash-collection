@@ -5,18 +5,34 @@
     <script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
     <style>
         /* Esto evita que el flash empuje el resto del contenido */
-        #flash-container {
+        /* 1. EL ESPEJO */
+        #espejo-wrapper {
             width: 512px;
-            height: 384px;
+            height: 384px; /* Altura estricta */
             margin: 0 auto;
-            overflow: hidden;
             position: relative;
+            display: block;
+            -webkit-box-reflect: below 0px linear-gradient(to bottom, rgba(255,255,255,0.4) 0%, transparent 60%);
+            margin-bottom: 250px; 
+        }
+
+        /* 2. LA CAJA FUERTE */
+        #flash-container {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            overflow: hidden; 
+            
+            /* --- LA BALA DE PLATA --- */
+            contain: strict; /* Aísla matemáticamente el contenedor del resto de la página */
+            transform: translateZ(0); /* Fuerza a la GPU a crear una capa 3D plana estricta */
+            /* ------------------------ */
+
             border: 2px solid #222;
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
-            -webkit-box-reflect: below 1px linear-gradient(to bottom, rgba(255,255,255,0.4) 0%, transparent 60%);
-			filter: url(#vhs-glitch-logic) url(#vhs-rgb-logic); 
-            will-change: filter;
-        }
+            filter: url(#vhs-glitch-logic) url(#vhs-rgb-logic); 
+            will-change: filter, transform;
+				}
 
         /* Viñeta (CRT look) - Tal cual estaba */
         #flash-container::after {
