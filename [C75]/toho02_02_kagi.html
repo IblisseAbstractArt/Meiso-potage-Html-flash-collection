@@ -6,20 +6,36 @@
     <style>
         /* Esto evita que el flash empuje el resto del contenido */
         #flash-container {
-            width: 800px;
-            height: 600px;
+        #flash-container {
+            width: 512px;
+            height: 384px;
             margin: 0 auto;
-            margin-bottom: 250px; /* Aquí se crea el hueco para el reflejo */
-            overflow: hidden;
+            /* ¡RESTAURADO A 250px! Esto es lo que salva tu interfaz de ser aplastada */
+            margin-bottom: 250px; 
             position: relative;
             border: 2px solid #222;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
-            
-            /* El reflejo funciona perfecto en -negativo px */
-            -webkit-box-reflect: below -380px linear-gradient(to bottom, rgba(255,255,255,0.4) 0%, transparent 60%);
-            
-            filter: url(#vhs-glitch-logic) url(#vhs-rgb-logic); 
+            will-change: filter;
         }
+
+        /* [ MODO 1 ] EL REFLEJO COMPLEJO (Consume RAM, clona colores exactos) */
+        #flash-container.reflection-complex {
+            overflow: hidden; 
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+            -webkit-box-reflect: below -380px linear-gradient(to bottom, rgba(255,255,255,0.4) 0%, transparent 60%);
+        }
+
+        /* [ MODO 2 ] AMBILIGHT SIMPLE (Ahorra RAM, usa luces reactivas a los filtros) */
+        @keyframes ambilight-pulse {
+            0% { box-shadow: 0 0 15px rgba(0,0,0,0.5), 0px 40px 50px -20px rgba(255, 255, 255, 0.1); }
+            100% { box-shadow: 0 0 15px rgba(0,0,0,0.5), 0px 90px 80px -10px rgba(255, 255, 255, 0.35); }
+        }
+        
+        #flash-container.reflection-simple {
+            overflow: hidden; 
+            -webkit-box-reflect: none; /* Apaga el devorador de memoria */
+            /* La animación proyecta una luz hacia abajo que es coloreada por tus filtros SVG */
+            animation: ambilight-pulse 1.5s infinite alternate ease-in-out;
+		}
 
         /* 2. LA LÍNEA CRT (Le quitamos el 'top: 0' fijo) */
         #flash-container::before {
@@ -160,10 +176,11 @@
 </object>
     </div>
 
-    <div style="margin-top: 15px; display: flex; justify-content: center; gap: 10px;">
+    <div style="margin-top: 15px; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;">
         <button id="glitch-btn" class="glitch-btn" onclick="toggleGlitch()">[ Disable Glitch / Negatives ]</button>
         <button id="wave-btn" class="glitch-btn" onclick="toggleWave()">[ Enable Waveform Distortion ]</button>
-		<button id="style-btn" class="glitch-btn" onclick="toggleStyle()">[ Style: TOXIC (Green/Purple) ]</button>
+        <button id="style-btn" class="glitch-btn" onclick="toggleStyle()">[ Style: TOXIC (Green/Purple) ]</button>
+        <button id="reflect-btn" class="glitch-btn" onclick="toggleReflection()" style="color: #d655ff; border-color: #d655ff;">[ Reflection: COMPLEX (Real-Time Reflection) ]</button>
 	</div>
     <br>
     <font size="2">
@@ -192,10 +209,10 @@
  </script>
 
     <script>
-        let isGlitchActive = true; 
+            let isGlitchActive = true; 
         let isWaveActive = false
 		let currentStyle = 'toxic'; 
-		
+
         function updateFilters() {
             const container = document.getElementById('flash-container');
             let filters = [];
@@ -211,7 +228,20 @@
 
             container.style.filter = filters.join(' ');
 		}
-        function toggleGlitch() {
+
+        function toggleStyle() {
+            currentStyle = (currentStyle === 'toxic') ? 'classic' : 'toxic';
+            const btn = document.getElementById('style-btn');
+            if (currentStyle === 'toxic') {
+                btn.textContent = '[ Style: TOXIC (Green/Purple) ]';
+                btn.style.color = '#39fdc1'; btn.style.borderColor = '#39fdc1';
+            } else {
+                btn.textContent = '[ Style: CLASSIC (Red/Blue) ]';
+                btn.style.color = '#55aaff'; btn.style.borderColor = '#55aaff';
+            }
+            updateFilters();
+        }
+		function toggleGlitch() {
             isGlitchActive = !isGlitchActive;
             const btn = document.getElementById('glitch-btn');
             if (isGlitchActive) {
@@ -222,7 +252,7 @@
                 btn.style.color = '#ff5555'; btn.style.borderColor = '#ff5555';
             }
             updateFilters();
-        }
+		}
 function toggleWave() {
             isWaveActive = !isWaveActive;
             const btn = document.getElementById('wave-btn');
@@ -236,15 +266,39 @@ function toggleWave() {
             }
             updateFilters();
 }
-        function toggleStyle() {
-            currentStyle = (currentStyle === 'toxic') ? 'classic' : 'toxic';
-            const btn = document.getElementById('style-btn');
-            if (currentStyle === 'toxic') {
-                btn.textContent = '[ Style: TOXIC (Green/Purple) ]';
-                btn.style.color = '39fdc1'; btn.style.borderColor = '#39fdc1';
+
+		// Control del tipo de reflejo (Empieza en complejo)
+        let currentReflection = 'complex';
+
+        function toggleReflection() {
+            const container = document.getElementById('flash-container');
+            const btn = document.getElementById('reflect-btn');
+
+            if (currentReflection === 'complex') {
+                // ESTADO 2: De Complejo pasa a Simple (Ambilight)
+                currentReflection = 'simple';
+                container.classList.remove('reflection-complex');
+                container.classList.add('reflection-simple');
+                btn.textContent = '[ Reflection: SIMPLE (Light Ambilight) ]';
+                btn.style.color = '#39fdc1'; 
+                btn.style.borderColor = '#39fdc1';
+                
+            } else if (currentReflection === 'simple') {
+                // ESTADO 3: De Simple pasa a Apagado (Sin efectos)
+                currentReflection = 'none';
+                container.classList.remove('reflection-simple');
+                // No le ponemos ninguna clase nueva, lo dejamos "limpio"
+                btn.textContent = '[ Reflection: OFF (Disabled) ]';
+                btn.style.color = ''; // Quitar el color lo devuelve al estado gris por defecto
+                btn.style.borderColor = '';
+                
             } else {
-                btn.textContent = '[ Style: CLASSIC (Red/Blue) ]';
-                btn.style.color = '#55aaff'; btn.style.borderColor = '#55aaff';
+                // ESTADO 1: De Apagado reinicia el ciclo a Complejo
+                currentReflection = 'complex';
+                container.classList.add('reflection-complex');
+                btn.textContent = '[ Reflection: COMPLEX (Real-Time Reflection) ]';
+                btn.style.color = '#d655ff'; 
+                btn.style.borderColor = '#d655ff';
             }
             updateFilters();
         }
