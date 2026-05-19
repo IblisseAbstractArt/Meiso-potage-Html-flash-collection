@@ -4,13 +4,14 @@
     <title>Optical Cellophane</title>
     <script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
     <style>
-		/* Esto evita que el flash empuje el resto del contenido */
+        /* Esto evita que el flash empuje el resto del contenido */
         #flash-container {
             width: 480px;
             height: 360px;
+            -webkit-box-reflect: below 0px linear-gradient(to bottom, rgba(255,255,255,0.4) 0%, transparent 60%);
 			margin: 0 auto;
             overflow: hidden;
-            position: relative; /* Para que el CRT se alinee aquí si quisiéramos */
+            position: relative;
             border: 2px solid #222;
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
             /* APLICAMOS EL NUEVO FILTRO DE DESGARRE */
@@ -152,18 +153,16 @@
 <center>
     <h3>Optical Cellophane [Ruffle fix]</h3>
 
-    <div style="width: 480px; height: 360px; margin: 0 auto; margin-bottom: 250px; -webkit-box-reflect: below 0px linear-gradient(to bottom, rgba(255,255,255,0.4) 0%, transparent 60%);">
-        
-        <div id="flash-container">
-            <object width="480" height="360">
-                <param name="movie" value="swf/tetla.swf">
-                <embed src="swf/tetla.swf" width="480" height="360"></embed>
-			</object>
+    <div id="flash-container">
+        <object width="480" height="360">
+            <param name="movie" value="swf/tetla.swf">
+            <embed src="swf/tetla.swf" width="480" height="360"></embed>
+        </object>
     </div>
 </object>
     </div>
 
-        <div style="margin-top: 15px; display: flex; justify-content: center; gap: 10px;">
+    <div style="margin-top: 15px; display: flex; justify-content: center; gap: 10px;">
         <button id="glitch-btn" class="glitch-btn" onclick="toggleGlitch()">[ Disable Glitch / Negatives ]</button>
         <button id="wave-btn" class="glitch-btn" onclick="toggleWave()">[ Enable Waveform Distortion ]</button>
 		<button id="style-btn" class="glitch-btn" onclick="toggleStyle()">[ Style: TOXIC (Green/Purple) ]</button>
@@ -258,5 +257,4 @@ function toggleWave() {
 </center>
 </body>
 </html>
-<br></font>
 <br></font>
