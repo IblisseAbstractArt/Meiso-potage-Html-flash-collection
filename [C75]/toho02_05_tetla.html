@@ -4,12 +4,6 @@
     <title>Optical Cellophane</title>
     <script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
     <style>
-       #reflection-wrapper {
-            width: 480px;
-            margin: 0 auto;
-            position: relative; /* Añadimos esto */
-            -webkit-box-reflect: below 0px linear-gradient(to bottom, rgba(255,255,255,0.4) 0%, transparent 60%);
-	   }
 		/* Esto evita que el flash empuje el resto del contenido */
         #flash-container {
             width: 480px;
@@ -18,7 +12,7 @@
 			margin: 0 auto;
             overflow: hidden;
             position: relative; /* Para que el CRT se alinee aquí si quisiéramos */
-            margin-bottom: 0px; /* Asegúrate de que no tenga margen inferior propio */
+            -webkit-box-reflect: below 0px linear-gradient(to bottom, rgba(255,255,255,0.4) 0%, transparent 60%);
 			position: relative;
             border: 2px solid #222;
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
