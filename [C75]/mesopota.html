@@ -8,15 +8,28 @@
         #flash-container {
             width: 512px;
             height: 384px;
-            margin: 0 
-			overflow: hidden;
+            margin: 0 auto;
+            
+            /* --- EL HUECO PARA PROTEGER LOS BOTONES --- */
+            margin-bottom: 250px; /* Esto empuja los botones hacia abajo físicamente */
+            
+            overflow: hidden;
             position: relative;
             border: 2px solid #222;
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
-            -webkit-box-reflect: below 5px linear-gradient(to bottom, rgba(255,255,255,0.4) 0%, transparent 60%);
-			filter: url(#vhs-glitch-logic) url(#vhs-rgb-logic); 
+            
+            /* --- EL REFLEJO FANTASMA --- */
+            /* Aparecerá exactamente en los 250px de hueco que creamos arriba */
+            -webkit-box-reflect: below 0px linear-gradient(to bottom, rgba(255,255,255,0.4) 0%, transparent 60%);
+            
+            /* --- LOS CANDADOS PARA EVITAR EL BUG DEL NAVEGADOR --- */
+            contain: paint;            
+            transform: translateZ(0);  
+            isolation: isolate;        
+
+            filter: url(#vhs-glitch-logic) url(#vhs-rgb-logic); 
             will-change: filter;
-        }
+		}
 
         /* Viñeta (CRT look) - Tal cual estaba */
         #flash-container::after {
