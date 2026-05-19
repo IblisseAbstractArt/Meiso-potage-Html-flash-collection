@@ -4,61 +4,37 @@
     <title>Fragance of Oriental Sunflower</title>
     <script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
     <style>
-       /* EL CONTENEDOR BASE (Controla el espacio físico) */
+       /* EL CONTENEDOR BASE (Restaurado a tu versión segura) */
         #flash-container {
             width: 512px;
             height: 384px;
             margin: 0 auto;
-            margin-bottom: 120px; /* Reducido un poco para que no quede tan lejos de los botones */
+            /* ¡RESTAURADO A 250px! Esto es lo que salva tu interfaz de ser aplastada */
+            margin-bottom: 250px; 
             position: relative;
             border: 2px solid #222;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
             will-change: filter;
         }
 
-        /* [ MODO 1 ] EL REFLEJO COMPLEJO (Para teléfonos potentes) */
+        /* [ MODO 1 ] EL REFLEJO COMPLEJO (Consume RAM, clona colores exactos) */
         #flash-container.reflection-complex {
-            overflow: hidden; /* Corta el bug de estiramiento */
+            overflow: hidden; 
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
             -webkit-box-reflect: below -142px linear-gradient(to bottom, rgba(255,255,255,0.4) 0%, transparent 60%);
         }
-        #flash-container.reflection-complex .vhs-fake-reflection {
-            display: none; /* Escondemos el reflejo falso si el complejo está activo */
-        }
 
-        /* [ MODO 2 ] EL REFLEJO SIMPLE - MODO AMBIENTACIÓN TRASLÚCIDO (Ahorra RAM) */
-        #flash-container.reflection-simple {
-            /* ¡MUY IMPORTANTE!: Cambiado a 'visible' para permitir que los filtros 
-               matemáticos del Ambilight se rendericen proyectándose hacia afuera */
-            overflow: visible; 
-            -webkit-box-reflect: none; /* Apaga por completo el devorador de RAM */
+        /* [ MODO 2 ] AMBILIGHT SIMPLE (Ahorra RAM, usa luces reactivas a los filtros) */
+        @keyframes ambilight-pulse {
+            0% { box-shadow: 0 0 15px rgba(0,0,0,0.5), 0px 40px 50px -20px rgba(255, 255, 255, 0.1); }
+            100% { box-shadow: 0 0 15px rgba(0,0,0,0.5), 0px 90px 80px -10px rgba(255, 255, 255, 0.35); }
         }
         
-        .vhs-fake-reflection {
-            position: absolute;
-            bottom: -142px; /* Ajustado milimétricamente para el hueco negro */
-            left: 0;
-            width: 100%;
-            height: 100px;
-            
-            /* EFECTO AMBIENTACIÓN: Captura y difumina los destellos matemáticos del contenedor */
-            backdrop-filter: blur(12px) brightness(1.5);
-            -webkit-backdrop-filter: blur(12px) brightness(1.5);
-            
-            /* Degradado sutil para suavizar los bordes inferiores del brillo */
-            background: linear-gradient(to bottom, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0) 100%);
-            mix-blend-mode: screen;
-            pointer-events: none;
-            z-index: 20;
-            
-            /* Animación corregida y fluida */
-            animation: reflection-pulse 0.4s infinite alternate ease-in-out;
-        }
-
-        /* CORREGIDO: Animación limpia que varía la opacidad simulando el parpadeo del CRT */
-        @keyframes reflection-pulse {
-            0% { opacity: 0.5; transform: scaleY(0.98); }
-            100% { opacity: 0.9; transform: scaleY(1.05); }
-        }
+        #flash-container.reflection-simple {
+            overflow: hidden; 
+            -webkit-box-reflect: none; /* Apaga el devorador de memoria */
+            /* La animación proyecta una luz hacia abajo que es coloreada por tus filtros SVG */
+            animation: ambilight-pulse 1.5s infinite alternate ease-in-out;
+		}
 
         /* 2. LA LÍNEA CRT (Le quitamos el 'top: 0' fijo) */
         #flash-container::before {
@@ -192,7 +168,6 @@
 <center>
     <h3>Fragance of Oriental Sunflower[Ruffle fix]</h3>
 
-    <div id="flash-container">
     <div id="flash-container" class="reflection-complex">
         <object width="512" height="384">
             <param name="movie" value="swf/kagi.swf">
@@ -212,8 +187,6 @@
             <div class="osd-block bottom-center">SOURCE</div>
             <div class="osd-block bottom-right">DECK 2</div>
         </div>
-
-        <div class="vhs-fake-reflection"></div>
 	</div>
 
     <div style="margin-top: 15px; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;">
