@@ -288,20 +288,30 @@ function toggleWave() {
             const btn = document.getElementById('reflect-btn');
 
             if (currentReflection === 'complex') {
-                // Cambia a modo Ligero
+                // ESTADO 2: De Complejo pasa a Simple (Ambilight)
                 currentReflection = 'simple';
                 container.classList.remove('reflection-complex');
                 container.classList.add('reflection-simple');
-                btn.textContent = '[ Reflection: SIMPLE (Light Reflection) ]';
-                btn.style.color = '#39fdc1'; btn.style.borderColor = '#39fdc1';
-            } else {
-                // Disabled
+                btn.textContent = '[ Reflection: SIMPLE (Light Ambilight) ]';
+                btn.style.color = '#39fdc1'; 
+                btn.style.borderColor = '#39fdc1';
                 
+            } else if (currentReflection === 'simple') {
+                // ESTADO 3: De Simple pasa a Apagado (Sin efectos)
                 currentReflection = 'none';
                 container.classList.remove('reflection-simple');
-                container.classList.remove('reflection-complex');
-                btn.textContent = '[ Reflection: None (No Reflections) ]';
-                btn.style.color = '##ff0000'; btn.style.borderColor = '#ff0000';
+                // No le ponemos ninguna clase nueva, lo dejamos "limpio"
+                btn.textContent = '[ Reflection: OFF (Disabled) ]';
+                btn.style.color = ''; // Quitar el color lo devuelve al estado gris por defecto
+                btn.style.borderColor = '';
+                
+            } else {
+                // ESTADO 1: De Apagado reinicia el ciclo a Complejo
+                currentReflection = 'complex';
+                container.classList.add('reflection-complex');
+                btn.textContent = '[ Reflection: COMPLEX (Real-Time Reflection) ]';
+                btn.style.color = '#d655ff'; 
+                btn.style.borderColor = '#d655ff';
             }
 		}
         // LÓGICA DEL CRONÓMETRO (AÑADIDA AL FINAL)
