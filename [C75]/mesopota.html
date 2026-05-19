@@ -227,15 +227,15 @@
             container.style.filter = filters.join(' ');
 		}
 
-        function toggleGlitch() {
-            isGlitchActive = !isGlitchActive;
-            const btn = document.getElementById('glitch-btn');
-            if (isGlitchActive) {
-                btn.textContent = '[ Disable Glitch / Negatives ]';
-                btn.style.color = ''; btn.style.borderColor = ''; btn.style.boxShadow = '';
+        function toggleStyle() {
+            currentStyle = (currentStyle === 'toxic') ? 'classic' : 'toxic';
+            const btn = document.getElementById('style-btn');
+            if (currentStyle === 'toxic') {
+                btn.textContent = '[ Style: TOXIC (Green/Purple) ]';
+                btn.style.color = '#39fdc1'; btn.style.borderColor = '#39fdc1';
             } else {
-                btn.textContent = '[ Enable Glitch / Negatives ]';
-                btn.style.color = '#ff5555'; btn.style.borderColor = '#ff5555';
+                btn.textContent = '[ Style: CLASSIC (Red/Blue) ]';
+                btn.style.color = '#55aaff'; btn.style.borderColor = '#55aaff';
             }
             updateFilters();
         }
@@ -244,6 +244,7 @@ function toggleWave() {
             const btn = document.getElementById('wave-btn');
             if (isWaveActive) {
                 btn.textContent = '[ Disable Waveform Distortion ]';
+                // Le damos un color amarillo/naranja retro cuando está encendido
                 btn.style.color = '#ffaa00'; btn.style.borderColor = '#ffaa00'; 
             } else {
                 btn.textContent = '[ Enable Waveform Distortion ]';
@@ -251,19 +252,20 @@ function toggleWave() {
             }
             updateFilters();
 }
-        function toggleStyle() {
-            currentStyle = (currentStyle === 'toxic') ? 'classic' : 'toxic';
-            const btn = document.getElementById('style-btn');
-            if (currentStyle === 'toxic') {
-                btn.textContent = '[ Style: TOXIC (Green/Purple) ]';
-                btn.style.color = '39fdc1'; btn.style.borderColor = '#39fdc1';
-            } else {
-                btn.textContent = '[ Style: CLASSIC (Red/Blue) ]';
-                btn.style.color = '#55aaff'; btn.style.borderColor = '#55aaff';
+        // LÓGICA DEL CRONÓMETRO (AÑADIDA AL FINAL)
+        let totalSeconds = 0;
+        function updateVHSTimer() {
+            totalSeconds++;
+            let hrs = Math.floor(totalSeconds / 3600);
+            let mins = Math.floor((totalSeconds % 3600) / 60);
+            let secs = totalSeconds % 60;
+            const timerElement = document.getElementById('vhs-timer');
+            if (timerElement) {
+                timerElement.innerText = hrs + ":" + mins.toString().padStart(2, '0') + ":" + secs.toString().padStart(2, '0');
             }
-            updateFilters();
         }
 
+        setInterval(updateVHSTimer, 1000);
         updateFilters();
 	</script>
 </center>
