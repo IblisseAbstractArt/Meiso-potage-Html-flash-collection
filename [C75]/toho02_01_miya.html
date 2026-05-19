@@ -80,35 +80,7 @@
             background-size: 100% 6px, 5px 100%;
 		}
 		
-        /* --- NUEVAS CLASES PARA EL OSD (SIN TOCAR LO ANTERIOR) --- */
-        .vhs-osd-overlay {
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            padding: 30px 40px;
-            box-sizing: border-box;
-            pointer-events: none;
-            z-index: 5;
-            display: grid;
-            grid-template-columns: 1fr auto 1fr;
-            grid-template-rows: 1fr 1fr;
-            font-family: 'Courier New', Courier, monospace; 
-            font-weight: bold;
-            font-size: 18px;
-            color: rgba(255, 255, 255, 0.9);
-            text-shadow: 1px 1px 1px rgba(255, 0, 255, 0.5), -1px -1px 1px rgba(0, 255, 255, 0.5);
-            text-transform: uppercase;
-        }
-        .osd-block { line-height: 1.2; }
-        .top-left { align-self: start; text-align: left; }
-        .top-center { align-self: start; text-align: center; }
-        .top-right { align-self: start; text-align: right; }
-        .bottom-left { align-self: end; text-align: left; }
-        .bottom-center { align-self: end; text-align: center; }
-        .bottom-right { align-self: end; text-align: right; }
-        .blink-text { animation: vhs-blink 2s step-end infinite; color: #39fdc1; }
-        @keyframes vhs-blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
-
+    
         /* Estilos de botones y body (Tus originales) */
         body { background-color: #000000; color: #ffffff; font-family: sans-serif; padding: 20px; text-align: center; }
         .glitch-btn {
@@ -169,25 +141,10 @@
     <h3>Fastest and Best Shutter Girl [Ruffle fix]</h3>
 
     <div id="flash-container" class="reflection-complex">
-        <object width="512" height="384">
+        <object width="640" height="360">
             <param name="movie" value="swf/miya.swf">
-            <embed src="swf/miya.swf" width="512" height="384"></embed>
+            <embed src="swf/miya.swf" width="640" height="360"></embed>
         </object>
-
-        <div class="vhs-osd-overlay">
-            <div class="osd-block top-left">
-                DECK 2<br>
-                <span class="blink-text">PLAY</span><br>
-                <span id="vhs-timer">0:00:00</span><br>
-                SP
-            </div>
-            <div class="osd-block top-center">TV VIEW<br>DECK 2</div>
-            <div class="osd-block top-right">DECK 2<br>STOP<br>0:00:00<br>SP</div>
-            <div class="osd-block bottom-left">CH02</div>
-            <div class="osd-block bottom-center">SOURCE</div>
-            <div class="osd-block bottom-right">DECK 2</div>
-        </div>
-	</div>
 
     <div style="margin-top: 15px; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;">
         <button id="glitch-btn" class="glitch-btn" onclick="toggleGlitch()">[ Disable Glitch / Negatives ]</button>
