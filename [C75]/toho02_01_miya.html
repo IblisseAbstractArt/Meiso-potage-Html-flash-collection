@@ -1,16 +1,17 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=shift-jis">
-    <title>Fastest and Best Shutter Girl</title>
+    <title>Fastest and best shutter girl</title>
     <script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
     <style>
-       /* EL CONTENEDOR BASE (Restaurado a tu versión segura) */
+        /* Esto evita que el flash empuje el resto del contenido */
         #flash-container {
             width: 640px;
             height: 360px;
             margin: 0 auto;
             overflow: hidden;
-            position: relative;
+            position: relative; /* Para que el CRT se alinee aquí si quisiéramos */
+        position: relative;
             border: 2px solid #222;
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
             /* APLICAMOS EL NUEVO FILTRO DE DESGARRE */
@@ -138,31 +139,26 @@
             <feColorMatrix in="blue-p" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 1 0 0  0 0 0 1 0" result="b"/>
             <feBlend mode="screen" in="r" in2="g" result="rg"/>
             <feBlend mode="screen" in="rg" in2="b"/>
-        
-		<filter id="vhs-wave-logic">
-            <feTurbulence type="fractalNoise" baseFrequency="0 0.05" numOctaves="1" result="warp">
-                <animate attributeName="seed" from="1" to="100" dur="5s" repeatCount="indefinite" />
-            </feTurbulence>
-            <feDisplacementMap in="SourceGraphic" in2="warp" scale="20" xChannelSelector="R" yChannelSelector="G" />
-		</filter>
+        </filter>
 	</svg>
 </head>
 
 <body bgcolor="#000000" text="#ffffff">
 <center>
-    <h3>Fastest and Best Shutter Girl [Ruffle fix]</h3>
+    <h3>Fastest and best shutter girl [Ruffle fix]</h3>
 
-    <div id="flash-container" class="reflection-complex">
+    <div id="flash-container">
         <object width="640" height="360">
             <param name="movie" value="swf/miya.swf">
             <embed src="swf/miya.swf" width="640" height="360"></embed>
         </object>
+    </div>
+</object>
+    </div>
 
-    <div style="margin-top: 15px; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;">
+    <div style="margin-top: 15px; display: flex; justify-content: center; gap: 10px;">
         <button id="glitch-btn" class="glitch-btn" onclick="toggleGlitch()">[ Disable Glitch / Negatives ]</button>
-        <button id="wave-btn" class="glitch-btn" onclick="toggleWave()">[ Enable Waveform Distortion ]</button>
         <button id="style-btn" class="glitch-btn" onclick="toggleStyle()">[ Style: TOXIC (Green/Purple) ]</button>
-        <button id="reflect-btn" class="glitch-btn" onclick="toggleReflection()" style="color: #d655ff; border-color: #d655ff;">[ Reflection: COMPLEX (Real-Time Reflection) ]</button>
 	</div>
     <br>
     <font size="2">
@@ -192,15 +188,13 @@
 
     <script>
         let isGlitchActive = true; 
-        let isWaveActive = false
-		let currentStyle = 'toxic'; 
+        let currentStyle = 'toxic'; 
 
         function updateFilters() {
             const container = document.getElementById('flash-container');
             let filters = [];
 
             if (isGlitchActive) filters.push('url(#vhs-glitch-logic)');
-            if (isWaveActive) filters.push('url(#vhs-wave-logic)'); // Agregamos la ola al array de filtros
             
             if (currentStyle === 'toxic') {
                 filters.push('url(#vhs-rgb-toxic)');
@@ -209,21 +203,9 @@
             }
 
             container.style.filter = filters.join(' ');
-		}
-
-        function toggleStyle() {
-            currentStyle = (currentStyle === 'toxic') ? 'classic' : 'toxic';
-            const btn = document.getElementById('style-btn');
-            if (currentStyle === 'toxic') {
-                btn.textContent = '[ Style: TOXIC (Green/Purple) ]';
-                btn.style.color = '#39fdc1'; btn.style.borderColor = '#39fdc1';
-            } else {
-                btn.textContent = '[ Style: CLASSIC (Red/Blue) ]';
-                btn.style.color = '#55aaff'; btn.style.borderColor = '#55aaff';
-            }
-            updateFilters();
         }
-		function toggleGlitch() {
+
+        function toggleGlitch() {
             isGlitchActive = !isGlitchActive;
             const btn = document.getElementById('glitch-btn');
             if (isGlitchActive) {
@@ -234,72 +216,25 @@
                 btn.style.color = '#ff5555'; btn.style.borderColor = '#ff5555';
             }
             updateFilters();
-		}
-function toggleWave() {
-            isWaveActive = !isWaveActive;
-            const btn = document.getElementById('wave-btn');
-            if (isWaveActive) {
-                btn.textContent = '[ Disable Waveform Distortion ]';
-                // Le damos un color amarillo/naranja retro cuando está encendido
-                btn.style.color = '#ffaa00'; btn.style.borderColor = '#ffaa00'; 
-            } else {
-                btn.textContent = '[ Enable Waveform Distortion ]';
-                btn.style.color = ''; btn.style.borderColor = '';
-            }
-            updateFilters();
-}
-
-		// Control del tipo de reflejo (Empieza en complejo)
-        let currentReflection = 'complex';
-
-        function toggleReflection() {
-            const container = document.getElementById('flash-container');
-            const btn = document.getElementById('reflect-btn');
-
-            if (currentReflection === 'complex') {
-                // ESTADO 2: De Complejo pasa a Simple (Ambilight)
-                currentReflection = 'simple';
-                container.classList.remove('reflection-complex');
-                container.classList.add('reflection-simple');
-                btn.textContent = '[ Reflection: SIMPLE (Light Ambilight) ]';
-                btn.style.color = '#39fdc1'; 
-                btn.style.borderColor = '#39fdc1';
-                
-            } else if (currentReflection === 'simple') {
-                // ESTADO 3: De Simple pasa a Apagado (Sin efectos)
-                currentReflection = 'none';
-                container.classList.remove('reflection-simple');
-                // No le ponemos ninguna clase nueva, lo dejamos "limpio"
-                btn.textContent = '[ Reflection: OFF (Disabled) ]';
-                btn.style.color = ''; // Quitar el color lo devuelve al estado gris por defecto
-                btn.style.borderColor = '';
-                
-            } else {
-                // ESTADO 1: De Apagado reinicia el ciclo a Complejo
-                currentReflection = 'complex';
-                container.classList.add('reflection-complex');
-                btn.textContent = '[ Reflection: COMPLEX (Real-Time Reflection) ]';
-                btn.style.color = '#d655ff'; 
-                btn.style.borderColor = '#d655ff';
-            }
-		}
-        // LÓGICA DEL CRONÓMETRO (AÑADIDA AL FINAL)
-        let totalSeconds = 0;
-        function updateVHSTimer() {
-            totalSeconds++;
-            let hrs = Math.floor(totalSeconds / 3600);
-            let mins = Math.floor((totalSeconds % 3600) / 60);
-            let secs = totalSeconds % 60;
-            const timerElement = document.getElementById('vhs-timer');
-            if (timerElement) {
-                timerElement.innerText = hrs + ":" + mins.toString().padStart(2, '0') + ":" + secs.toString().padStart(2, '0');
-            }
         }
 
-        setInterval(updateVHSTimer, 1000);
+        function toggleStyle() {
+            currentStyle = (currentStyle === 'toxic') ? 'classic' : 'toxic';
+            const btn = document.getElementById('style-btn');
+            if (currentStyle === 'toxic') {
+                btn.textContent = '[ Style: TOXIC (Green/Purple) ]';
+                btn.style.color = '39fdc1'; btn.style.borderColor = '#39fdc1';
+            } else {
+                btn.textContent = '[ Style: CLASSIC (Red/Blue) ]';
+                btn.style.color = '#55aaff'; btn.style.borderColor = '#55aaff';
+            }
+            updateFilters();
+        }
+
         updateFilters();
 	</script>
 </center>
 </body>
 </html>
+<br></font>
 <br></font>
