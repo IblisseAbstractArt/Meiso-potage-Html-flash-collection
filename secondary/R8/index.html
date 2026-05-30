@@ -104,7 +104,70 @@ img.cover-image { /* O aplica esta clase directamente a tus etiquetas <img> */
 }
         .game-type { color: #666; font-size: 10px; margin-top: 4px; }
 
-        #footer { text-align: center; padding: 40px 0; color: #777; font-size: 11px; }
+       #footer { text-align: center; padding: 40px 0; color: #777; font-size: 11px; }
+    
+    /* --- ESTILOS EXCLUSIVOS REITAISAI 8 --- */
+        .reitaisai-wrapper {
+            max-width: 850px;
+            margin: 40px auto;
+            background-color: #5b1212; /* El rojo oscuro característico */
+            color: #f2f2f2;
+            font-family: Arial, "MS PGothic", sans-serif;
+            box-shadow: 0 0 10px rgba(0,0,0,0.5);
+        }
+
+        .rei-header {
+            background-color: #000000;
+            color: #ffffff;
+            font-size: 24px;
+            font-weight: bold;
+            padding: 12px 20px;
+            text-transform: capitalize;
+        }
+
+        .rei-section {
+            padding: 20px 25px 30px 25px;
+        }
+
+        /* Bloque Notice */
+        .rei-notice-title { font-size: 26px; font-weight: bold; line-height: 1.2; margin-bottom: 15px; }
+        .rei-notice-text { font-size: 16px; line-height: 1.4; margin-bottom: 15px; }
+        .toriyoke-box {
+            display: flex; gap: 15px;
+            border-top: 1px solid #8a2a2a; border-bottom: 1px solid #8a2a2a;
+            padding: 15px 0; margin-top: 20px; margin-bottom: 20px;
+        }
+        
+        /* Product Info */
+        .rei-product { display: flex; gap: 25px; margin-top: 15px; }
+        .rei-product-left { flex: 0 0 260px; }
+        .rei-product-right { flex: 1; }
+        .rei-kanji-title { font-family: "MS Mincho", serif; font-size: 28px; border-bottom: 1px solid #8a2a2a; padding-bottom: 10px; margin: 0 0 15px 0; font-weight: normal; }
+        
+        /* Tabla de producto Reitaisai */
+        .rei-table { width: 100%; border-collapse: collapse; font-size: 11px; margin-top: 15px; font-family: sans-serif; }
+        .rei-table th { text-align: left; padding: 6px 0; width: 130px; font-weight: bold; border-bottom: 1px solid #731e1e; color: #fff; vertical-align: top;}
+        .rei-table td { padding: 6px 0; border-bottom: 1px solid #731e1e; vertical-align: top;}
+        .rei-table a { color: #ffcccc; text-decoration: underline; }
+
+        .credit-grid { display: flex; gap: 30px; }
+        .credit-grid div { display: flex; flex-direction: column; gap: 3px; }
+        .credit-grid strong { margin-bottom: 3px; color: #fff; }
+
+        /* Lista de Performances */
+        .perf-row {
+            display: flex; align-items: flex-start; gap: 15px;
+            padding: 15px 0; border-bottom: 1px solid #731e1e;
+        }
+        .perf-num {
+            font-size: 55px; color: #9c3b3b; font-weight: normal; 
+            width: 60px; text-align: right; line-height: 1; padding-top: 10px;
+        }
+        .perf-thumb { width: 160px; height: 90px; border: 1px solid #222; background-color: #000; object-fit: cover; }
+        .perf-info { flex: 1; font-size: 12px; line-height: 1.5; }
+        .perf-info .title { font-size: 16px; font-weight: bold; text-decoration: underline; margin-bottom: 5px; color: #fff; display: block;}
+        .perf-info .label { font-weight: bold; display: inline-block; width: 45px; }
+        .perf-info a { color: #ffcccc; text-decoration: underline; }
     </style>
 </head>
 <body>
@@ -148,7 +211,227 @@ img.cover-image { /* O aplica esta clase directamente a tus etiquetas <img> */
         </a>
 
         </div>
-  
+  <!-- ========================================== -->
+    <!-- INICIO SECCIÓN HAKUREI SHRINE REITAISAI 8  -->
+    <!-- ========================================== -->
+    <div class="reitaisai-wrapper">
+
+        <!-- BLOQUE 1: NOTICE -->
+        <div class="rei-header">notice</div>
+        <div class="rei-section">
+            <div class="rei-notice-title">A limited-edition bonus booklet and a bonus hand-burned CD will be given away on a first-come, first-served basis at the Hakurei Shrine Reitaisai!!</div>
+            <div class="rei-notice-text">
+                At the Hakurei Shrine Reitaisai on May 8th, we'll be giving away a bonus booklet and a bonus hand-burned CD "Toriyoke" on a first-come, first-served basis.<br>
+                As usual, some unlucky people might end up with a "loser"...?
+            </div>
+
+            <div class="toriyoke-box">
+                <!-- IMAGEN DEL CD TORIYOKE -->
+                <img src="" alt="Meisou Potage Toriyoke" style="width: 130px; height: 130px; border: 1px solid #333;">
+                <div style="font-size: 12px; line-height: 1.4;">
+                    A CD (*) that is expected to be effective in controlling pest birds that damage crops.<br>
+                    <strong style="font-size: 16px; display: block; margin: 4px 0;">"Meisou Potage Toriyoke"</strong>
+                    Event: Hakurei Shrine Reitaisai<br>
+                    Space: Hi-47a<br>
+                    Specifications: Hand-burned CD-R (paper case)<br>
+                    Price: Free<br>
+                    <span style="font-size: 10px; color: #ccc;">*This does not guarantee the actual effectiveness in controlling pest birds.</span>
+                </div>
+            </div>
+            <div class="rei-notice-title" style="margin-bottom: 0;">thank you!</div>
+        </div>
+
+        <!-- BLOQUE 2: PRODUCT INFORMATION -->
+        <div class="rei-header">Product Information</div>
+        <div class="rei-section">
+            <h2 class="rei-kanji-title">七組のクリエイターによる渾身の宴会芸！</h2>
+            
+            <div class="rei-product">
+                <div class="rei-product-left">
+                    <img src="R8.jpg" alt="Eastern Banquet Mound" style="width: 100%; height: auto; border: 1px solid #222;">
+                    <div style="font-size: 9px; margin-top: 5px; color: #ccc; line-height: 1.2;">Layout: Kagi / Design: Uda Tetra /<br>Illustrations: Miya, Uda Tetra, Kagi, yu-ki</div>
+                </div>
+                
+                <div class="rei-product-right">
+                    <div class="rei-notice-text" style="font-size: 15px; margin-bottom: 20px;">
+                        Welcome to the feast of Gensokyo, where humans and yokai frolic!<br>
+                        Tonight,<br>
+                        we have prepared a colorful array of entertainment, including Touhou fan-made Flash animations and Flash games, as well as a Bunka-cho style photo game and a wallpaper creation mode!<br>
+                        <span style="font-size: 11px; color: #ccc; font-style: italic;">*Alcohol is for those 20 years of age and older.</span>
+                    </div>
+
+                    <table class="rei-table">
+                        <tr>
+                            <th>title</th>
+                            <td><strong>Eastern Banquet Mound</strong></td>
+                        </tr>
+                        <tr>
+                            <th>event</th>
+                            <td><a href="#">Hakurei Shrine Reitaisai</a></td>
+                        </tr>
+                        <tr>
+                            <th>space</th>
+                            <td>Hi-47a</td>
+                        </tr>
+                        <tr>
+                            <th>Distribution start date</th>
+                            <td>2010/05/08 (Sun)</td>
+                        </tr>
+                        <tr>
+                            <th>price</th>
+                            <td>1000 yen</td>
+                        </tr>
+                        <tr>
+                            <th>specification</th>
+                            <td>CD-ROM (Slim Tall Case)</td>
+                        </tr>
+                        <tr>
+                            <th>credit</th>
+                            <td>
+                                <div class="credit-grid">
+                                    <div>
+                                        <strong>Flash</strong>
+                                        <a href="#">Kagi</a>
+                                        <a href="#">Uda Tetra</a>
+                                        <a href="#">yama_ko</a>
+                                        <a href="#">ICyas</a>
+                                        <a href="#">Funi</a>
+                                        <a href="#">Kouki</a>
+                                    </div>
+                                    <div>
+                                        <strong>Music</strong>
+                                        <a href="#">Day Online</a>
+                                        <a href="#">COOL&CREATE</a>
+                                        <a href="#">Honey Lemon</a>
+                                        <a href="#">Forest Pireo</a>
+                                        <a href="#">nekomimi style</a>
+                                        <a href="#">Gooshandagoo</a>
+                                        <a href="#">Keigo</a>
+                                    </div>
+                                    <div>
+                                        <strong>System</strong>
+                                        <a href="#">Miya</a>
+                                        <a href="#">yu-ki</a>
+                                    </div>
+                                    <div>
+                                        <strong>Support</strong>
+                                        <a href="#">as@earth</a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- BLOQUE 3: LIST OF PERFORMANCES -->
+        <div class="rei-header">List of performances</div>
+        <div class="rei-section" style="padding-bottom: 10px;">
+            
+            <!-- TRACK 01 -->
+            <div class="perf-row">
+                <div class="perf-num">01</div>
+                <img src="ss1.jpg" alt="The Subterranean Prominence" class="perf-thumb">
+                <div class="perf-info">
+                    <a href="#" class="title">The Subterranean Prominence</a>
+                    <div style="margin-bottom: 4px;">4:53</div>
+                    <div><span class="label">Movie</span> <a href="#">Key</a></div>
+                    <div><span class="label">Music</span> <a href="#">Day Online</a></div>
+                    <div style="margin-top: 6px; font-weight: bold; font-size: 13px;">"Prominence"</div>
+                    <div style="font-size: 10px; color: #ccc;">From Trois Bleu</div>
+                </div>
+            </div>
+
+            <!-- TRACK 02 -->
+            <div class="perf-row">
+                <div class="perf-num">02</div>
+                <img src="ss2.jpg" alt="Sadistic complex" class="perf-thumb">
+                <div class="perf-info">
+                    <a href="#" class="title">Sadistic complex</a>
+                    <div style="margin-bottom: 4px;">3:52</div>
+                    <div><span class="label">Movie</span> <a href="#">Uda Tetra</a></div>
+                    <div><span class="label">Music</span> <a href="#">COOL & CREATE</a></div>
+                    <div style="margin-top: 6px; font-weight: bold; font-size: 13px;">"s complex"</div>
+                    <div style="font-size: 10px; color: #ccc;">From COOL&CREATE; Touhou Vocal Collection III "Super Amanerio"</div>
+                </div>
+            </div>
+
+            <!-- TRACK 03 -->
+            <div class="perf-row">
+                <div class="perf-num">03</div>
+                <img src="ss3.jpg" alt="495Go!" class="perf-thumb">
+                <div class="perf-info">
+                    <a href="#" class="title">495Go! Little Sister Emotion</a>
+                    <div style="margin-bottom: 4px;">3:05</div>
+                    <div><span class="label">Movie</span> <a href="#">ICyas</a></div>
+                    <div><span class="label">Music</span> <a href="#">Forest Pireo</a></div>
+                    <div style="margin-top: 6px; font-weight: bold; font-size: 13px;">"Is she the most girlish of them all?"</div>
+                    <div style="font-size: 10px; color: #ccc;">From T★GIRLS.02</div>
+                </div>
+            </div>
+
+            <!-- TRACK 04 -->
+            <div class="perf-row">
+                <div class="perf-num">04</div>
+                <img src="ss4.jpg" alt="Fran-chan's Music Class" class="perf-thumb">
+                <div class="perf-info">
+                    <a href="#" class="title">Fran-chan's Music Class</a>
+                    <div style="margin-bottom: 4px;">2:20</div>
+                    <div><span class="label">Movie</span> <a href="#">Funi</a></div>
+                    <div><span class="label">Music</span> <a href="#">nekomimi style</a> (Re:cy:cle)</div>
+                    <div style="margin-top: 6px; font-weight: bold; font-size: 13px;">"Fran-chan's Music Class"</div>
+                    <div style="font-size: 10px; color: #ccc;">From TohoQ Highland!</div>
+                </div>
+            </div>
+
+            <!-- TRACK 05 -->
+            <div class="perf-row">
+                <div class="perf-num">05</div>
+                <img src="ss5.jpg" alt="Double Flutter" class="perf-thumb">
+                <div class="perf-info" style="display: flex; justify-content: space-between;">
+                    <div>
+                        <a href="#" class="title">Double Flutter</a>
+                        <div style="margin-bottom: 4px;">3:32</div>
+                        <div><span class="label">Movie</span> <a href="#">yama_ko</a></div>
+                        <div><span class="label">Music</span> <a href="#">Honey Lemon</a></div>
+                        <div style="margin-top: 6px; font-weight: bold; font-size: 13px;">"Fluttergirl"</div>
+                        <div style="font-size: 10px; color: #ccc;">From Flutter Girl</div>
+                    </div>
+                    <div style="max-width: 250px; font-size: 10px; color: #ddd; padding-top: 25px;">
+                        *The back of the product packaging incorrectly lists the song title as "Flutter Girl," but the correct title is "Flutter Girl." We apologize for the error and have corrected it.
+                    </div>
+                </div>
+            </div>
+
+            <!-- TRACK 06 -->
+            <div class="perf-row">
+                <div class="perf-num">06</div>
+                <img src="ss6.jpg" alt="Amaterasu" class="perf-thumb">
+                <div class="perf-info">
+                    <a href="#" class="title">Amaterasu, the Crow of Hell</a>
+                    <div style="margin-bottom: 4px;">3:48</div>
+                    <div><span class="label">Movie</span> <a href="#">Kouki</a></div>
+                    <div><span class="label">Music</span> <a href="#">Gooshandagoo</a></div>
+                    <div style="margin-top: 6px; font-weight: bold; font-size: 13px;">"A Song Dedicated to Cremation"</div>
+                    <div style="font-size: 10px; color: #ccc;">From e-Lfingate</div>
+                </div>
+            </div>
+
+            <!-- TRACK Ex -->
+            <div class="perf-row" style="border-bottom: none;">
+                <div class="perf-num">Ex</div>
+                <img src="ss7jpg" alt="Bunka-cho Mode" class="perf-thumb">
+                <div class="perf-info">
+                    <a href="#" class="title">Bunka-cho Mode</a>
+                    <div style="margin-bottom: 15px;"><span class="label">System</span> <a href="#">Miya</a> , <a href="#">yu-ki</a></div>
+                    <a href="#" style="color: #ffea00; font-weight: bold; font-size: 14px; text-decoration: underline;">Crossfade demo movie of all works ➡</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!-- FIN SECCIÓN HAKUREI SHRINE REITAISAI 8 -->
     <div id="footer" style="text-align: center; padding: 30px; color: #666; font-size: 12px;">
         <p>Select a flash animation / game to start.</p>
         <address>Copyright &copy; 2008-2026 迷走ポタージュ / Average Rumia. Preservation Project.</address>
