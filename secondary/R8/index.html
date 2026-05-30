@@ -159,20 +159,176 @@ img.cover-image { /* O aplica esta clase directamente a tus etiquetas <img> */
         .credit-grid div { display: flex; flex-direction: column; gap: 3px; }
         .credit-grid strong { margin-bottom: 3px; color: #fff; }
 
-        /* Lista de Performances */
-        .perf-row {
-            display: flex; align-items: flex-start; gap: 15px;
-            padding: 15px 0; border-bottom: 1px solid #731e1e;
+        /* --- LISTA DE PERFORMANCES MEISOU POTAGE (OPTIMIZADA) --- */
+        #tracklist ol {
+            list-style: none;
+            padding: 0;
+            margin: 0;
         }
-        .perf-num {
-            font-size: 55px; color: #9c3b3b; font-weight: normal; 
-            width: 60px; text-align: right; line-height: 1; padding-top: 10px;
+
+        #tracklist li {
+            display: flex;
+            align-items: flex-start;
+            padding: 20px 0;
+            border-bottom: 1px solid #731e1e;
+            position: relative;
         }
-        .perf-thumb { width: 160px; height: 90px; border: 1px solid #222; background-color: #000; object-fit: cover; }
-        .perf-info { flex: 1; font-size: 12px; line-height: 1.5; }
-        .perf-info .title { font-size: 16px; font-weight: bold; text-decoration: underline; margin-bottom: 5px; color: #fff; display: block;}
-        .perf-info .label { font-weight: bold; display: inline-block; width: 45px; }
-        .perf-info a { color: #ffcccc; text-decoration: underline; }
+
+        /* Generación de los números grandes con la estética original */
+        #tracklist li::before {
+            font-size: 50px;
+            color: #8c2e2e;
+            font-weight: bold;
+            width: 70px;
+            text-align: right;
+            margin-right: 20px;
+            line-height: 1;
+            font-family: Arial, sans-serif;
+            flex-shrink: 0;
+        }
+
+        /* Asignación de números por ID para calcar el código original */
+        #tracklist01::before { content: "01"; }
+        #tracklist02::before { content: "02"; }
+        #tracklist03::before { content: "03"; }
+        #tracklist04::before { content: "04"; }
+        #tracklist05::before { content: "05"; }
+        #tracklist06::before { content: "06"; }
+        #tracklistEx::before { content: "Ex"; }
+
+        #tracklist .img {
+            margin-right: 20px;
+            flex-shrink: 0;
+        }
+
+        #tracklist .img img {
+            width: 160px;
+            height: 90px;
+            border: 1px solid #000;
+            display: block;
+            object-fit: cover;
+        }
+
+        #tracklist .desc {
+            flex: 1;
+            font-size: 13px;
+            line-height: 1.4;
+        }
+
+        #tracklist .desc h3 {
+            margin: 0 0 4px 0;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        #tracklist .desc h3 a {
+            color: #ffffff;
+            text-decoration: underline;
+        }
+
+        #tracklist .desc ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        #tracklist .desc ul li {
+            display: block;
+            padding: 0;
+            border: none;
+            margin-bottom: 4px;
+        }
+
+        #tracklist .desc .time {
+            color: #ccc;
+            font-size: 12px;
+            margin-bottom: 6px;
+        }
+
+        #tracklist .desc dl {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            gap: 10px;
+        }
+
+        #tracklist .desc dt {
+            font-weight: bold;
+            color: #fff;
+            width: 45px;
+            flex-shrink: 0;
+        }
+
+        #tracklist .desc dd {
+            margin: 0;
+            padding: 0;
+        }
+
+        #tracklist .desc dd p {
+            margin: 0;
+            padding: 0;
+        }
+
+        #tracklist .desc dd .title {
+            font-weight: bold;
+            color: #fff;
+            font-size: 13px;
+            margin-top: 2px;
+        }
+
+        #tracklist .desc dd .album {
+            font-size: 11px;
+            color: #ccc;
+        }
+
+        #tracklist .desc a {
+            color: #ffcccc;
+            text-decoration: underline;
+        }
+
+        #tracklist .sorry {
+            margin: 10px 0 0 0;
+            font-size: 11px;
+            color: #ddd;
+            line-height: 1.4;
+            max-width: 320px;
+        }
+
+        /* --- CONTROL DE RESPONSIVIDAD PARA MÓVILES (VERTICAL) --- */
+        @media (max-width: 768px) {
+            #tracklist li {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px;
+                padding: 20px 15px;
+            }
+
+            #tracklist li::before {
+                text-align: left;
+                width: auto;
+                font-size: 40px;
+                margin-bottom: -5px;
+            }
+
+            #tracklist .img {
+                margin-right: 0;
+                width: 100%;
+            }
+
+            #tracklist .img img {
+                width: 100%;
+                height: auto;
+                aspect-ratio: 16 / 9;
+            }
+
+            #tracklist .desc {
+                width: 100%;
+            }
+
+            #tracklist .sorry {
+                max-width: 100%;
+            }
+        }
     </style>
 </head>
 <body>
@@ -394,49 +550,210 @@ img.cover-image { /* O aplica esta clase directamente a tus etiquetas <img> */
             <div class="perf-row">
                 <div class="perf-num">05</div>
                 <img src="cover/ss5.jpg" alt="Double Flutter" class="perf-thumb">
-                <div class="perf-info" style="display: flex; justify-content: space-between;">
-                    <div>
-                        <a href="#" class="title">Double Flutter</a>
-                        <div style="margin-bottom: 4px;">3:32</div>
-                        <div><span class="label">Movie</span> <a href="#">yama_ko</a></div>
-                        <div><span class="label">Music</span> <a href="#">Honey Lemon</a></div>
-                        <div style="margin-top: 6px; font-weight: bold; font-size: 13px;">"Fluttergirl"</div>
-                        <div style="font-size: 10px; color: #ccc;">From Flutter Girl</div>
+<!-- BLOQUE 3: LIST OF PERFORMANCES ORIGINAL -->
+        <div class="rei-header">List of performances</div>
+        <div class="rei-section" id="tracklist" style="padding-bottom: 10px;">
+            <ol>
+                <!-- TRACK 01 -->
+                <li id="tracklist01">
+                    <div class="img">
+                        <a href="#"><img src="cover/ss1.jpg" alt="The Subterranean Prominence"/></a>
                     </div>
-                    <div style="max-width: 250px; font-size: 10px; color: #ddd; padding-top: 25px;">
-                        *The back of the product packaging incorrectly lists the song title as "Flutter Girl," but the correct title is "Double Flutter." We apologize for the error and have corrected it.
+                    <div class="desc">
+                        <h3><a href="#">The Subterranean Prominence</a></h3>
+                        <ul>
+                            <li class="time">4:53</li>
+                            <li class="movie">
+                                <dl>
+                                    <dt>Movie</dt>
+                                    <dd><a href="#">Locker Room Productions</a></dd>
+                                </dl>
+                            </li>
+                            <li class="music">
+                                <dl>
+                                    <dt>Music</dt>
+                                    <dd>
+                                        <p class="name"><a href="#">Day Online</a></p>
+                                        <p class="title">"Prominence"</p>
+                                        <p class="album">From Trois Bleu</p>
+                                    </dd>
+                                </dl>
+                            </li>
+                        </ul>
                     </div>
-                </div>
-            </div>
+                </li>
 
-            <!-- TRACK 06 -->
-            <div class="perf-row">
-                <div class="perf-num">06</div>
-                <img src="cover/ss6.jpg" alt="Amaterasu" class="perf-thumb">
-                <div class="perf-info">
-                    <a href="#" class="title">Amaterasu, the Crow of Hell</a>
-                    <div style="margin-bottom: 4px;">3:48</div>
-                    <div><span class="label">Movie</span> <a href="#">Kouki</a></div>
-                    <div><span class="label">Music</span> <a href="#">Gooshandagoo</a></div>
-                    <div style="margin-top: 6px; font-weight: bold; font-size: 13px;">"A Song Dedicated to Cremation"</div>
-                    <div style="font-size: 10px; color: #ccc;">From e-Lfingate</div>
-                </div>
-            </div>
+                <!-- TRACK 02 -->
+                <li id="tracklist02">
+                    <div class="img">
+                        <a href="#"><img src="cover/ss2.jpg" alt="Sadistic complex"/></a>
+                    </div>
+                    <div class="desc">
+                        <h3><a href="#">Sadistic complex</a></h3>
+                        <ul>
+                            <li class="time">3:52</li>
+                            <li class="movie">
+                                <dl>
+                                    <dt>Movie</dt>
+                                    <dd><a href="#">Uda Tetra</a></dd>
+                                </dl>
+                            </li>
+                            <li class="music">
+                                <dl>
+                                    <dt>Music</dt>
+                                    <dd>
+                                        <p class="name"><a href="#">COOL & CREATE</a></p>
+                                        <p class="title">"s complex"</p>
+                                        <p class="album">From COOL&CREATE; Touhou Vocal Collection III "Super Amanerio"</p>
+                                    </dd>
+                                </dl>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
 
-            <!-- TRACK Ex -->
-            <div class="perf-row" style="border-bottom: none;">
-                <div class="perf-num">Ex</div>
-                <img src="cover/ss7.jpg" alt="Bunka-cho Mode" class="perf-thumb">
-                <div class="perf-info">
-                    <a href="#" class="title">Bunka-cho Mode</a>
-                    <div style="margin-bottom: 15px;"><span class="label">System</span> <a href="#">Miya</a> , <a href="#">yu-ki</a></div>
-                    <a href="https://youtu.be/sECoMs1Slu4?si=Ab95UvyosXJzTAm0" style="color: #ffea00; font-weight: bold; font-size: 14px; text-decoration: underline;">Crossfade demo movie of all works ➡</a>
-                </div>
-            </div>
+                <!-- TRACK 03 -->
+                <li id="tracklist03">
+                    <div class="img">
+                        <a href="#"><img src="cover/ss3.jpg" alt="495Go! Little Sister Emotion"/></a>
+                    </div>
+                    <div class="desc">
+                        <h3><a href="#">495Go! Little Sister Emotion</a></h3>
+                        <ul>
+                            <li class="time">3:05</li>
+                            <li class="movie">
+                                <dl>
+                                    <dt>Movie</dt>
+                                    <dd><a href="#">ICyas</a></dd>
+                                </dl>
+                            </li>
+                            <li class="music">
+                                <dl>
+                                    <dt>Music</dt>
+                                    <dd>
+                                        <p class="name"><a href="#">Forest Pireo</a></p>
+                                        <p class="title">"Is she the most girlish of them all?"</p>
+                                        <p class="album">From T★GIRLS.02</p>
+                                    </dd>
+                                </dl>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
 
+                <!-- TRACK 04 -->
+                <li id="tracklist04">
+                    <div class="img">
+                        <a href="#"><img src="cover/ss4.jpg" alt="Flan-chan's Music Class"/></a>
+                    </div>
+                    <div class="desc">
+                        <h3><a href="#">Flan-chan's Music Class</a></h3>
+                        <ul>
+                            <li class="time">2:20</li>
+                            <li class="movie">
+                                <dl>
+                                    <dt>Movie</dt>
+                                    <dd><a href="#">Funi</a></dd>
+                                </dl>
+                            </li>
+                            <li class="music">
+                                <dl>
+                                    <dt>Music</dt>
+                                    <dd>
+                                        <p class="name"><a href="#">nekomimi style</a> (Re:cy:cle)</p>
+                                        <p class="title">"Fran-chan's Music Class"</p>
+                                        <p class="album">From TohoQ Highland!</p>
+                                    </dd>
+                                </dl>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
+                <!-- TRACK 05 -->
+                <li id="tracklist05">
+                    <div class="img">
+                        <a href="#"><img src="cover/ss5.jpg" alt="Double Flutter"/></a>
+                    </div>
+                    <div class="desc">
+                        <h3><a href="#">Double Flutter</a></h3>
+                        <dl style="margin-bottom: 5px;">
+                            <dt style="color: #ccc; font-weight: normal; font-size: 12px; width: auto;">3:32</dt>
+                        </dl>
+                        <ul>
+                            <li class="movie">
+                                <dl>
+                                    <dt>Movie</dt>
+                                    <dd><a href="#">yama_ko</a></dd>
+                                </dl>
+                            </li>
+                            <li class="music">
+                                <dl>
+                                    <dt>Music</dt>
+                                    <dd>
+                                        <p class="name"><a href="#">Honey Lemon</a></p>
+                                        <p class="title">"Fluttergirl"</p>
+                                        <p class="album">From Flutter Girl</p>
+                                    </dd>
+                                </dl>
+                            </li>
+                        </ul>
+                        <p class="sorry">*The back of the product packaging incorrectly lists the song title as "Flutter Girl," but the correct title is "Double Flutter." We apologize for the error and have corrected it.</p>
+                    </div>
+                </li>
+
+                <!-- TRACK 06 -->
+                <li id="tracklist06">
+                    <div class="img">
+                        <a href="#"><img src="cover/ss6.jpg" alt="Amaterasu, the Crow of Hell"/></a>
+                    </div>
+                    <div class="desc">
+                        <h3><a href="#">Amaterasu, the Crow of Hell</a></h3>
+                        <ul>
+                            <li class="time">3:48</li>
+                            <li class="movie">
+                                <dl>
+                                    <dt>Movie</dt>
+                                    <dd><a href="#">Kouki</a></dd>
+                                </dl>
+                            </li>
+                            <li class="music">
+                                <dl>
+                                    <dt>Music</dt>
+                                    <dd>
+                                        <p class="name"><a href="#">Gooshandagoo</a></p>
+                                        <p class="title">"A Song Dedicated to Cremation"</p>
+                                        <p class="album">From e-Lfingate</p>
+                                    </dd>
+                                </dl>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
+                <!-- TRACK Ex -->
+                <li id="tracklistEx">
+                    <div class="img">
+                        <img src="cover/ss7.jpg" alt="Bunka-cho Mode"/>
+                    </div>
+                    <div class="desc">
+                        <h3>Bunka-cho Mode</h3>
+                        <ul>
+                            <li class="movie">
+                                <dl>
+                                    <dt>System</dt>
+                                    <dd><a href="#">Miya</a>, <a href="#">yu-ki</a></dd>
+                                </dl>
+                            </li>
+                            <li style="margin-top: 10px;">
+                                <strong><a href="https://youtu.be/sECoMs1Slu4?si=Ab95UvyosXJzTAm0" style="color: #ffea00; font-weight: bold; font-size: 14px; text-decoration: underline;">Crossfade demo movie of all works ➡</a></strong>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+            </ol>
         </div>
-    </div>
-    <!-- FIN SECCIÓN HAKUREI SHRINE REITAISAI 8 -->
+        <!-- FIN SECCIÓN HAKUREI SHRINE REITAISAI 8 -->
     <div id="footer" style="text-align: center; padding: 30px; color: #666; font-size: 12px;">
         <p>Select a flash animation / game to start.</p>
         <address>Copyright &copy; 2008-2026 迷走ポタージュ / Average Rumia. No Rights Reserved.</address>
