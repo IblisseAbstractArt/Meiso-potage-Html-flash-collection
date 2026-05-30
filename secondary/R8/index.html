@@ -6,11 +6,16 @@
     <style>
         /* BASE */
         body { 
-            background-color: #c4c4c4; 
+            /* Gradiente vertical: Color 1 (Arriba) -> Color 2 (Medio) -> Color 1 (Abajo) */
+            background: linear-gradient(to bottom, #eacb83 0%, #921e1e 50%, #eacb83 100%);
+            
             color: #333; 
             font-family: "MS PGothic", sans-serif; 
             margin: 0; 
             padding: 0;
+            
+            /* Esto asegura que el gradiente se estire por toda la altura de la ventana si hay poco contenido */
+            min-height: 100vh; 
         }
 
         /* SCANLINES (Se mantienen sobre todo) */
