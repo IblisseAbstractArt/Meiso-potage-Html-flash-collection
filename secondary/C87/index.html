@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>Mesopota - Archive Selection Full Width</title>
+    <style>
+        /* BASE */
+        body { 
+            background-color: #c4c4c4; 
+            color: #333; 
+            font-family: "MS PGothic", sans-serif; 
+            margin: 0; 
+            padding: 0;
+        }
+
+        /* SCANLINES (Se mantienen sobre todo) */
+        body::before {
+            content: " "; display: block; position: fixed; top: 0; left: 0; bottom: 0; right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.05) 50%),
+                        linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
+            z-index: 9999; pointer-events: none; background-size: 100% 3px, 3px 100%;
+        }
+
+        /* Contenedor central para el logo, la galería y el footer */
+        .container {
+            width: 850px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        /* --- BARRA DE NAVEGACIÓN (ANCHO TOTAL) --- */
+        #headernav-full {
+            background-color: #cc8000;
+            width: 100%; /* Esto hace que llegue a ambos extremos */
+            padding: 10px 0;
+            margin-bottom: 20px;
+        }
+
+        /* --- BARRA DE TÍTULO DE LISTA (ANCHO TOTAL) --- */
+        .orange-header-full {
+            background-color: #cc8000;
+            width: 100%; /* Extremo a extremo */
+            color: #fff;
+            padding: 8px 0;
+            margin-bottom: 25px;
+        }
+
+        /* Estilo del texto dentro de las barras para que no se pegue al borde de la pantalla */
+        .inner-content {
+            width: 850px;
+            margin: 0 auto;
+            padding: 0 10px;
+            box-sizing: border-box;
+        }
+
+        .orange-menu { 
+            list-style: none; 
+            padding: 0; 
+            margin: 0; 
+            display: flex; 
+            justify-content: center; 
+            gap: 30px; 
+        }
+        .orange-menu a { 
+            color: #fff; 
+            text-decoration: none; 
+            font-weight: bold; 
+            font-size: 16px;
+        }
+
+        /* GALERÍA */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            padding-bottom: 40px;
+        }
+
+        .game-card {
+            background: #b0b0b0;
+            border: 1px solid #8c5300;
+            padding: 8px;
+            text-align: center;
+            text-decoration: none;
+            color: #0033cc; /* Color de link azul clásico */
+            font-size: 13px;
+        }
+
+        .game-card img {
+            width: 100%;
+            height: auto;
+            border: 1px solid #333;
+            margin-bottom: 8px;
+        }
+/* --- Ajuste uniforme para las imágenes del grid --- */
+/* Nota: Asegúrate de que el selector coincida con el contenedor de tus juegos */
+img.cover-image { /* O aplica esta clase directamente a tus etiquetas <img> */
+    width: 320px;       /* Ancho fijo para todas las carátulas */
+    height: 180px;      /* Alto fijo para alinear la cuadrícula */
+    object-fit: cover;  /* LLena el espacio recortando el sobrante sin deformar */
+    object-position: center; /* Centra la imagen dentro del "marco" */
+    border: 1px solid #999; /* Opcional: un borde para mantener el estilo retro */
+    display: block;     /* Evita espacios fantasmas debajo de la imagen */
+}
+        .game-type { color: #666; font-size: 10px; margin-top: 4px; }
+
+        #footer { text-align: center; padding: 40px 0; color: #777; font-size: 11px; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div id="header" style="padding: 20px 0;">
+            <h1 style="color: #8c5300; margin: 0; font-size: 22px;">迷走ポタージュ <span style="font-size: 12px; font-weight: normal; color: #666;">- Archive Selection</span></h1> 
+        </div>
+    </div>
+
+
+    <div class="orange-header-full">
+        <div class="inner-content">
+            <h2 style="margin: 0; font-size: 20px;">作品リスト <span style="font-size: 14px; font-weight: normal;">Product List</span></h2>
+        </div>
+    </div>
+
+    <div class="gallery-grid">
+        <a href="kagi.html" class="Flash Animation">
+            <img class="cover-image" src="cover/kagi.jpg" alt="Patche">
+            <div class="game-title">S Complex</div>
+            <div class="game-type">Animation</div>
+        </a>
+
+        <a href="tetla1.html" class="Flash Animation">
+            <img class="cover-image" src="cover/tetla1.jpg" alt="Eastern Tales">
+            <div class="game-title">Kero⑨ destiny</div>
+            <div class="game-type">Animation</div>
+        </a>
+
+        <a href="kagi.html" class="Flash Animation">
+            <img class="cover-image" src="cover/kagi.jpg" alt="Blazing Hearth">
+            <div class="game-title">Blazing Hearth</div>
+            <div class="game-type">Animation / PV</div>
+        </a>
+
+        <a href="miya.html" class="Flash Animation">
+            <img class="cover-image" src="cover/miya.jpg" alt="true blossom">
+            <div class="game-title">True Blossom</div>
+            <div class="game-type">Animation / PV</div>
+        </a>
+
+        <a href="niji.html" class="Flash Animation">
+            <img class="cover-image" src="cover/niji.jpg" alt="nekoromamcer">
+            <div class="game-title">Heartful Nekoromancer</div>
+            <div class="game-type">Animation / PV</div>
+        </a>
+
+        <a href="take.html" class="Flash Animation">
+            <img class="cover-image" src="cover/take.jpg" alt="Neko Miko Reimu">
+            <div class="game-title">Cat Shrine Maiden Reimu</div>
+            <div class="game-type">Animation / PV</div>
+        </a>
+
+      <a href="tetla.html" class="Flash Animation">
+            <img class="cover-image" src="cover/tetla.jpg" alt="gouryuden">
+            <div class="game-title">Touhou Gouryuden Video Theater</div>
+            <div class="game-type">Animation</div>
+      </a>
+
+      <a href="yamako.html" class="Flash Animation">
+            <img class="cover-image" src="cover/yamko.jpg" alt="Yamako">
+            <div class="game-title">Oath of Soul</div>
+            <div class="game-type">Animation / PV</div>
+      </a>
+
+      <a href="yuki.html" class="Flash Animation">
+            <img class="cover-image" src="cover/yuki.jpg" alt="E-mission">
+            <div class="game-title">Rezamari E-Mission</div>
+            <div class="game-type">Game</div>
+      </a>
+        </div>
+     <div style="margin-top: 40px; font-family: sans-serif; color: #333; line-height: 1.6; max-width: 800px; margin-left: auto; margin-right: auto; padding: 0 15px;">
+
+        <h2 style="background-color: #cc8000; color: #fff; padding: 12px 15px; margin: 0 0 20px 0; font-size: 1.4em; font-weight: bold; border-left: 5px solid #cc7a00; border-right: 5px solid #cc7a00; text-align: center;">
+            ::Announcements <span style="font-size: 0.6em; color: #ffe6b3; margin-left: 10px; text-transform: uppercase;">Topics</span>
+        </h2>
+
+        <div style="margin-bottom: 35px; text-align: center;">
+            <h3 style="color: #8b4513; font-size: 1.2em; margin-bottom: 15px; border-bottom: 1px dashed #ccc; padding-bottom: 10px; display: inline-block;">
+                Comic Market 87 Participation Information
+            </h3>
+            
+            <div style="max-width: 700px; margin: 0 auto; text-align: justify; font-size: 1.05em;">
+                <p style="font-size: 1.1em; font-weight: bold; color: #d32f2f; margin: 0 0 10px 0; text-align: center;">
+                    12/29 (Monday) Higashine-39a
+                </p>
+                <p style="margin: 0 0 10px 0;">
+                    We will be distributing <a href="#" style="color: #8b4513; text-decoration: underline; font-weight: bold;">"Gensokyo Flashback!!"</a>.
+                </p>
+                <p style="margin: 0;">
+                    a compilation DVD of Touhou fan-made Flash animations . Thank you for your support.
+                </p>
+            </div>
+        </div>
+
+        
+    
+  <div style="margin-top: 50px; border: 2px solid #e0d085; background-color: #ffffe8; border-radius: 8px; padding: 25px; font-family: sans-serif;">
+
+    <h2 style="color: #8b4513; font-size: 1.6em; margin: 0 0 5px 0; font-weight: bold;">"Memories rolling around"</h2>
+    <h4 style="color: #555; font-size: 1em; margin: 0 0 25px 0; font-weight: normal;">A thrilling Flash anthology filled with love, friendship, and courage! (But you can't defeat Seymour.)</h4>
+
+    <div style="display: flex; flex-wrap: wrap; gap: 30px;">
+        
+        <div style="flex: 0 0 220px;">
+            <img src="cover/C87.jpg" alt="Gensokyo Flashback!!" style="width: 100%; border: 1px solid #aaa; box-shadow: 2px 2px 5px rgba(0,0,0,0.2);">
+            <p style="font-size: 0.75em; color: #666; text-align: center; margin-top: 8px;">CD case illustration: Miya, Kagi, Uda Tetla</p>
+        </div>
+
+        <div style="flex: 1; min-width: 300px;">
+            <h3 style="color: #8b4513; border-bottom: 2px solid #e0d085; padding-bottom: 5px; margin-top: 0;">"Gensokyo Flashback!!"<br>
+            <span style="font-size: 0.8em; color: #8b4513; font-weight: normal;">Touhou Project Fan-Made Flash Animation DVD</span></h3>
+
+            <table style="width: 100%; border-collapse: collapse; font-size: 0.9em; color: #8b4513; text-align: left;">
+                <tr>
+                    <th style="background-color: #ff9900; color: #fff; padding: 10px; width: 130px; border-bottom: 2px solid #fff;">Event</th>
+                    <td style="padding: 10px; border-bottom: 1px dotted #ccc;"><a href="#" style="color: #8b4513; text-decoration: underline;">Comic Market 87</a></td>
+                </tr>
+                <tr>
+                    <th style="background-color: #ff9900; color: #fff; padding: 10px; border-bottom: 2px solid #fff;">Space</th>
+                    <td style="padding: 10px; border-bottom: 1px dotted #ccc;">East Ne-39a/td>
+                </tr>
+                <tr>
+                    <th style="background-color: #ff9900; color: #fff; padding: 10px; border-bottom: 2px solid #fff;">Distribution Date</th>
+                    <td style="padding: 10px; border-bottom: 1px dotted #ccc;">2014/12/29(Monday)</td>
+                </tr>
+                <tr>
+                    <th style="background-color: #ff9900; color: #fff; padding: 10px; border-bottom: 2px solid #fff;">Price</th>
+                    <td style="padding: 10px; border-bottom: 1px dotted #ccc;">1,000 yen</td>
+               </tr>
+                <tr>
+                    <th style="background-color: #ff9900; color: #fff; padding: 10px; border-bottom: 2px solid #fff;">Specification</th>
+                    <td style="padding: 10px; border-bottom: 1px dotted #ccc;">DVD-VIDEO (tall case)</td>
+                </tr>
+                <tr>
+                    <th style="background-color: #ff9900; color: #fff; padding: 10px; vertical-align: top;">Credit</th>
+                    <td style="padding: 15px 10px;">
+                        
+                        <div style="display: flex; gap: 40px; flex-wrap: wrap; line-height: 1.6;">
+                            <div>
+                                <strong style="color: #333;">Flash</strong><br>
+                                <a href="#" style="color: #8b4513;">Miya</a><br>
+                                <a href="#" style="color: #8b4513;">Uda Tetla</a><br
+                                <a href="#" style="color: #8b4513;">Kagi</a><br>
+                              
+                            </div>
+                            <div>
+                                <strong style="color: #333;">Music</strong><br>
+                                <a href="#" style="color: #8b4513;">IOSYS</a><br>
+                                <a href="#" style="color: #8b4513;">COOL&CREATE</a><br>
+                                <a href="#" style="color: #8b4513;">Keigo</a><br>
+                                <a href="#" style="color: #8b4513;">Day Online</a><br>
+                                <a href="#" style="color: #8b4513;">SOUND HOLIC</a><br>
+                                <a href="#" style="color: #8b4513;">Silver Forest</a><br>
+                                <a href="#" style="color: #8b4513;">SYNC. ARTS</a><br>
+                                <a href="#" style="color: #8b4513;">Soap Shop</a><br>
+                                <a href="#" style="color: #8b4513;">-Pig Girl</a><br>
+                                <a href="#" style="color: #8b4513;">PopKorn</a><br>
+                            </div>
+                            <div>
+                                <strong style="color: #333;">Support</strong><br>
+                                <a href="#" style="color: #8b4513;">Chisei Maeda</a>
+                            </div>
+                        </div>
+
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+  </div>
+    <div id="footer" style="text-align: center; padding: 30px; color: #666; font-size: 12px;">
+        <p>Select a flash animation / game to start.</p>
+        <address>Copyright &copy; 2008-2026 迷走ポタージュ / Average Rumia. Preservation Project, No rights reserved.</address>
+    </div>
+</div>
+
+</body>
+          </html>
