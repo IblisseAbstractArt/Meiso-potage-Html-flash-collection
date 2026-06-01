@@ -2,19 +2,23 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <title>Mesopota - Player</title>
+    <title>Mesopota - Player Retro</title>
     <style>
-        /* --- ESTILOS DE LA PÁGINA DEL REPRODUCTOR --- */
+        /* --- ESTILOS DE LA PÁGINA DEL REPRODUCTOR (BASE) --- */
         body { 
             background-color: #c4c4c4; /* Fondo gris claro clásico */
             color: #333; 
             font-family: "MS PGothic", sans-serif; 
             margin: 0; 
+            animation: flicker 0.15s infinite; /* Efecto de parpadeo global */
         }
+        
         #wrapper { 
             width: 850px; 
             margin: 0 auto; 
             background: #c4c4c4; 
+            position: relative;
+            z-index: 1; /* Asegura que el contenido quede bajo las scanlines */
         }
         
         /* El menú naranja estilo barra */
@@ -39,13 +43,98 @@
         }
         .orange-menu a:hover { text-decoration: underline; color: #ffe6b3; }
 
-        /* Contenedor del Flash */
+        /* Contenedor principal del centrado */
         #visual2 {
             display: flex;
             justify-content: center;
             margin: 30px 0;
-            background: #c4c4c4; /* Color de fondo mientras carga Ruffle */
+            background: #c4c4c4;
             padding: 10px;
+        }
+
+        /* --- EFECTOS RETRO (ESSENTIALS) --- */
+        
+        /* Capa de Scanlines globales */
+        body::before {
+            content: " ";
+            display: block;
+            position: fixed;
+            top: 0; left: 0; bottom: 0; right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%),
+                        linear-gradient(90deg, rgba(255, 0, 0, 0.02), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.02));
+            z-index: 9999;
+            pointer-events: none;
+            background-size: 100% 6px, 5px 100%;
+        }
+
+        @keyframes flicker {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.98; }
+        }
+
+        /* Contenedor específico para aplicar filtros al reproductor */
+        #flash-container {
+            filter: url(#vhs-glitch-logic) url(#vhs-rgb-toxic); 
+            will-change: filter;
+            position: relative; /* Clave para contener la viñeta y el roll */
+            display: inline-block; /* Se ajusta al tamaño exacto del video */
+            line-height: 0; /* Evita márgenes fantasma debajo del video */
+            overflow: hidden; /* <--- AÑADE ESTA LÍNEA */
+        }
+
+        /* Viñeta (CRT look) superpuesta al video */
+        #flash-container::after {
+            content: " ";
+            display: block;
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            box-shadow: inset 0 0 80px rgba(0,0,0,0.85),
+                        inset 0 0 20px rgba(0,0,0,1);
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        /* Barra de desplazamiento blanca (CRT Roll) */
+        #flash-container::before {
+            content: " ";
+            display: block;
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 12%;
+            background: linear-gradient(
+                to bottom, 
+                rgba(255,255,255,0) 0%, 
+                rgba(255,255,255,0.08) 50%, 
+                rgba(255,255,255,0) 100%
+            );
+            pointer-events: none;
+            z-index: 15;
+            animation: crt-roll 8s linear infinite;
+        }
+
+        @keyframes crt-roll {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(900%); }
+        }
+
+        /* Botones Retro */
+        .glitch-btn {
+            background-color: #000 !important;
+            color: #39fdc1;
+            border: 1px solid #39fdc1;
+            padding: 8px 16px;
+            cursor: pointer;
+            font-family: monospace;
+            margin: 5px;
+            transition: 0.3s;
+            outline: none;
+            position: relative;
+            z-index: 10000; /* Asegura que sean cliqueables */
+        }
+        
+        .glitch-btn:hover {
+            background-color: #39fdc1;
+            color: #000;
         }
 
         /* Sección de Información */
@@ -64,6 +153,40 @@
 </head>
 <body>
 
+<!-- SVG FILTERS (Ocultos pero necesarios para el glitch) -->
+<svg style="display: none;">
+    <filter id="vhs-glitch-logic">
+        <feTurbulence type="fractalNoise" baseFrequency="0.001 0.15" numOctaves="1" result="noise">
+            <animate attributeName="seed" from="1" to="100" dur="1s" repeatCount="indefinite" />
+        </feTurbulence>
+        <feColorMatrix in="noise" type="matrix" values="1 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 15 -8" result="dest-map" />
+        <feDisplacementMap in="SourceGraphic" in2="dest-map" scale="0" xChannelSelector="R" result="glitched-raw">
+            <animate attributeName="scale" values="0; 0; 50; 0; 0; 30; 0; 70; 0" keyTimes="0; 0.7; 0.72; 0.75; 0.85; 0.87; 0.9; 0.92; 1" dur="5s" repeatCount="indefinite" />
+        </feDisplacementMap>
+        <feColorMatrix in="glitched-raw" type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 1 0">
+            <animate attributeName="values" calcMode="discrete" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 1 0; -1 0 0 0 1  0 -1 0 0 1  0 0 -1 0 1  0 0 0 1 0; 1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 1 0; 1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 1 0" keyTimes="0; 0.85; 0.90; 1" dur="10s" repeatCount="indefinite" />
+        </feColorMatrix>
+    </filter>
+
+    <filter id="vhs-rgb-toxic">
+        <feOffset in="SourceGraphic" dx="3" dy="0" result="purple-p"/>
+        <feColorMatrix in="purple-p" type="matrix" values="1 0 0 0 0  0 0 0 0 0  0 0 1 0 0  0 0 0 1 0" result="chan-purple"/>
+        <feOffset in="SourceGraphic" dx="-3" dy="0" result="green-p"/>
+        <feColorMatrix in="green-p" type="matrix" values="0 0 0 0 0  0 1 0 0 0  0 0 0 0 0  0 0 0 1 0" result="chan-green"/>
+        <feBlend mode="screen" in="chan-purple" in2="chan-green"/>
+    </filter>
+
+    <filter id="vhs-rgb-classic">
+        <feOffset in="SourceGraphic" dx="6" dy="0" result="red-p"/>
+        <feColorMatrix in="red-p" type="matrix" values="1 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0" result="r"/>
+        <feColorMatrix in="SourceGraphic" type="matrix" values="0 0 0 0 0  0 1 0 0 0  0 0 0 0 0  0 0 0 1 0" result="g"/>
+        <feOffset in="SourceGraphic" dx="-6" dy="0" result="blue-p"/>
+        <feColorMatrix in="blue-p" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 1 0 0  0 0 0 1 0" result="b"/>
+        <feBlend mode="screen" in="r" in2="g" result="rg"/>
+        <feBlend mode="screen" in="rg" in2="b"/>
+    </filter>
+</svg>
+
 <div id="wrapper">
     <div id="header" style="text-align: left; padding: 15px;">
         <h1 style="color: #8c5300; margin: 0; font-size: 1.5em;">迷走ポタージュ</h1> 
@@ -77,22 +200,46 @@
         </ul>
     </div>
 
-    <<div id="visual2">
-        <!-- El atributo 'controls' añade los botones de play/pausa/volumen nativos del navegador -->
-        <video width="800" height="450" controls style="background-color: #000; border: 1px solid #333;">
-            <!-- Reemplaza la ruta en 'src' con el nombre de tu archivo mp4 -->
-            <source src="https://files.catbox.moe/0evndg.mp4" type="video/mp4">
-            
-            <!-- Este texto solo se mostrará si alguien usa un navegador prehistórico que no soporta HTML5 -->
-            Your browser does not support the HTML5 video player.
-        </video>
+    <!-- Contenedor del video con el wrapper para los filtros -->
+    <div id="visual2">
+        <div id="flash-container">
+            <video width="800" height="450" controls style="background-color: #000; border: 1px solid #333; display: block;">
+                <source src="https://files.catbox.moe/0evndg.mp4" type="video/mp4">
+                Your browser does not support the HTML5 video player. 
+            </video>
+        </div>
+    </div>
+
+    <!-- Botones de Control de Glitch -->
+    <div style="margin-bottom: 30px; display: flex; justify-content: center; gap: 10px;">
+        <button id="glitch-btn" class="glitch-btn" onclick="toggleGlitch()">[ Disable Glitch / Negatives ]</button>
+        <button id="style-btn" class="glitch-btn" onclick="toggleStyle()">[ Style: TOXIC (Green/Purple) ]</button>
     </div>
 
     <div id="content">
         <div id="info">
             <h2 class="orange-header">Mp4<span style="font-size: 0.7em; font-weight: normal; margin-left: 10px;">Animation</span></h2>
             <p>type: Mp4 Animation. Modded: Average Rumia. Hosted: Github Server</p>
-            <p style="color: #666;">first mp4 integration lol</p>
+            <p style="color: #666;">the last DVD video fr</p>
+        </div>
+
+        <!-- GISCUS Comentarios -->
+        <div style="margin-top: 40px;">
+            <script src="https://giscus.app/client.js"
+                data-repo="IblisseAbstractArt/Meiso-potage-Html-flash-collection"
+                data-repo-id="R_kgDORp4pkQ"
+                data-category="General"
+                data-category-id="DIC_kwDORp4pkc4C5HRy"
+                data-mapping="pathname"
+                data-strict="0"
+                data-reactions-enabled="1"
+                data-emit-metadata="0"
+                data-input-position="bottom"
+                data-theme="dark"
+                data-lang="es"
+                crossorigin="anonymous"
+                async>
+            </script>
         </div>
     </div>
 
@@ -107,6 +254,54 @@
     </div>
 </div>
 
+<!-- Lógica JavaScript para los botones -->
+<script>
+    let isGlitchActive = true; 
+    let currentStyle = 'toxic'; 
+
+    function updateFilters() {
+        const container = document.getElementById('flash-container');
+        let filters = [];
+
+        if (isGlitchActive) filters.push('url(#vhs-glitch-logic)');
+        
+        if (currentStyle === 'toxic') {
+            filters.push('url(#vhs-rgb-toxic)');
+        } else {
+            filters.push('url(#vhs-rgb-classic)');
+        }
+
+        container.style.filter = filters.join(' ');
+    }
+
+    function toggleGlitch() {
+        isGlitchActive = !isGlitchActive;
+        const btn = document.getElementById('glitch-btn');
+        if (isGlitchActive) {
+            btn.textContent = '[ Disable Glitch / Negatives ]';
+            btn.style.color = ''; btn.style.borderColor = ''; btn.style.boxShadow = '';
+        } else {
+            btn.textContent = '[ Enable Glitch / Negatives ]';
+            btn.style.color = '#ff5555'; btn.style.borderColor = '#ff5555';
+        }
+        updateFilters();
+    }
+
+    function toggleStyle() {
+        currentStyle = (currentStyle === 'toxic') ? 'classic' : 'toxic';
+        const btn = document.getElementById('style-btn');
+        if (currentStyle === 'toxic') {
+            btn.textContent = '[ Style: TOXIC (Green/Purple) ]';
+            btn.style.color = '#39fdc1'; btn.style.borderColor = '#39fdc1';
+        } else {
+            btn.textContent = '[ Style: CLASSIC (Red/Blue) ]';
+            btn.style.color = '#55aaff'; btn.style.borderColor = '#55aaff';
+        }
+        updateFilters();
+    }
+
+    updateFilters();
+</script>
+
 </body>
 </html>
-
