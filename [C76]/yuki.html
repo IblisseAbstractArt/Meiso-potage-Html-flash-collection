@@ -6,7 +6,7 @@
     <script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
     
     <style>
-        /* Base de Ruffle */
+        /* Adaptado para los 800x600 de GuruGuru */
         #flash-container {
             width: 800px;
             height: 600px;
@@ -15,22 +15,34 @@
             position: relative;
             border: 2px solid #222;
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+            /* APLICAMOS EL FILTRO */
             filter: url(#rgb-split); 
             will-change: filter;
         }
 
+        /* 1. La viñeta: sombra interna fuerte y suave */
         #flash-container::after {
-            content: " "; display: block; position: absolute;
+            content: " ";
+            display: block;
+            position: absolute;
             top: 0; left: 0; right: 0; bottom: 0;
-            box-shadow: inset 0 0 80px rgba(0,0,0,0.85), inset 0 0 20px rgba(0,0,0,1);
-            pointer-events: none; z-index: 10;
+            box-shadow: inset 0 0 80px rgba(0,0,0,0.85),
+                        inset 0 0 20px rgba(0,0,0,1);
+            pointer-events: none;
+            z-index: 10;
         }
 
+        /* 2. El barrido de línea CRT que baja (CRT Roll effect) */
         #flash-container::before {
-            content: " "; display: block; position: absolute;
-            top: 0; left: 0; right: 0; height: 10px;
+            content: " ";
+            display: block;
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 10px;
             background: rgba(255, 255, 255, 0.06);
-            pointer-events: none; z-index: 11;
+            blur: 2px;
+            pointer-events: none;
+            z-index: 11;
             animation: crt-sweep 6s linear infinite;
         }
 
@@ -39,7 +51,8 @@
             100% { top: 100%; }
         }
 
-        /* --- BOTÓN PARA MOSTRAR/OCULTAR CONTROLES --- */
+        /* --- NUEVOS ESTILOS PARA LOS BOTONES VIRTUALES --- */
+        
         .toggle-pad-btn {
             background-color: #111;
             color: #5555ff;
@@ -51,18 +64,21 @@
             margin-top: 15px;
             margin-bottom: 5px;
             display: inline-block;
+            text-decoration: none;
         }
-        .toggle-pad-btn:hover { background-color: #5555ff; color: #fff; }
+        .toggle-pad-btn:hover {
+            background-color: #5555ff;
+            color: #fff;
+        }
 
-        /* --- CONTENEDOR PRINCIPAL DEL GAMEPAD --- */
         #virtual-gamepad {
-            display: none; /* Oculto en PC por defecto */
+            display: none; /* Oculto por defecto para PC */
             width: 800px;
             margin: 15px auto;
             justify-content: space-between;
             align-items: center;
-            background: rgba(0, 0, 0, 0.6);
-            padding: 30px 40px;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 20px;
             border: 2px solid #333;
             border-radius: 10px;
             box-sizing: border-box;
@@ -70,51 +86,55 @@
             -webkit-user-select: none;
         }
 
-        /* --- ESTRUCTURA DEL JOYSTICK VIRTUAL --- */
-        .joystick-zone {
-            width: 140px;
-            height: 140px;
+        /* Distribución del D-Pad (Flechas) en cruz */
+        .dpad {
+            display: grid;
+            grid-template-columns: repeat(3, 55px);
+            grid-template-rows: repeat(3, 55px);
+            gap: 4px;
+        }
+        .dpad button {
+            width: 55px;
+            height: 55px;
+            background: #252525;
+            color: #fff;
+            border: 2px solid #444;
+            border-radius: 6px;
+            font-size: 22px;
+            font-weight: bold;
+            cursor: pointer;
+            touch-action: manipulation;
+        }
+        .btn-up { grid-column: 2; grid-row: 1; }
+        .btn-left { grid-column: 1; grid-row: 2; }
+        .btn-right { grid-column: 3; grid-row: 2; }
+        .btn-down { grid-column: 2; grid-row: 3; }
+
+        /* Distribución de Botones de Acción (Z y X) */
+        .actions {
             display: flex;
-            justify-content: center;
-            align-items: center;
+            gap: 20px;
         }
-        
-        /* La base circular del stick */
-        .joystick-base {
-            width: 130px;
-            height: 130px;
-            background: rgba(255, 255, 255, 0.1);
-            border: 3px solid rgba(255, 255, 255, 0.4);
-            border-radius: 50%;
-            position: relative;
-            touch-action: none; /* Crucial para evitar que el móvil mueva la pantalla */
-        }
-
-        /* El pomo/palanca central que mueves con el dedo */
-        .joystick-knob {
-            width: 50px;
-            height: 50px;
-            background: #e67300;
-            border: 2px solid #fff;
-            border-radius: 50%;
-            position: absolute;
-            left: 38px;
-            top: 38px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
-            transition: transform 0.05s linear;
-        }
-
-        /* --- BOTONES DE ACCIÓN (Z y X) --- */
-        .actions { display: flex; gap: 20px; }
         .actions button {
-            width: 65px; height: 65px;
-            background: #a31c1c; color: #fff;
-            border: 3px solid #ff4d4d; border-radius: 50%;
-            font-size: 20px; font-weight: bold;
-            cursor: pointer; touch-action: manipulation;
+            width: 65px;
+            height: 65px;
+            background: #a31c1c;
+            color: #fff;
+            border: 3px solid #ff4d4d;
+            border-radius: 50%;
+            font-size: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            touch-action: manipulation;
             box-shadow: 0 4px #5c1010;
         }
-        .actions button:active { transform: translateY(3px); box-shadow: 0 1px #5c1010; }
+        .actions button:active {
+            transform: translateY(3px);
+            box-shadow: 0 1px #5c1010;
+        }
+        .dpad button:active {
+            background: #555;
+        }
     </style>
 
     <svg style="display: none;">
@@ -135,7 +155,7 @@
 <center>
     <h3>Rezamari E-mission [Ruffle fix]</h3>
     
-    <div id="flash-container">
+    <div id=\"flash-container\">
         <object width="800" height="600">
             <param name="movie" value="swf/yuki.swf">
             <embed src="swf/yuki.swf" width="800" height="600"></embed>
@@ -145,10 +165,11 @@
     <button id="toggle-pad-btn" class="toggle-pad-btn" onclick="toggleGamepad()">[ Enable Touch Controls ]</button>
 
     <div id="virtual-gamepad">
-        <div class="joystick-zone">
-            <div class="joystick-base" id="joy-base">
-                <div class="joystick-knob" id="joy-knob"></div>
-            </div>
+        <div class="dpad">
+            <button class="btn-up" onmousedown="pressKey(event, 38, 'ArrowUp')" onmouseup="releaseKey(event, 38, 'ArrowUp')" ontouchstart="pressKey(event, 38, 'ArrowUp')" ontouchend="releaseKey(event, 38, 'ArrowUp')">▲</button>
+            <button class="btn-left" onmousedown="pressKey(event, 37, 'ArrowLeft')" onmouseup="releaseKey(event, 37, 'ArrowLeft')" ontouchstart="pressKey(event, 37, 'ArrowLeft')" ontouchend="releaseKey(event, 37, 'ArrowLeft')">◀</button>
+            <button class="btn-right" onmousedown="pressKey(event, 39, 'ArrowRight')" onmouseup="releaseKey(event, 39, 'ArrowRight')" ontouchstart="pressKey(event, 39, 'ArrowRight')" ontouchend="releaseKey(event, 39, 'ArrowRight')">▶</button>
+            <button class="btn-down" onmousedown="pressKey(event, 40, 'ArrowDown')" onmouseup="releaseKey(event, 40, 'ArrowDown')" ontouchstart="pressKey(event, 40, 'ArrowDown')" ontouchend="releaseKey(event, 40, 'ArrowDown')">▼</button>
         </div>
         
         <div class="actions">
@@ -162,128 +183,43 @@
     <font size="2">
         Type = Flash Game<br>
         Modded = Average Rumia<br>
-        Hosted = Github Server [virtual buttons available] <br><br>
+        Hosted = Github Server [keyboard needed to play] <br><br>
+        
         <a href="./index.html" style="color: #5555ff;">[ Return to the menu ]</a><br><br>
+        
         (c) 2026 Meiso Potage / Average Rumia, No rights reserved.
     </font>
 
 <script>
-    // --- SISTEMA INTERNO DE TECLAS DE RUFFLE ---
-    function sendKey(type, keyCode, keyName) {
-        const event = new KeyboardEvent(type, {
-            key: keyName, code: keyName, keyCode: keyCode, which: keyCode, bubbles: true, cancelable: true
+    // Envía el evento de presionar tecla
+    function pressKey(e, keyCode, keyName) {
+        if(e && e.cancelable) e.preventDefault(); // Evita zooms raros en móvil
+        const event = new KeyboardEvent('keydown', {
+            key: keyName,
+            code: keyName,
+            keyCode: keyCode,
+            which: keyCode,
+            bubbles: true,
+            cancelable: true
         });
         window.dispatchEvent(event);
     }
 
-    function pressKey(e, keyCode, keyName) {
-        if(e && e.cancelable) e.preventDefault();
-        sendKey('keydown', keyCode, keyName);
-    }
-
+    // Envía el evento de soltar tecla
     function releaseKey(e, keyCode, keyName) {
         if(e && e.cancelable) e.preventDefault();
-        sendKey('keyup', keyCode, keyName);
+        const event = new KeyboardEvent('keyup', {
+            key: keyName,
+            code: keyName,
+            keyCode: keyCode,
+            which: keyCode,
+            bubbles: true,
+            cancelable: true
+        });
+        window.dispatchEvent(event);
     }
 
-    // --- LÓGICA MATEMÁTICA DEL JOYSTICK TRASLADADA A TECLADO VIRTUAL ---
-    const base = document.getElementById('joy-base');
-    const knob = document.getElementById('joy-knob');
-    
-    let activeKeys = { ArrowUp: false, ArrowDown: false, ArrowLeft: false, ArrowRight: false };
-    let dragStart = null;
-    const maxRadius = 40; // Límite de qué tan lejos puede ir el pomo central
-
-    function handleJoystickMove(x, y) {
-        // Calcular distancias
-        let dx = x - dragStart.x;
-        let dy = y - dragStart.y;
-        const distance = Math.sqrt(dx * dx + dy * dy);
-        
-        // Mantener el pomo dentro de la circunferencia límite
-        if (distance > maxRadius) {
-            dx = (dx / distance) * maxRadius;
-            dy = (dy / distance) * maxRadius;
-        }
-        
-        // Mover visualmente la palanca
-        knob.style.transform = `translate(${dx}px, ${dy}px)`;
-
-        // Determinar qué direcciones activar según la inclinación del vector
-        // Usamos un umbral (threshold) de 12px para evitar activar teclas con temblores leves del dedo
-        const threshold = 12;
-        const newKeys = {
-            ArrowUp: dy < -threshold,
-            ArrowDown: dy > threshold,
-            ArrowLeft: dx < -threshold,
-            ArrowRight: dx > threshold
-        };
-
-        // Disparar eventos Keydown/Keyup automáticos solo si el estado de la dirección cambió
-        for (let key in newKeys) {
-            if (newKeys[key] !== activeKeys[key]) {
-                if (newKeys[key]) {
-                    sendKey('keydown', getKeyCode(key), key);
-                } else {
-                    sendKey('keyup', getKeyCode(key), key);
-                }
-                activeKeys[key] = newKeys[key];
-            }
-        }
-    }
-
-    function getKeyCode(key) {
-        if (key === 'ArrowUp') return 38;
-        if (key === 'ArrowDown') return 40;
-        if (key === 'ArrowLeft') return 37;
-        if (key === 'ArrowRight') return 39;
-    }
-
-    function resetJoystick() {
-        dragStart = null;
-        knob.style.transform = 'translate(0px, 0px)';
-        // Soltar todas las teclas de movimiento inmediatamente al levantar el dedo
-        for (let key in activeKeys) {
-            if (activeKeys[key]) {
-                sendKey('keyup', getKeyCode(key), key);
-                activeKeys[key] = false;
-            }
-        }
-    }
-
-    // Eventos táctiles para dispositivos móviles
-    base.addEventListener('touchstart', (e) => {
-        const touch = e.touches[0];
-        dragStart = { x: touch.clientX, y: touch.clientY };
-    });
-
-    base.addEventListener('touchmove', (e) => {
-        if (!dragStart) return;
-        const touch = e.touches[0];
-        handleJoystickMove(touch.clientX, touch.clientY);
-    });
-
-    base.addEventListener('touchend', resetJoystick);
-
-    // Eventos de Mouse (Para poder probarlo también haciendo clic y arrastrando en PC)
-    base.addEventListener('mousedown', (e) => {
-        dragStart = { x: e.clientX, y: e.clientY };
-        document.addEventListener('mousemove', mouseMoveHandler);
-        document.addEventListener('mouseup', mouseUpHandler);
-    });
-
-    function mouseMoveHandler(e) {
-        if (!dragStart) return;
-        handleJoystickMove(e.clientX, e.clientY);
-    }
-
-    function mouseUpHandler() {
-        document.removeEventListener('mousemove', mouseMoveHandler);
-        document.removeEventListener('mouseup', mouseUpHandler);
-        resetJoystick();
-    }
-
-    // Función Toggle para mostrar u ocultar
+    // Muestra y oculta el panel interactivo
     function toggleGamepad() {
         const pad = document.getElementById('virtual-gamepad');
         const btn = document.getElementById('toggle-pad-btn');
@@ -314,4 +250,4 @@
 </script>
 </center>
 </body>
-</html>
+ </html>
