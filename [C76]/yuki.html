@@ -12,7 +12,7 @@
             height: 600px;
             margin: 0 auto;
             overflow: hidden;
-            position: relative;
+        position: relative;
             border: 2px solid #222;
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
             /* APLICAMOS EL FILTRO */
@@ -32,119 +32,71 @@
             z-index: 10;
         }
 
-        /* 2. El barrido de línea CRT que baja (CRT Roll effect) */
+        /* 2. La franja blanca transparente (CRT Roll) */
         #flash-container::before {
             content: " ";
             display: block;
             position: absolute;
             top: 0; left: 0; right: 0;
-            height: 10px;
-            background: rgba(255, 255, 255, 0.06);
-            blur: 2px;
+            height: 12%;
+            background: linear-gradient(
+                to bottom, 
+                rgba(255,255,255,0) 0%, 
+                rgba(255,255,255,0.08) 50%, 
+                rgba(255,255,255,0) 100%
+            );
             pointer-events: none;
-            z-index: 11;
-            animation: crt-sweep 6s linear infinite;
+            z-index: 15;
+            animation: crt-roll 6s linear infinite;
         }
 
-        @keyframes crt-sweep {
-            0% { top: -10px; }
-            100% { top: 100%; }
+        /* 3. La animación de bajada (Corregida sin el '?') */
+        @keyframes crt-roll {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(900%); }
+        }
+        /* 2. Capa CRT (Scanlines) - Ajustada para no tapar tanto */
+        body::before {
+            content: " ";
+            display: block;
+            position: fixed;
+            top: 0; left: 0; bottom: 0; right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%),
+                        linear-gradient(90deg, rgba(255, 0, 0, 0.02), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.02));
+            z-index: 9999;
+            pointer-events: none;
+            /* Bajé un poco el grosor de 6px a 4px para que sea menos invasivo */
+            background-size: 100% 6px, 5px 100%;
         }
 
-        /* --- NUEVOS ESTILOS PARA LOS BOTONES VIRTUALES --- */
-        
-        .toggle-pad-btn {
-            background-color: #111;
-            color: #5555ff;
-            border: 1px solid #5555ff;
-            padding: 6px 12px;
-            font-family: monospace;
-            font-size: 13px;
-            cursor: pointer;
-            margin-top: 15px;
-            margin-bottom: 5px;
-            display: inline-block;
-            text-decoration: none;
-        }
-        .toggle-pad-btn:hover {
-            background-color: #5555ff;
-            color: #fff;
+        @keyframes flicker {
+            0% { opacity: 0.98; }
+            5% { opacity: 0.95; }
+            10% { opacity: 0.99; }
+            100% { opacity: 1; } /* Corregido de 5 a 1 */
         }
 
-        #virtual-gamepad {
-            display: none; /* Oculto por defecto para PC */
-            width: 800px;
-            margin: 15px auto;
-            justify-content: space-between;
-            align-items: center;
-            background: rgba(0, 0, 0, 0.5);
+        body {
+            background-color: #0c6128;
+            color: #ffffff;
+            margin: 0;
             padding: 20px;
-            border: 2px solid #333;
-            border-radius: 10px;
-            box-sizing: border-box;
-            user-select: none;
-            -webkit-user-select: none;
-        }
-
-        /* Distribución del D-Pad (Flechas) en cruz */
-        .dpad {
-            display: grid;
-            grid-template-columns: repeat(3, 55px);
-            grid-template-rows: repeat(3, 55px);
-            gap: 4px;
-        }
-        .dpad button {
-            width: 55px;
-            height: 55px;
-            background: #252525;
-            color: #fff;
-            border: 2px solid #444;
-            border-radius: 6px;
-            font-size: 22px;
-            font-weight: bold;
-            cursor: pointer;
-            touch-action: manipulation;
-        }
-        .btn-up { grid-column: 2; grid-row: 1; }
-        .btn-left { grid-column: 1; grid-row: 2; }
-        .btn-right { grid-column: 3; grid-row: 2; }
-        .btn-down { grid-column: 2; grid-row: 3; }
-
-        /* Distribución de Botones de Acción (Z y X) */
-        .actions {
-            display: flex;
-            gap: 20px;
-        }
-        .actions button {
-            width: 65px;
-            height: 65px;
-            background: #a31c1c;
-            color: #fff;
-            border: 3px solid #ff4d4d;
-            border-radius: 50%;
-            font-size: 20px;
-            font-weight: bold;
-            cursor: pointer;
-            touch-action: manipulation;
-            box-shadow: 0 4px #5c1010;
-        }
-        .actions button:active {
-            transform: translateY(3px);
-            box-shadow: 0 1px #5c1010;
-        }
-        .dpad button:active {
-            background: #555;
-        }
+            font-family: sans-serif;
+            animation: flicker 0.15s infinite;
+        
+        font[size="2"] {
+        color: #ffffff;
+        line-height: 1.6;
+            {
     </style>
 
     <svg style="display: none;">
       <filter id="rgb-split">
-        <feOffset in="SourceGraphic" dx="2" dy="0" result="red-blur"/>
-        <feColorMatrix in="red-blur" type="matrix" values="1 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0" result="red-only"/>
-        <feOffset in="SourceGraphic" dx="0" dy="0" result="green-blur"/>
-        <feColorMatrix in="green-blur" type="matrix" values="0 0 0 0 0  0 1 0 0 0  0 0 0 0 0  0 0 0 1 0" result="green-only"/>
-        <feOffset in="SourceGraphic" dx="-2" dy="0" result="blue-blur"/>
-        <feColorMatrix in="blue-blur" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 1 0 0  0 0 0 1 0" result="blue-only"/>
+        <feOffset in="SourceGraphic" dx="5" dy="0" result="red-shift"/>
+        <feColorMatrix in="red-shift" type="matrix" values="1 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0" result="red-only"/>
+        <feColorMatrix in="SourceGraphic" type="matrix" values="0 0 0 0 0  0 1 0 0 0  0 0 0 0 0  0 0 0 1 0" result="green-only"/>
+        <feOffset in="SourceGraphic" dx="-5" dy="0" result="blue-shift"/>
+        <feColorMatrix in="blue-shift" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 1 0 0  0 0 0 1 0" result="blue-only"/>
         <feBlend mode="screen" in="red-only" in2="green-only" result="red-green"/>
         <feBlend mode="screen" in="red-green" in2="blue-only"/>
       </filter>
@@ -155,27 +107,11 @@
 <center>
     <h3>Rezamari E-mission [Ruffle fix]</h3>
     
-    <div id=\"flash-container\">
+    <div id="flash-container">
         <object width="800" height="600">
             <param name="movie" value="swf/yuki.swf">
             <embed src="swf/yuki.swf" width="800" height="600"></embed>
         </object>
-    </div>
-
-    <button id="toggle-pad-btn" class="toggle-pad-btn" onclick="toggleGamepad()">[ Enable Touch Controls ]</button>
-
-    <div id="virtual-gamepad">
-        <div class="dpad">
-            <button class="btn-up" onmousedown="pressKey(event, 38, 'ArrowUp')" onmouseup="releaseKey(event, 38, 'ArrowUp')" ontouchstart="pressKey(event, 38, 'ArrowUp')" ontouchend="releaseKey(event, 38, 'ArrowUp')">▲</button>
-            <button class="btn-left" onmousedown="pressKey(event, 37, 'ArrowLeft')" onmouseup="releaseKey(event, 37, 'ArrowLeft')" ontouchstart="pressKey(event, 37, 'ArrowLeft')" ontouchend="releaseKey(event, 37, 'ArrowLeft')">◀</button>
-            <button class="btn-right" onmousedown="pressKey(event, 39, 'ArrowRight')" onmouseup="releaseKey(event, 39, 'ArrowRight')" ontouchstart="pressKey(event, 39, 'ArrowRight')" ontouchend="releaseKey(event, 39, 'ArrowRight')">▶</button>
-            <button class="btn-down" onmousedown="pressKey(event, 40, 'ArrowDown')" onmouseup="releaseKey(event, 40, 'ArrowDown')" ontouchstart="pressKey(event, 40, 'ArrowDown')" ontouchend="releaseKey(event, 40, 'ArrowDown')">▼</button>
-        </div>
-        
-        <div class="actions">
-            <button onmousedown="pressKey(event, 88, 'x')" onmouseup="releaseKey(event, 88, 'x')" ontouchstart="pressKey(event, 88, 'x')" ontouchend="releaseKey(event, 88, 'x')">X</button>
-            <button onmousedown="pressKey(event, 90, 'z')" onmouseup="releaseKey(event, 90, 'z')" ontouchstart="pressKey(event, 90, 'z')" ontouchend="releaseKey(event, 90, 'z')">Z</button>
-        </div>
     </div>
 
     <br>
@@ -189,65 +125,21 @@
         
         (c) 2026 Meiso Potage / Average Rumia, No rights reserved.
     </font>
-
-<script>
-    // Envía el evento de presionar tecla
-    function pressKey(e, keyCode, keyName) {
-        if(e && e.cancelable) e.preventDefault(); // Evita zooms raros en móvil
-        const event = new KeyboardEvent('keydown', {
-            key: keyName,
-            code: keyName,
-            keyCode: keyCode,
-            which: keyCode,
-            bubbles: true,
-            cancelable: true
-        });
-        window.dispatchEvent(event);
-    }
-
-    // Envía el evento de soltar tecla
-    function releaseKey(e, keyCode, keyName) {
-        if(e && e.cancelable) e.preventDefault();
-        const event = new KeyboardEvent('keyup', {
-            key: keyName,
-            code: keyName,
-            keyCode: keyCode,
-            which: keyCode,
-            bubbles: true,
-            cancelable: true
-        });
-        window.dispatchEvent(event);
-    }
-
-    // Muestra y oculta el panel interactivo
-    function toggleGamepad() {
-        const pad = document.getElementById('virtual-gamepad');
-        const btn = document.getElementById('toggle-pad-btn');
-        if (pad.style.display === 'none' || pad.style.display === '') {
-            pad.style.display = 'flex';
-            btn.textContent = '[ Hide Touch Controls ]';
-        } else {
-            pad.style.display = 'none';
-            btn.textContent = '[ Enable Touch Controls ]';
-        }
-    }
-</script>
-
 <script src="https://giscus.app/client.js"
-    data-repo="IblisseAbstractArt/Meiso-potage-Html-flash-collection"
-    data-repo-id="R_kgDORp4pkQ"
-    data-category="General"
-    data-category-id="DIC_kwDORp4pkc4C5HRy"
-    data-mapping="pathname"
-    data-strict="0"
-    data-reactions-enabled="1"
-    data-emit-metadata="0"
-    data-input-position="bottom"
-    data-theme="dark"
-    data-lang="es"
-    crossorigin="anonymous"
-    async>
+        data-repo="IblisseAbstractArt/Meiso-potage-Html-flash-collection"
+        data-repo-id="R_kgDORp4pkQ"
+        data-category="General"
+        data-category-id="DIC_kwDORp4pkc4C5HRy"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="dark"
+        data-lang="es"
+        crossorigin="anonymous"
+        async>
 </script>
 </center>
 </body>
- </html>
+</html>
