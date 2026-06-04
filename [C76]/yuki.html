@@ -6,97 +6,125 @@
     <script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
     
     <style>
-        /* Adaptado para los 800x600 de GuruGuru */
+        /* Base de Ruffle */
         #flash-container {
             width: 800px;
             height: 600px;
             margin: 0 auto;
             overflow: hidden;
-        position: relative;
+            position: relative;
             border: 2px solid #222;
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
-            /* APLICAMOS EL FILTRO */
             filter: url(#rgb-split); 
             will-change: filter;
         }
 
-        /* 1. La viñeta: sombra interna fuerte y suave */
         #flash-container::after {
-            content: " ";
-            display: block;
-            position: absolute;
+            content: " "; display: block; position: absolute;
             top: 0; left: 0; right: 0; bottom: 0;
-            box-shadow: inset 0 0 80px rgba(0,0,0,0.85),
-                        inset 0 0 20px rgba(0,0,0,1);
-            pointer-events: none;
-            z-index: 10;
+            box-shadow: inset 0 0 80px rgba(0,0,0,0.85), inset 0 0 20px rgba(0,0,0,1);
+            pointer-events: none; z-index: 10;
         }
 
-        /* 2. La franja blanca transparente (CRT Roll) */
         #flash-container::before {
-            content: " ";
-            display: block;
-            position: absolute;
-            top: 0; left: 0; right: 0;
-            height: 12%;
-            background: linear-gradient(
-                to bottom, 
-                rgba(255,255,255,0) 0%, 
-                rgba(255,255,255,0.08) 50%, 
-                rgba(255,255,255,0) 100%
-            );
-            pointer-events: none;
-            z-index: 15;
-            animation: crt-roll 6s linear infinite;
+            content: " "; display: block; position: absolute;
+            top: 0; left: 0; right: 0; height: 10px;
+            background: rgba(255, 255, 255, 0.06);
+            pointer-events: none; z-index: 11;
+            animation: crt-sweep 6s linear infinite;
         }
 
-        /* 3. La animación de bajada (Corregida sin el '?') */
-        @keyframes crt-roll {
-            0% { transform: translateY(-100%); }
-            100% { transform: translateY(900%); }
-        }
-        /* 2. Capa CRT (Scanlines) - Ajustada para no tapar tanto */
-        body::before {
-            content: " ";
-            display: block;
-            position: fixed;
-            top: 0; left: 0; bottom: 0; right: 0;
-            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%),
-                        linear-gradient(90deg, rgba(255, 0, 0, 0.02), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.02));
-            z-index: 9999;
-            pointer-events: none;
-            /* Bajé un poco el grosor de 6px a 4px para que sea menos invasivo */
-            background-size: 100% 6px, 5px 100%;
+        @keyframes crt-sweep {
+            0% { top: -10px; }
+            100% { top: 100%; }
         }
 
-        @keyframes flicker {
-            0% { opacity: 0.98; }
-            5% { opacity: 0.95; }
-            10% { opacity: 0.99; }
-            100% { opacity: 1; } /* Corregido de 5 a 1 */
+        /* --- BOTÓN PARA MOSTRAR/OCULTAR CONTROLES --- */
+        .toggle-pad-btn {
+            background-color: #111;
+            color: #5555ff;
+            border: 1px solid #5555ff;
+            padding: 6px 12px;
+            font-family: monospace;
+            font-size: 13px;
+            cursor: pointer;
+            margin-top: 15px;
+            margin-bottom: 5px;
+            display: inline-block;
+        }
+        .toggle-pad-btn:hover { background-color: #5555ff; color: #fff; }
+
+        /* --- CONTENEDOR PRINCIPAL DEL GAMEPAD --- */
+        #virtual-gamepad {
+            display: none; /* Oculto en PC por defecto */
+            width: 800px;
+            margin: 15px auto;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 30px 40px;
+            border: 2px solid #333;
+            border-radius: 10px;
+            box-sizing: border-box;
+            user-select: none;
+            -webkit-user-select: none;
         }
 
-        body {
-            background-color: #0c6128;
-            color: #ffffff;
-            margin: 0;
-            padding: 20px;
-            font-family: sans-serif;
-            animation: flicker 0.15s infinite;
+        /* --- ESTRUCTURA DEL JOYSTICK VIRTUAL --- */
+        .joystick-zone {
+            width: 140px;
+            height: 140px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
         
-        font[size="2"] {
-        color: #ffffff;
-        line-height: 1.6;
-            {
+        /* La base circular del stick */
+        .joystick-base {
+            width: 130px;
+            height: 130px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 3px solid rgba(255, 255, 255, 0.4);
+            border-radius: 50%;
+            position: relative;
+            touch-action: none; /* Crucial para evitar que el móvil mueva la pantalla */
+        }
+
+        /* El pomo/palanca central que mueves con el dedo */
+        .joystick-knob {
+            width: 50px;
+            height: 50px;
+            background: #e67300;
+            border: 2px solid #fff;
+            border-radius: 50%;
+            position: absolute;
+            left: 38px;
+            top: 38px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+            transition: transform 0.05s linear;
+        }
+
+        /* --- BOTONES DE ACCIÓN (Z y X) --- */
+        .actions { display: flex; gap: 20px; }
+        .actions button {
+            width: 65px; height: 65px;
+            background: #a31c1c; color: #fff;
+            border: 3px solid #ff4d4d; border-radius: 50%;
+            font-size: 20px; font-weight: bold;
+            cursor: pointer; touch-action: manipulation;
+            box-shadow: 0 4px #5c1010;
+        }
+        .actions button:active { transform: translateY(3px); box-shadow: 0 1px #5c1010; }
     </style>
 
     <svg style="display: none;">
       <filter id="rgb-split">
-        <feOffset in="SourceGraphic" dx="5" dy="0" result="red-shift"/>
-        <feColorMatrix in="red-shift" type="matrix" values="1 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0" result="red-only"/>
-        <feColorMatrix in="SourceGraphic" type="matrix" values="0 0 0 0 0  0 1 0 0 0  0 0 0 0 0  0 0 0 1 0" result="green-only"/>
-        <feOffset in="SourceGraphic" dx="-5" dy="0" result="blue-shift"/>
-        <feColorMatrix in="blue-shift" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 1 0 0  0 0 0 1 0" result="blue-only"/>
+        <feOffset in="SourceGraphic" dx="2" dy="0" result="red-blur"/>
+        <feColorMatrix in="red-blur" type="matrix" values="1 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0" result="red-only"/>
+        <feOffset in="SourceGraphic" dx="0" dy="0" result="green-blur"/>
+        <feColorMatrix in="green-blur" type="matrix" values="0 0 0 0 0  0 1 0 0 0  0 0 0 0 0  0 0 0 1 0" result="green-only"/>
+        <feOffset in="SourceGraphic" dx="-2" dy="0" result="blue-blur"/>
+        <feColorMatrix in="blue-blur" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 1 0 0  0 0 0 1 0" result="blue-only"/>
         <feBlend mode="screen" in="red-only" in2="green-only" result="red-green"/>
         <feBlend mode="screen" in="red-green" in2="blue-only"/>
       </filter>
@@ -114,31 +142,175 @@
         </object>
     </div>
 
+    <button id="toggle-pad-btn" class="toggle-pad-btn" onclick="toggleGamepad()">[ Enable Touch Controls ]</button>
+
+    <div id="virtual-gamepad">
+        <div class="joystick-zone">
+            <div class="joystick-base" id="joy-base">
+                <div class="joystick-knob" id="joy-knob"></div>
+            </div>
+        </div>
+        
+        <div class="actions">
+            <button onmousedown="pressKey(event, 88, 'x')" onmouseup="releaseKey(event, 88, 'x')" ontouchstart="pressKey(event, 88, 'x')" ontouchend="releaseKey(event, 88, 'x')">X</button>
+            <button onmousedown="pressKey(event, 90, 'z')" onmouseup="releaseKey(event, 90, 'z')" ontouchstart="pressKey(event, 90, 'z')" ontouchend="releaseKey(event, 90, 'z')">Z</button>
+        </div>
+    </div>
+
     <br>
     
     <font size="2">
         Type = Flash Game<br>
         Modded = Average Rumia<br>
-        Hosted = Github Server [keyboard needed to play] <br><br>
-        
+        Hosted = Github Server [Virtual Controls Avaliable]<br><br>
         <a href="./index.html" style="color: #5555ff;">[ Return to the menu ]</a><br><br>
-        
         (c) 2026 Meiso Potage / Average Rumia, No rights reserved.
     </font>
+
+<script>
+    // --- SISTEMA INTERNO DE TECLAS DE RUFFLE ---
+    function sendKey(type, keyCode, keyName) {
+        const event = new KeyboardEvent(type, {
+            key: keyName, code: keyName, keyCode: keyCode, which: keyCode, bubbles: true, cancelable: true
+        });
+        window.dispatchEvent(event);
+    }
+
+    function pressKey(e, keyCode, keyName) {
+        if(e && e.cancelable) e.preventDefault();
+        sendKey('keydown', keyCode, keyName);
+    }
+
+    function releaseKey(e, keyCode, keyName) {
+        if(e && e.cancelable) e.preventDefault();
+        sendKey('keyup', keyCode, keyName);
+    }
+
+    // --- LÓGICA MATEMÁTICA DEL JOYSTICK TRASLADADA A TECLADO VIRTUAL ---
+    const base = document.getElementById('joy-base');
+    const knob = document.getElementById('joy-knob');
+    
+    let activeKeys = { ArrowUp: false, ArrowDown: false, ArrowLeft: false, ArrowRight: false };
+    let dragStart = null;
+    const maxRadius = 40; // Límite de qué tan lejos puede ir el pomo central
+
+    function handleJoystickMove(x, y) {
+        // Calcular distancias
+        let dx = x - dragStart.x;
+        let dy = y - dragStart.y;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+        
+        // Mantener el pomo dentro de la circunferencia límite
+        if (distance > maxRadius) {
+            dx = (dx / distance) * maxRadius;
+            dy = (dy / distance) * maxRadius;
+        }
+        
+        // Mover visualmente la palanca
+        knob.style.transform = `translate(${dx}px, ${dy}px)`;
+
+        // Determinar qué direcciones activar según la inclinación del vector
+        // Usamos un umbral (threshold) de 12px para evitar activar teclas con temblores leves del dedo
+        const threshold = 12;
+        const newKeys = {
+            ArrowUp: dy < -threshold,
+            ArrowDown: dy > threshold,
+            ArrowLeft: dx < -threshold,
+            ArrowRight: dx > threshold
+        };
+
+        // Disparar eventos Keydown/Keyup automáticos solo si el estado de la dirección cambió
+        for (let key in newKeys) {
+            if (newKeys[key] !== activeKeys[key]) {
+                if (newKeys[key]) {
+                    sendKey('keydown', getKeyCode(key), key);
+                } else {
+                    sendKey('keyup', getKeyCode(key), key);
+                }
+                activeKeys[key] = newKeys[key];
+            }
+        }
+    }
+
+    function getKeyCode(key) {
+        if (key === 'ArrowUp') return 38;
+        if (key === 'ArrowDown') return 40;
+        if (key === 'ArrowLeft') return 37;
+        if (key === 'ArrowRight') return 39;
+    }
+
+    function resetJoystick() {
+        dragStart = null;
+        knob.style.transform = 'translate(0px, 0px)';
+        // Soltar todas las teclas de movimiento inmediatamente al levantar el dedo
+        for (let key in activeKeys) {
+            if (activeKeys[key]) {
+                sendKey('keyup', getKeyCode(key), key);
+                activeKeys[key] = false;
+            }
+        }
+    }
+
+    // Eventos táctiles para dispositivos móviles
+    base.addEventListener('touchstart', (e) => {
+        const touch = e.touches[0];
+        dragStart = { x: touch.clientX, y: touch.clientY };
+    });
+
+    base.addEventListener('touchmove', (e) => {
+        if (!dragStart) return;
+        const touch = e.touches[0];
+        handleJoystickMove(touch.clientX, touch.clientY);
+    });
+
+    base.addEventListener('touchend', resetJoystick);
+
+    // Eventos de Mouse (Para poder probarlo también haciendo clic y arrastrando en PC)
+    base.addEventListener('mousedown', (e) => {
+        dragStart = { x: e.clientX, y: e.clientY };
+        document.addEventListener('mousemove', mouseMoveHandler);
+        document.addEventListener('mouseup', mouseUpHandler);
+    });
+
+    function mouseMoveHandler(e) {
+        if (!dragStart) return;
+        handleJoystickMove(e.clientX, e.clientY);
+    }
+
+    function mouseUpHandler() {
+        document.removeEventListener('mousemove', mouseMoveHandler);
+        document.removeEventListener('mouseup', mouseUpHandler);
+        resetJoystick();
+    }
+
+    // Función Toggle para mostrar u ocultar
+    function toggleGamepad() {
+        const pad = document.getElementById('virtual-gamepad');
+        const btn = document.getElementById('toggle-pad-btn');
+        if (pad.style.display === 'none' || pad.style.display === '') {
+            pad.style.display = 'flex';
+            btn.textContent = '[ Hide Touch Controls ]';
+        } else {
+            pad.style.display = 'none';
+            btn.textContent = '[ Enable Touch Controls ]';
+        }
+    }
+</script>
+
 <script src="https://giscus.app/client.js"
-        data-repo="IblisseAbstractArt/Meiso-potage-Html-flash-collection"
-        data-repo-id="R_kgDORp4pkQ"
-        data-category="General"
-        data-category-id="DIC_kwDORp4pkc4C5HRy"
-        data-mapping="pathname"
-        data-strict="0"
-        data-reactions-enabled="1"
-        data-emit-metadata="0"
-        data-input-position="bottom"
-        data-theme="dark"
-        data-lang="es"
-        crossorigin="anonymous"
-        async>
+    data-repo="IblisseAbstractArt/Meiso-potage-Html-flash-collection"
+    data-repo-id="R_kgDORp4pkQ"
+    data-category="General"
+    data-category-id="DIC_kwDORp4pkc4C5HRy"
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="bottom"
+    data-theme="dark"
+    data-lang="es"
+    crossorigin="anonymous"
+    async>
 </script>
 </center>
 </body>
