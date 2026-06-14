@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <title>迷走ポタージュ - The Home of Touhou Flash Content</title>
     <script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
-
+    <link rel="icon" type="image/png" href="icon64.png">
     <style>
         @charset "utf-8";
-        /* 全要素リセット */
+        
         h1, h2, h3, h4, h5, h6, p, ul, li, address, img, table, th, td, dl, dt, dd {
             margin: 0;
             padding: 0;
@@ -21,7 +21,7 @@
             text-decoration: none;
             border: none;
         }
-        /* 基本属性 */
+        
         body {
             margin: 0;
             padding: 0;
@@ -39,7 +39,7 @@
             border-color: #CCCCCC;
             margin-bottom: 20px;
         }
-        /* 汎用クラス */
+        
         .leftfloating { float: left; }
         .rightfloating { float: right; }
         .rightalign { text-align: right; }
@@ -79,18 +79,18 @@
         .clearfix { min-height: 1px; }
         * html .clearfix {
           height: 1px;
-          /*\*/
+          
           height: auto;
           overflow: hidden;
-          /**/
+          
         }
-        /* ラッパー */
+        
         #wrapper {
             margin: 0 auto;
             width: 780px;
             text-align: left;
         }
-        /* ヘッダー */
+        
         #header {
             height: 70px;
             background: url('layout/address.jpg') center right no-repeat;
@@ -99,7 +99,7 @@
             font-size: 150%;
             font-weight: bold;
         }
-        /* ヘッダーナビゲーション */
+        
         #headernav { }
         #headernav ul {
             height: 50px;
@@ -148,7 +148,7 @@
             margin-bottom: 0px;
             margin-left: 0;
         }
-        /* コンテント */
+        
         #content { clear: both; }
         #content h2 {
             margin: 0 0 0.5em 0;
@@ -165,7 +165,7 @@
         
         #consignment,#info,#topic, #about, #member, #product, #cheer, #link { margin-bottom: 30px; }
 
-        /* インフォメーション */
+        
         #info { margin-bottom: 30px; }
         #info dt {
             padding-left: 0.5em;
@@ -181,12 +181,12 @@
             border-bottom: 1px dashed #FF9900;
             margin-bottom: 0.25em;
         }
-        /* 委託 & トピックス */
+        
         #consignment h3, #topic h3 { color: #993300; font-weight: bold; }
         #topic ul { margin-left: 25px; }
         #topic li { list-style: square; }
         
-        /* ＝新設：アニメーションカタログの更新スタイル＝ */
+        
         .product-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -230,17 +230,17 @@
             color: #666666;
         }
         
-        /* 旧プロダクトの背景のみ維持 */
+        
         #product { background: url('layout/product.gif') bottom right no-repeat; }
         
-        /* メンバー, アバウト, チアリング, リンク */
+        
         #member { background: url('layout/member.gif') bottom right no-repeat; }
         #about { background: url('layout/about.gif') bottom right no-repeat; }
         #about address { margin: 0 0.5em; }
         #cheer { background: url('layout/cheer.gif') bottom right no-repeat; }
         #link { background: url('layout/link.gif') bottom right no-repeat; }
         
-        /* フッター */
+        
         #footer {
             text-align: center;
             height: 4.5em;
@@ -261,7 +261,7 @@
         #footernav li a:hover { color: #FF3333; }
         #footer address { margin: 1em; }
 
-        /* み～や更新 & カーギィ更新 */
+        
         #visual2 {
             margin: 20px 0;
             padding: 0 60px;
