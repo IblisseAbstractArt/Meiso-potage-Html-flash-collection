@@ -13,7 +13,7 @@
             padding: 0;
         }
 
-        /* SCANLINES (Se mantienen sobre todo) */
+        
         body::before {
             content: " "; display: block; position: fixed; top: 0; left: 0; bottom: 0; right: 0;
             background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.05) 50%),
@@ -21,31 +21,31 @@
             z-index: 9999; pointer-events: none; background-size: 100% 3px, 3px 100%;
         }
 
-        /* Contenedor central para el logo, la galería y el footer */
+        
         .container {
             width: 850px;
             margin: 0 auto;
             position: relative;
         }
 
-        /* --- BARRA DE NAVEGACIÓN (ANCHO TOTAL) --- */
+        
         #headernav-full {
             background-color: #cc8000;
-            width: 100%; /* Esto hace que llegue a ambos extremos */
+            width: 100%; 
             padding: 10px 0;
             margin-bottom: 20px;
         }
 
-        /* --- BARRA DE TÍTULO DE LISTA (ANCHO TOTAL) --- */
+        /
         .orange-header-full {
             background-color: #cc8000;
-            width: 100%; /* Extremo a extremo */
+            width: 100%; 
             color: #fff;
             padding: 8px 0;
             margin-bottom: 25px;
         }
 
-        /* Estilo del texto dentro de las barras para que no se pegue al borde de la pantalla */
+        
         .inner-content {
             width: 850px;
             margin: 0 auto;
@@ -68,7 +68,7 @@
             font-size: 16px;
         }
 
-        /* GALERÍA */
+        
         .gallery-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -82,7 +82,7 @@
             padding: 8px;
             text-align: center;
             text-decoration: none;
-            color: #0033cc; /* Color de link azul clásico */
+            color: #0033cc; 
             font-size: 13px;
         }
 
@@ -92,15 +92,14 @@
             border: 1px solid #333;
             margin-bottom: 8px;
         }
-/* --- Ajuste uniforme para las imágenes del grid --- */
-/* Nota: Asegúrate de que el selector coincida con el contenedor de tus juegos */
-img.cover-image { /* O aplica esta clase directamente a tus etiquetas <img> */
-    width: 320px;       /* Ancho fijo para todas las carátulas */
-    height: 180px;      /* Alto fijo para alinear la cuadrícula */
-    object-fit: cover;  /* LLena el espacio recortando el sobrante sin deformar */
-    object-position: center; /* Centra la imagen dentro del "marco" */
-    border: 1px solid #999; /* Opcional: un borde para mantener el estilo retro */
-    display: block;     /* Evita espacios fantasmas debajo de la imagen */
+
+img.cover-image { 
+    width: 320px;       
+    height: 180px;      
+    object-fit: cover;  
+    object-position: center; 
+    border: 1px solid #999; 
+    display: block;     
 }
         .game-type { color: #666; font-size: 10px; margin-top: 4px; }
 
