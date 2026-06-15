@@ -2,109 +2,211 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <title>Mesopota - Flash Player</title>
+    <title>迷走ポタージュ - Miracle ∞ Hinacle</title>
     <script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
+    <link rel="icon" type="image/png" href="../icon64.png">
     <style>
-        /* --- ESTILOS DE LA PÁGINA DEL REPRODUCTOR --- */
-        body { 
-            background-color: #c4c4c4; /* Fondo gris claro clásico */
-            color: #333; 
-            font-family: "MS PGothic", sans-serif; 
-            margin: 0; 
-        }
-        #wrapper { 
-            width: 850px; 
-            margin: 0 auto; 
-            background: #c4c4c4; 
+        @charset "utf-8";
+        
+        h1, h2, h3, h4, h5, h6, p, ul, li, address, img, table, th, td, dl, dt, dd {
+            margin: 0;
+            padding: 0;
+            color: #333333;
+            list-style: none;
+            line-height: 1.25em;
+            font-family: "ＭＳ Ｐゴシック", Osaka, "ヒラギノ角ゴ Pro W3";
+            font-size:100%;
+            font-weight: normal;
+            font-style: normal;
+            text-decoration: none;
+            border: none;
         }
         
-        /* El menú naranja estilo barra */
-        #headernav, #footernav {
-            background-color: #cc8000; 
-            padding: 10px 0;
+        body {
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            
+            background:url('../layout/body.gif') top left repeat-x;
+        }
+        a {
+            color: #993300;
+        }
+        a:hover {
+            color: #FF3333;
+        }
+        hr {
+            border-width: 1px;
+            border-color: #CCCCCC;
             margin-bottom: 20px;
         }
-        .orange-menu { 
-            list-style: none; 
-            padding: 0; 
-            margin: 0; 
-            display: flex; 
-            justify-content: center; 
-            gap: 30px; 
-        }
-        .orange-menu a { 
-            color: #fff; 
-            text-decoration: none; 
-            font-weight: bold; 
-            font-size: 14px;
-        }
-        .orange-menu a:hover { text-decoration: underline; color: #ffe6b3; }
-
-        /* Contenedor del Flash */
-        #visual2 {
-            display: flex;
-            justify-content: center;
-            margin: 30px 0;
-            background: #c4c4c4; /* Color de fondo mientras carga Ruffle */
-            padding: 10px;
-        }
-
-        /* Sección de Información */
-        #content { padding: 0 20px; }
-        .orange-header { 
-            background-color: #cc8000; 
-            color: #fff; 
-            padding: 8px 15px; 
-            font-size: 1.2em; 
-            margin-bottom: 15px;
-        }
-        p { font-size: 0.9em; line-height: 1.6; }
         
-        #footer { text-align: center; margin-top: 40px; font-size: 0.8em; color: #555; padding-bottom: 20px; }
+        .leftfloating { float: left; }
+        .rightfloating { float: right; }
+        .rightalign { text-align: right; }
+        .center { text-align: center; }
+        .clear { clear: both; }
+        
+        .clearfix:after {
+          content: ".";
+          display: block;
+          clear: both;
+          height: 0;
+          visibility: hidden;
+        }
+        .clearfix { min-height: 1px; }
+        * html .clearfix {
+          height: 1px;
+          height: auto;
+          overflow: hidden;
+        }
+        
+        
+        #wrapper {
+            margin: 0 auto;
+            width: 780px;
+            text-align: left;
+        }
+        
+        
+        #header {
+            height: 70px;
+            background: url('../layout/address.jpg') center right no-repeat;
+        }
+        #header h1 {
+            font-size: 150%;
+            font-weight: bold;
+        }
+        
+        
+        #headernav ul {
+            height: 50px;
+            background: url('../layout/globalnav.gif') #FF9900;
+            background-position:0 -100px;
+        }
+        #headernav li {
+            float: left;
+            width: 130px;
+        }
+        #headernav li a {
+            line-height: 160%;
+            display: block;
+            color: #333333;
+            font-size: 120%;
+            font-weight: bold;
+            height: 50px;
+            width: 100%;
+            text-align: center;
+            text-decoration: none;
+            letter-spacing: 0.2em;
+            overflow: hidden;
+            text-indent:-9999px;
+            background: url('../layout/globalnav.gif') #FF9900;
+        }
+        #headernav li a:hover { color: #FFFFFF; }
+        #nav_info a:link, #nav_info a:visited { background-position:0 0; }
+        #nav_product a:link, #nav_product a:visited { background-position:-130px 0; }
+        #nav_member a:link, #nav_member a:visited { background-position:-260px 0; }
+        #nav_about a:link, #nav_about a:visited { background-position:-390px 0; }
+        #nav_cheer a:link, #nav_cheer a:visited { background-position:-520px 0; }
+        #nav_link a:link, #nav_link a:visited { background-position:-650px 0; }
+        #nav_info a:hover { background-position:0 -50px; }
+        #nav_product a:hover { background-position:-130px -50px; }
+        #nav_member a:hover { background-position:-260px -50px; }
+        #nav_about a:hover { background-position:-390px -50px; }
+        #nav_cheer a:hover { background-position:-520px -50px; }
+        #nav_link a:hover { background-position:-650px -50px; }
+
+        
+        #visual3 {
+            margin: 20px auto;
+            background: #FFFFFF;
+            text-align: center; 
+        }
+
+        
+        #content { clear: both; }
+        #content h2 {
+            margin: 0 0 0.5em 0;
+            padding: 0.2em 30px;
+            color: #FFFFFF;
+            font-weight: bold;
+            font-size: 100%;
+            letter-spacing: 0.2em;
+            background: url('../layout/h2.gif') center left no-repeat #FF9900;
+            border-bottom: 2px solid #DDDDDD;
+        }
+        #content p { padding: 0.5em; }
+        
+        #info { margin-bottom: 30px; }
+        .x-small { font-size: 60%; }
+
+        
+        #footer {
+            text-align: center;
+            height: 4.5em;
+            font-size:90%;
+            margin-top: 20px;
+        }
+        #footernav {
+            padding: 0.2em;
+            background: #FF9900;
+            border-bottom: 2px solid #DDDDDD;
+        }
+        #footernav li {
+            display: inline;
+            padding: 0 1em;
+            border-left: 1px solid #FFFFFF;
+        }
+        #footernav li.first { border-left: none; }
+        #footernav li a { color: #FFFFFF; }
+        #footernav li a:hover { color: #FF3333; }
+        #footer address { margin: 1em; }
     </style>
 </head>
 <body>
 
 <div id="wrapper">
-    <div id="header" style="text-align: left; padding: 15px;">
-        <h1 style="color: #8c5300; margin: 0; font-size: 1.5em;">迷走ポタージュ</h1> 
+  <div id="header">
+    <h1><a href="../mesopota_2010.html"><img src="../layout/logo.jpg" alt="迷走ポタージュ"/></a></h1>
+  </div>
+  
+  <div id="headernav">
+    <ul>
+      <li id="nav_info"><a href="../mesopota_2010.html#info">更新情報</a></li>
+      <li id="nav_product"><a href="../mesopota_2010.html#product">製品情報</a></li>
+      <li id="nav_member"><a href="../mesopota_2010.html#member">メンバー</a></li>
+      <li id="nav_about"><a href="../mesopota_2010.html#about">サイト説明</a></li>
+      <li id="nav_cheer"><a href="../mesopota_2010.html#cheer">応援中</a></li>
+      <li id="nav_link"><a href="../mesopota_2010.html#link">リンク</a></li>
+    </ul>
+  </div>
+  
+  <div id="visual3">
+    <embed src="swf/kagi4.swf" quality="low" wmode="opaque" width="80p" height="600" type="application/x-shockwave-flash" />
+  </div>
+  
+  <div id="content">
+    <div id="info" class="clearfix">
+      <h2>作品紹介ムービー <span class="x-small">Information Movie</span></h2>
+      <p>hina solving ur problems if u feel bad lol</p>
     </div>
+  </div>
+</div>
 
-    <div id="headernav">
-        <ul class="orange-menu">
-            <li><a href="../mesopota_2010.html">TOP</a></li>
-            <li><a href="./index.html">Product</a></li>
-            <li><a href="#">Member</a></li>
-        </ul>
-    </div>
-
-    <div id="visual2">
-        <object width="800" height="600">
-            <param name="movie" value="swf/kagi4.swf">
-            <param name="wmode" value="transparent">
-            <embed src="kagi4.swf" width="800" height="600" wmode="transparent"></embed>
-        </object>
-    </div>
-
-    <div id="content">
-        <div id="info">
-            <h2 class="orange-header">Flash<span style="font-size: 0.7em; font-weight: normal; margin-left: 10px;">Animation</span></h2>
-            <p>type: Flash Animation. Modded: Average Rumia. Hosted: Github Server</p>
-            <p style="color: #666;"></p>
-        </div>
-    </div>
-
-    <div id="footer">
-        <div id="footernav">
-            <ul class="orange-menu" style="font-size: 12px; gap: 20px;">
-            </ul>
-        </div>
-        <address style="font-style: normal; margin-top: 15px;">
-            Copyright &copy; 2026 迷走ポタージュ / Average Rumia. No rights reserved.
-        </address>
-    </div>
+<div id="footer" class="clear">
+  <div id="footernav">
+    <ul>
+      <li class="first"><a href="../index.html#info">更新情報</a></li>
+      <li><a href="../mesopota_2010.html#product">製品情報</a></li>
+      <li><a href="../mesopota_2010.html#member">メンバー</a></li>
+      <li><a href="../mesopota_2010.html#about">サイト説明</a></li>
+      <li><a href="../mesopota_2010.html#cheer">応援中</a></li>
+      <li><a href="../mesopota_2010.html#link">リンク</a></li>
+    </ul>
+  </div>
+  <address>Copyright &copy; 2026 迷走ポタージュ / Average Rumia. No rights reserved.</address>
 </div>
 
 </body>
-  </html>
-
+</html>
