@@ -5,121 +5,265 @@
     <title>迷走ポタージュ - Flash Selection</title>
    <link rel="icon" type="image/png" href="../icon64.png">
     <style>
+    @charset "utf-8";
+        
+    h1, h2, h3, h4, h5, h6, p, ul, li, address, img, table, th, td, dl, dt, dd {
+        margin: 0;
+        padding: 0;
+        color: #333333;
+        list-style: none;
+        line-height: 1.25em;
+        font-family: "ＭＳ Ｐゴシック", Osaka, "ヒラギノ角ゴ Pro W3";
+        font-size:100%;
+        font-weight: normal;
+        font-style: normal;
+        text-decoration: none;
+        border: none;
+    }
     
-        body { 
-            background-color: #c4c4c4; 
-            color: #333; 
-            font-family: "MS PGothic", sans-serif; 
-            margin: 0; 
-            padding: 0;
-        }
+    body { 
+        background-color: #ffffff; 
+        color: #333; 
+        font-family: "MS PGothic", sans-serif; 
+        margin: 0; 
+        padding: 0;
+    }
+
+    
+    body::before {
+        content: " "; display: block; position: fixed; top: 0; left: 0; bottom: 0; right: 0;
+        background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.05) 50%),
+                    linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
+        z-index: 9999; pointer-events: none; background-size: 100% 3px, 3px 100%;
+    }
+
+    a {
+        color: #993300;
+    }
+    a:hover {
+        color: #FF3333;
+    }
+    hr {
+        border-width: 1px;
+        border-color: #CCCCCC;
+        margin-bottom: 20px;
+    }
+    
+    .leftfloating { float: left; }
+    .rightfloating { float: right; }
+    .rightalign { text-align: right; }
+    .center { text-align: center; }
+    .clear { clear: both; }
+    
+    .clearfix:after {
+      content: ".";
+      display: block;
+      clear: both;
+      height: 0;
+      visibility: hidden;
+    }
+    .clearfix { min-height: 1px; }
+    * html .clearfix {
+      height: 1px;
+      height: auto;
+      overflow: hidden;
+    }
 
         
-        body::before {
-            content: " "; display: block; position: fixed; top: 0; left: 0; bottom: 0; right: 0;
-            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.05) 50%),
-                        linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
-            z-index: 9999; pointer-events: none; background-size: 100% 3px, 3px 100%;
-        }
+    #wrapper {
+        margin: 0 auto;
+        width: 780px;
+        text-align: left;
+    }
+    
+    
+    #header {
+        height: 70px;
+        background: url('../layout/address.jpg') center right no-repeat;
+    }
+    #header h1 {
+        font-size: 150%;
+        font-weight: bold;
+    }
+    
+    
+    #headernav ul {
+        height: 50px;
+        background: url('../layout/globalnav.gif') #FF9900;
+        background-position:0 -100px;
+    }
+    #headernav li {
+        float: left;
+        width: 130px;
+    }
+    #headernav li a {
+        line-height: 160%;
+        display: block;
+        color: #333333;
+        font-size: 120%;
+        font-weight: bold;
+        height: 50px;
+        width: 100%;
+        text-align: center;
+        text-decoration: none;
+        letter-spacing: 0.2em;
+        overflow: hidden;
+        text-indent:-9999px;
+        background: url('../layout/globalnav.gif') #FF9900;
+    }
+    #headernav li a:hover { color: #FFFFFF; }
+    #nav_info a:link, #nav_info a:visited { background-position:0 0; }
+    #nav_product a:link, #nav_product a:visited { background-position:-130px 0; }
+    #nav_member a:link, #nav_member a:visited { background-position:-260px 0; }
+    #nav_about a:link, #nav_about a:visited { background-position:-390px 0; }
+    #nav_cheer a:link, #nav_cheer a:visited { background-position:-520px 0; }
+    #nav_link a:link, #nav_link a:visited { background-position:-650px 0; }
+    #nav_info a:hover { background-position:0 -50px; }
+    #nav_product a:hover { background-position:-130px -50px; }
+    #nav_member a:hover { background-position:-260px -50px; }
+    #nav_about a:hover { background-position:-390px -50px; }
+    #nav_cheer a:hover { background-position:-520px -50px; }
+    #nav_link a:hover { background-position:-650px -50px; }
 
         
-        .container {
-            width: 850px;
-            margin: 0 auto;
-            position: relative;
-        }
+    #visual3 {
+        margin: 20px 134px;
+        background: #FFFFFF;
+        text-align: center; 
+    }
 
         
-        #headernav-full {
-            background-color: #cc8000;
-            width: 100%; 
-            padding: 10px 0;
-            margin-bottom: 20px;
-        }
+    #content { clear: both; }
+    #content h2 {
+        margin: 0 0 0.5em 0;
+        padding: 0.2em 30px;
+        color: #FFFFFF;
+        font-weight: bold;
+        font-size: 100%;
+        letter-spacing: 0.2em;
+        background: url('../layout/h2.gif') center left no-repeat #FF9900;
+        border-bottom: 2px solid #DDDDDD;
+    }
+    #content p { padding: 0.5em; }
+    
+    #info { margin-bottom: 30px; }
+    .x-small { font-size: 60%; }
 
-        
-        .orange-header-full {
-            background-color: #cc8000;
-            width: 100%; 
-            color: #fff;
-            padding: 8px 0;
-            margin-bottom: 25px;
-        }
+    
+    .container {
+        width: 850px;
+        margin: 0 auto;
+        position: relative;
+    }
 
-        
-        .inner-content {
-            width: 850px;
-            margin: 0 auto;
-            padding: 0 10px;
-            box-sizing: border-box;
-        }
+    
+    .orange-header-full {
+        background-color: #cc8000;
+        width: 100%; 
+        color: #fff;
+        padding: 8px 0;
+        margin-bottom: 25px;
+    }
 
-        .orange-menu { 
-            list-style: none; 
-            padding: 0; 
-            margin: 0; 
-            display: flex; 
-            justify-content: center; 
-            gap: 30px; 
-        }
-        .orange-menu a { 
-            color: #fff; 
-            text-decoration: none; 
-            font-weight: bold; 
-            font-size: 16px;
-        }
+    
+    .inner-content {
+        width: 850px;
+        margin: 0 auto;
+        padding: 0 10px;
+        box-sizing: border-box;
+    }
 
-        
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 25px;
-            padding-bottom: 40px;
-        }
+    .orange-menu { 
+        list-style: none; 
+        padding: 0; 
+        margin: 0; 
+        display: flex; 
+        justify-content: center; 
+        gap: 30px; 
+    }
+    .orange-menu a { 
+        color: #fff; 
+        text-decoration: none; 
+        font-weight: bold; 
+        font-size: 16px;
+    }
 
-        .game-card {
-            background: #b0b0b0;
-            border: 1px solid #8c5300;
-            padding: 8px;
-            text-align: center;
-            text-decoration: none;
-            color: #0033cc; 
-            font-size: 13px;
-        }
+    
+    .gallery-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 25px;
+        padding-bottom: 40px;
+    }
 
-        .game-card img {
-            width: 100%;
-            height: auto;
-            border: 1px solid #333;
-            margin-bottom: 8px;
-        }
+    .game-card {
+        background: #b0b0b0;
+        border: 1px solid #8c5300;
+        padding: 8px;
+        text-align: center;
+        text-decoration: none;
+        color: #0033cc; 
+        font-size: 13px;
+    }
 
-img.cover-image { 
-    width: 320px;       
-    height: 180px;      
-    object-fit: cover;  
-    object-position: center; 
-    border: 1px solid #999; 
-    display: block;     
-}
-        .game-type { color: #666; font-size: 10px; margin-top: 4px; }
+    .game-card img {
+        width: 100%;
+        height: auto;
+        border: 1px solid #333;
+        margin-bottom: 8px;
+    }
 
-        #footer { text-align: center; padding: 40px 0; color: #777; font-size: 11px; }
+    img.cover-image { 
+        width: 320px;       
+        height: 180px;      
+        object-fit: cover;  
+        object-position: center; 
+        border: 1px solid #999; 
+        display: block;     
+    }
+    .game-type { color: #666; font-size: 10px; margin-top: 4px; }
+
+    #footer { 
+        text-align: center; 
+        height: 4.5em;
+        font-size:90%;
+        margin-top: 20px;
+    }
+    #footernav {
+        padding: 0.2em;
+        background: #FF9900;
+        border-bottom: 2px solid #DDDDDD;
+    }
+    #footernav li {
+        display: inline;
+        padding: 0 1em;
+        border-left: 1px solid #FFFFFF;
+    }
+    #footernav li.first { border-left: none; }
+    #footernav li a { color: #FFFFFF; }
+    #footernav li a:hover { color: #FF3333; }
+    #footer address { margin: 1em; }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <div id="header" style="padding: 20px 0;">
-            <h1 style="color: #8c5300; margin: 0; font-size: 22px;">迷走ポタージュ <span style="font-size: 12px; font-weight: normal; color: #666;">- Archive Selection</span></h1> 
-        </div>
+    <div id="wrapper">
+      <div id="header">
+        <h1><a href="../mesopota_2010.html"><img src="../layout/logo.jpg" alt="迷走ポタージュ"/></a></h1>
+      </div>
+      
+      <div id="headernav">
+        <ul>
+          <li id="nav_info"><a href="../mesopota_2010.html#info">更新情報</a></li>
+          <li id="nav_product"><a href="../mesopota_2010.html#product">製品情報</a></li>
+          <li id="nav_member"><a href="../mesopota_2010.html#member">メンバー</a></li>
+          <li id="nav_about"><a href="../mesopota_2010.html#about">サイト説明</a></li>
+          <li id="nav_cheer"><a href="../mesopota_2010.html#cheer">応援中</a></li>
+          <li id="nav_link"><a href="../mesopota_2010.html#link">リンク</a></li>
+        </ul>
+      </div>
     </div>
 
-    <div class="orange-header-full">
-        <div class="inner-content">
-            <h2 style="margin: 0; font-size: 20px;">作品リスト <span style="font-size: 14px; font-weight: normal;">Product List</span></h2>
-        </div>
-    </div>
 
     <div class="gallery-grid">
         <a href="take.html" class="Flash Animation">
@@ -158,10 +302,10 @@ img.cover-image {
             <div class="game-type">Animation / PV</div>
         </a>
       
-        </div>
-<div style="margin-top: 40px; font-family: sans-serif; color: #333; line-height: 1.6; max-width: 800px; margin-left: auto; margin-right: auto; padding: 0 15px;">
+    </div>
+    <div style="margin-top: 40px; font-family: sans-serif; color: #333; line-height: 1.6; max-width: 800px; margin-left: auto; margin-right: auto; padding: 0 15px;">
 
-    <h2 style="background-color: #cc8000; color: #fff; padding: 12px 15px; margin: 0 0 20px 0; font-size: 1.4em; font-weight: bold; border-left: 5px solid #cc7a00; border-right: 5px solid #cc7a00; text-align: center;">
+    <h2 style="background-color: #cc8000; color: #fff; padding: 12px 15px; margin: 0 0 20px 0; font-size: 1.4em; font-weight: bold; border-left: 5px solid #cc7a00; border-right: 5px solid #cc7a00;">
         ::Announcements <span style="font-size: 0.6em; color: #ffe6b3; margin-left: 10px; text-transform: uppercase;">Topics</span>
     </h2>
 
@@ -171,7 +315,7 @@ img.cover-image {
         </h3>
         
         <p style="margin: 0 auto 15px auto; max-width: 700px; text-align: justify; font-size: 1.05em;">
-            We apologize for this announcement coming so close to the release date, but there are a few errors in the settings of the game "Touhou Kotodama Matsuri" included in the final product. The problematic areas are the following two:
+            We apologize for this announcement coming so close to the release date, but there are a few errors in the settings of the game "Touhou Kotodama Matsuri" included in the final product.
         </p>
         
         <ul style="text-align: left; max-width: 650px; margin: 0 auto; color: #444; background: #f9f9f9; padding: 15px 15px 15px 35px; border: 1px solid #ddd; border-radius: 4px;">
@@ -181,7 +325,7 @@ img.cover-image {
     </div>
 
     <div style="text-align: center;">
-        <h3 style="color: #8b4513; font-size: 1.1em; margin-bottom: 10px; padding: 15px; background-color: #fff3e6; border-left: 4px solid #ff9900; display: inline-block; text-align: justify; max-width: 700px; font-weight: normal; line-height: 1.5;">
+        <h3 style="color: #8b4513; font-size: 1.1em; margin-bottom: 10px; padding: 15px; background-color: #fff3e6; border-left: 4px solid #ff9900; display: inline-block; text-align: justify; max-width: 600px;">
             <strong style="font-weight: bold; font-size: 1.1em;">Fortunately, there are no major problems in terms of game progression.</strong><br>
             However, if you don't want to bully Tewi unnecessarily or waste bombs, please refrain from pressing the Enter key at the relevant point.
         </h3>
@@ -259,11 +403,20 @@ Not just for viewing, but for playing with.</h4>
         </div>
     </div>
     </div>
-    <div id="footer" style="text-align: center; padding: 30px; color: #666; font-size: 12px;">
-        <p>Select a flash animation / game to start.</p>
-        <address>Copyright &copy; 2008-2026 迷走ポタージュ / Average Rumia. Preservation Project. No rights reserved.</address>
+
+    <div id="footer" class="clear">
+      <div id="footernav">
+        <ul>
+          <li class="first"><a href="../index.html#info">更新情報</a></li>
+          <li><a href="../mesopota_2010.html#product">製品情報</a></li>
+          <li><a href="../mesopota_2010.html#member">メンバー</a></li>
+          <li><a href="../mesopota_2010.html#about">サイト説明</a></li>
+          <li><a href="../mesopota_2010.html#cheer">応援中</a></li>
+          <li><a href="../mesopota_2010.html#link">リンク</a></li>
+        </ul>
+      </div>
+      <address>Copyright &copy; 2008-2026 迷走ポタージュ / Average Rumia. Preservation Project. No rights reserved.</address>
     </div>
-</div>
 
 </body>
-  </html>
+</html>
