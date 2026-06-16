@@ -2,268 +2,388 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <title>迷走ポタージュ - Flash Selection</title>
-   <link rel="icon" type="image/png" href="../icon64.png">
+    <title>迷走ポタージュ - Archive Selection</title>
+    <link rel="icon" type="image/png" href="icon64.png">
     <style>
-    
-        body { 
-            background-color: #c4c4c4; 
-            color: #333; 
-            font-family: "MS PGothic", sans-serif; 
-            margin: 0; 
+        @charset "utf-8";
+        
+        /* リセット共通スタイル */
+        h1, h2, h3, h4, h5, h6, p, ul, li, address, img, table, th, td, dl, dt, dd {
+            margin: 0;
             padding: 0;
+            color: #333333;
+            list-style: none;
+            line-height: 1.35em;
+            font-family: "ＭＳ Ｐゴシック", Osaka, "ヒラギノ角ゴ Pro W3";
+            font-size: 100%;
+            font-weight: normal;
+            font-style: normal;
+            text-decoration: none;
+            border: none;
         }
-
         
-        body::before {
-            content: " "; display: block; position: fixed; top: 0; left: 0; bottom: 0; right: 0;
-            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.05) 50%),
-                        linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
-            z-index: 9999; pointer-events: none; background-size: 100% 3px, 3px 100%;
+        body {
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            background: url('layout/body.gif') top left repeat-x;
         }
-
+        a { color: #993300; }
+        a:hover { color: #FF3333; }
         
-        .container {
-            width: 850px;
+        .clear { clear: both; }
+        .clearfix:after {
+          content: ".";
+          display: block;
+          clear: both;
+          height: 0;
+          visibility: hidden;
+        }
+        
+        /* レイアウト枠 */
+        #wrapper {
             margin: 0 auto;
-            position: relative;
+            width: 780px;
+            text-align: left;
         }
-
         
-        #headernav-full {
-            background-color: #cc8000;
-            width: 100%; 
-            padding: 10px 0;
-            margin-bottom: 20px;
+        /* ヘッダー＆メインナビ */
+        #header {
+            height: 70px;
+            background: url('layout/address.jpg') center right no-repeat;
         }
-
+        #header h1 { font-size: 150%; font-weight: bold; }
         
-        .orange-header-full {
-            background-color: #cc8000;
-            width: 100%; 
-            color: #fff;
-            padding: 8px 0;
+        #headernav ul {
+            height: 50px;
+            background: url('layout/globalnav.gif') #FF9900 0 -100px;
+        }
+        #headernav li { float: left; width: 130px; }
+        #headernav li a {
+            line-height: 160%;
+            display: block;
+            height: 50px;
+            width: 100%;
+            text-indent: -9999px;
+            background: url('layout/globalnav.gif') #FF9900;
+        }
+        #nav_info a { background-position: 0 0; }
+        #nav_product a { background-position: -130px 0; }
+        #nav_member a { background-position: -260px 0; }
+        #nav_about a { background-position: -390px 0; }
+        #nav_cheer a { background-position: -520px 0; }
+        #nav_link a { background-position: -650px 0; }
+        #nav_info a:hover { background-position: 0 -50px; }
+        #nav_product a:hover { background-position: -130px -50px; }
+        #nav_member a:hover { background-position: -260px -50px; }
+        #nav_about a:hover { background-position: -390px -50px; }
+        #nav_cheer a:hover { background-position: -520px -50px; }
+        #nav_link a:hover { background-position: -650px -50px; }
+
+        /* コンテンツ要素 */
+        #content { clear: both; padding-top: 20px; }
+        #content h2 {
+            margin: 20px 0 15px 0;
+            padding: 0.3em 30px;
+            color: #FFFFFF;
+            font-weight: bold;
+            font-size: 105%;
+            letter-spacing: 0.1em;
+            background: url('layout/h2.gif') center left no-repeat #FF9900;
+            border-bottom: 2px solid #DDDDDD;
+        }
+        
+        .archive-grid {
+            margin-bottom: 30px;
+        }
+        .archive-item {
+            float: left;
+            width: 240px;
+            margin-right: 30px;
             margin-bottom: 25px;
         }
-
-        
-        .inner-content {
-            width: 850px;
-            margin: 0 auto;
-            padding: 0 10px;
-            box-sizing: border-box;
+        .archive-item.last-col {
+            margin-right: 0;
+        }
+        .archive-item img {
+            width: 240px;
+            height: 135px;
+            border: 1px solid #CCCCCC;
+            display: block;
+            margin-bottom: 6px;
+        }
+        .archive-item a {
+            font-weight: bold;
+            font-size: 90%;
+            display: block;
+        }
+        .archive-item span {
+            font-size: 75%;
+            color: #666666;
+            display: block;
+            margin-top: 2px;
         }
 
-        .orange-menu { 
-            list-style: none; 
-            padding: 0; 
-            margin: 0; 
-            display: flex; 
-            justify-content: center; 
-            gap: 30px; 
+        /* トピック＆警告枠（当時の .caution スタイルを採用） */
+        .caution {
+            padding: 15px;
+            border: 3px solid #FFCC00;
+            background: #FFFEEE;
+            margin-bottom: 20px;
+            font-size: 85%;
         }
-        .orange-menu a { 
-            color: #fff; 
-            text-decoration: none; 
-            font-weight: bold; 
-            font-size: 16px;
+        .caution h3 {
+            font-weight: bold;
+            color: #CC3300;
+            margin-bottom: 10px;
+            font-size: 105%;
         }
-
-        
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 25px;
-            padding-bottom: 40px;
+        .caution ul {
+            margin: 10px 0 10px 20px;
         }
-
-        .game-card {
-            background: #b0b0b0;
-            border: 1px solid #8c5300;
-            padding: 8px;
-            text-align: center;
-            text-decoration: none;
-            color: #0033cc; 
-            font-size: 13px;
+        .caution li {
+            list-style: disc;
+            margin-bottom: 4px;
+        }
+        .caution .highlight-box {
+            background: #FFFFFF;
+            border: 1px dashed #FF9900;
+            padding: 10px;
+            margin-top: 10px;
+            font-weight: bold;
+            color: #993300;
         }
 
-        .game-card img {
+        /* 製品詳細テーブルスタイリング */
+        .product-section {
+            margin-top: 15px;
+            font-size: 85%;
+        }
+        .product-title {
+            font-size: 110%;
+            font-weight: bold;
+            color: #993300;
+            margin-bottom: 10px;
+            border-left: 5px solid #FF9900;
+            padding-left: 10px;
+        }
+        .product-container {
+            display: flex;
+            gap: 20px;
+        }
+        .product-cover img {
+            width: 180px;
+            border: 1px solid #CCCCCC;
+        }
+        .product-table {
             width: 100%;
-            height: auto;
-            border: 1px solid #333;
-            margin-bottom: 8px;
+            border-collapse: collapse;
+        }
+        .product-table th {
+            background: #FF9900;
+            color: #FFFFFF;
+            padding: 8px;
+            width: 110px;
+            font-weight: bold;
+            text-align: left;
+            border-bottom: 1px solid #FFFFFF;
+        }
+        .product-table td {
+            background: #FAF8F5;
+            padding: 8px;
+            border-bottom: 1px solid #E6E6E6;
+        }
+        .product-table td ul {
+            padding: 0 !important;
+        }
+        .product-table td ul li {
+            margin-bottom: 4px;
         }
 
-img.cover-image { 
-    width: 320px;       
-    height: 180px;      
-    object-fit: cover;  
-    object-position: center; 
-    border: 1px solid #999; 
-    display: block;     
-}
-        .game-type { color: #666; font-size: 10px; margin-top: 4px; }
-
-        #footer { text-align: center; padding: 40px 0; color: #777; font-size: 11px; }
+        /* フッター */
+        #footer {
+            text-align: center;
+            height: 4.5em;
+            font-size: 90%;
+            margin-top: 40px;
+        }
+        #footernav {
+            padding: 0.2em;
+            background: #FF9900;
+            border-bottom: 2px solid #DDDDDD;
+        }
+        #footernav li {
+            display: inline;
+            padding: 0 1em;
+            border-left: 1px solid #FFFFFF;
+        }
+        #footernav li.first { border-left: none; }
+        #footernav li a { color: #FFFFFF; }
+        #footernav li a:hover { color: #FF3333; }
+        #footer address { margin: 1em; }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <div id="header" style="padding: 20px 0;">
-            <h1 style="color: #8c5300; margin: 0; font-size: 22px;">迷走ポタージュ <span style="font-size: 12px; font-weight: normal; color: #666;">- Archive Selection</span></h1> 
-        </div>
-    </div>
-
-    <div class="orange-header-full">
-        <div class="inner-content">
-            <h2 style="margin: 0; font-size: 20px;">作品リスト <span style="font-size: 14px; font-weight: normal;">Product List</span></h2>
-        </div>
-    </div>
-
-    <div class="gallery-grid">
-        <a href="take.html" class="Flash Animation">
-            <img class="cover-image" src="cover/tn_take.jpg" alt="Artifical Children">
-            <div class="game-title">Artificial Children</div>
-            <div class="game-type">Animation / PV</div>
-        </a>
-
-        <a href="miya.html" class="Flash Game">
-            <img class="cover-image" src="cover/tn_miya.jpg" alt="Spell Typing Carnival">
-            <div class="game-title">Spell Typing Carnival</div>
-            <div class="game-type">Typing Game</div>
-        </a>
-
-        <a href="kagi.html" class="Flash Animation">
-            <img class="cover-image" src="cover/tn_kagi.jpg" alt="S Complex">
-            <div class="game-title">S Complex</div>
-            <div class="game-type">Animation / PV</div>
-        </a>
-
-        <a href="tetla.html" class="Flash Animation">
-            <img class="cover-image" src="cover/tn_tetla.jpg" alt="Kero9 Destiny">
-            <div class="game-title">Kero9 Destiny</div>
-            <div class="game-type">Animation / PV</div>
-        </a>
-
-        <a href="kouks.html" class="Flash Animation">
-            <img class="cover-image" src="cover/tn_kouks.jpg" alt="It doesn't stop at the affected area, it goes all the way in">
-            <div class="game-title">Overdrive (Paranoia Remix)</div>
-            <div class="game-type">Animation / PV</div>
-        </a>
-
-        <a href="morii.html" class="Flash Animation">
-            <img class="cover-image" src="cover/tn_morii.jpg" alt="Overlap">
-            <div class="game-title">Overlap</div>
-            <div class="game-type">Animation / PV</div>
-        </a>
+<div id="wrapper">
+  <!-- ロゴヘッダー -->
+  <div id="header">
+    <h1><a href="index.html"><img src="layout/logo.jpg" alt="迷走ポタージュ"/></a></h1>
+  </div>
+  
+  <!-- グローバルナビゲーション -->
+  <div id="headernav">
+    <ul>
+      <li id="nav_info"><a href="index.html#info">更新情報</a></li>
+      <li id="nav_product"><a href="index.html#product">製品情報</a></li>
+      <li id="nav_member"><a href="index.html#member">メンバー</a></li>
+      <li id="nav_about"><a href="index.html#about">サイト説明</a></li>
+      <li id="nav_cheer"><a href="index.html#cheer">応援中</a></li>
+      <li id="nav_link"><a href="index.html#link">リンク</a></li>
+    </ul>
+  </div>
+  
+  <div id="content">
+    <!-- 作品リスト -->
+    <h2>作品リスト <span class="x-small">Product List</span></h2>
+    <div class="archive-grid clearfix">
       
-        </div>
-<div style="margin-top: 40px; font-family: sans-serif; color: #333; line-height: 1.6; max-width: 800px; margin-left: auto; margin-right: auto; padding: 0 15px;">
+      <!-- Fila 1 -->
+      <div class="archive-item">
+        <img src="thumbs/artificial_children.jpg" alt="Artificial Children">
+        <a href="C76/index.html">Artificial Children</a>
+        <span>Animation / PV</span>
+      </div>
+      
+      <div class="archive-item">
+        <img src="thumbs/spell_typing.jpg" alt="Spell Typing Carnival">
+        <a href="typing/index.html">Spell Typing Carnival</a>
+        <span>Typing Game</span>
+      </div>
+      
+      <div class="archive-item last-col">
+        <img src="thumbs/s_complex.jpg" alt="S Complex">
+        <a href="s_complex/index.html">S Complex</a>
+        <span>Animation / PV</span>
+      </div>
+      
+      <!-- Fila 2 -->
+      <div class="archive-item">
+        <img src="thumbs/kero9.jpg" alt="Kero9 Destiny">
+        <a href="kero9/index.html">Kero9 Destiny</a>
+        <span>Animation / PV</span>
+      </div>
+      
+      <div class="archive-item">
+        <img src="thumbs/overdrive.jpg" alt="Overdrive">
+        <a href="overdrive/index.html">Overdrive (Paranoia Remix)</a>
+        <span>Animation / PV</span>
+      </div>
+      
+      <div class="archive-item last-col">
+        <img src="thumbs/overlap.jpg" alt="Overlap">
+        <a href="overlap/index.html">Overlap</a>
+        <span>Animation / PV</span>
+      </div>
+      
+    </div>
 
-    <h2 style="background-color: #cc8000; color: #fff; padding: 12px 15px; margin: 0 0 20px 0; font-size: 1.4em; font-weight: bold; border-left: 5px solid #cc7a00; border-right: 5px solid #cc7a00; text-align: center;">
-        ::Announcements <span style="font-size: 0.6em; color: #ffe6b3; margin-left: 10px; text-transform: uppercase;">Topics</span>
-    </h2>
-
-    <div style="margin-bottom: 30px; text-align: center;">
-        <h3 style="color: #8b4513; font-size: 1.2em; margin-bottom: 15px; border-bottom: 1px dashed #ccc; padding-bottom: 10px; display: inline-block;">
-            Notification regarding a setting error in the typing game "Touhou Kotodama Matsuri"
-        </h3>
-        
-        <p style="margin: 0 auto 15px auto; max-width: 700px; text-align: justify; font-size: 1.05em;">
-            We apologize for this announcement coming so close to the release date, but there are a few errors in the settings of the game "Touhou Kotodama Matsuri" included in the final product. The problematic areas are the following two:
-        </p>
-        
-        <ul style="text-align: left; max-width: 650px; margin: 0 auto; color: #444; background: #f9f9f9; padding: 15px 15px 15px 35px; border: 1px solid #ddd; border-radius: 4px;">
-            <li style="margin-bottom: 8px;">After defeating Tewi, you can follow up with a bomb by pressing the Enter key.</li>
+    <h2>アナウンス <span class="x-small">TOPICS</span></h2>
+    <div class="caution">
+        <h3>Notification regarding a setting error in the typing game "Touhou Kotodama Matsuri"</h3>
+        <p>We apologize for this announcement coming so close to the release date, but there are a few errors in the settings of the game "Touhou Kotodama Matsuri" included in the final product. The problematic areas are the following two:</p>
+        <ul>
+            <li>After defeating Tewi, you can follow up with a bomb by pressing the Enter key.</li>
             <li>In Tewi's last spell, you cannot erase "South 2nd Round 5th Honba" unless you type "nan ikkyoku gohonba".</li>
         </ul>
-    </div>
-
-    <div style="text-align: center;">
-        <h3 style="color: #8b4513; font-size: 1.1em; margin-bottom: 10px; padding: 15px; background-color: #fff3e6; border-left: 4px solid #ff9900; display: inline-block; text-align: justify; max-width: 700px; font-weight: normal; line-height: 1.5;">
-            <strong style="font-weight: bold; font-size: 1.1em;">Fortunately, there are no major problems in terms of game progression.</strong><br>
-            However, if you don't want to bully Tewi unnecessarily or waste bombs, please refrain from pressing the Enter key at the relevant point.
-        </h3>
-    </div>
+        <div class="highlight-box">
+            Fortunately, there are no major problems in terms of game progression.
+            <p style="font-weight:normal; font-size:95%; color:#333; margin-top:5px;">However, if you don't want to bully Tewi unnecessarily or waste bombs, please refrain from pressing the Enter key at the relevant point.</p>
+        </div>
     </div>
     
-    <div style="margin-top: 50px; border: 2px solid #e0d085; background-color: #ffffe8; border-radius: 8px; padding: 25px; font-family: sans-serif;">
 
-    <h2 style="color: #8b4513; font-size: 1.6em; margin: 0 0 5px 0; font-weight: bold;">"Behold, the dazzling action of the East!"</h2>
-    <h4 style="color: #555; font-size: 1em; margin: 0 0 25px 0; font-weight: normal;">A collection of Flash creations by popular internet creators!
-Not just for viewing, but for playing with.</h4>
-
-    <div style="display: flex; flex-wrap: wrap; gap: 30px;">
+    <h2>作品紹介 <span class="x-small">Introduction</span></h2>
+    <div class="product-section">
+        <div class="product-title">"Behold, the dazzling action of the East!"</div>
+        <p style="margin-bottom: 15px;">A collection of Flash creations by popular internet creators! Not just for viewing, but for playing with.</p>
         
-        <div style="flex: 0 0 220px;">
-            <img src="cover/R5.jpg" alt="Touhou Eisharoku" style="width: 100%; border: 1px solid #aaa; box-shadow: 2px 2px 5px rgba(0,0,0,0.2);">
-            <p style="font-size: 0.75em; color: #666; text-align: center; margin-top: 8px;">CD case illustration: Kagi, Uda Tetla</p>
-        </div>
-
-        <div style="flex: 1; min-width: 300px;">
-            <h3 style="color: #8b4513; border-bottom: 2px solid #e0d085; padding-bottom: 5px; margin-top: 0;">"Touhou Eisharoku"<br>
-            <span style="font-size: 0.8em; color: #8b4513; font-weight: normal;">A collection of Touhou Project fan-made Flash animations.</span></h3>
-
-            <table style="width: 100%; border-collapse: collapse; font-size: 0.9em; color: #8b4513; text-align: left;">
+        <div class="product-container">
+            <div class="product-cover">
+                <img src="cover/R5.jpg" alt="Touhou Eisharoku">
+            </div>
+            <table class="product-table">
                 <tr>
-                    <th style="background-color: #ff9900; color: #fff; padding: 10px; width: 130px; border-bottom: 2px solid #fff;">Event</th>
-                    <td style="padding: 10px; border-bottom: 1px dotted #ccc;"><a href="#" style="color: #8b4513; text-decoration: underline;">Hakurei Reitaisai Shrine</a></td>
+                    <th>Event</th>
+                    <td><a href="#">Hakurei Reitaisai Shrine</a></td>
                 </tr>
                 <tr>
-                    <th style="background-color: #ff9900; color: #fff; padding: 10px; border-bottom: 2px solid #fff;">Space</th>
-                    <td style="padding: 10px; border-bottom: 1px dotted #ccc;">Wa - 21b</td>
+                    <th>Space</th>
+                    <td>Wa - 21b</td>
                 </tr>
                 <tr>
-                    <th style="background-color: #ff9900; color: #fff; padding: 10px; border-bottom: 2px solid #fff;">Distribution Date</th>
-                    <td style="padding: 10px; border-bottom: 1px dotted #ccc;">2008/05/25</td>
+                    <th>Distribution Date</th>
+                    <td>2008/05/25</td>
                 </tr>
                 <tr>
-                    <th style="background-color: #ff9900; color: #fff; padding: 10px; border-bottom: 2px solid #fff;">Specification</th>
-                    <td style="padding: 10px; border-bottom: 1px dotted #ccc;">Single CD in a tall case</td>
+                    <th>Specification</th>
+                    <td>Single CD in a tall case</td>
                 </tr>
                 <tr>
-                    <th style="background-color: #ff9900; color: #fff; padding: 10px; vertical-align: top;">Credit</th>
-                    <td style="padding: 15px 10px;">
-                        
-                        <div style="display: flex; gap: 40px; flex-wrap: wrap; line-height: 1.6;">
-                            <div>
-                                <strong style="color: #333;">Flash</strong><br>
-                                <a href="#" style="color: #8b4513;">Miya</a><br>
-                                <a href="#" style="color: #8b4513;">Uda Tetla</a><br>
-                                <a href="#" style="color: #8b4513;">Kagi</a><br>
-                                <a href="#" style="color: #8b4513;">Takenoko</a><br>
-                                <a href="#" style="color: #8b4513;">Kouks</a><br>
-                                <a href="#" style="color: #8b4513;">Ing_k</a><br>
-                                <a href="#" style="color: #8b4513;">Kenshiro Morii</a><br>
-                            
-                               </div>
-                            <div>
-                                <strong style="color: #333;">Music</strong><br>
-                                <a href="#" style="color: #8b4513;">dBu Music</a><br>
-                                <a href="#" style="color: #8b4513;">Silver Forest</a><br>
-                                <a href="#" style="color: #8b4513;">COOL&CREATE</a><br>
-                                <a href="#" style="color: #8b4513;">IOSYS</a><br>
-                                <a href="#" style="color: #8b4513;">Keigo</a><br>
-                            
-                            </div>
-                            <div>
-                                <strong style="color: #333;">Support</strong><br>
-                                <a href="#" style="color: #8b4513;">as</a><br>
-                                <a href="#" style="color: #8b4513;">IOSYS</a><br>
-                            </div>
-                        </div>
+                    <th>Credit</th>
+                    <td>
+                        <table style="width:100%; font-size:100%;">
+                            <tr>
+                                <td style="width:33%; padding:0; background:none; border:none;">
+                                    <strong>Flash:</strong>
+                                    <ul>
+                                        <li><a href="C76/index.html">Miya</a></li>
+                                        <li><a href="#">Uda Tetla</a></li>
+                                        <li><a href="#">Kagi</a></li>
+                                        <li><a href="#">Takenoko</a></li>
+                                    </ul>
+                                </td>
+                                <td style="width:33%; padding:0; background:none; border:none;">
+                                    <strong>Music:</strong>
+                                    <ul>
+                                        <li><a href="#">dBu Music</a></li>
+                                        <li><a href="#">Silver Forest</a></li>
+                                        <li><a href="#">COOL&CREATE</a></li>
+                                        <li><a href="#">IOSYS</a></li>
+                                    </ul>
+                                </td>
+                                <td style="width:33%; padding:0; background:none; border:none;">
+                                    <strong>Support:</strong>
+                                    <ul>
+                                        <li><a href="#">as</a></li>
+                                        <li><a href="#">IOSYS</a></li>
+                                    </ul>
+                                </td>
+                            </tr>
+                        </table>
                     </td>
                 </tr>
             </table>
         </div>
     </div>
-    </div>
-    <div id="footer" style="text-align: center; padding: 30px; color: #666; font-size: 12px;">
-        <p>Select a flash animation / game to start.</p>
-        <address>Copyright &copy; 2008-2026 迷走ポタージュ / Average Rumia. Preservation Project. No rights reserved.</address>
-    </div>
+
+  </div>
+</div>
+
+<!-- 共通フッター -->
+<div id="footer" class="clear">
+  <div id="footernav">
+    <ul>
+      <li class="first"><a href="index.html#info">更新情報</a></li>
+      <li><a href="index.html#product">製品情報</a></li>
+      <li><a href="index.html#member">メンバー</a></li>
+      <li><a href="index.html#about">サイト説明</a></li>
+      <li><a href="index.html#cheer">応援中</a></li>
+      <li><a href="index.html#link">リンク</a></li>
+    </ul>
+  </div>
+  <address>Copyright &copy; 2026 迷走ポタージュ / Average Rumia. No rights reserved.</address>
 </div>
 
 </body>
-  </html>
+</html>
