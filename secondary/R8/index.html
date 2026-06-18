@@ -18,7 +18,7 @@
             font-family: "メイリオ", Meiryo, "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", Osaka, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
             font-size: 12px;
             line-height: 1.4;
-            /* Fondo rojo oscuro característico del R8 */
+            /* Fondo original del evento */
             background: #931E1E url('../layout/back.jpg') center top repeat-x;
         }
         
@@ -29,52 +29,45 @@
         /* Contenedor principal ensanchado a 960px */
         .wrapper { margin: 0 auto; width: 960px; }
         
-        /* Cajas de sección estilo Enshutsuka */
+        /* Cajas de sección con textura original */
         .box {
             margin-bottom: 40px;
             background: url('../layout/box_back.png') repeat;
-            background-color: rgba(0,0,0,0.6); /* Fallback */
+            border: 1px solid #000;
         }
         .box h2 { 
             padding: 10px 15px; font-size: 16px; color: #FFF; background: #000; 
             letter-spacing: 0.1em; text-transform: uppercase; font-weight: normal;
         }
-        .box .inner { padding: 20px; width: 920px; overflow: hidden; }
+        .box .inner { padding: 20px; width: 918px; overflow: hidden; }
         
-        /* Cabecera y Navegación B/N */
-        #header { padding: 20px 0; width: 100%; text-align: left; margin-bottom: 10px;}
+        /* Cabecera - Logo alineado a la izquierda */
+        #header { padding: 30px 0 10px 0; width: 100%; text-align: left; }
         #header #sitelogo { display: inline-block; }
         
-        #header h1 { font-size: 150%; font-weight: bold; }
-        
-        #headernav ul {
-            height: 50px;
-            background: url('../layout/globalnav.gif') #FF9900 0 -100px;
-        }
+        /* Contenedor del Navbar Naranja (Evita que se rompa en 960px) */
+        #nav-container { width: 780px; margin: 0 auto 40px auto; }
+        #headernav ul { height: 50px; background: url('../layout/globalnav.gif') repeat-x; }
         #headernav li { float: left; width: 130px; }
         #headernav li a {
-            line-height: 160%;
-            display: block;
-            height: 50px;
-            width: 100%;
-            text-indent: -9999px;
-            background: url('../layout/globalnav.gif') #FF9900;
+            line-height: 160%; display: block; height: 50px; width: 100%; text-indent: -9999px;
+            background: url('../layout/globalnav.gif') no-repeat;
         }
-        #headernav li a:hover { color: #FFFFFF; }
-        #nav_info a:link, #nav_info a:visited { background-position:0 0; }
-        #nav_product a:link, #nav_product a:visited { background-position:-130px 0; }
-        #nav_member a:link, #nav_member a:visited { background-position:-260px 0; }
-        #nav_about a:link, #nav_about a:visited { background-position:-390px 0; }
-        #nav_cheer a:link, #nav_cheer a:visited { background-position:-520px 0; }
-        #nav_link a:link, #nav_link a:visited { background-position:-650px 0; }
-        #nav_info a:hover { background-position:0 -50px; }
-        #nav_product a:hover { background-position:-130px -50px; }
-        #nav_member a:hover { background-position:-260px -50px; }
-        #nav_about a:hover { background-position:-390px -50px; }
-        #nav_cheer a:hover { background-position:-520px -50px; }
-        #nav_link a:hover { background-position:-650px -50px; }
+        #headernav #nav_info a { background-position: 0 0; }
+        #headernav #nav_product a { background-position: -130px 0; }
+        #headernav #nav_member a { background-position: -260px 0; }
+        #headernav #nav_about a { background-position: -390px 0; }
+        #headernav #nav_cheer a { background-position: -520px 0; }
+        #headernav #nav_link a { background-position: -650px 0; }
+        
+        #headernav #nav_info a:hover { background-position: 0 -50px; }
+        #headernav #nav_product a:hover { background-position: -130px -50px; }
+        #headernav #nav_member a:hover { background-position: -260px -50px; }
+        #headernav #nav_about a:hover { background-position: -390px -50px; }
+        #headernav #nav_cheer a:hover { background-position: -520px -50px; }
+        #headernav #nav_link a:hover { background-position: -650px -50px; }
 
-        /* Galería (Adaptada a 960px: 3 columnas de 280px + márgenes de 40px) */
+        /* Galería Grid - Mantenida intacta */
         .archive-grid { margin-bottom: 10px; }
         .archive-item { float: left; width: 280px; margin-right: 40px; margin-bottom: 25px; }
         .archive-item.last-col { margin-right: 0; }
@@ -96,7 +89,7 @@
         #product #infoTable { width: 100%; border: 1px solid #633; border-collapse: collapse; }
         #product #infoTable th {
             padding: 10px; color: #FFF; text-align: left; font-weight: bold;
-            background: #4a0d0d url('../layout/th_back.png');
+            background: #4a0d0d url('../layout/th_back.png') repeat;
             border: 1px solid #633; width: 130px; text-transform: uppercase;
         }
         #product #infoTable td { padding: 10px; font-weight: bold; border: 1px solid #633; background: rgba(0,0,0,0.3);}
@@ -112,18 +105,33 @@
             padding: 20px 0; margin: 20px 0;
         }
 
-        /* Lista de Pistas / Tracklist CSS Original */
+        /* Lista de Rendimientos (Tracklist con números PNG a la izquierda) */
         #tracklist { width: 918px; border-top: 1px solid #633; border-left: 1px solid #633; border-right: 1px solid #633; overflow: hidden; margin-bottom: 10px;}
         #tracklist li {
-            padding: 15px 0; float: left; width: 100%; overflow: hidden; border-bottom: 1px solid #633;
-            background: rgba(0,0,0,0.4);
+            padding: 15px; clear: both; overflow: hidden; border-bottom: 1px solid #633;
+            background: rgba(0,0,0,0.4) url('../layout/box_back.png') repeat;
         }
-        #tracklist li:nth-child(even) { background: rgba(60,10,10,0.4) url('../layout/th_back.png'); }
+        #tracklist li:nth-child(even) { background: rgba(60,10,10,0.4) url('../layout/th_back.png') repeat; }
         
-        #tracklist li div.img { padding-left: 15px; float: left; width: 160px; text-align: center; font-size: 24px; color: #633; font-weight: bold;}
-        #tracklist li div.img img { width: 160px; height: 90px; border: 1px solid #000; object-fit: cover; }
+        /* Contenedor del PNG del Número (Alineación izquierda) */
+        #tracklist li div.num {
+            float: left; width: 50px; height: 90px;
+            background-repeat: no-repeat; background-position: center left;
+        }
+        #tracklist01 div.num { background-image: url('../layout/num01.png'); }
+        #tracklist02 div.num { background-image: url('../layout/num02.png'); }
+        #tracklist03 div.num { background-image: url('../layout/num03.png'); }
+        #tracklist04 div.num { background-image: url('../layout/num04.png'); }
+        #tracklist05 div.num { background-image: url('../layout/num05.png'); }
+        #tracklist06 div.num { background-image: url('../layout/num06.png'); }
+        #tracklistEx div.num { background-image: url('../layout/numex.png'); }
         
-        #tracklist li div.desc { padding-left: 20px; float: left; color: #CCC; width: 700px; }
+        /* Miniaturas */
+        #tracklist li div.img { float: left; width: 160px; text-align: center; margin-left: 10px; }
+        #tracklist li div.img img { width: 160px; height: 90px; border: 1px solid #000; object-fit: cover; display: block; }
+        
+        /* Textos descripciones */
+        #tracklist li div.desc { float: left; padding-left: 20px; color: #CCC; width: 660px; }
         #tracklist li h3 { margin: 0 0 10px; padding: 0; color: #FFF; font-size: 18px; font-weight: bold; }
         
         #tracklist li dl { margin: 0; padding: 0; }
@@ -136,13 +144,17 @@
         
         #tracklistEx .crossfade { margin-top: 10px; font-size: 14px; font-weight: bold; color: #FF0;}
 
-        /* Footer */
-        #footer { text-align: center; padding: 40px 0; color: #999; font-size: 12px; margin-top: 10px; }
-        #footernav { padding: 0 0 20px 0; }
-        #footernav li { display: inline; padding: 0 10px; border-left: 1px solid #666; }
+        /* Footer Original con imagen footer_back.png */
+        #footer { 
+            text-align: center; height: 300px; margin-top: 10px; clear: both;
+            background: url('../layout/footer_back.png') bottom right no-repeat; 
+        }
+        #footer .inner-footer { margin: 0 auto; padding: 200px 0 0; width: 960px; }
+        #footernav { padding: 0 0 20px 0; color: #000; }
+        #footernav li { display: inline; padding: 0 10px; border-left: 1px solid #FFF; }
         #footernav li.first { border-left: none; }
-        #footernav a { color: #999; }
-        #footer address { margin-top: 10px; }
+        #footernav a { color: #FFF; }
+        #footer address { margin-top: 10px; color: #EFDFDF; font-style: normal; }
     </style>
 </head>
 <body>
@@ -150,7 +162,7 @@
 <div class="wrapper">
   
   <div id="header">
-    <a href="../mesopota_2010.html"><img id="sitelogo" src="../layout/exlogo.png" alt="迷走ポタージュ"/></a>
+    <a href="../mesopota_2010.html"><img id="sitelogo" src="../layout/logo.png" alt="迷走ポタージュ"/></a>
   </div>
   
   <div id="nav-container">
@@ -345,8 +357,8 @@
           <ol id="tracklist">
               
               <li id="tracklist01">
+                  <div class="num"></div>
                   <div class="img">
-                      <div style="font-size: 36px; line-height: 1; margin-bottom: 5px;">01</div>
                       <img src="cover/ss1.jpg" alt="The Subterranean Prominence">
                   </div>
                   <div class="desc">
@@ -365,8 +377,8 @@
               </li>
 
               <li id="tracklist02">
+                  <div class="num"></div>
                   <div class="img">
-                      <div style="font-size: 36px; line-height: 1; margin-bottom: 5px;">02</div>
                       <img src="cover/ss2.jpg" alt="Sadistic complex">
                   </div>
                   <div class="desc">
@@ -385,8 +397,8 @@
               </li>
 
               <li id="tracklist03">
+                  <div class="num"></div>
                   <div class="img">
-                      <div style="font-size: 36px; line-height: 1; margin-bottom: 5px;">03</div>
                       <img src="cover/ss3.jpg" alt="495Go!">
                   </div>
                   <div class="desc">
@@ -405,8 +417,8 @@
               </li>
 
               <li id="tracklist04">
+                  <div class="num"></div>
                   <div class="img">
-                      <div style="font-size: 36px; line-height: 1; margin-bottom: 5px;">04</div>
                       <img src="cover/ss4.jpg" alt="Fran-chan's Music Class">
                   </div>
                   <div class="desc">
@@ -425,8 +437,8 @@
               </li>
 
               <li id="tracklist05">
+                  <div class="num"></div>
                   <div class="img">
-                      <div style="font-size: 36px; line-height: 1; margin-bottom: 5px;">05</div>
                       <img src="cover/ss5.jpg" alt="Double Flutter">
                   </div>
                   <div class="desc">
@@ -446,8 +458,8 @@
               </li>
 
               <li id="tracklist06">
+                  <div class="num"></div>
                   <div class="img">
-                      <div style="font-size: 36px; line-height: 1; margin-bottom: 5px;">06</div>
                       <img src="cover/ss6.jpg" alt="Amaterasu">
                   </div>
                   <div class="desc">
@@ -466,8 +478,8 @@
               </li>
 
               <li id="tracklistEx">
-                  <div class="img" style="color: #FF0;">
-                      <div style="font-size: 36px; line-height: 1; margin-bottom: 5px;">Ex</div>
+                  <div class="num"></div>
+                  <div class="img">
                       <img src="cover/ss7.jpg" alt="Bunka-cho Mode">
                   </div>
                   <div class="desc">
@@ -486,21 +498,23 @@
       </div>
   </div>
 
-  <div id="footer" class="clear">
-    <div id="footernav">
-      <ul>
-        <li class="first"><a href="../mesopota_2010.html#info">更新情報</a></li>
-        <li><a href="../mesopota_2010.html#product">製品情報</a></li>
-        <li><a href="../mesopota_2010.html#member">メンバー</a></li>
-        <li><a href="../mesopota_2010.html#about">サイト説明</a></li>
-        <li><a href="../mesopota_2010.html#cheer">応援中</a></li>
-        <li><a href="../mesopota_2010.html#link">リンク</a></li>
-      </ul>
+  <div id="footer">
+    <div class="inner-footer">
+        <div id="footernav">
+          <ul>
+            <li class="first"><a href="../mesopota_2010.html#info">更新情報</a></li>
+            <li><a href="../mesopota_2010.html#product">製品情報</a></li>
+            <li><a href="../mesopota_2010.html#member">メンバー</a></li>
+            <li><a href="../mesopota_2010.html#about">サイト説明</a></li>
+            <li><a href="../mesopota_2010.html#cheer">応援中</a></li>
+            <li><a href="../mesopota_2010.html#link">リンク</a></li>
+          </ul>
+        </div>
+        <address>Copyright &copy; 2008-2026 迷走ポタージュ / Average Rumia. Preservation Project. No rights reserved.</address>
     </div>
-    <address>Copyright &copy; 2008-2026 迷走ポタージュ / Average Rumia. Preservation Project. No rights reserved.</address>
   </div>
 
 </div>
 
 </body>
- </html>
+</html>
