@@ -45,27 +45,31 @@
         #header { padding: 30px 0 10px 0; width: 100%; text-align: left; }
         #header #sitelogo { display: inline-block; }
         
-        /* Contenedor del Navbar Naranja (Evita que se rompa en 960px) */
-        #nav-container { width: 780px; margin: 0 auto 40px auto; }
-        #headernav ul { height: 50px; background: url('../layout/globalnav.gif') repeat-x; }
+        
         #headernav li { float: left; width: 130px; }
         #headernav li a {
-            line-height: 160%; display: block; height: 50px; width: 100%; text-indent: -9999px;
-            background: url('../layout/globalnav.gif') no-repeat;
+            line-height: 160%;
+            display: block;
+            height: 50px;
+            width: 100%;
+            text-indent: -9999px;
+            background: url('../layout/globalnav.gif') #FF9900;
         }
-        #headernav #nav_info a { background-position: 0 0; }
-        #headernav #nav_product a { background-position: -130px 0; }
-        #headernav #nav_member a { background-position: -260px 0; }
-        #headernav #nav_about a { background-position: -390px 0; }
-        #headernav #nav_cheer a { background-position: -520px 0; }
-        #headernav #nav_link a { background-position: -650px 0; }
         
-        #headernav #nav_info a:hover { background-position: 0 -50px; }
-        #headernav #nav_product a:hover { background-position: -130px -50px; }
-        #headernav #nav_member a:hover { background-position: -260px -50px; }
-        #headernav #nav_about a:hover { background-position: -390px -50px; }
-        #headernav #nav_cheer a:hover { background-position: -520px -50px; }
-        #headernav #nav_link a:hover { background-position: -650px -50px; }
+        
+        #headernav li a:hover { color: #FFFFFF; }
+        #nav_info a:link, #nav_info a:visited { background-position:0 0; }
+        #nav_product a:link, #nav_product a:visited { background-position:-130px 0; }
+        #nav_member a:link, #nav_member a:visited { background-position:-260px 0; }
+        #nav_about a:link, #nav_about a:visited { background-position:-390px 0; }
+        #nav_cheer a:link, #nav_cheer a:visited { background-position:-520px 0; }
+        #nav_link a:link, #nav_link a:visited { background-position:-650px 0; }
+        #nav_info a:hover { background-position:0 -50px; }
+        #nav_product a:hover { background-position:-130px -50px; }
+        #nav_member a:hover { background-position:-260px -50px; }
+        #nav_about a:hover { background-position:-390px -50px; }
+        #nav_cheer a:hover { background-position:-520px -50px; }
+        #nav_link a:hover { background-position:-650px -50px; }
 
         /* Galería Grid - Mantenida intacta */
         .archive-grid { margin-bottom: 10px; }
@@ -498,18 +502,17 @@
       </div>
     </div>
 
-  <div id="footer">
-    <div class="inner-footer">
-        <div id="footernav">
-          <ul>
-            <li class="first"><a href="../mesopota_2010.html#info">更新情報</a></li>
-            <li><a href="../mesopota_2010.html#product">製品情報</a></li>
-            <li><a href="../mesopota_2010.html#member">メンバー</a></li>
-            <li><a href="../mesopota_2010.html#about">サイト説明</a></li>
-            <li><a href="../mesopota_2010.html#cheer">応援中</a></li>
-            <li><a href="../mesopota_2010.html#link">リンク</a></li>
-          </ul>
-        </div>
+  <div id="footer" class="clear">
+  <div id="footernav">
+    <ul>
+      <li class="first"><a href="../mesopota_2010.html#info">更新情報</a></li>
+      <li><a href="../mesopota_2010.html#product">製品情報</a></li>
+      <li><a href="../mesopota_2010.html#member">メンバー</a></li>
+      <li><a href="../mesopota_2010.html#about">サイト説明</a></li>
+      <li><a href="../mesopota_2010.html#cheer">応援中</a></li>
+      <li><a href="../mesopota_2010.html#link">リンク</a></li>
+    </ul>
+  </div>
         <address>Copyright &copy; 2008-2026 迷走ポタージュ / Average Rumia. Preservation Project. No rights reserved.</address>
     </div>
   </div>
