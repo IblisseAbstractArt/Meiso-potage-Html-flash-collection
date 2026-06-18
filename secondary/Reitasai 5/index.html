@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>迷走ポタージュ - Archive Selection</title>
-    <link rel="icon" type="image/png" href="../icon64.png">
+    <link rel="icon" type="image/png" href="icon64.png">
     <style>
         @charset "utf-8";
         
@@ -67,7 +67,6 @@
             text-indent: -9999px;
             background: url('../layout/globalnav.gif') #FF9900;
         }
-        
         #headernav li a:hover { color: #FFFFFF; }
         #nav_info a:link, #nav_info a:visited { background-position:0 0; }
         #nav_product a:link, #nav_product a:visited { background-position:-130px 0; }
@@ -106,15 +105,14 @@
             margin-bottom: 25px;
         }
         .archive-item.last-col {
-            margin-right: 0;
+            margin-right: 0; 
         }
         .archive-item img {
             width: 240px;
             height: 135px;
             border: 1px solid #CCCCCC;
             display: block;
-            margin-bottom: 6px;
-            object-fit: cover;
+            margin-bottom: cover;
         }
         .archive-item a {
             font-weight: bold;
@@ -128,7 +126,7 @@
             margin-top: 2px;
         }
 
-        /* トピック＆警告枠 */
+        /* トピック＆警告枠（当時の .caution スタイルを採用） */
         .caution {
             padding: 15px;
             border: 3px solid #FFCC00;
@@ -141,6 +139,21 @@
             color: #CC3300;
             margin-bottom: 10px;
             font-size: 105%;
+        }
+        .caution ul {
+            margin: 10px 0 10px 20px;
+        }
+        .caution li {
+            list-style: disc;
+            margin-bottom: 4px;
+        }
+        .caution .highlight-box {
+            background: #FFFFFF;
+            border: 1px dashed #FF9900;
+            padding: 10px;
+            margin-top: 10px;
+            font-weight: bold;
+            color: #993300;
         }
 
         /* 製品詳細テーブルスタイリング */
@@ -160,18 +173,9 @@
             display: flex;
             gap: 20px;
         }
-        .product-cover {
-            width: 180px;
-        }
         .product-cover img {
-            width: 100%;
+            width: 180px;
             border: 1px solid #CCCCCC;
-        }
-        .product-cover p {
-            font-size: 75%;
-            color: #666666;
-            text-align: center;
-            margin-top: 8px;
         }
         .product-table {
             width: 100%;
@@ -181,7 +185,7 @@
             background: #FF9900;
             color: #FFFFFF;
             padding: 8px;
-            width: 120px;
+            width: 110px;
             font-weight: bold;
             text-align: left;
             border-bottom: 1px solid #FFFFFF;
@@ -224,10 +228,12 @@
 <body>
 
 <div id="wrapper">
+  <!-- ロゴヘッダー -->
   <div id="header">
     <h1><a href="../mesopota_2010.html"><img src="../layout/logo.jpg" alt="迷走ポタージュ"/></a></h1>
   </div>
   
+  <!-- グローバルナビゲーション -->
   <div id="headernav">
     <ul>
       <li id="nav_info"><a href="../mesopota_2010.html#info">更新情報</a></li>
@@ -240,89 +246,121 @@
   </div>
   
   <div id="content">
+    <!-- 作品リスト -->
     <h2>作品リスト <span class="x-small">Product List</span></h2>
     <div class="archive-grid clearfix">
       
+      
       <div class="archive-item">
-        <a href="megatonpunch.html">
-            <img src="cover/megatonpunch.jpg" alt="Megaton Punch">
-            Megaton Punch
-        </a>
-        <span>Game</span>
+        <img src="cover/tn_takw.jpg" alt="Artificial Children">
+        <a href="take.html">Artificial Children</a>
+        <span>Animation / PV</span>
       </div>
       
       <div class="archive-item">
-        <a href="mushiire.html">
-            <img src="cover/mushiire.jpg" alt="Mushiire">
-            Mushiire
-        </a>
+        <img src="cover/tn_miya.jpg" alt="Spell Typing Carnival">
+        <a href="miya.html">Spell Typing Carnival</a>
         <span>Game</span>
       </div>
       
       <div class="archive-item last-col">
-        <a href="sakuya.html">
-            <img src="cover/sakuya.jpg" alt="Sakuya Clock">
-            Sakuya Clock
-        </a>
-        <span>Flash Clock</span>
+        <img src="cover/tn_kagi.jpg" alt="S Complex">
+        <a href="kagi.html">S Complex</a>
+        <span>Animation / PV</span>
+      </div>
+      
+      
+      <div class="archive-item">
+        <img src="cover/tn_tetla.jpg" alt="Kero9 Destiny">
+        <a href="tetla.html">Kero9 Destiny</a>
+        <span>Animation / PV</span>
+      </div>
+      
+      <div class="archive-item">
+        <img src="cover/tn_kouks.jpg" alt="Overdrive">
+        <a href="kouks.html">Overdrive (Paranoia Remix)</a>
+        <span>Animation / PV</span>
+      </div>
+      
+      <div class="archive-item last-col">
+        <img src="cover/tn_morii.jpg" alt="Overlap ">
+        <a href="morii.html">Overlap</a>
+        <span>Animation / PV</span>
       </div>
       
     </div>
     
+    
     <h2>アナウンス <span class="x-small">Topics</span></h2>
     <div class="caution">
-        <h3 style="border-bottom: 1px dashed #ccc; padding-bottom: 10px;">Reitaisai 6 Participation Information</h3>
-        <p style="font-weight: bold; color: #d32f2f; margin: 10px 0;">March 8th (Sun) Booth A-57b</p>
-        <p style="font-weight: bold; margin-bottom: 5px;">To those who have drawn a "losing CD" with a beer flavor</p>
-        <p>Among the "Meisou Potage Beer Flavor" CDs distributed at the recent festival, some have "Loser" written on the disc. The winning CDs are just plain CD-Rs with nothing drawn on them. As you can see, the losing CDs have been scribbled on <em>by the circle members</em>. We are sorry, but please understand.</p>
-        <p style="margin-top: 10px; font-size: 90%; color: #666;">(Note: There is no difference in the data on the CD-R.)</p>
+        <h3>Notification regarding a setting error in the typing game "Touhou Kotodama Matsuri"</h3>
+        <p>We apologize for this announcement coming so close to the release date, but there are a few errors in the settings of the game "Touhou Kotodama Matsuri" included in the final product. The problematic areas are the following two:</p>
+        <ul>
+            <li>After defeating Tewi, you can follow up with a bomb by pressing the Enter key.</li>
+            <li>In Tewi's last spell, you cannot erase "South 2nd Round 5th Honba" unless you type "nan ikkyoku gohonba".</li>
+        </ul>
+        <div class="highlight-box">
+            Fortunately, there are no major problems in terms of game progression.
+            <p style="font-weight:normal; font-size:95%; color:#333; margin-top:5px;">However, if you don't want to bully Tewi unnecessarily or waste bombs, please refrain from pressing the Enter key at the relevant point.</p>
+        </div>
     </div>
+    
     
     <h2>作品紹介 <span class="x-small">Introduction</span></h2>
     <div class="product-section">
-        <div class="product-title">"The information release is so slow! What are you doing?!"</div>
-        <p style="margin-bottom: 15px;">"A hand-burned" CD of a meandering potage, where everything is on the edge.</p>
+        <div class="product-title">"Behold, the dazzling action of the East!"</div>
+        <p style="margin-bottom: 15px;">A collection of Flash creations by popular internet creators! Not just for viewing, but for playing with.</p>
         
         <div class="product-container">
             <div class="product-cover">
-                <img src="cover/R6.jpg" alt="Touhou Beer flavor">
-                <p>CD case illustration: Kagi</p>
+                <img src="cover/R5.jpg" alt="Touhou Eisharoku">
+                <p>CD case illustration: Kagi, Uda Tetla</p>
             </div>
             <table class="product-table">
                 <tr>
                     <th>Event</th>
-                    <td><a href="#">Hakurei Shrine Reitaisai</a></td>
+                    <td><a href="#">Hakurei Reitaisai Shrine</a></td>
                 </tr>
                 <tr>
                     <th>Space</th>
-                    <td>A-57b</td>
+                    <td>Wa - 21b</td>
                 </tr>
                 <tr>
                     <th>Distribution Date</th>
-                    <td>2009/03/08</td>
+                    <td>2008/05/25</td>
                 </tr>
                 <tr>
                     <th>Specification</th>
-                    <td>Hand-burned CD-R (paper case)</td>
+                    <td>Single CD in a tall case</td>
                 </tr>
                 <tr>
                     <th>Credit</th>
                     <td>
                         <table style="width:100%; font-size:100%;">
                             <tr>
-                                <td style="width:50%; padding:0; background:none; border:none; vertical-align:top;">
+                                <td style="width:33%; padding:0; background:none; border:none;">
                                     <strong>Flash:</strong>
                                     <ul>
-                                        <li><a href="#">Miya</a></li>
+                                        <li><a href="C76/index.html">Miya</a></li>
                                         <li><a href="#">Uda Tetla</a></li>
                                         <li><a href="#">Kagi</a></li>
-                                        <li><a href="#">Yu-ki</a></li>
+                                        <li><a href="#">Takenoko</a></li>
                                     </ul>
                                 </td>
-                                <td style="width:50%; padding:0; background:none; border:none; vertical-align:top;">
+                                <td style="width:33%; padding:0; background:none; border:none;">
+                                    <strong>Music:</strong>
+                                    <ul>
+                                        <li><a href="#">dBu Music</a></li>
+                                        <li><a href="#">Silver Forest</a></li>
+                                        <li><a href="#">COOL&CREATE</a></li>
+                                        <li><a href="#">IOSYS</a></li>
+                                    </ul>
+                                </td>
+                                <td style="width:33%; padding:0; background:none; border:none;">
                                     <strong>Support:</strong>
                                     <ul>
-                                        <li><a href="#">as@earth</a></li>
+                                        <li><a href="#">as</a></li>
+                                        <li><a href="#">IOSYS</a></li>
                                     </ul>
                                 </td>
                             </tr>
@@ -336,6 +374,7 @@
   </div>
 </div>
 
+<!-- 共通フッター -->
 <div id="footer" class="clear">
   <div id="footernav">
     <ul>
@@ -347,7 +386,7 @@
       <li><a href="../mesopota_2010.html#link">リンク</a></li>
     </ul>
   </div>
-  <address>Copyright &copy; 2008-2026 迷走ポタージュ / Average Rumia. Preservation Project. No rights reserved.</address>
+  <address>Copyright &copy; 2026 迷走ポタージュ / Average Rumia. No rights reserved.</address>
 </div>
 
 </body>
