@@ -2,458 +2,496 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <title>Mesopota - Archive Selection Full Width</title>
+    <title>迷走ポタージュ - Archive Selection (R8)</title>
+    <link rel="icon" type="image/png" href="../icon64.png">
     <style>
-        /* BASE */
-        body { 
-            /* Gradiente vertical: Color 1 (Arriba) -> Color 2 (Medio) -> Color 1 (Abajo) */
-            background: linear-gradient(to bottom, #eacb83 0%, #921e1e 50%, #eacb83 100%);
+        @charset "utf-8";
+
+        
+        html,body,h1,h2,h3,h4,h5,h6,p,ul,ol,dl,li,dt,dd,table,th,td,tr,img,input,div {
+            margin: 0; padding: 0; color: #EFDFDF; border: 0; list-style: none;
+        }
+        a:link, a:visited { color: #FFF; text-decoration: none; }
+        a:hover, a:active { color: #FF6; text-decoration: underline; }
+        
+        body {
+            font-family: "メイリオ", Meiryo, "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", Osaka, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
+            font-size: 12px;
+            line-height: 1.4;
             
-            color: #333; 
-            font-family: "MS PGothic", sans-serif; 
-            margin: 0; 
-            padding: 0;
-            
-            /* Esto asegura que el gradiente se estire por toda la altura de la ventana si hay poco contenido */
-            min-height: 100vh; 
+            background: #931E1E url('../layout/back.jpg') center top repeat-x;
         }
+        
+        hr { color: #FFF; margin: 20px 0; }
+        .clear { clear: both; }
+        .yellow { color: #FF0; }
+        
+        
+        .wrapper { margin: 0 auto; width: 960px; }
+        
+        
+        .box {
+            margin-bottom: 40px;
+            background: url('../layout/box_back.png') repeat;
+            background-color: rgba(0,0,0,0.6); 
+        }
+        .box h2 { 
+            padding: 10px 15px; font-size: 16px; color: #FFF; background: #000; 
+            letter-spacing: 0.1em; text-transform: uppercase; font-weight: normal;
+        }
+        .box .inner { padding: 20px; width: 920px; overflow: hidden; }
+        
+        
+        #header { padding: 20px 0; width: 100%; text-align: center; margin-bottom: 10px;}
+        #header #sitelogo { display: inline-block; }
+        
+        #nav-container { width: 780px; margin: 0 auto 40px auto; }
+        #headernav ul { height: 50px; background: url('../layout/exglobalnav.gif') #000 0 -100px; }
+        #headernav li { float: left; width: 130px; }
+        #headernav li a {
+            line-height: 160%; display: block; height: 50px; width: 100%; text-indent: -9999px;
+            background: url('../layout/exglobalnav.gif') #000;
+        }
+        #headernav #nav_info a { background-position: 0 0; }
+        #headernav #nav_product a { background-position: -130px 0; }
+        #headernav #nav_member a { background-position: -260px 0; }
+        #headernav #nav_about a { background-position: -390px 0; }
+        #headernav #nav_cheer a { background-position: -520px 0; }
+        #headernav #nav_link a { background-position: -650px 0; }
+        #headernav #nav_info a:hover { background-position: 0 -50px; }
+        #headernav #nav_product a:hover { background-position: -130px -50px; }
+        #headernav #nav_member a:hover { background-position: -260px -50px; }
+        #headernav #nav_about a:hover { background-position: -390px -50px; }
+        #headernav #nav_cheer a:hover { background-position: -520px -50px; }
+        #headernav #nav_link a:hover { background-position: -650px -50px; }
 
-        /* SCANLINES (Se mantienen sobre todo) */
-        body::before {
-            content: " "; display: block; position: fixed; top: 0; left: 0; bottom: 0; right: 0;
-            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.05) 50%),
-                        linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
-            z-index: 9999; pointer-events: none; background-size: 100% 3px, 3px 100%;
+        
+        .archive-grid { margin-bottom: 10px; }
+        .archive-item { float: left; width: 280px; margin-right: 40px; margin-bottom: 25px; }
+        .archive-item.last-col { margin-right: 0; }
+        .archive-item img {
+            width: 280px; height: 157px; border: 1px solid #633;
+            display: block; margin-bottom: 6px; object-fit: cover; background: #000;
         }
+        .archive-item a { font-weight: bold; font-size: 14px; display: block; text-decoration: none;}
+        .archive-item span { font-size: 11px; color: #999; display: block; margin-top: 2px; }
 
-        /* Contenedor central para el logo, la galería y el footer */
-        .container {
-            width: 850px;
-            margin: 0 auto;
-            position: relative;
+        
+        #product #copy { margin-bottom: 20px; font-size: 24px; line-height: 140%; font-family: "MS Mincho", serif;}
+        #product .desc-text { font-size: 14px; margin-bottom: 20px; line-height: 1.6; }
+        #product #jacketImg { float: left; width: 260px; text-align: center; }
+        #product #jacketImg img { width: 100%; border: 1px solid #633; margin-bottom: 5px; }
+        #product #jacketImg .caption { font-size: 10px; color: #CCC; }
+        #product div.desc { float: right; width: 630px; }
+        
+        #product #infoTable { width: 100%; border: 1px solid #633; border-collapse: collapse; }
+        #product #infoTable th {
+            padding: 10px; color: #FFF; text-align: left; font-weight: bold;
+            background: #4a0d0d url('../layout/th_back.png');
+            border: 1px solid #633; width: 130px; text-transform: uppercase;
         }
+        #product #infoTable td { padding: 10px; font-weight: bold; border: 1px solid #633; background: rgba(0,0,0,0.3);}
+        
+        #product .credit-table { width: 100%; border-collapse: collapse; border: none; }
+        #product .credit-table td { border: none; padding: 0 15px 0 0; vertical-align: top; width: 25%; background: transparent; font-weight: normal;}
+        #product .credit-table strong { display: block; margin-bottom: 5px; color: #FFF; font-weight: bold; }
+        #product .credit-table li { margin-bottom: 3px; }
 
-        /* --- BARRA DE NAVEGACIÓN (ANCHO TOTAL) --- */
-        #headernav-full {
-            background-color: #000000;
-            width: 100%; /* Esto hace que llegue a ambos extremos */
-            padding: 10px 0;
-            margin-bottom: 20px;
-        }
-
-        /* --- BARRA DE TÍTULO DE LISTA (ANCHO TOTAL) --- */
-        .orange-header-full {
-            background-color: #000000;
-            width: 100%; /* Extremo a extremo */
-            color: #fff;
-            padding: 8px 0;
-            margin-bottom: 25px;
-        }
-
-        /* Estilo del texto dentro de las barras para que no se pegue al borde de la pantalla */
-        .inner-content {
-            width: 850px;
-            margin: 0 auto;
-            padding: 0 10px;
-            box-sizing: border-box;
-        }
-
-        .orange-menu { 
-            list-style: none; 
-            padding: 0; 
-            margin: 0; 
-            display: flex; 
-            justify-content: center; 
-            gap: 30px; 
-        }
-        .orange-menu a { 
-            color: #fff; 
-            text-decoration: none; 
-            font-weight: bold; 
-            font-size: 16px;
-        }
-
-        /* GALERÍA */
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 25px;
-            padding-bottom: 40px;
-        }
-
-        .game-card {
-            background: #b0b0b0;
-            border: 1px solid #8c5300;
-            padding: 8px;
-            text-align: center;
-            text-decoration: none;
-            color: #0033cc; /* Color de link azul clásico */
-            font-size: 13px;
-        }
-
-        .game-card img {
-            width: 100%;
-            height: auto;
-            border: 1px solid #333;
-            margin-bottom: 8px;
-        }
-/* --- Ajuste uniforme para las imágenes del grid --- */
-/* Nota: Asegúrate de que el selector coincida con el contenedor de tus juegos */
-img.cover-image { /* O aplica esta clase directamente a tus etiquetas <img> */
-    width: 320px;       /* Ancho fijo para todas las carátulas */
-    height: 180px;      /* Alto fijo para alinear la cuadrícula */
-    object-fit: cover;  /* LLena el espacio recortando el sobrante sin deformar */
-    object-position: center; /* Centra la imagen dentro del "marco" */
-    border: 1px solid #999; /* Opcional: un borde para mantener el estilo retro */
-    display: block;     /* Evita espacios fantasmas debajo de la imagen */
-}
-        .game-type { color: #666; font-size: 10px; margin-top: 4px; }
-
-       #footer { text-align: center; padding: 40px 0; color: #777; font-size: 11px; }
-    
-    /* --- ESTILOS EXCLUSIVOS REITAISAI 8 --- */
-        .reitaisai-wrapper {
-            max-width: 850px;
-            margin: 40px auto;
-            background-color: #5b1212; /* El rojo oscuro característico */
-            color: #f2f2f2;
-            font-family: Arial, "MS PGothic", sans-serif;
-            box-shadow: 0 0 10px rgba(0,0,0,0.5);
-        }
-
-        .rei-header {
-            background-color: #000000;
-            color: #ffffff;
-            font-size: 24px;
-            font-weight: bold;
-            padding: 12px 20px;
-            text-transform: capitalize;
-        }
-
-        .rei-section {
-            padding: 20px 25px 30px 25px;
-        }
-
-        /* Bloque Notice */
-        .rei-notice-title { font-size: 26px; font-weight: bold; line-height: 1.2; margin-bottom: 15px; }
-        .rei-notice-text { font-size: 16px; line-height: 1.4; margin-bottom: 15px; }
+        
         .toriyoke-box {
-            display: flex; gap: 15px;
-            border-top: 1px solid #8a2a2a; border-bottom: 1px solid #8a2a2a;
-            padding: 15px 0; margin-top: 20px; margin-bottom: 20px;
+            display: flex; gap: 20px; border-top: 1px solid #633; border-bottom: 1px solid #633;
+            padding: 20px 0; margin: 20px 0;
         }
-        
-        /* Product Info */
-        .rei-product { display: flex; gap: 25px; margin-top: 15px; }
-        .rei-product-left { flex: 0 0 260px; }
-        .rei-product-right { flex: 1; }
-        .rei-kanji-title { font-family: "MS Mincho", serif; font-size: 28px; border-bottom: 1px solid #8a2a2a; padding-bottom: 10px; margin: 0 0 15px 0; font-weight: normal; }
-        
-        /* Tabla de producto Reitaisai */
-        .rei-table { width: 100%; border-collapse: collapse; font-size: 11px; margin-top: 15px; font-family: sans-serif; }
-        .rei-table th { text-align: left; padding: 6px 0; width: 130px; font-weight: bold; border-bottom: 1px solid #731e1e; color: #fff; vertical-align: top;}
-        .rei-table td { padding: 6px 0; border-bottom: 1px solid #731e1e; vertical-align: top;}
-        .rei-table a { color: #ffcccc; text-decoration: underline; }
 
-        .credit-grid { display: flex; gap: 30px; }
-        .credit-grid div { display: flex; flex-direction: column; gap: 3px; }
-        .credit-grid strong { margin-bottom: 3px; color: #fff; }
+        
+        #tracklist { width: 918px; border-top: 1px solid #633; border-left: 1px solid #633; border-right: 1px solid #633; overflow: hidden; margin-bottom: 10px;}
+        #tracklist li {
+            padding: 15px 0; float: left; width: 100%; overflow: hidden; border-bottom: 1px solid #633;
+            background: rgba(0,0,0,0.4);
+        }
+        #tracklist li:nth-child(even) { background: rgba(60,10,10,0.4) url('../layout/th_back.png'); }
+        
+        #tracklist li div.img { padding-left: 15px; float: left; width: 160px; text-align: center; font-size: 24px; color: #633; font-weight: bold;}
+        #tracklist li div.img img { width: 160px; height: 90px; border: 1px solid #000; object-fit: cover; }
+        
+        #tracklist li div.desc { padding-left: 20px; float: left; color: #CCC; width: 700px; }
+        #tracklist li h3 { margin: 0 0 10px; padding: 0; color: #FFF; font-size: 18px; font-weight: bold; }
+        
+        #tracklist li dl { margin: 0; padding: 0; }
+        #tracklist li dl dt { margin: 0; padding: 0; float: left; font-weight: bold; width: 45px; color: #EFDFDF;}
+        #tracklist li dl dd { margin: 0; padding: 0 0 0 55px; margin-bottom: 3px;}
+        
+        .song-info { margin-top: 10px; }
+        .song-info .title { font-size: 14px; font-weight: bold; color: #FFF; margin-bottom: 2px;}
+        .song-info .album { font-size: 11px; color: #999; }
+        
+        #tracklistEx .crossfade { margin-top: 10px; font-size: 14px; font-weight: bold; color: #FF0;}
 
-        /* Lista de Performances */
-        .perf-row {
-            display: flex; align-items: flex-start; gap: 15px;
-            padding: 15px 0; border-bottom: 1px solid #731e1e;
-        }
-        .perf-num {
-            font-size: 55px; color: #9c3b3b; font-weight: normal; 
-            width: 60px; text-align: right; line-height: 1; padding-top: 10px;
-        }
-        .perf-thumb { width: 160px; height: 90px; border: 1px solid #222; background-color: #000; object-fit: cover; }
-        .perf-info { flex: 1; font-size: 12px; line-height: 1.5; }
-        .perf-info .title { font-size: 16px; font-weight: bold; text-decoration: underline; margin-bottom: 5px; color: #fff; display: block;}
-        .perf-info .label { font-weight: bold; display: inline-block; width: 45px; }
-        .perf-info a { color: #ffcccc; text-decoration: underline; }
+        
+        #footer { text-align: center; padding: 40px 0; color: #999; font-size: 12px; margin-top: 10px; }
+        #footernav { padding: 0 0 20px 0; }
+        #footernav li { display: inline; padding: 0 10px; border-left: 1px solid #666; }
+        #footernav li.first { border-left: none; }
+        #footernav a { color: #999; }
+        #footer address { margin-top: 10px; }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <div id="header" style="padding: 20px 0;">
-            <h1 style="color: #000000; margin: 0; font-size: 22px;">迷走ポタージュ <span style="font-size: 12px; font-weight: normal; color: #000000;">- Archive Selection</span></h1> 
+<div class="wrapper">
+  
+  <div id="header">
+    <a href="../mesopota_2010.html"><img id="sitelogo" src="../layout/exlogo.png" alt="迷走ポタージュ"/></a>
+  </div>
+  
+  <div id="nav-container">
+      <div id="headernav">
+        <ul>
+          <li id="nav_info"><a href="../mesopota_2010.html#info">更新情報</a></li>
+          <li id="nav_product"><a href="../mesopota_2010.html#product">製品情報</a></li>
+          <li id="nav_member"><a href="../mesopota_2010.html#member">メンバー</a></li>
+          <li id="nav_about"><a href="../mesopota_2010.html#about">サイト説明</a></li>
+          <li id="nav_cheer"><a href="../mesopota_2010.html#cheer">応援中</a></li>
+          <li id="nav_link"><a href="../mesopota_2010.html#link">リンク</a></li>
+        </ul>
+      </div>
+  </div>
+  
+  <div class="box">
+      <h2>Archive Selection</h2>
+      <div class="inner">
+        <div class="archive-grid clearfix">
+          
+          <div class="archive-item">
+            <a href="icyas.html">
+                <img src="cover/icyas.jpg" alt="flan">
+                495Go! Little Sister's Emotion
+            </a>
+            <span>Animation / PV</span>
+          </div>
+          
+          <div class="archive-item">
+            <a href="kagi.html">
+                <img src="cover/kagi.jpg" alt="okuu">
+                The Subterranean Prominence
+            </a>
+            <span>Animation / PV</span>
+          </div>
+          
+          <div class="archive-item last-col">
+            <a href="kouki.html">
+                <img src="cover/kouki.jpg" alt="crow">
+                Amaterasu, the Crow of Hell
+            </a>
+            <span>Animation / PV</span>
+          </div>
+    
+          <div class="archive-item">
+            <a href="tetla.html">
+                <img src="cover/tetla.jpg" alt="s complex">
+                D-S Complex
+            </a>
+            <span>Animation / PV</span>
+          </div>
+    
+          <div class="archive-item">
+            <a href="yamako.html">
+                <img src="cover/double flutter.jpg" alt="flutter">
+                Double Flutter
+            </a>
+            <span>Animation / PV</span>
+          </div>
+    
+          <div class="archive-item last-col">
+            <a href="funi.html">
+                <img src="cover/funi.jpg" alt="funi">
+                Flan-chan's Music Class
+            </a>
+            <span>Animation / PV</span>
+          </div>
+          
         </div>
+      </div>
+  </div>
+
+  <div class="box">
+      <h2>Notice</h2>
+      <div class="inner">
+          <p style="font-size: 16px; font-weight: bold; margin-bottom: 15px; color: #FFF;">A limited-edition bonus booklet and a bonus hand-burned CD will be given away on a first-come, first-served basis at the Hakurei Shrine Reitaisai!!</p>
+          <p>
+              At the Hakurei Shrine Reitaisai on May 8th, we'll be giving away a bonus booklet and a bonus hand-burned CD "Toriyoke" on a first-come, first-served basis.<br>
+              As usual, some unlucky people might end up with a "loser"...?
+          </p>
+          
+          <div class="toriyoke-box">
+              <img src="cover/R8E.jpg" alt="Meisou Potage Toriyoke" style="width: 130px; height: 130px; border: 1px solid #000;">
+              <div>
+                  <p style="margin-bottom: 5px;">A CD (*) that is expected to be effective in controlling pest birds that damage crops.</p>
+                  <strong style="font-size: 16px; color: #FFF;">"Meisou Potage Toriyoke"</strong><br><br>
+                  Event: Hakurei Shrine Reitaisai<br>
+                  Space: Hi-47a<br>
+                  Specifications: Hand-burned CD-R (paper case)<br>
+                  Price: Free<br>
+                  <span style="font-size: 10px; color: #999;">*This does not guarantee the actual effectiveness in controlling pest birds.</span>
+              </div>
+          </div>
+      </div>
+  </div>
+
+  <div class="box" id="product">
+      <h2>Product Information</h2>
+      <div class="inner">
+          <h3 id="copy">七組のクリエイターによる渾身の宴会芸！</h3>
+          
+          <div id="jacketImg">
+              <img src="cover/R8.jpg" alt="Eastern Banquet Mound">
+              <div class="caption">Layout: Kagi / Design: Uda Tetra /<br>Illustrations: Miya, Uda Tetra, Kagi, yu-ki</div>
+          </div>
+          
+          <div class="desc">
+              <p class="desc-text">
+                  Welcome to the feast of Gensokyo, where humans and yokai frolic!<br>
+                  Tonight, we have prepared a colorful array of entertainment, including Touhou fan-made Flash animations and Flash games, as well as a Bunka-cho style photo game and a wallpaper creation mode!<br>
+                  <span style="font-size: 11px; color: #999; font-style: italic;">*Alcohol is for those 20 years of age and older.</span>
+              </p>
+
+              <table id="infoTable">
+                  <tr>
+                      <th>Title</th>
+                      <td>Eastern Banquet Mound (東方演出家)</td>
+                  </tr>
+                  <tr>
+                      <th>Event</th>
+                      <td><a href="#">Hakurei Shrine Reitaisai</a></td>
+                  </tr>
+                  <tr>
+                      <th>Space</th>
+                      <td>Hi-47a</td>
+                  </tr>
+                  <tr>
+                      <th>Distribution Date</th>
+                      <td>2010/05/08 (Sun)</td>
+                  </tr>
+                  <tr>
+                      <th>Price</th>
+                      <td>1000 yen</td>
+                  </tr>
+                  <tr>
+                      <th>Specification</th>
+                      <td>CD-ROM (Slim Tall Case)</td>
+                  </tr>
+                  <tr>
+                      <th>Credit</th>
+                      <td>
+                          <table class="credit-table">
+                              <tr>
+                                  <td>
+                                      <strong>Flash</strong>
+                                      <ul>
+                                          <li><a href="#">Kagi</a></li>
+                                          <li><a href="#">Uda Tetra</a></li>
+                                          <li><a href="#">yama_ko</a></li>
+                                          <li><a href="#">ICyas</a></li>
+                                          <li><a href="#">Funi</a></li>
+                                          <li><a href="#">Kouki</a></li>
+                                      </ul>
+                                  </td>
+                                  <td>
+                                      <strong>Music</strong>
+                                      <ul>
+                                          <li><a href="#">Day Online</a></li>
+                                          <li><a href="#">COOL&CREATE</a></li>
+                                          <li><a href="#">Honey Lemon</a></li>
+                                          <li><a href="#">Forest Pireo</a></li>
+                                          <li><a href="#">nekomimi style</a></li>
+                                          <li><a href="#">Gooshandagoo</a></li>
+                                          <li><a href="#">Keigo</a></li>
+                                      </ul>
+                                  </td>
+                                  <td>
+                                      <strong>System</strong>
+                                      <ul>
+                                          <li><a href="#">Miya</a></li>
+                                          <li><a href="#">yu-ki</a></li>
+                                      </ul>
+                                  </td>
+                                  <td>
+                                      <strong>Support</strong>
+                                      <ul>
+                                          <li><a href="#">as@earth</a></li>
+                                      </ul>
+                                  </td>
+                              </tr>
+                          </table>
+                      </td>
+                  </tr>
+              </table>
+          </div>
+      </div>
+  </div>
+
+  <div class="box">
+      <h2>List of performances</h2>
+      <div class="inner">
+          <ol id="tracklist">
+              
+              <li id="tracklist01">
+                  <div class="img">
+                      <div style="font-size: 36px; line-height: 1; margin-bottom: 5px;">01</div>
+                      <img src="cover/ss1.jpg" alt="The Subterranean Prominence">
+                  </div>
+                  <div class="desc">
+                      <h3>The Subterranean Prominence</h3>
+                      <dl>
+                          <dt>Movie</dt>
+                          <dd><a href="#">Locker Room Productions</a></dd>
+                          <dt>Music</dt>
+                          <dd><a href="#">Day Online</a></dd>
+                      </dl>
+                      <div class="song-info">
+                          <p class="title">"Prominence"</p>
+                          <p class="album">From Trois Bleu</p>
+                      </div>
+                  </div>
+              </li>
+
+              <li id="tracklist02">
+                  <div class="img">
+                      <div style="font-size: 36px; line-height: 1; margin-bottom: 5px;">02</div>
+                      <img src="cover/ss2.jpg" alt="Sadistic complex">
+                  </div>
+                  <div class="desc">
+                      <h3>Sadistic complex</h3>
+                      <dl>
+                          <dt>Movie</dt>
+                          <dd><a href="#">Uda Tetra</a></dd>
+                          <dt>Music</dt>
+                          <dd><a href="#">COOL & CREATE</a></dd>
+                      </dl>
+                      <div class="song-info">
+                          <p class="title">"s complex"</p>
+                          <p class="album">From COOL&CREATE; Touhou Vocal Collection III "Super Amanerio"</p>
+                      </div>
+                  </div>
+              </li>
+
+              <li id="tracklist03">
+                  <div class="img">
+                      <div style="font-size: 36px; line-height: 1; margin-bottom: 5px;">03</div>
+                      <img src="cover/ss3.jpg" alt="495Go!">
+                  </div>
+                  <div class="desc">
+                      <h3>495Go! Little Sister Emotion</h3>
+                      <dl>
+                          <dt>Movie</dt>
+                          <dd><a href="#">ICyas</a></dd>
+                          <dt>Music</dt>
+                          <dd><a href="#">Forest Pireo</a></dd>
+                      </dl>
+                      <div class="song-info">
+                          <p class="title">"Is she the most girlish of them all?"</p>
+                          <p class="album">From T★GIRLS.02</p>
+                      </div>
+                  </div>
+              </li>
+
+              <li id="tracklist04">
+                  <div class="img">
+                      <div style="font-size: 36px; line-height: 1; margin-bottom: 5px;">04</div>
+                      <img src="cover/ss4.jpg" alt="Fran-chan's Music Class">
+                  </div>
+                  <div class="desc">
+                      <h3>Flan-chan's Music Class</h3>
+                      <dl>
+                          <dt>Movie</dt>
+                          <dd><a href="#">Funi</a></dd>
+                          <dt>Music</dt>
+                          <dd><a href="#">nekomimi style</a> (Re:cy:cle)</dd>
+                      </dl>
+                      <div class="song-info">
+                          <p class="title">"Flan-chan's Music Class"</p>
+                          <p class="album">From TohoQ Highland!</p>
+                      </div>
+                  </div>
+              </li>
+
+              <li id="tracklist05">
+                  <div class="img">
+                      <div style="font-size: 36px; line-height: 1; margin-bottom: 5px;">05</div>
+                      <img src="cover/ss5.jpg" alt="Double Flutter">
+                  </div>
+                  <div class="desc">
+                      <h3>Double Flutter</h3>
+                      <dl>
+                          <dt>Movie</dt>
+                          <dd><a href="#">yama_ko</a></dd>
+                          <dt>Music</dt>
+                          <dd><a href="#">Honey Lemon</a></dd>
+                      </dl>
+                      <div class="song-info">
+                          <p class="title">"Fluttergirl"</p>
+                          <p class="album">From Flutter Girl</p>
+                          <p style="font-size: 10px; color: #993333; margin-top: 5px;">*The back of the product packaging incorrectly lists the song title as "Flutter Girl," but the correct title is "Double Flutter." We apologize for the error and have corrected it.</p>
+                      </div>
+                  </div>
+              </li>
+
+              <li id="tracklist06">
+                  <div class="img">
+                      <div style="font-size: 36px; line-height: 1; margin-bottom: 5px;">06</div>
+                      <img src="cover/ss6.jpg" alt="Amaterasu">
+                  </div>
+                  <div class="desc">
+                      <h3>Amaterasu, the Crow of Hell</h3>
+                      <dl>
+                          <dt>Movie</dt>
+                          <dd><a href="#">Kouki</a></dd>
+                          <dt>Music</dt>
+                          <dd><a href="#">Gooshandagoo</a></dd>
+                      </dl>
+                      <div class="song-info">
+                          <p class="title">"A Song Dedicated to Cremation"</p>
+                          <p class="album">From e-Lfingate</p>
+                      </div>
+                  </div>
+              </li>
+
+              <li id="tracklistEx">
+                  <div class="img" style="color: #FF0;">
+                      <div style="font-size: 36px; line-height: 1; margin-bottom: 5px;">Ex</div>
+                      <img src="cover/ss7.jpg" alt="Bunka-cho Mode">
+                  </div>
+                  <div class="desc">
+                      <h3>Bunka-cho Mode [not avaliable]</h3>
+                      <dl>
+                          <dt>System</dt>
+                          <dd><a href="#">Miya</a> , <a href="#">yu-ki</a></dd>
+                      </dl>
+                      <div class="crossfade">
+                          <a href="https://youtu.be/sECoMs1Slu4?si=Ab95UvyosXJzTAm0" target="_blank" style="color:#FF0;">Crossfade demo movie of all works ➡</a>
+                      </div>
+                  </div>
+              </li>
+
+          </ol>
+      </div>
+  </div>
+
+  <div id="footer" class="clear">
+    <div id="footernav">
+      <ul>
+        <li class="first"><a href="../mesopota_2010.html#info">更新情報</a></li>
+        <li><a href="../mesopota_2010.html#product">製品情報</a></li>
+        <li><a href="../mesopota_2010.html#member">メンバー</a></li>
+        <li><a href="../mesopota_2010.html#about">サイト説明</a></li>
+        <li><a href="../mesopota_2010.html#cheer">応援中</a></li>
+        <li><a href="../mesopota_2010.html#link">リンク</a></li>
+      </ul>
     </div>
+    <address>Copyright &copy; 2008-2026 迷走ポタージュ / Average Rumia. Preservation Project. No rights reserved.</address>
+  </div>
 
-
-    <div class="orange-header-full">
-        <div class="inner-content">
-            <h2 style="margin: 0; font-size: 20px;">作品リスト <span style="font-size: 14px; font-weight: normal;">Product List</span></h2>
-        </div>
-    </div>
-
-    <div class="gallery-grid">
-        <a href="icyas.html" class="Flash Animation">
-            <img class="cover-image" src="cover/icyas.jpg" alt="flan">
-            <div class="game-title">495Go! Little Sister's Emotion</div>
-            <div class="game-type">Animation / PV</div>
-        </a>
-
-        <a href="kagi.html" class="Flash Animation">
-            <img class="cover-image" src="cover/kagi.jpg" alt="okuu">
-            <div class="game-title">The Subterranean Prominence</div>
-            <div class="game-type">Animation / PV</div>
-        </a>
-
-        <a href="kouki.html" class="Flash Animation">
-            <img class="cover-image" src="cover/kouki.jpg" alt="crow">
-            <div class="game-title">Amaterasu, the Crow of Hell</div>
-            <div class="game-type">Animation / PV</div>
-        </a>
-
-        <a href="tetla.html" class="Flash Animation">
-            <img class="cover-image" src="cover/tetla.jpg" alt="s complex but bad i guess">
-            <div class="game-title">D-S Complex</div>
-            <div class="game-type">Animation / PV</div>
-        </a>
-
-        <a href="yamako.html" class="Flash Animation">
-            <img class="cover-image" src="cover/double flutter.jpg" alt="flutter">
-            <div class="game-title">Double Flutter</div>
-            <div class="game-type">Animation / PV</div>
-        </a>
-
-        <a href="funi.html" class="Flash Animation">
-            <img class="cover-image" src="cover/funi.jpg" alt="funi">
-            <div class="game-title">Flan-chan's Music Classr</div>
-            <div class="game-type">Animation / PV</div>
-        </a>
-        
-    </div>
-  <!-- ========================================== -->
-    <!-- INICIO SECCIÓN HAKUREI SHRINE REITAISAI 8  -->
-    <!-- ========================================== -->
-    <div class="reitaisai-wrapper">
-
-        <!-- BLOQUE 1: NOTICE -->
-        <div class="rei-header">notice</div>
-        <div class="rei-section">
-            <div class="rei-notice-title">A limited-edition bonus booklet and a bonus hand-burned CD will be given away on a first-come, first-served basis at the Hakurei Shrine Reitaisai!!</div>
-            <div class="rei-notice-text">
-                At the Hakurei Shrine Reitaisai on May 8th, we'll be giving away a bonus booklet and a bonus hand-burned CD "Toriyoke" on a first-come, first-served basis.<br>
-                As usual, some unlucky people might end up with a "loser"...?
-            </div>
-
-            <div class="toriyoke-box">
-                <!-- IMAGEN DEL CD TORIYOKE -->
-                <img src="cover/R8E.jpg" alt="Meisou Potage Toriyoke" style="width: 130px; height: 130px; border: 1px solid #333;">
-                <div style="font-size: 12px; line-height: 1.4;">
-                    A CD (*) that is expected to be effective in controlling pest birds that damage crops.<br>
-                    <strong style="font-size: 16px; display: block; margin: 4px 0;">"Meisou Potage Toriyoke"</strong>
-                    Event: Hakurei Shrine Reitaisai<br>
-                    Space: Hi-47a<br>
-                    Specifications: Hand-burned CD-R (paper case)<br>
-                    Price: Free<br>
-                    <span style="font-size: 10px; color: #ccc;">*This does not guarantee the actual effectiveness in controlling pest birds.</span>
-                </div>
-            </div>
-            <div class="rei-notice-title" style="margin-bottom: 0;">thank you!</div>
-        </div>
-
-        <!-- BLOQUE 2: PRODUCT INFORMATION -->
-        <div class="rei-header">Product Information</div>
-        <div class="rei-section">
-            <h2 class="rei-kanji-title">七組のクリエイターによる渾身の宴会芸！</h2>
-            
-            <div class="rei-product">
-                <div class="rei-product-left">
-                    <img src="cover/R8.jpg" alt="Eastern Banquet Mound" style="width: 100%; height: auto; border: 1px solid #222;">
-                    <div style="font-size: 9px; margin-top: 5px; color: #ccc; line-height: 1.2;">Layout: Kagi / Design: Uda Tetra /<br>Illustrations: Miya, Uda Tetra, Kagi, yu-ki</div>
-                </div>
-                
-                <div class="rei-product-right">
-                    <div class="rei-notice-text" style="font-size: 15px; margin-bottom: 20px;">
-                        Welcome to the feast of Gensokyo, where humans and yokai frolic!<br>
-                        Tonight,<br>
-                        we have prepared a colorful array of entertainment, including Touhou fan-made Flash animations and Flash games, as well as a Bunka-cho style photo game and a wallpaper creation mode!<br>
-                        <span style="font-size: 11px; color: #ccc; font-style: italic;">*Alcohol is for those 20 years of age and older.</span>
-                    </div>
-
-                    <table class="rei-table">
-                        <tr>
-                            <th>title</th>
-                            <td><strong>Eastern Banquet Mound</strong></td>
-                        </tr>
-                        <tr>
-                            <th>event</th>
-                            <td><a href="#">Hakurei Shrine Reitaisai</a></td>
-                        </tr>
-                        <tr>
-                            <th>space</th>
-                            <td>Hi-47a</td>
-                        </tr>
-                        <tr>
-                            <th>Distribution start date</th>
-                            <td>2010/05/08 (Sun)</td>
-                        </tr>
-                        <tr>
-                            <th>price</th>
-                            <td>1000 yen</td>
-                        </tr>
-                        <tr>
-                            <th>specification</th>
-                            <td>CD-ROM (Slim Tall Case)</td>
-                        </tr>
-                        <tr>
-                            <th>credit</th>
-                            <td>
-                                <div class="credit-grid">
-                                    <div>
-                                        <strong>Flash</strong>
-                                        <a href="#">Kagi</a>
-                                        <a href="#">Uda Tetra</a>
-                                        <a href="#">yama_ko</a>
-                                        <a href="#">ICyas</a>
-                                        <a href="#">Funi</a>
-                                        <a href="#">Kouki</a>
-                                    </div>
-                                    <div>
-                                        <strong>Music</strong>
-                                        <a href="#">Day Online</a>
-                                        <a href="#">COOL&CREATE</a>
-                                        <a href="#">Honey Lemon</a>
-                                        <a href="#">Forest Pireo</a>
-                                        <a href="#">nekomimi style</a>
-                                        <a href="#">Gooshandagoo</a>
-                                        <a href="#">Keigo</a>
-                                    </div>
-                                    <div>
-                                        <strong>System</strong>
-                                        <a href="#">Miya</a>
-                                        <a href="#">yu-ki</a>
-                                    </div>
-                                    <div>
-                                        <strong>Support</strong>
-                                        <a href="#">as@earth</a>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
-        </div>
-
-        <!-- BLOQUE 3: LIST OF PERFORMANCES -->
-        <div class="rei-header">List of performances</div>
-        <div class="rei-section" style="padding-bottom: 10px;">
-            
-            <!-- TRACK 01 -->
-            <div class="perf-row">
-                <div class="perf-num">01</div>
-                <img src="cover/ss1.jpg" alt="The Subterranean Prominence" class="perf-thumb">
-                <div class="perf-info">
-                    <a href="#" class="title">The Subterranean Prominence</a>
-                    <div style="margin-bottom: 4px;">4:53</div>
-                    <div><span class="label">Movie</span> <a href="#">Locker Room Productions</a></div>
-                    <div><span class="label">Music</span> <a href="#">Day Online</a></div>
-                    <div style="margin-top: 6px; font-weight: bold; font-size: 13px;">"Prominence"</div>
-                    <div style="font-size: 10px; color: #ccc;">From Trois Bleu</div>
-                </div>
-            </div>
-
-            <!-- TRACK 02 -->
-            <div class="perf-row">
-                <div class="perf-num">02</div>
-                <img src="cover/ss2.jpg" alt="Sadistic complex" class="perf-thumb">
-                <div class="perf-info">
-                    <a href="#" class="title">Sadistic complex</a>
-                    <div style="margin-bottom: 4px;">3:52</div>
-                    <div><span class="label">Movie</span> <a href="#">Uda Tetra</a></div>
-                    <div><span class="label">Music</span> <a href="#">COOL & CREATE</a></div>
-                    <div style="margin-top: 6px; font-weight: bold; font-size: 13px;">"s complex"</div>
-                    <div style="font-size: 10px; color: #ccc;">From COOL&CREATE; Touhou Vocal Collection III "Super Amanerio"</div>
-                </div>
-            </div>
-
-            <!-- TRACK 03 -->
-            <div class="perf-row">
-                <div class="perf-num">03</div>
-                <img src="cover/ss3.jpg" alt="495Go!" class="perf-thumb">
-                <div class="perf-info">
-                    <a href="#" class="title">495Go! Little Sister Emotion</a>
-                    <div style="margin-bottom: 4px;">3:05</div>
-                    <div><span class="label">Movie</span> <a href="#">ICyas</a></div>
-                    <div><span class="label">Music</span> <a href="#">Forest Pireo</a></div>
-                    <div style="margin-top: 6px; font-weight: bold; font-size: 13px;">"Is she the most girlish of them all?"</div>
-                    <div style="font-size: 10px; color: #ccc;">From T★GIRLS.02</div>
-                </div>
-            </div>
-
-            <!-- TRACK 04 -->
-            <div class="perf-row">
-                <div class="perf-num">04</div>
-                <img src="cover/ss4.jpg" alt="Fran-chan's Music Class" class="perf-thumb">
-                <div class="perf-info">
-                    <a href="#" class="title">Flan-chan's Music Class</a>
-                    <div style="margin-bottom: 4px;">2:20</div>
-                    <div><span class="label">Movie</span> <a href="#">Funi</a></div>
-                    <div><span class="label">Music</span> <a href="#">nekomimi style</a> (Re:cy:cle)</div>
-                    <div style="margin-top: 6px; font-weight: bold; font-size: 13px;">"Flan-chan's Music Class"</div>
-                    <div style="font-size: 10px; color: #ccc;">From TohoQ Highland!</div>
-                </div>
-            </div>
-
-            <!-- TRACK 05 -->
-            <div class="perf-row">
-                <div class="perf-num">05</div>
-                <img src="cover/ss5.jpg" alt="Double Flutter" class="perf-thumb">
-                <div class="perf-info" style="display: flex; justify-content: space-between;">
-                    <div>
-                        <a href="#" class="title">Double Flutter</a>
-                        <div style="margin-bottom: 4px;">3:32</div>
-                        <div><span class="label">Movie</span> <a href="#">yama_ko</a></div>
-                        <div><span class="label">Music</span> <a href="#">Honey Lemon</a></div>
-                        <div style="margin-top: 6px; font-weight: bold; font-size: 13px;">"Fluttergirl"</div>
-                        <div style="font-size: 10px; color: #ccc;">From Flutter Girl</div>
-                    </div>
-                    <div style="max-width: 250px; font-size: 10px; color: #ddd; padding-top: 25px;">
-                        *The back of the product packaging incorrectly lists the song title as "Flutter Girl," but the correct title is "Double Flutter." We apologize for the error and have corrected it.
-                    </div>
-                </div>
-            </div>
-
-            <!-- TRACK 06 -->
-            <div class="perf-row">
-                <div class="perf-num">06</div>
-                <img src="cover/ss6.jpg" alt="Amaterasu" class="perf-thumb">
-                <div class="perf-info">
-                    <a href="#" class="title">Amaterasu, the Crow of Hell</a>
-                    <div style="margin-bottom: 4px;">3:48</div>
-                    <div><span class="label">Movie</span> <a href="#">Kouki</a></div>
-                    <div><span class="label">Music</span> <a href="#">Gooshandagoo</a></div>
-                    <div style="margin-top: 6px; font-weight: bold; font-size: 13px;">"A Song Dedicated to Cremation"</div>
-                    <div style="font-size: 10px; color: #ccc;">From e-Lfingate</div>
-                </div>
-            </div>
-
-            <!-- TRACK Ex -->
-            <div class="perf-row" style="border-bottom: none;">
-                <div class="perf-num">Ex</div>
-                <img src="cover/ss7.jpg" alt="Bunka-cho Mode" class="perf-thumb">
-                <div class="perf-info">
-                    <a href="#" class="title">Bunka-cho Mode [not avaliable]</a>
-                    <div style="margin-bottom: 15px;"><span class="label">System</span> <a href="#">Miya</a> , <a href="#">yu-ki</a></div>
-                    <a href="https://youtu.be/sECoMs1Slu4?si=Ab95UvyosXJzTAm0" style="color: #ffea00; font-weight: bold; font-size: 14px; text-decoration: underline;">Crossfade demo movie of all works ➡</a>
-                </div>
-            </div>
-
-        </div>
-    </div>
-    <!-- FIN SECCIÓN HAKUREI SHRINE REITAISAI 8 -->
-    <div id="footer" style="text-align: center; padding: 30px; color: #666; font-size: 12px;">
-        <p>Select a flash animation / game to start.</p>
-        <address>Copyright &copy; 2008-2026 迷走ポタージュ / Average Rumia. No Rights Reserved.</address>
-    </div>
 </div>
 
 </body>
-  </html>
+</html>
