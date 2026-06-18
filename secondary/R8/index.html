@@ -7,68 +7,51 @@
     <style>
         @charset "utf-8";
 
-        
-        h1, h2, h3, h4, h5, h6, p, ul, li, address, img, table, th, td, dl, dt, dd {
-            margin: 0;
-            padding: 0;
-            color: #333333;
-            list-style: none;
-            line-height: 1.35em;
-            font-family: "ＭＳ Ｐゴシック", Osaka, "ヒラギノ角ゴ Pro W3";
-            font-size: 100%;
-            font-weight: normal;
-            font-style: normal;
-            text-decoration: none;
-            border: none;
+        /* リセット共通スタイル (Enshutsuka Base) */
+        html,body,h1,h2,h3,h4,h5,h6,p,ul,ol,dl,li,dt,dd,table,th,td,tr,img,input,div {
+            margin: 0; padding: 0; color: #EFDFDF; border: 0; list-style: none;
         }
+        a:link, a:visited { color: #FFF; text-decoration: none; }
+        a:hover, a:active { color: #FF6; text-decoration: underline; }
         
         body {
-            margin: 0;
-            padding: 0;
-            text-align: center;
-            background: url('../layout/body.gif') top left repeat-x;
+            font-family: "メイリオ", Meiryo, "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", Osaka, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
+            font-size: 12px;
+            line-height: 1.4;
+            /* Fondo rojo oscuro característico del R8 */
+            background: #931E1E url('../layout/back.jpg') center top repeat-x;
         }
-        a { color: #993300; }
-        a:hover { color: #FF3333; }
         
+        hr { color: #FFF; margin: 20px 0; }
         .clear { clear: both; }
-        .clearfix:after {
-          content: ".";
-          display: block;
-          clear: both;
-          height: 0;
-          visibility: hidden;
-        }
+        .yellow { color: #FF0; }
         
-        /* レイアウト枠 */
-        #wrapper {
-            margin: 0 auto;
-            width: 780px;
-            text-align: left;
-        }
+        /* Contenedor principal ensanchado a 960px */
+        .wrapper { margin: 0 auto; width: 960px; }
         
-
-        #header {
-            height: 70px;
-            background: url('../layout/adress.jpg') center right no-repeat;
+        /* Cajas de sección estilo Enshutsuka */
+        .box {
+            margin-bottom: 40px;
+            background: url('../layout/box_back.png') repeat;
+            background-color: rgba(0,0,0,0.6); /* Fallback */
         }
-        #header h1 { font-size: 150%; font-weight: bold; }
+        .box h2 { 
+            padding: 10px 15px; font-size: 16px; color: #FFF; background: #000; 
+            letter-spacing: 0.1em; text-transform: uppercase; font-weight: normal;
+        }
+        .box .inner { padding: 20px; width: 920px; overflow: hidden; }
         
-        #headernav ul {
-            height: 50px;
-            background: url('../layout/exglobalnav.gif') #000000 0 -100px;
-        }
+        /* Cabecera y Navegación B/N */
+        #header { padding: 20px 0; width: 100%; text-align: center; margin-bottom: 10px;}
+        #header #sitelogo { display: inline-block; }
+        
+        #nav-container { width: 780px; margin: 0 auto 40px auto; }
+        #headernav ul { height: 50px; background: url('../layout/globalnav.gif') #000 0 -100px; }
         #headernav li { float: left; width: 130px; }
         #headernav li a {
-            line-height: 160%;
-            display: block;
-            height: 50px;
-            width: 100%;
-            text-indent: -9999px;
-            background: url('../layout/exglobalnav.gif') #000000;
+            line-height: 160%; display: block; height: 50px; width: 100%; text-indent: -9999px;
+            background: url('../layout/globalnav.gif') #000;
         }
-        
-        
         #headernav li a:hover { color: #FFFFFF; }
         #nav_info a:link, #nav_info a:visited { background-position:0 0; }
         #nav_product a:link, #nav_product a:visited { background-position:-130px 0; }
@@ -82,7 +65,8 @@
         #nav_about a:hover { background-position:-390px -50px; }
         #nav_cheer a:hover { background-position:-520px -50px; }
         #nav_link a:hover { background-position:-650px -50px; }
-        
+
+        /* Galería (Adaptada a 960px: 3 columnas de 280px + márgenes de 40px) */
         .archive-grid { margin-bottom: 10px; }
         .archive-item { float: left; width: 280px; margin-right: 40px; margin-bottom: 25px; }
         .archive-item.last-col { margin-right: 0; }
@@ -93,7 +77,7 @@
         .archive-item a { font-weight: bold; font-size: 14px; display: block; text-decoration: none;}
         .archive-item span { font-size: 11px; color: #999; display: block; margin-top: 2px; }
 
-        
+        /* Sección de Información de Producto */
         #product #copy { margin-bottom: 20px; font-size: 24px; line-height: 140%; font-family: "MS Mincho", serif;}
         #product .desc-text { font-size: 14px; margin-bottom: 20px; line-height: 1.6; }
         #product #jacketImg { float: left; width: 260px; text-align: center; }
@@ -114,13 +98,13 @@
         #product .credit-table strong { display: block; margin-bottom: 5px; color: #FFF; font-weight: bold; }
         #product .credit-table li { margin-bottom: 3px; }
 
-        
+        /* Bloque Notice */
         .toriyoke-box {
             display: flex; gap: 20px; border-top: 1px solid #633; border-bottom: 1px solid #633;
             padding: 20px 0; margin: 20px 0;
         }
 
-        
+        /* Lista de Pistas / Tracklist CSS Original */
         #tracklist { width: 918px; border-top: 1px solid #633; border-left: 1px solid #633; border-right: 1px solid #633; overflow: hidden; margin-bottom: 10px;}
         #tracklist li {
             padding: 15px 0; float: left; width: 100%; overflow: hidden; border-bottom: 1px solid #633;
@@ -144,7 +128,7 @@
         
         #tracklistEx .crossfade { margin-top: 10px; font-size: 14px; font-weight: bold; color: #FF0;}
 
-        
+        /* Footer */
         #footer { text-align: center; padding: 40px 0; color: #999; font-size: 12px; margin-top: 10px; }
         #footernav { padding: 0 0 20px 0; }
         #footernav li { display: inline; padding: 0 10px; border-left: 1px solid #666; }
@@ -511,4 +495,4 @@
 </div>
 
 </body>
-</html>
+ </html>
