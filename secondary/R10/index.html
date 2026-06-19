@@ -2,228 +2,343 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <title>Mesopota - Archive Selection Full Width</title>
+    <title>迷走ポタージュ - Archive Selection</title>
+    <link rel="icon" type="image/png" href="../icon64.png">
     <style>
-        /* BASE */
-        body { 
-            background-color: #c4c4c4; 
-            color: #333; 
-            font-family: "MS PGothic", sans-serif; 
-            margin: 0; 
+        @charset "utf-8";
+        
+        /* リセット共通スタイル */
+        h1, h2, h3, h4, h5, h6, p, ul, li, address, img, table, th, td, dl, dt, dd {
+            margin: 0;
             padding: 0;
+            color: #333333;
+            list-style: none;
+            line-height: 1.35em;
+            font-family: "ＭＳ Ｐゴシック", Osaka, "ヒラギノ角ゴ Pro W3";
+            font-size: 100%;
+            font-weight: normal;
+            font-style: normal;
+            text-decoration: none;
+            border: none;
         }
-
-        /* SCANLINES (Se mantienen sobre todo) */
-        body::before {
-            content: " "; display: block; position: fixed; top: 0; left: 0; bottom: 0; right: 0;
-            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.05) 50%),
-                        linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
-            z-index: 9999; pointer-events: none; background-size: 100% 3px, 3px 100%;
+        
+        body {
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            background: url('../layout/body.gif') top left repeat-x;
         }
-
-        /* Contenedor central para el logo, la galería y el footer */
-        .container {
-            width: 850px;
+        a { color: #993300; }
+        a:hover { color: #FF3333; }
+        
+        .clear { clear: both; }
+        .clearfix:after {
+          content: ".";
+          display: block;
+          clear: both;
+          height: 0;
+          visibility: hidden;
+        }
+        
+        /* レイアウト枠 */
+        #wrapper {
             margin: 0 auto;
-            position: relative;
+            width: 780px;
+            text-align: left;
         }
-
-        /* --- BARRA DE NAVEGACIÓN (ANCHO TOTAL) --- */
-        #headernav-full {
-            background-color: #cc8000;
-            width: 100%; /* Esto hace que llegue a ambos extremos */
-            padding: 10px 0;
-            margin-bottom: 20px;
+        
+        /* ヘッダー＆メインナビ */
+        #header {
+            height: 70px;
+            background: url('../layout/address.jpg') center right no-repeat;
         }
+        #header h1 { font-size: 150%; font-weight: bold; }
+        
+        #headernav ul {
+            height: 50px;
+            background: url('../layout/globalnav.gif') #FF9900 0 -100px;
+        }
+        #headernav li { float: left; width: 130px; }
+        #headernav li a {
+            line-height: 160%;
+            display: block;
+            height: 50px;
+            width: 100%;
+            text-indent: -9999px;
+            background: url('../layout/globalnav.gif') #FF9900;
+        }
+        
+        #headernav li a:hover { color: #FFFFFF; }
+        #nav_info a:link, #nav_info a:visited { background-position:0 0; }
+        #nav_product a:link, #nav_product a:visited { background-position:-130px 0; }
+        #nav_member a:link, #nav_member a:visited { background-position:-260px 0; }
+        #nav_about a:link, #nav_about a:visited { background-position:-390px 0; }
+        #nav_cheer a:link, #nav_cheer a:visited { background-position:-520px 0; }
+        #nav_link a:link, #nav_link a:visited { background-position:-650px 0; }
+        #nav_info a:hover { background-position:0 -50px; }
+        #nav_product a:hover { background-position:-130px -50px; }
+        #nav_member a:hover { background-position:-260px -50px; }
+        #nav_about a:hover { background-position:-390px -50px; }
+        #nav_cheer a:hover { background-position:-520px -50px; }
+        #nav_link a:hover { background-position:-650px -50px; }
 
-        /* --- BARRA DE TÍTULO DE LISTA (ANCHO TOTAL) --- */
-        .orange-header-full {
-            background-color: #cc8000;
-            width: 100%; /* Extremo a extremo */
-            color: #fff;
-            padding: 8px 0;
+        /* コンテンツ要素 */
+        #content { clear: both; padding-top: 20px; }
+        #content h2 {
+            margin: 20px 0 15px 0;
+            padding: 0.3em 30px;
+            color: #FFFFFF;
+            font-weight: bold;
+            font-size: 105%;
+            letter-spacing: 0.1em;
+            background: url('../layout/h2.gif') center left no-repeat #FF9900;
+            border-bottom: 2px solid #DDDDDD;
+        }
+        
+        /* 作品リスト：3カラムグリッドレイアウト */
+        .archive-grid {
+            margin-bottom: 30px;
+        }
+        .archive-item {
+            float: left;
+            width: 240px;
+            margin-right: 30px;
             margin-bottom: 25px;
         }
-
-        /* Estilo del texto dentro de las barras para que no se pegue al borde de la pantalla */
-        .inner-content {
-            width: 850px;
-            margin: 0 auto;
-            padding: 0 10px;
-            box-sizing: border-box;
+        .archive-item.last-col {
+            margin-right: 0;
+        }
+        .archive-item img {
+            width: 240px;
+            height: 135px;
+            border: 1px solid #CCCCCC;
+            display: block;
+            margin-bottom: 6px;
+            object-fit: cover;
+        }
+        .archive-item a {
+            font-weight: bold;
+            font-size: 90%;
+            display: block;
+        }
+        .archive-item span {
+            font-size: 75%;
+            color: #666666;
+            display: block;
+            margin-top: 2px;
         }
 
-        .orange-menu { 
-            list-style: none; 
-            padding: 0; 
-            margin: 0; 
-            display: flex; 
-            justify-content: center; 
-            gap: 30px; 
+        /* トピック＆警告枠 */
+        .caution {
+            padding: 15px;
+            border: 3px solid #FFCC00;
+            background: #FFFEEE;
+            margin-bottom: 20px;
+            font-size: 85%;
         }
-        .orange-menu a { 
-            color: #fff; 
-            text-decoration: none; 
-            font-weight: bold; 
-            font-size: 16px;
-        }
-
-        /* GALERÍA */
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 25px;
-            padding-bottom: 40px;
+        .caution h3 {
+            font-weight: bold;
+            color: #CC3300;
+            margin-bottom: 10px;
+            font-size: 105%;
+            border-bottom: 1px dashed #FF9900;
+            padding-bottom: 5px;
         }
 
-        .game-card {
-            background: #b0b0b0;
-            border: 1px solid #8c5300;
-            padding: 8px;
-            text-align: center;
-            text-decoration: none;
-            color: #0033cc; /* Color de link azul clásico */
-            font-size: 13px;
+        /* 製品詳細テーブルスタイリング */
+        .product-section {
+            margin-top: 15px;
+            font-size: 85%;
         }
-
-        .game-card img {
+        .product-title {
+            font-size: 110%;
+            font-weight: bold;
+            color: #993300;
+            margin-bottom: 10px;
+            border-left: 5px solid #FF9900;
+            padding-left: 10px;
+        }
+        .product-container {
+            display: flex;
+            gap: 20px;
+        }
+        .product-cover {
+            width: 180px;
+        }
+        .product-cover img {
             width: 100%;
-            height: auto;
-            border: 1px solid #333;
-            margin-bottom: 8px;
+            border: 1px solid #CCCCCC;
         }
-/* --- Ajuste uniforme para las imágenes del grid --- */
-/* Nota: Asegúrate de que el selector coincida con el contenedor de tus juegos */
-img.cover-image { /* O aplica esta clase directamente a tus etiquetas <img> */
-    width: 320px;       /* Ancho fijo para todas las carátulas */
-    height: 180px;      /* Alto fijo para alinear la cuadrícula */
-    object-fit: cover;  /* LLena el espacio recortando el sobrante sin deformar */
-    object-position: center; /* Centra la imagen dentro del "marco" */
-    border: 1px solid #999; /* Opcional: un borde para mantener el estilo retro */
-    display: block;     /* Evita espacios fantasmas debajo de la imagen */
-}
-        .game-type { color: #666; font-size: 10px; margin-top: 4px; }
+        .product-cover p {
+            font-size: 75%;
+            color: #666666;
+            text-align: center;
+            margin-top: 8px;
+        }
+        .product-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .product-table th {
+            background: #FF9900;
+            color: #FFFFFF;
+            padding: 8px;
+            width: 120px;
+            font-weight: bold;
+            text-align: left;
+            border-bottom: 1px solid #FFFFFF;
+        }
+        .product-table td {
+            background: #FAF8F5;
+            padding: 8px;
+            border-bottom: 1px solid #E6E6E6;
+        }
+        .product-table td ul {
+            padding: 0 !important;
+        }
+        .product-table td ul li {
+            margin-bottom: 4px;
+        }
 
-        #footer { text-align: center; padding: 40px 0; color: #777; font-size: 11px; }
+        /* フッター */
+        #footer {
+            text-align: center;
+            height: 4.5em;
+            font-size: 90%;
+            margin-top: 40px;
+        }
+        #footernav {
+            padding: 0.2em;
+            background: #FF9900;
+            border-bottom: 2px solid #DDDDDD;
+        }
+        #footernav li {
+            display: inline;
+            padding: 0 1em;
+            border-left: 1px solid #FFFFFF;
+        }
+        #footernav li.first { border-left: none; }
+        #footernav li a { color: #FFFFFF; }
+        #footernav li a:hover { color: #FF3333; }
+        #footer address { margin: 1em; }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <div id="header" style="padding: 20px 0;">
-            <h1 style="color: #8c5300; margin: 0; font-size: 22px;">迷走ポタージュ <span style="font-size: 12px; font-weight: normal; color: #666;">- Archive Selection</span></h1> 
-        </div>
-    </div>
-
-    </nav>
-
-    <div class="orange-header-full">
-        <div class="inner-content">
-            <h2 style="margin: 0; font-size: 20px;">作品リスト <span style="font-size: 14px; font-weight: normal;">Product List</span></h2>
-        </div>
-    </div>
-
-    <div class="gallery-grid">
-        <a href="miya.html" class="Flash Game">
-            <img class="cover-image" src="cover/hidenseek.jpg" alt="sunny">
-            <div class="game-title">Hide And Seek</div>
-            <div class="game-type">Game</div>
+<div id="wrapper">
+  <div id="header">
+    <h1><a href="../mesopota_2010.html"><img src="../layout/logo.jpg" alt="迷走ポタージュ"/></a></h1>
+  </div>
+  
+  <div id="headernav">
+    <ul>
+      <li id="nav_info"><a href="../mesopota_2010.html#info">更新情報</a></li>
+      <li id="nav_product"><a href="../mesopota_2010.html#product">製品情報</a></li>
+      <li id="nav_member"><a href="../mesopota_2010.html#member">メンバー</a></li>
+      <li id="nav_about"><a href="../mesopota_2010.html#about">サイト説明</a></li>
+      <li id="nav_cheer"><a href="../mesopota_2010.html#cheer">応援中</a></li>
+      <li id="nav_link"><a href="../mesopota_2010.html#link">リンク</a></li>
+    </ul>
+  </div>
+  
+  <div id="content">
+    <h2>作品リスト <span class="x-small">Product List</span></h2>
+    <div class="archive-grid clearfix">
+      
+      <div class="archive-item">
+        <a href="miya.html">
+            <img src="cover/hidenseek.jpg" alt="Hide And Seek">
+            Hide And Seek
         </a>
-
+        <span>Game</span>
+      </div>
+      
     </div>
-  <div style="margin-top: 40px; font-family: sans-serif; color: #333; line-height: 1.6; max-width: 800px; margin-left: auto; margin-right: auto; padding: 0 15px;">
-
-        <h2 style="background-color: #cc8000; color: #fff; padding: 12px 15px; margin: 0 0 20px 0; font-size: 1.4em; font-weight: bold; border-left: 5px solid #cc7a00; border-right: 5px solid #cc7a00; text-align: center;">
-            ::Announcements <span style="font-size: 0.6em; color: #ffe6b3; margin-left: 10px; text-transform: uppercase;">Topics</span>
-        </h2>
-
-        <div style="margin-bottom: 35px; text-align: center;">
-            <h3 style="color: #8b4513; font-size: 1.2em; margin-bottom: 15px; border-bottom: 1px dashed #ccc; padding-bottom: 10px; display: inline-block;">
-                Hakurei Shrine Reitaisai 10 Participation Information
-            </h3>
-            
-            <div style="max-width: 700px; margin: 0 auto; text-align: justify; font-size: 1.05em;">
-                <p style="font-size: 1.1em; font-weight: bold; color: #d32f2f; margin: 0 0 10px 0; text-align: center;">
-                    5/26 (Sun) shi-50b
-                </p>
-                <p style="margin: 0 0 10px 0;">
-                    We will be distributing our new Touhou fan-made Flash animation collection, a hand-burned CD titled <a href="#" style="color: #8b4513; text-decoration: underline; font-weight: bold;">"Meisou Potage Melon."</a>.
-                </p>
-                <p style="margin: 0 0 10px 0;">
-                    In addition, we will also be distributing <a href="#" style="color: #8b4513; text-decoration: underline; font-weight: bold;">"Floriography".
-                
-                <p style="margin: 0 0 10px 0;">
-                    a product commissioned by <a href="#" style="color: #8b4513; text-decoration: underline; font-weight: bold;">"KGYK."</a>.
-                </p>
-                <p style="margin: 0;">
-                    In addition, we plan to bring in some older CDs by Meisou Potage. Thank you for your support.
-                </p>
-           <div style="margin-top: 50px; border: 2px solid #e0d085; background-color: #ffffe8; border-radius: 8px; padding: 25px; font-family: sans-serif;">
-
-    <h2 style="color: #8b4513; font-size: 1.6em; margin: 0 0 5px 0; font-weight: bold;">"This artificial melon flavor</h2>
-    <h4 style="color: #555; font-size: 1em; margin: 0 0 25px 0; font-weight: normal;">I like this kind of thing, it's simple. Reitaisai is a festival for boys, right?</h4>
-
-    <div style="display: flex; flex-wrap: wrap; gap: 30px;">
+    
+    <h2>アナウンス <span class="x-small">Topics</span></h2>
+    
+    <div class="caution">
+        <h3>Hakurei Shrine Reitaisai 10 Participation Information</h3>
+        <p style="font-weight: bold; color: #CC3300; margin: 10px 0;">5/26 (Sun) shi-50b</p>
+        <p>We will be distributing our new Touhou fan-made Flash animation collection, a hand-burned CD titled <strong>"Meisou Potage Melon"</strong>.</p>
+        <p style="margin-top: 10px;">In addition, we will also be distributing <strong>"Floriography"</strong>, a product commissioned by <strong>"KGYK."</strong>.</p>
+        <p style="margin-top: 10px;">In addition, we plan to bring in some older CDs by Meisou Potage. Thank you for your support.</p>
+    </div>
+    
+    <h2>作品紹介 <span class="x-small">Introduction</span></h2>
+    <div class="product-section">
+        <div class="product-title">"This artificial melon flavor. I like this kind of thing, it's simple."</div>
+        <p style="margin-bottom: 15px;">Reitaisai is a festival for boys, right? A collection of hand-made Flash animations based on Touhou Project fan fiction.</p>
         
-        <div style="flex: 0 0 220px;">
-            <img src="cover/R10.jpg" alt="Touhou Ramune flavor" style="width: 100%; border: 1px solid #aaa; box-shadow: 2px 2px 5px rgba(0,0,0,0.2);">
-            <p style="font-size: 0.75em; color: #666; text-align: center; margin-top: 8px;">CD case illustration: Uda Tetla</p>
-        </div>
-
-        <div style="flex: 1; min-width: 300px;">
-            <h3 style="color: #8b4513; border-bottom: 2px solid #e0d085; padding-bottom: 5px; margin-top: 0;">"Melon"<br>
-            <span style="font-size: 0.8em; color: #8b4513; font-weight: normal;">A collection of hand-made Flash animations based on Touhou Project fan fiction.</span></h3>
-
-            <table style="width: 100%; border-collapse: collapse; font-size: 0.9em; color: #8b4513; text-align: left;">
+        <div class="product-container">
+            <div class="product-cover">
+                <img src="cover/R10.jpg" alt="Touhou Melon">
+                <p>CD case illustration: Uda Tetla</p>
+            </div>
+            <table class="product-table">
                 <tr>
-                    <th style="background-color: #ff9900; color: #fff; padding: 10px; width: 130px; border-bottom: 2px solid #fff;">Event</th>
-                    <td style="padding: 10px; border-bottom: 1px dotted #ccc;"><a href="#" style="color: #8b4513; text-decoration: underline;">Hakurei Shrine Reitaisai 10</a></td>
+                    <th>Event</th>
+                    <td><a href="#">Hakurei Shrine Reitaisai 10</a></td>
                 </tr>
                 <tr>
-                    <th style="background-color: #ff9900; color: #fff; padding: 10px; border-bottom: 2px solid #fff;">Space</th>
-                    <td style="padding: 10px; border-bottom: 1px dotted #ccc;">shi-50b</td>
+                    <th>Space</th>
+                    <td>shi-50b</td>
                 </tr>
                 <tr>
-                    <th style="background-color: #ff9900; color: #fff; padding: 10px; border-bottom: 2px solid #fff;">Distribution Date</th>
-                    <td style="padding: 10px; border-bottom: 1px dotted #ccc;">2013/05/26 (Sun)</td>
+                    <th>Distribution Date</th>
+                    <td>2013/05/26 (Sun)</td>
                 </tr>
                 <tr>
-                    <th style="background-color: #ff9900; color: #fff; padding: 10px; border-bottom: 2px solid #fff;">Price</th>
-                    <td style="padding: 10px; border-bottom: 1px dotted #ccc;">200 yen</td>
+                    <th>Price</th>
+                    <td>200 yen</td>
                 </tr>
                 <tr>
-                    <th style="background-color: #ff9900; color: #fff; padding: 10px; border-bottom: 2px solid #fff;">Specification</th>
-                    <td style="padding: 10px; border-bottom: 1px dotted #ccc;">Hand-burned CD-R (paper case)</td>
+                    <th>Specification</th>
+                    <td>Hand-burned CD-R (paper case)</td>
                 </tr>
                 <tr>
-                    <th style="background-color: #ff9900; color: #fff; padding: 10px; vertical-align: top;">Credit</th>
-                    <td style="padding: 15px 10px;">
-                        
-                        <div style="display: flex; gap: 40px; flex-wrap: wrap; line-height: 1.6;">
-                            <div>
-                                <strong style="color: #333;">Flash</strong><br>
-                                <a href="#" style="color: #8b4513;">Miya</a><br>
-                                <a href="#" style="color: #8b4513;">Uda Tetla</a><br>
-                                
-                            </div>
-
-                            <div>
-                                <strong style="color: #333;">Support</strong><br>
-                                <a href="#" style="color: #8b4513;">as@earth</a><br>
-                                <a href="#" style="color: #8b4513;">kagi</a><br>
-                            </div>
-                        </div>
-
+                    <th>Credit</th>
+                    <td>
+                        <table style="width:100%; font-size:100%;">
+                            <tr>
+                                <td style="width:50%; padding:0; background:none; border:none; vertical-align:top;">
+                                    <strong>Flash:</strong>
+                                    <ul>
+                                        <li><a href="#">Miya</a></li>
+                                        <li><a href="#">Uda Tetla</a></li>
+                                    </ul>
+                                </td>
+                                <td style="width:50%; padding:0; background:none; border:none; vertical-align:top;">
+                                    <strong>Support:</strong>
+                                    <ul>
+                                        <li><a href="#">as@earth</a></li>
+                                        <li><a href="#">kagi</a></li>
+                                    </ul>
+                                </td>
+                            </tr>
+                        </table>
                     </td>
                 </tr>
             </table>
         </div>
     </div>
- </div>
-    <div id="footer" style="text-align: center; padding: 30px; color: #666; font-size: 12px;">
-        <p>Select a flash animation / game to start.</p>
-        <address>Copyright &copy; 2008-2026 迷走ポタージュ / Average Rumia. No Rights Reserved.</address>
-    </div>
+
+  </div>
 </div>
 
-</body></html>
+<div id="footer" class="clear">
+  <div id="footernav">
+    <ul>
+      <li class="first"><a href="../mesopota_2010.html#info">更新情報</a></li>
+      <li><a href="../mesopota_2010.html#product">製品情報</a></li>
+      <li><a href="../mesopota_2010.html#member">メンバー</a></li>
+      <li><a href="../mesopota_2010.html#about">サイト説明</a></li>
+      <li><a href="../mesopota_2010.html#cheer">応援中</a></li>
+      <li><a href="../mesopota_2010.html#link">リンク</a></li>
+    </ul>
+  </div>
+  <address>Copyright &copy; 2008-2026 迷走ポタージュ / Average Rumia. Preservation Project. No rights reserved.</address>
+</div>
+
+</body>
+</html>
