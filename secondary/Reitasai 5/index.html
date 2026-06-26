@@ -68,6 +68,7 @@
             text-indent: -9999px;
             background: url('../layout/globalnav.gif') #FF9900;
         }
+        
         #headernav li a:hover { color: #FFFFFF; }
         #nav_info a:link, #nav_info a:visited { background-position:0 0; }
         #nav_product a:link, #nav_product a:visited { background-position:-130px 0; }
@@ -106,7 +107,7 @@
             margin-bottom: 25px;
         }
         .archive-item.last-col {
-            margin-right: 0; 
+            margin-right: 0;
         }
         .archive-item img {
             width: 240px;
@@ -128,7 +129,7 @@
             margin-top: 2px;
         }
 
-        /* トピック＆警告枠（当時の .caution スタイルを採用） */
+        /* トピック＆警告枠 */
         .caution {
             padding: 15px;
             border: 3px solid #FFCC00;
@@ -141,21 +142,6 @@
             color: #CC3300;
             margin-bottom: 10px;
             font-size: 105%;
-        }
-        .caution ul {
-            margin: 10px 0 10px 20px;
-        }
-        .caution li {
-            list-style: disc;
-            margin-bottom: 4px;
-        }
-        .caution .highlight-box {
-            background: #FFFFFF;
-            border: 1px dashed #FF9900;
-            padding: 10px;
-            margin-top: 10px;
-            font-weight: bold;
-            color: #993300;
         }
 
         /* 製品詳細テーブルスタイリング */
@@ -175,9 +161,18 @@
             display: flex;
             gap: 20px;
         }
-        .product-cover img {
+        .product-cover {
             width: 180px;
+        }
+        .product-cover img {
+            width: 100%;
             border: 1px solid #CCCCCC;
+        }
+        .product-cover p {
+            font-size: 75%;
+            color: #666666;
+            text-align: center;
+            margin-top: 8px;
         }
         .product-table {
             width: 100%;
@@ -187,7 +182,7 @@
             background: #FF9900;
             color: #FFFFFF;
             padding: 8px;
-            width: 110px;
+            width: 120px;
             font-weight: bold;
             text-align: left;
             border-bottom: 1px solid #FFFFFF;
@@ -230,12 +225,10 @@
 <body>
 
 <div id="wrapper">
-  <!-- ロゴヘッダー -->
   <div id="header">
     <h1><a href="../mesopota_2010.html"><img src="../layout/logo.jpg" alt="迷走ポタージュ"/></a></h1>
   </div>
   
-  <!-- グローバルナビゲーション -->
   <div id="headernav">
     <ul>
       <li id="nav_info"><a href="../mesopota_2010.html#info">更新情報</a></li>
@@ -246,21 +239,18 @@
       <li id="nav_link"><a href="../mesopota_2010.html#link">リンク</a></li>
     </ul>
   </div>
-    <br>
-  <div id="visual">
+  <br>
+    <div id="visual">
     <object id="FlashID" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="780" height="300">
       <param name="movie" value="splash.swf"/>
       <param name="quality" value="high"/>
       <param name="wmode" value="opaque"/>
       <embed src="splash.swf" quality="low" wmode="opaque" width="780" height="300" type="application/x-shockwave-flash" />
     </object>
-  </div>
-    
+    </div>
   <div id="content">
-    <!-- 作品リスト -->
     <h2>作品リスト <span class="x-small">Product List</span></h2>
     <div class="archive-grid clearfix">
-      
       
       <div class="archive-item">
         <a href="take.html">
@@ -289,7 +279,7 @@
       
       <div class="archive-item">
         <a href="tetla.html">
-            <img src="cover/tetla.jpg" alt="Kero9 Destiny">
+            <img src="cover/tn_tetla.jpg" alt="Kero9 Destiny">
             Kero9 Destiny
         </a>
         <span>Animation / PV</span>
@@ -413,4 +403,4 @@
 </div>
 
 </body>
-    </html>
+</html>
