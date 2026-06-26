@@ -64,7 +64,7 @@
         
         #wrapper {
             margin: 0 auto;
-            width: 780px;
+            width: 864px;
             text-align: left;
         }
         
@@ -79,11 +79,20 @@
         }
         
         
-        #headernav ul {
-            height: 50px;
-            background: url('../layout/globalnav.gif') #FF9900;
-            background-position:0 -100px;
+        /* --- AQUÍ ESTÁ EL ARREGLO MÁGICO --- */
+        #headernav {
+            width: 100%;
+            background-color: #FF9900;
         }
+        #headernav ul {
+            width: 780px;
+            height: 50px;
+            margin: 0 auto;
+            padding: 0;
+            background: url('../layout/globalnav.gif') #FF9900 0 -100px;
+        }
+        /* ----------------------------------- */
+
         #headernav li {
             float: left;
             width: 130px;
@@ -119,7 +128,7 @@
 
         
         #visual3 {
-            margin: 20px auto;
+            margin: auto;
             background: #FFFFFF;
             text-align: center; 
         }
@@ -181,15 +190,13 @@
       <li id="nav_link"><a href="../mesopota_2010.html#link">リンク</a></li>
     </ul>
   </div>
-  
   <div id="visual3">
     <embed src="swf/midareuchi.swf" quality="low" wmode="opaque" width="864" height="486" type="application/x-shockwave-flash" />
   </div>
-  
   <div id="content">
     <div id="info" class="clearfix">
-      <h2>プロダクトゲーム <span class="x-small">Information Game</span></h2>
-      <p>This is the infamous "RAM Eater". Seriously, this game devours your ram with the ammount of fairies appearing until your browser collapses.</p>
+      <h2>作品紹介ムービー <span class="x-small">Information Movie</span></h2>
+      <p>This is the infamous "RAM Eater". Seriously, this game devours your ram with the ammount of fairies appearing until your browser collapses.e</p>
     </div>
   </div>
 </div>
