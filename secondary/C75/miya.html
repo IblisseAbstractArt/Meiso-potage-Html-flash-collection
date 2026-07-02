@@ -222,5 +222,33 @@
   <address>Copyright &copy; 2026 迷走ポタージュ / Average Rumia. No rights reserved.</address>
 </div>
 
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const toggleButton = document.getElementById('visuals-toggle');
+        const body = document.body;
+        
+
+        let visualsEnabled = localStorage.getItem('visualsEnabled') !== 'false';
+        
+        updateVisualsState();
+        
+        toggleButton.addEventListener('click', function() {
+            visualsEnabled = !visualsEnabled;
+            localStorage.setItem('visualsEnabled', visualsEnabled);
+            updateVisualsState();
+        });
+        
+        function updateVisualsState() {
+            if (visualsEnabled) {
+                body.classList.remove('visuals-disabled');
+                toggleButton.textContent = 'Disable Visuals';
+            } else {
+                body.classList.add('visuals-disabled');
+                toggleButton.textContent = 'Enable Visuals';
+            }
+        }
+    });
+</script>
+
 </body>
 </html>
