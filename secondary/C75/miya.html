@@ -5,7 +5,7 @@
     <title>迷走ポタージュ - 最速最高シャッターガール</title>
     <script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
     <link rel="icon" type="image/png" href="../icon64.png">
-     <link rel="stylesheet" href="../visuals.css">
+    <link rel="stylesheet" href="../visuals.css">
     <style>
         @charset "utf-8";
         
@@ -72,6 +72,23 @@
     height: auto;
     display: block;
         }
+       
+        body.visuals-disabled {
+    animation: none !important;
+}
+       
+        body.visuals-disabled::before {
+    display: none !important;
+}
+
+      body.visuals-disabled #flash-container {
+    filter: none !important;
+}
+
+     body.visuals-disabled #flash-container::before,
+     body.visuals-disabled #flash-container::after {
+    display: none !important;
+}
         #wrapper {
             margin: 0 auto;
             width: 780px;
@@ -224,30 +241,31 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        const toggleButton = document.getElementById('visuals-toggle');
-        const body = document.body;
-        
-
-        let visualsEnabled = localStorage.getItem('visualsEnabled') !== 'false';
-        
+    const toggleButton = document.getElementById('visuals-toggle');
+    const body = document.body;
+    
+    let visualsEnabled = localStorage.getItem('visualsEnabled') !== 'false';
+    
+    updateVisualsState();
+    
+    toggleButton.addEventListener('click', function() {
+        visualsEnabled = !visualsEnabled;
+        localStorage.setItem('visualsEnabled', visualsEnabled);
         updateVisualsState();
-        
-        toggleButton.addEventListener('click', function() {
-            visualsEnabled = !visualsEnabled;
-            localStorage.setItem('visualsEnabled', visualsEnabled);
-            updateVisualsState();
-        });
-        
-        function updateVisualsState() {
-            if (visualsEnabled) {
-                body.classList.remove('visuals-disabled');
-                toggleButton.textContent = 'Disable Visuals';
-            } else {
-                body.classList.add('visuals-disabled');
-                toggleButton.textContent = 'Enable Visuals';
-            }
-        }
     });
+    
+    function updateVisualsState() {
+        if (visualsEnabled) {
+            
+            body.classList.remove('visuals-disabled');
+            toggleButton.setAttribute('aria-label', 'Disable visual effects');
+        } else {
+            
+            body.classList.add('visuals-disabled');
+            toggleButton.setAttribute('aria-label', 'Enable visual effects');
+        }
+    }
+});
 </script>
 
 </body>
