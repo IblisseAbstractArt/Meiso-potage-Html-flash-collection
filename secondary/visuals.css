@@ -59,16 +59,6 @@
             background-size: 100% 6px, 5px 100%;
         }
 
-        body {
-            animation: flicker 0.15s infinite;
-        }
-
-        @keyframes flicker {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.98; }
-        }
-
-
 		.glitch-btn {
             background-color: #ffffff !important;
             color: #a7e2e8;
