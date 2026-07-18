@@ -288,6 +288,11 @@
 </head>
 <body>
 
+<audio id="welcomeBgm" style="display: none;">
+  <source src="audio/welcome_bgm.mp3" type="audio/mpeg">
+  Your browser does not support the audio element.
+</audio>
+    
 <div id="wrapper">
   <div id="header">
     <h1><a href="mesopota_2010.html"><img src="layout/logo.jpg" alt="迷走ポタージュ"/></a></h1>
@@ -668,6 +673,20 @@ this is my first proyect of all time, so dont expect more from me (im novice in 
   </div>
   <address>Copyright &copy; 2026 迷走ポタージュ / Average Rumia. No rights reserved.</address>
 </div>
+<script>
+  if (!localStorage.getItem('meisopotage_visited')) {
 
+    localStorage.setItem('meisopotage_visited', 'true');
+    
+    window.addEventListener('load', function() {
+      const welcomeAudio = document.getElementById('welcomeBgm');
+      if (welcomeAudio) {
+        welcomeAudio.play().catch(err => {
+          console.log('Autoplay prevented by browser:', err);
+        });
+      }
+    });
+  }
+</script>
 </body>
 </html>
