@@ -698,7 +698,6 @@ function shouldPlay() {
   if (!lastPlayTime) return true;
   
   const timeSinceLastPlay = Date.now() - parseInt(lastPlayTime);
-  return timeSinceLastPlay > 3600000; 
 }
 
 function safeSet(value) {
