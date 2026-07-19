@@ -693,7 +693,17 @@ this is my first proyect of all time, so dont expect more from me (im novice in 
     document.body.appendChild(wrap);
     return {wrap, img};
   }
+function shouldPlay() {
+  const lastPlayTime = localStorage.getItem('welcomeBgmLastPlay');
+  if (!lastPlayTime) return true;
+  
+  const timeSinceLastPlay = Date.now() - parseInt(lastPlayTime);
+  return timeSinceLastPlay > 3600000; 
+}
 
+function safeSet(value) {
+  localStorage.setItem('welcomeBgmLastPlay', value);
+}
   window.addEventListener('load', () => {
     if (!welcomeAudio) return;
     if (!shouldPlay()) return; 
