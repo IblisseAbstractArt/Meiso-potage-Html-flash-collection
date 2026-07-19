@@ -284,6 +284,10 @@
             border: 3px solid #FC0;
             background:#FFFEEE;
         }
+        #welcomeWrap { position: fixed; right: 16px; bottom: 16px; z-index:9999; }
+#welcomeImg { width: 120px; height: 48px; cursor: pointer; display:block; border-radius:6px; }
+#welcomeWrap.sliding { animation: slide-out-right 600ms ease forwards; }
+@keyframes slide-out-right { from { transform: translateX(0); opacity:1 } to { transform: translateX(120%); opacity:0 } }
     </style>
 </head>
 <body>
@@ -674,19 +678,43 @@ this is my first proyect of all time, so dont expect more from me (im novice in 
   <address>Copyright &copy; 2026 迷走ポタージュ / Average Rumia. No rights reserved.</address>
 </div>
 <script>
-  if (!localStorage.getItem('meisopotage_visited')) {
+  (function() {
+  const PLAY_DURATION_MS = 51000;
+  const spriteStandby = 'standby.png';
+  const spritePlaying = 'playing.png';
+  const welcomeAudio = document.getElementById('welcomeBgm');
 
-    localStorage.setItem('meisopotage_visited', 'true');
-    
-    window.addEventListener('load', function() {
-      const welcomeAudio = document.getElementById('welcomeBgm');
-      if (welcomeAudio) {
-        welcomeAudio.play().catch(err => {
-          console.log('Autoplay prevented by browser:', err);
-        });
-      }
-    });
+  function createImg() {
+    const wrap = document.createElement('div'); wrap.id='welcomeWrap';
+    const img = document.createElement('img'); img.id='welcomeImg';
+    img.src = spriteStandby;
+    img.alt = 'Play welcome music';
+    wrap.appendChild(img);
+    document.body.appendChild(wrap);
+    return {wrap, img};
   }
+
+  window.addEventListener('load', () => {
+    if (!welcomeAudio) return;
+    if (!shouldPlay()) return; 
+
+    const {wrap, img} = createImg();
+
+    function start() {
+      welcomeAudio.currentTime = 0;
+      welcomeAudio.play().then(() => {
+        img.src = spritePlaying;
+        safeSet(String(Date.now()));
+        setTimeout(() => { wrap.classList.add('sliding'); }, PLAY_DURATION_MS);
+      }).catch(err => { console.warn(err); });
+    }
+
+    img.addEventListener('click', start);
+
+    
+    welcomeAudio.play().then(() => { img.src = spritePlaying; safeSet(String(Date.now())); setTimeout(()=>wrap.classList.add('sliding'), PLAY_DURATION_MS); }).catch(()=>{/* leave img clickable */});
+  });
+})();
 </script>
 </body>
 </html>
