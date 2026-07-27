@@ -124,8 +124,9 @@
             position: relative;
             border: 2px solid #222;
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
-            filter: url(#vhs-rgb-classic); 
+            filter: url(#vhs-rgb-classic) blur(0.8px); 
             will-change: filter;
+            transition: filter 0.3s ease;
         }
 
         #visual3::after {
@@ -300,6 +301,7 @@
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     const toggleButton = document.getElementById('visuals-toggle');
+    const visual3 = document.getElementById('visual3');
     const body = document.body;
 
     let visualsEnabled = localStorage.getItem('visualsEnabled') !== 'false';
@@ -315,9 +317,11 @@ document.addEventListener('DOMContentLoaded', function() {
     function updateVisualsState() {
         if (visualsEnabled) {
             body.classList.remove('visuals-disabled');
+            visual3.style.filter = 'url(#vhs-rgb-classic) blur(0.8px)';
             toggleButton.setAttribute('aria-label', 'Disable visual effects');
         } else {
             body.classList.add('visuals-disabled');
+            visual3.style.filter = 'none';
             toggleButton.setAttribute('aria-label', 'Enable visual effects');
         }
     }
