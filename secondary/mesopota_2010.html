@@ -730,6 +730,69 @@ function safeSet(value) {
     welcomeAudio.play().then(() => { img.src = spritePlaying; safeSet(String(Date.now())); setTimeout(()=>wrap.classList.add('sliding'), PLAY_DURATION_MS); }).catch(()=>{/* leave img clickable */});
   });
 })();
+
+    
+document.addEventListener('DOMContentLoaded', () => {
+  
+  let bgAudio = document.getElementById('bgAudio');
+  if (!bgAudio) {
+    bgAudio = document.createElement('audio');
+    bgAudio.id = 'bgAudio';
+    bgAudio.style.display = 'none';
+    
+    document.body.appendChild(bgAudio);
+  }
+
+
+  const links = Array.from(document.querySelectorAll('#cheer a'))
+    .filter(a => {
+      const href = a.getAttribute('href') || '';
+      const data = a.dataset.audio || '';
+      return href.endsWith('.flac') || data.endsWith('.flac');
+    });
+
+  links.forEach(a => {
+    a.addEventListener('click', (e) => {
+      
+      if (e.button !== 0 || e.ctrlKey || e.metaKey || e.shiftKey || e.altKey) return;
+
+      e.preventDefault();
+
+      const url = a.dataset.audio || a.getAttribute('href');
+      if (!url) return;
+
+      
+      if (bgAudio.src && bgAudio.src === new URL(url, location.href).href) {
+        if (bgAudio.paused) {
+          bgAudio.play().catch(err => console.warn('Playback failed:', err));
+          a.classList.add('playing');
+        } else {
+          bgAudio.pause();
+          a.classList.remove('playing');
+        }
+        return;
+      }
+
+      bgAudio.pause();
+      bgAudio.src = url;
+      bgAudio.currentTime = 0;
+      bgAudio.volume = 0.9;
+      bgAudio.loop = false;
+      bgAudio.play().then(() => {
+    
+        links.forEach(l => l.classList.remove('playing'));
+        a.classList.add('playing');
+      }).catch(err => {
+    
+        console.warn('Playback failed:', err);
+      });
+    });
+  });
+
+  bgAudio.addEventListener('ended', () => {
+    links.forEach(l => l.classList.remove('playing'));
+  });
+});
 </script>
 </body>
 </html>
