@@ -288,21 +288,6 @@
         #welcomeImg { width: 176px; height: 250px; cursor: pointer; display:block; border-radius:6px; }
         #welcomeWrap.sliding { animation: slide-out-right 600ms ease forwards; }
         @keyframes slide-out-right { from { transform: translateX(0); opacity:1 } to { transform: translateX(120%); opacity:0 } }
-
-.random-cover-container { position: relative; display: inline-block; }
-.random-cover-overlay {
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 110px;         
-  height: auto;
-  box-sizing: border-box;
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 600ms ease;
-  z-index: 2;
-}
-.product-card-img img { display: block; z-index: 1; position: relative; }
     </style>
 </head>
 <body>
@@ -580,12 +565,12 @@
           </div>
 
             <div class="product-card">
-          <div class="random-cover-overlay">
-            <a href="---/---.html"><img src="covers/---.jpg" alt="Random Selection"/></a>
+          <div class="product-card-img">
+            <a href="  /index.html"><img src="covers/Random.jpg" alt="Random Selection"/></a>
           </div>
           <div class="product-card-info">
-            <h3>Try your luck!</h3>
-            <p>A Random selection of CD-R / Reitaisai events!</p>
+            <h3>Random Selection</h3>
+            <p>[Placeholder] try your luck!</p>
           </div>
         </div>
       </div>
@@ -813,67 +798,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   bgAudio.addEventListener('ended', () => {
     links.forEach(l => l.classList.remove('playing'));
-  });
-});
-</script>
-
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-  
-  const placeholderImg = document.querySelector('.product-grid .product-card-img a[href="---/---.html"] img');
-  if (!placeholderImg) return;
-
-  
-  const imgWrapper = placeholderImg.parentElement;
-  imgWrapper.classList.add('random-cover-container');
-  imgWrapper.style.width = getComputedStyle(placeholderImg).width || '110px';
-
-  
-  const coverImgs = Array.from(document.querySelectorAll('.product-grid .product-card-img img'))
-    .map(img => img.getAttribute('src'))
-    .filter(src => src && !src.endsWith('---.jpg'));
-
-  if (coverImgs.length === 0) return;
-
-  let index = 0;
-  const TRANS_MS = 600;   
-  const INTERVAL_MS = 1000; 
-
-  const nextCover = () => {
-    const nextSrc = coverImgs[index % coverImgs.length];
-    index++;
-
-    
-    const overlay = document.createElement('img');
-    overlay.className = 'random-cover-overlay';
-    overlay.src = nextSrc;
-
-    
-    overlay.style.width = placeholderImg.width ? placeholderImg.width + 'px' : '110px';
-    overlay.style.height = placeholderImg.height ? placeholderImg.height + 'px' : 'auto';
-
-    imgWrapper.appendChild(overlay);
-
-    
-    requestAnimationFrame(() => {
-      overlay.style.opacity = '1';
-    });
-
-    
-    setTimeout(() => {
-      placeholderImg.src = nextSrc;
-      if (overlay.parentElement) overlay.parentElement.removeChild(overlay);
-    }, TRANS_MS);
-  };
-
-  
-  const intervalId = setInterval(nextCover, INTERVAL_MS);
-
-  
-  imgWrapper.addEventListener('click', () => {
-    if (intervalId) {
-      clearInterval(intervalId);
-    }
   });
 });
 </script>
