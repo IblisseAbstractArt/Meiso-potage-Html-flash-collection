@@ -565,15 +565,15 @@
           </div>
         </div>
           
-            <div class="product-card">
-          <div class="product-card-img">
-            <a href="  /index.html"><img src="covers/Random.jpg" alt="Random Selection"/></a>
+            <div class="product-card random-card">
+             <div class="product-card-img">
+           <a href="#" id="randomCard"><img src="covers/Random.jpg" alt="Random Selection"/></a>
           </div>
           <div class="product-card-info">
             <h3>Random Selection</h3>
-            <p>[Placeholder] try your luck!</p>
-          </div>
-        </div>
+            <p>try your luck going to a random CD-R / Reitaisai event!</p>
+           </div>
+         </div>
       </div>
 
       <p class="button"><a href="#wrapper">▲ページトップ</a></p>
@@ -802,5 +802,31 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 </script>
+
+    <script>
+document.addEventListener('DOMContentLoaded', () => {
+  const randomAnchor = document.getElementById('randomCard');
+  if (!randomAnchor) return;
+
+  randomAnchor.addEventListener('click', (e) => {
+    e.preventDefault();
+
+    
+    const anchors = Array.from(
+      document.querySelectorAll('.product-grid .product-card .product-card-img a')
+    ).filter(a => !a.closest('.random-card')) 
+     .map(a => a.getAttribute('href'))
+     .filter(h => h && h.trim());
+
+    if (anchors.length === 0) return;
+
+    
+    const choice = anchors[Math.floor(Math.random() * anchors.length)];
+
+    
+    location.href = choice;
+  });
+});
+    </script>
 </body>
 </html>
