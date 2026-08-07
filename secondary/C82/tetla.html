@@ -234,6 +234,47 @@
         body.visuals-disabled #visual3::after {
             display: none !important;
         }
+
+            #info .description {
+  max-height: 12.5em;               
+  overflow: hidden;
+  transition: max-height 0.35s ease;
+  position: relative;
+  padding: 0.5em;
+  background: transparent;
+}
+
+#info .description.expanded {
+  max-height: 2000px;               
+}
+
+#info .description::after {
+  
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 3.2em;
+  background: linear-gradient(rgba(255,255,255,0), rgba(255,255,255,1));
+  pointer-events: none;
+}
+
+#info .description.expanded::after {
+  display: none;
+}
+
+.readmore-toggle {
+  display: inline-block;
+  margin: 0.6em 0 1em;
+  background: #FF9900;
+  color: #fff;
+  border: none;
+  padding: 0.4em 0.8em;
+  cursor: pointer;
+  font-weight: bold;
+  border-radius: 3px;
+        }
     </style>
 </head>
 <body>
@@ -277,7 +318,8 @@
   <div id="content">
     <div id="info" class="clearfix">
       <h2>作品紹介ムービー <span class="x-small">Information Movie</span></h2>
-      <p>Nice to meet you, and hello. My name is Uda Tetla.<br>
+    <div id="product-description" class="description" aria-live="polite">  
+        Nice to meet you, and hello. My name is Uda Tetla.<br>
 Thank you very much for picking up “Meisou Potage　Nabeshiki.”<br>
 <br>
 I made the PV video I am currently producing for my next work in the style of a commercial.<br>
@@ -300,7 +342,10 @@ so I hope you will look forward to it.<br>
 <br>
 Uda Tetla<br>
 ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■<br>
-          Note: the full version got cancelled, this short version only proves its existence</p>
+          Note: the full version got cancelled, this short version only proves its existence</div>
+        <button class="readmore-toggle" aria-controls="product-description" aria-expanded="false">
+    Read more
+        </button>
     </div>
   </div>
 </div>
@@ -345,6 +390,30 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 </script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  
+  (function() {
+    const desc = document.getElementById('product-description');
+    const btn = document.querySelector('.readmore-toggle');
+    if (!desc || !btn) return;
 
+    
+    if (desc.scrollHeight <= desc.clientHeight + 2) {
+      btn.style.display = 'none';
+      return;
+    }
+
+    btn.addEventListener('click', function() {
+      const expanded = desc.classList.toggle('expanded');
+      
+      btn.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+      btn.textContent = expanded ? 'Read less' : 'Read more';
+      
+      if (expanded) desc.setAttribute('tabindex', '-1'), desc.focus();
+    });
+  })();
+});
+</script>
 </body>
 </html>
