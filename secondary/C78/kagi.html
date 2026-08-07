@@ -234,6 +234,47 @@
         body.visuals-disabled #visual3::after {
             display: none !important;
         }
+
+        #info .description {
+  max-height: 12.5em;               
+  overflow: hidden;
+  transition: max-height 0.35s ease;
+  position: relative;
+  padding: 0.5em;
+  background: transparent;
+}
+
+#info .description.expanded {
+  max-height: 2000px;               
+}
+
+#info .description::after {
+  
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 3.2em;
+  background: linear-gradient(rgba(255,255,255,0), rgba(255,255,255,1));
+  pointer-events: none;
+}
+
+#info .description.expanded::after {
+  display: none;
+}
+
+.readmore-toggle {
+  display: inline-block;
+  margin: 0.6em 0 1em;
+  background: #FF9900;
+  color: #fff;
+  border: none;
+  padding: 0.4em 0.8em;
+  cursor: pointer;
+  font-weight: bold;
+  border-radius: 3px;
+}
     </style>
 </head>
 <body>
@@ -277,7 +318,8 @@
   <div id="content">
     <div id="info" class="clearfix">
       <h2>プロダクトゲーム <span class="x-small">Information Game</span></h2>
-      <p>【Afterword】<br>
+      <div id="product-description" class="description" aria-live="polite">
+        【Afterword】<br>
 <br>
 Good work, this is Kagi.<br>
 Thank you for picking up “Meandering Potage: Ramune Flavor” this time.<br>
@@ -307,7 +349,10 @@ Production: Kagi (http://www.l-room.net/)<br>
 Planning: Meandering Potage (https://mesopota.vercel.app/)<br>
 Original work: Shanghai Alice Phantasmagoria (http://www16.big.or.jp/~zun/)<br>
 Sound effects: The Matchmakers 2nd (http://osabisi.sakura.ne.jp/m2/)<br>
-BGM: Rengoku Teien (http://www.rengoku-teien.com/)</p>
+BGM: Rengoku Teien (http://www.rengoku-teien.com/)</div>
+        <button class="readmore-toggle" aria-controls="product-description" aria-expanded="false">
+    Read more
+        </button>
     </div>
   </div>
 </div>
@@ -352,6 +397,30 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 </script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  
+  (function() {
+    const desc = document.getElementById('product-description');
+    const btn = document.querySelector('.readmore-toggle');
+    if (!desc || !btn) return;
 
+    
+    if (desc.scrollHeight <= desc.clientHeight + 2) {
+      btn.style.display = 'none';
+      return;
+    }
+
+    btn.addEventListener('click', function() {
+      const expanded = desc.classList.toggle('expanded');
+      
+      btn.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+      btn.textContent = expanded ? 'Read less' : 'Read more';
+      
+      if (expanded) desc.setAttribute('tabindex', '-1'), desc.focus();
+    });
+  })();
+});
+</script>
 </body>
 </html>
