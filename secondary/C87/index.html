@@ -380,7 +380,212 @@
       </div>
       
     </div>
+
+    <h2>CDスキャン <span class="x-small">CD Scans</span></h2>
+    <div class="product-section">
+       
+<div class="cd-gallery" aria-label="CD Scans gallery">
+  <button class="g-btn prev" aria-label="Previous image">&larr;</button>
+
+  <div class="g-frame">
+    <div class="g-img-wrapper"></div>
+  </div>
+
+  <button class="g-btn next" aria-label="Next image">&rarr;</button>
+
+  <div class="g-caption" aria-live="polite"></div>
+</div>
+
+<style>
+
+.cd-gallery {
+  max-width: 540px;
+  margin: 12px auto;
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  justify-content: center;
+  user-select: none;
+}
+
+.g-frame {
+  width: 360px;
+  height: 360px;
+  background: #faf8f5;
+  border: 1px solid #ddd;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+  border-radius: 4px;
+}
+
+.g-img-wrapper img {
+  position: absolute;
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  will-change: transform, opacity;
+  transition: transform 450ms cubic-bezier(.22,.9,.3,1), opacity 450ms ease;
+  opacity: 1;
+}
+
+.g-img-enter-from-right {
+  transform: translate(calc(-50% + 20px), -50%);
+  opacity: 0;
+}
+.g-img-enter-from-left {
+  transform: translate(calc(-50% - 20px), -50%);
+  opacity: 0;
+}
+.g-img-enter {
+  transform: translate(-50%, -50%);
+  opacity: 1;
+}
+
+.g-img-leave-to-left {
+  transform: translate(calc(-50% - 20px), -50%);
+  opacity: 0;
+}
+.g-img-leave-to-right {
+  transform: translate(calc(-50% + 20px), -50%);
+  opacity: 0;
+}
+
+.g-btn {
+  background: rgba(255,153,0,0.95);
+  color: #fff;
+  border: none;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-weight: bold;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.12);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.g-btn:hover { background: #ffb84d; }
+.g-btn:active { transform: scale(.98); }
+
+.g-caption {
+  margin-top: 8px;
+  text-align: center;
+  font-size: 0.9rem;
+  color: #444;
+}
+
+
+@media (max-width: 700px) {
+  .cd-gallery { gap: 8px; }
+  .g-frame { width: 260px; height: 260px; }
+  .g-btn { width: 40px; height: 40px; }
+}
+</style>
+
+<script>
+(function () {
+  
+  const images = [
+    '../scans/Flashback/jacket_frong.jpg',
+    '../scans/Flashback/jacket.jpg',
+    '../scans/Flashback/CD_label.jpg'
+  ];
+  const captions = [
+    'Scan 1 — front cover',
+    'Scan 2 — jacket',
+    'Scan 3 — CD scan'
+  ]; 
+
+  const wrapper = document.querySelector('.cd-gallery .g-img-wrapper');
+  const captionEl = document.querySelector('.cd-gallery .g-caption');
+  const prevBtn = document.querySelector('.cd-gallery .g-btn.prev');
+  const nextBtn = document.querySelector('.cd-gallery .g-btn.next');
+
+  let current = 0;
+  let animating = false;
+  const duration = 500; 
+  function createImgEl(src, enterFrom) {
+    const img = document.createElement('img');
+    img.src = src;
+    img.alt = '';
     
+    img.classList.add(enterFrom === 'right' ? 'g-img-enter-from-right' : 'g-img-enter-from-left');
+    
+    void img.offsetWidth;
+    
+    requestAnimationFrame(() => img.classList.add('g-img-enter'));
+    return img;
+  }
+
+  function show(index, direction) {
+    if (animating || index === current) return;
+    animating = true;
+    const oldImg = wrapper.querySelector('img');
+    const newImg = createImgEl(images[index], direction === 'next' ? 'right' : 'left');
+
+    
+    wrapper.appendChild(newImg);
+
+    
+    captionEl.textContent = captions[index] || images[index].split('/').pop();
+
+    
+    if (oldImg) {
+      if (direction === 'next') {
+        oldImg.classList.add('g-img-leave-to-left');
+      } else {
+        oldImg.classList.add('g-img-leave-to-right');
+      }
+      
+      setTimeout(() => {
+        if (oldImg && oldImg.parentNode) oldImg.parentNode.removeChild(oldImg);
+        animating = false;
+      }, duration);
+    } else {
+      
+      setTimeout(() => animating = false, duration / 2);
+    }
+
+    current = index;
+  }
+
+
+  function init() {
+    const initial = createImgEl(images[current], 'right');
+    
+    initial.classList.add('g-img-enter');
+    wrapper.appendChild(initial);
+    captionEl.textContent = captions[current] || images[current].split('/').pop();
+  }
+
+  prevBtn.addEventListener('click', () => {
+    const nextIndex = (current - 1 + images.length) % images.length;
+    show(nextIndex, 'prev');
+  });
+  nextBtn.addEventListener('click', () => {
+    const nextIndex = (current + 1) % images.length;
+    show(nextIndex, 'next');
+  });
+
+  
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowLeft') prevBtn.click();
+    if (e.key === 'ArrowRight') nextBtn.click();
+  });
+
+  init();
+})();
+</script> 
+      
     <h2>アナウンス <span class="x-small">Topics</span></h2>
     
     <div class="caution">
